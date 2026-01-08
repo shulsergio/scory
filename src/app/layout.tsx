@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Scory App",
+  title: "Scory Game",
   description: "Football prediction app",
 };
 

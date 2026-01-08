@@ -1,13 +1,19 @@
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --text-blue-title-primary: #200089;
+  --text-blue-title-secondary: #0c0034;
+  --text-primary: #ededed;
+
+  --text-secondary: #999;
+
+  /* --foreground: #171717; */
   --font-family-Kanit: "Kanit", sans-serif;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
-    --foreground: #ededed;
+    /* --foreground: #ededed; */
   }
 }
 
