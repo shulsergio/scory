@@ -1,5 +1,5 @@
 .page {
-  --background: #fafafa;
+  /* --background: #fafafa;
   --foreground: #fff;
 
   --text-primary: #000;
@@ -7,7 +7,7 @@
 
   --button-primary-hover: #383838;
   --button-secondary-hover: #f2f2f2;
-  --button-secondary-border: #ebebeb;
+  --button-secondary-border: #ebebeb; */
 
   display: flex;
   min-height: 100vh;
@@ -25,7 +25,7 @@
   flex-direction: column;
   align-items: flex-start;
   /* justify-content: space-between; */
-  background-color: var(--foreground);
+  /* background-color: var(--foreground); */
   padding: 40px 20px;
 }
 
@@ -77,10 +77,11 @@
   font-size: 18px;
   line-height: 0px;
   text-wrap: balance;
-  color: var(--text-secondary);
+  color: var(--text-blue-title-secondary);
   padding-bottom: 80px;
 }
 .comingSoon {
+  color: var(--text-primary);
   margin: 0 auto;
   width: 300px;
   text-align: center;
