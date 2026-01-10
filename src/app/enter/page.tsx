@@ -1,9 +1,11 @@
+import { ThemeToggle } from "@/utils/ThemeToggle";
 import css from "./enter.module.css";
 
 export default function Enter() {
   return (
     <div className={css.page}>
       <main className={css.main}>
+        <ThemeToggle />
         <div className={css.intro}>
           <p className={css.descriptionTop}>Welcome to</p>
           <h1 className={css.title}>SCORY</h1>

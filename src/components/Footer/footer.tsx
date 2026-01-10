@@ -1,7 +1,5 @@
+// import { ThemeToggle } from "@/utils/ThemeToggle";
+
 export default function Footer() {
-  return (
-    <>
-      <h3>FOOTER</h3>
-    </>
-  );
+  return <p>FOOTER</p>;
 }

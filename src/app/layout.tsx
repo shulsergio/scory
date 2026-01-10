@@ -11,7 +11,8 @@ const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
 });
-
+import { ThemeProvider } from "next-themes";
+// import Footer from "@/components/Footer/footer";
 export const metadata: Metadata = {
   title: "Scory Game",
   description: "Football prediction app",
@@ -23,10 +24,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        {children}
+        <ThemeProvider> {children}</ThemeProvider>
       </body>
+
+      {/* <Footer  /> */}
+ 
     </html>
   );
 }
