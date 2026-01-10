@@ -9,6 +9,7 @@ export default function Enter() {
           <h1 className={css.title}>SCORY</h1>
           <p className={css.descriptionBottom}>write your story of glory</p>
           <p>PREVIEW</p>
+          <p>Branch_3</p>
         </div>
         <div className={css.comingSoon}>coming soon</div>
       </main>
