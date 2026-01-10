@@ -6,11 +6,17 @@
 
   --text-secondary: #999;
   --border: #000000;
-  /* --foreground: #171717; */
   --font-family-Kanit: "Kanit", sans-serif;
 }
-
-@media (prefers-color-scheme: dark) {
+[data-theme="dark"] {
+  --background: #0a0a0a;
+  --text-blue-title-primary: #7c5cff;
+  --text-blue-title-secondary: #94a3b8;
+  --text-primary: #ededed;
+  --text-secondary: #a1a1a1;
+  --border: #262626;
+}
+/* @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
     --text-blue-title-primary: #7c5cff;
@@ -18,9 +24,8 @@
     --text-primary: #ededed;
     --text-secondary: #a1a1a1;
     --border: #262626;
-    /* --foreground: #ededed; */
   }
-}
+} */
 
 html,
 body {
@@ -47,8 +52,8 @@ a {
   text-decoration: none;
 }
 
-@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;
   }
-}
+} */
