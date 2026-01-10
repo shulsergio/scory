@@ -1,0 +1,102 @@
+.page {
+  /* --background: #fafafa;
+  --foreground: #fff;
+
+  --text-primary: #000;
+  --text-secondary: #666;
+
+  --button-primary-hover: #383838;
+  --button-secondary-hover: #f2f2f2;
+  --button-secondary-border: #ebebeb; */
+
+  display: flex;
+  min-height: 100vh;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-geist-sans);
+  /* background-color: var(--background); */
+  background-color: var(--background);
+}
+
+.main {
+  display: flex;
+  min-height: 100vh;
+  width: 100%;
+  /* max-width: 800px; */
+  flex-direction: column;
+  align-items: flex-start;
+  /* justify-content: space-between; */
+  /* background-color: var(--foreground); */
+  padding: 40px 20px;
+}
+
+.intro {
+  width: 100%;
+  padding-top: 40px;
+  /* display: flex;
+  flex-direction: column; */
+  /* align-items: flex-start; */
+  text-align: center;
+  /* gap: 24px; */
+}
+
+.title {
+  font-family: var(--font-family-Kanit);
+  font-weight: 900;
+  font-style: italic;
+  /* line-height: 0px; */
+  width: 100%;
+  /* max-width: 320px; */
+  font-size: 60px;
+  color: var(--text-blue-title-primary);
+  /* letter-spacing: -2.4px; */
+  /* text-wrap: balance; */
+  /* color: var(--text-primary); */
+  text-align: center;
+}
+
+.descriptionTop {
+  /* max-width: 440px; */
+  font-size: 24px;
+  /* line-height: 0px; */
+  /* text-wrap: balance; */
+  color: var(--text-blue-title-secondary);
+  padding-bottom: 20px;
+}
+.descriptionBottom {
+  font-style: italic;
+  /* max-width: 440px; */
+  font-size: 18px;
+  line-height: 0px;
+  text-wrap: balance;
+  color: var(--text-blue-title-secondary);
+  padding-bottom: 80px;
+}
+.descriptionBottom {
+  font-style: italic;
+  /* max-width: 440px; */
+  font-size: 18px;
+  line-height: 0px;
+  text-wrap: balance;
+  color: var(--text-blue-title-secondary);
+  padding-bottom: 80px;
+}
+.comingSoon {
+  color: var(--text-primary);
+  margin: 0 auto;
+  width: 300px;
+  text-align: center;
+  padding: 30px 20px;
+  border-radius: 4px;
+  font-weight: 600;
+  font-size: 24px;
+  border: 1px solid var(--border);
+  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.1), 0px 4px 8px rgba(0, 0, 0, 0.1),
+    0px 8px 16px rgba(0, 0, 0, 0.05);
+}
+
+@media (prefers-color-scheme: dark) {
+  .page {
+    --background: #000;
+  }
+}
