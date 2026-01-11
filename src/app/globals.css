@@ -1,10 +1,13 @@
 :root {
   --background: #ffffff;
+  --background-header: #016969;
+
   --text-blue-title-primary: #200089;
   --text-blue-title-secondary: #0c0034;
   --text-primary: #000000;
 
   --text-secondary: #999;
+  --text-secondary-white: #f5f5f5;
   --border: #000000;
   --font-family-Kanit: "Kanit", sans-serif;
 }
