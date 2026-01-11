@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import Footer from '@/components/Footer/Index';
 import "./globals.css";
 
 const geistSans = Geist({
@@ -12,7 +13,6 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 import { ThemeProvider } from "next-themes";
-// import Footer from "@/components/Footer/footer";
 export const metadata: Metadata = {
   title: "Scory Game",
   description: "Football prediction app",
@@ -26,11 +26,13 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        <ThemeProvider> {children}</ThemeProvider>
+        <ThemeProvider>
+          <div className="site-container">
+            <main className="main-container">{children}</main>
+            <Footer />
+          </div>
+        </ThemeProvider>
       </body>
-
-      {/* <Footer  /> */}
- 
     </html>
   );
 }
