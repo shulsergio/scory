@@ -14,6 +14,7 @@ const geistMono = Geist_Mono({
 });
 import { ThemeProvider } from "next-themes";
 import TanStackProvider from "@/utils/TanStackProvider";
+import Header from "@/components/Header/Header";
 export const metadata: Metadata = {
   title: "Scory Game",
   description: "Football prediction app",
@@ -30,6 +31,7 @@ export default function RootLayout({
         <TanStackProvider>
           <ThemeProvider>
             <div className="site-container">
+              <Header />
               <main className="main-container">{children}</main>
               <Footer />
             </div>
