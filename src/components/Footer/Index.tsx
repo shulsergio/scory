@@ -1,11 +1,14 @@
+import Link from "next/link";
 import css from "./Footer.module.css";
-import { ThemeToggle } from "@/utils/ThemeToggle";
 
 export default function Footer() {
   return (
     <footer className={css.footer}>
-      <p>FOOTER</p>
-      <ThemeToggle />
+      <div className={css.navContainer}>
+        <Link href="/" className={css.logo}>
+          Scory
+        </Link>
+      </div>
     </footer>
   );
 }
