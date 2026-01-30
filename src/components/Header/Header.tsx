@@ -10,6 +10,12 @@ const navLinks = [
   { name: "About", href: "/about" },
 ];
 
+/**
+ *
+ *
+ * @export
+ * @return {*}
+ */
 export default function Header() {
   const pathname = usePathname();
 

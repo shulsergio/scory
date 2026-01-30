@@ -20,6 +20,17 @@ export const metadata: Metadata = {
   description: "Football prediction app",
 };
 
+/**
+ *
+ *
+ * @export
+ * @param {Readonly<{
+ *   children: React.ReactNode;
+ * }>} {
+ *   children,
+ * }
+ * @return {*}
+ */
 export default function RootLayout({
   children,
 }: Readonly<{
