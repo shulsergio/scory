@@ -14,7 +14,7 @@ export default async function TeamPage({ params }: { params: { id: string } }) {
   return (
     <div>
       <h1>Team Page</h1>
-      <p>Team ID: {id}</p>
+      <p className={css.p}>Team ID: {id}</p>
     </div>
   );
 }
