@@ -1,20 +1,33 @@
+import { fetchTeamById } from "@/utils/fetch";
 import css from "./teams.module.css";
+import { Match, TeamWithMatches } from "@/types/interface";
 /**
- *
+ * динамическая страница команды
+ * нужно добавить получение данных команды по id
+ * и желательно список матчей этой команды
  *
  * @export
  * @param {{ params: { id: string } }} { params }
  * @return {*}
  */
-export default async function TeamPage({ params }: { params: { id: string } }) {
-  //const { id } = params.id;
-
+export default async function TeamPage({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
   const { id } = await params;
-
+  console.log("!! TeamPage- id: ", id);
+  const team: TeamWithMatches | null = await fetchTeamById(id);
+  console.log("!! TeamPage- team: ", team);
+  if (!team) return <div>team not found</div>;
   return (
     <div>
-      <h1>Team Page</h1>
-      <p className={css.p}>Team ID: {id}</p>
+      <h1 className={css.teamHeader}>{team.name}</h1>
+      {team.matches?.map((match: Match) => (
+        <div key={match._id} className={css.teamsListItem}>
+          {match.homeTeam.name} vs {match.awayTeam.name}
+        </div>
+      ))}
     </div>
   );
 }
