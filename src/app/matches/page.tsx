@@ -1,33 +1,19 @@
 // import css from "./matches.module.css";
 import Link from "next/link";
 import { fetchAllMatches } from "@/utils/fetch";
+import { Match } from "@/types/interface";
 
-interface Team {
-  _id: string;
-  name: string;
-  code?: string;
-  flagUrl?: string;
-}
-
-interface Score {
-  home: number;
-  away: number;
-}
-
-interface Match {
-  _id: string;
-  matchNumber: number;
-  homeTeam: Team;
-  awayTeam: Team;
-  kickoffTime: string;
-  lockTime: string;
-  stadium: string;
-  status: "scheduled" | "finished";
-  group: string;
-  score: Score;
-  isCalculated: boolean;
-}
-
+/**
+ * Matches - страница для отображения списка матчей
+ *
+ * НУЖНО СДЕЛАТЬ ПАГИНАЦИЮ И ФИЛЬТРЫ
+ *
+ * Сделать отдельные компоненты для матчей и фильтров,
+ * перенести в components а тут вызывать
+ *
+ * @export
+ * @return {*}
+ */
 export default async function Matches() {
   const matches = await fetchAllMatches();
   console.log("!!!! Matches:", matches);
@@ -53,11 +39,20 @@ export default async function Matches() {
   return (
     <div>
       <h1>Next matches</h1>
-      {/* ..... первій мар .....  */}
+
+      {/* ..... КНОПКИ ГЕНА .....  */}
+      <div>
+        <button disabled>All</button>
+        <button disabled>Scheduled</button>
+        <button disabled>Finished</button>
+      </div>
+      {/* ..... КНОПКИ ГЕНА .....  */}
+
+      {/* ..... первій мар - єто даті.....  */}
       {newDates.map((date: string) => (
         <div key={date}>
           <h2>{date}</h2>
-          {/* ..... первій мар .....  */}
+          {/* ..... первій мар - єто даті.....  */}
           <table>
             <tbody>
               {/* ..... второй фільтр і мар .....  */}
@@ -71,10 +66,19 @@ export default async function Matches() {
                 .map((match: Match) => (
                   <tr key={match._id}>
                     <td>
-                      {new Date(match.kickoffTime).toLocaleTimeString("ru-RU", {
-                        hour: "2-digit",
-                        minute: "2-digit",
-                      })}
+                      {match.status === "finished" ? (
+                        <div>
+                          {match.score.home} : {match.score.away}
+                        </div>
+                      ) : (
+                        new Date(match.kickoffTime).toLocaleTimeString(
+                          "ru-RU",
+                          {
+                            hour: "2-digit",
+                            minute: "2-digit",
+                          },
+                        )
+                      )}
                     </td>
 
                     <td>
