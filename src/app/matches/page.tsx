@@ -1,4 +1,4 @@
-// import css from "./matches.module.css";
+import css from "./matches.module.css";
 import { fetchAllMatches } from "@/utils/fetch";
 import { Match } from "@/types/interface";
 import MatchRow from "@/components/MatchRow/MatchRow";
@@ -38,7 +38,7 @@ export default async function Matches() {
   console.log("!!!! newDates", newDates);
   return (
     <div>
-      <h1>Next matches</h1>
+      <h1 className={css.header}>WC 2026 matches</h1>
 
       {/* ..... КНОПКИ ГЕНА .....  */}
       <div>
@@ -51,7 +51,7 @@ export default async function Matches() {
       {/* ..... первій мар - єто даті.....  */}
       {newDates.map((date: string) => (
         <div key={date}>
-          <h2>{date}</h2>
+          <h2 className={css.headerDate}>{date}</h2>
           {/* ..... первій мар - єто даті.....  */}
           <table>
             <tbody>
