@@ -1,7 +1,7 @@
 // import css from "./matches.module.css";
-import Link from "next/link";
 import { fetchAllMatches } from "@/utils/fetch";
 import { Match } from "@/types/interface";
+import MatchRow from "@/components/MatchRow/MatchRow";
 
 /**
  * Matches - страница для отображения списка матчей
@@ -64,42 +64,7 @@ export default async function Matches() {
                 )
 
                 .map((match: Match) => (
-                  <tr key={match._id}>
-                    <td>
-                      {match.status === "finished" ? (
-                        <div>
-                          {match.score.home} : {match.score.away}
-                        </div>
-                      ) : (
-                        new Date(match.kickoffTime).toLocaleTimeString(
-                          "ru-RU",
-                          {
-                            hour: "2-digit",
-                            minute: "2-digit",
-                          },
-                        )
-                      )}
-                    </td>
-
-                    <td>
-                      <div>
-                        <Link href={`/teams/${match.homeTeam?._id}`}>
-                          {match.homeTeam?.name || "-"}
-                        </Link>
-                      </div>
-                      <div>
-                        <Link href={`/teams/${match.awayTeam?._id}`}>
-                          {match.awayTeam?.name || "-"}
-                        </Link>
-                      </div>
-                    </td>
-
-                    <td>
-                      {match.stadium}
-                      <br />
-                      <span>Group {match.group}</span>
-                    </td>
-                  </tr>
+                  <MatchRow key={match._id} match={match} />
                 ))}
             </tbody>
           </table>

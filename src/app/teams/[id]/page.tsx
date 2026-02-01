@@ -3,8 +3,8 @@ import css from "./teams.module.css";
 import { Match, TeamWithMatches } from "@/types/interface";
 /**
  * динамическая страница команды
- * нужно добавить получение данных команды по id
- * и желательно список матчей этой команды
+ * нужно добавить получение данных команды по id (done)
+ * и желательно список матчей этой команды (done)
  *
  * @export
  * @param {{ params: { id: string } }} { params }
