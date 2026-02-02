@@ -1,7 +1,7 @@
 import css from "./matches.module.css";
 import { fetchAllMatches } from "@/utils/fetch";
 import { Match } from "@/types/interface";
-import MatchRow from "@/components/MatchRow/MatchRow";
+import GroupMatchesByDate from "@/components/GroupMatchesByDate/GroupMatchesByDate";
 
 /**
  * Matches - страница для отображения списка матчей
@@ -36,6 +36,9 @@ export default async function Matches() {
     );
   });
   console.log("!!!! newDates", newDates);
+
+  console.log(newDates.length);
+
   return (
     <div>
       <h1 className={css.header}>WC 2026 matches</h1>
@@ -48,28 +51,15 @@ export default async function Matches() {
       </div>
       {/* ..... КНОПКИ ГЕНА .....  */}
 
-      {/* ..... первій мар - єто даті.....  */}
-      {newDates.map((date: string) => (
-        <div key={date}>
-          <h2 className={css.headerDate}>{date}</h2>
-          {/* ..... первій мар - єто даті.....  */}
-          <table>
-            <tbody>
-              {/* ..... второй фільтр і мар .....  */}
-              {matches
-                .filter(
-                  (match: Match) =>
-                    new Date(match.kickoffTime).toLocaleDateString("ru-RU") ===
-                    date,
-                )
-
-                .map((match: Match) => (
-                  <MatchRow key={match._id} match={match} />
-                ))}
-            </tbody>
-          </table>
-        </div>
-      ))}
+      {newDates.map((date: string) => {
+        const matchesInDay = matches.filter(
+          (match: Match) =>
+            new Date(match.kickoffTime).toLocaleDateString("ru-RU") === date,
+        );
+        return (
+          <GroupMatchesByDate key={date} date={date} matches={matchesInDay} />
+        );
+      })}
     </div>
   );
 }
