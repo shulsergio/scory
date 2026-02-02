@@ -7,6 +7,7 @@ interface MatchRowProps {
 }
 
 export default function MatchRow({ match }: MatchRowProps) {
+  console.log(match);
   return (
     <tr>
       {/* ///////// */}
