@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import Footer from "@/components/Footer/Index";
+import Header from "@/components/Header/Header";
+import { Providers } from "./providers";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -12,25 +14,12 @@ const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
 });
-import { ThemeProvider } from "next-themes";
-import TanStackProvider from "@/utils/TanStackProvider";
-import Header from "@/components/Header/Header";
+
 export const metadata: Metadata = {
   title: "Scory Game",
   description: "Football prediction app",
 };
 
-/**
- *
- *
- * @export
- * @param {Readonly<{
- *   children: React.ReactNode;
- * }>} {
- *   children,
- * }
- * @return {*}
- */
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -39,15 +28,13 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        <TanStackProvider>
-          <ThemeProvider>
-            <div className="site-container">
-              <Header />
-              <main className="main-container">{children}</main>
-              <Footer />
-            </div>
-          </ThemeProvider>
-        </TanStackProvider>
+        <Providers>
+          <div className="site-container">
+            <Header />
+            <main className="main-container">{children}</main>
+            <Footer />
+          </div>
+        </Providers>
       </body>
     </html>
   );

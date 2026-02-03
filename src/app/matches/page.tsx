@@ -18,10 +18,6 @@ export default async function Matches() {
   const matches = await fetchAllMatches();
   console.log("!!!! Matches:", matches);
 
-  const data = matches?.map((match: Match) => ({
-    data: new Date(match.kickoffTime).toLocaleDateString("ru-RU"),
-  }));
-  console.log("data", data);
   const newDates = Array.from(
     new Set(
       matches.map((match: Match) =>
@@ -29,6 +25,7 @@ export default async function Matches() {
       ),
     ),
   ) as string[];
+
   newDates.sort((a, b) => {
     return (
       new Date(a.split(".").reverse().join("-")).getTime() -

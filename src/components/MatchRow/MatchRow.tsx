@@ -36,8 +36,8 @@ export default function MatchRow({ match }: MatchRowProps) {
       </td>
       {/* ///////// */}
       <td className={css.blockInfo}>
-        <span className={css.groupInfo}>Group {match.group}</span>
-        <br /> {match.stadium}
+        <div className={css.groupInfo}>Group {match.group}</div>
+        <div>{match.stadium}</div>
       </td>
     </tr>
   );
