@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useSession, signOut } from "next-auth/react";
 import css from "./Header.module.css";
 import { ThemeToggle } from "@/utils/ThemeToggle";
 
@@ -11,14 +12,20 @@ const navLinks = [
 ];
 
 /**
+ * Компонент Header отображает навигационную панель с логотипом,
+ * ссылками на страницы и информацией о пользователе.
  *
- *
+ * Использует хуки useSession для получения данных о текущей сессии и usePathname для определения активной ссылки.
+ * В зависимости от статуса сессии отображает информацию о пользователе или кнопку входа.
  * @export
  * @return {*}
  */
 export default function Header() {
   const pathname = usePathname();
-
+  const { data: session, status } = useSession();
+  console.log("session", session);
+  console.log("status", status);
+  const loading = status === "loading";
   return (
     <header className={css.header}>
       <div className={css.navContainer}>
@@ -39,12 +46,30 @@ export default function Header() {
             );
           })}
         </nav>
+        {/* */}
         <div className={css.adding}>
           <div className={css.actions}>
-            <button className={css.loginBtn}>Войти</button>
+            {loading ? (
+              <span className={css.statusText}>-</span>
+            ) : session ? (
+              <div className={css.userProfile}>
+                <div className={css.stats}>
+                  <span className={css.points}>🏆 {session.user.points}</span>
+                  <span className={css.nickname}>{session.user.name}</span>
+                </div>
+                <button onClick={() => signOut()} className={css.logoutBtn}>
+                  Logout
+                </button>
+              </div>
+            ) : (
+              // Блок для гостя
+              <Link href="/enter" className={css.loginBtn}>
+                Login
+              </Link>
+            )}
           </div>
-          <ThemeToggle />
         </div>
+        <ThemeToggle />
       </div>
     </header>
   );
