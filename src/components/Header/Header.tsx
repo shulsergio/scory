@@ -68,7 +68,7 @@ export default function Header() {
               </div>
             ) : (
               // Блок для гостя
-              <ButtonBox option="link" variant="white" href="/enter">
+              <ButtonBox option="link" variant="white" href="/register">
                 Started
               </ButtonBox>
             )}
