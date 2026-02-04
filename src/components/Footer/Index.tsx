@@ -8,6 +8,7 @@ export default function Footer() {
         <Link href="/" className={css.logo}>
           Scory
         </Link>
+        <p className={css.copyright}>© Write your story of glory</p>
       </div>
     </footer>
   );
