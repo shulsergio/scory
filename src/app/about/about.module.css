@@ -18,7 +18,6 @@
 }
 
 .intro {
-  padding-top: 40px;
   text-align: center;
   /* gap: 24px; */
 }
@@ -27,15 +26,16 @@
   font-family: var(--font-family-Kanit);
   font-weight: 900;
   font-style: italic;
-  /* line-height: 0px; */
-  width: 100%;
-  /* max-width: 320px; */
   font-size: 60px;
-  color: var(--text-blue-title-primary);
-  /* letter-spacing: -2.4px; */
-  /* text-wrap: balance; */
-  /* color: var(--text-primary); */
   text-align: center;
+  width: 100%;
+  /* ФОН ТЕКСТРА */
+  display: block;
+  background: linear-gradient(to bottom, #0008ff 10%, #ffffff 90%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
 }
 
 /* .descriptionTop { 
@@ -50,7 +50,7 @@
   line-height: 0px;
   text-wrap: balance;
   color: var(--text-blue-title-secondary);
-  padding-bottom: 80px;
+  padding-bottom: 40px;
 }
 .descriptionBottom {
   font-style: italic;
@@ -59,7 +59,6 @@
   line-height: 0px;
   text-wrap: balance;
   color: var(--text-blue-title-secondary);
-  padding-bottom: 80px;
 }
 .comingSoon {
   color: var(--text-primary);
@@ -69,13 +68,15 @@
   padding: 30px 20px;
   border-radius: 4px;
   font-weight: 600;
-  font-size: 24px;
+  font-size: 20px;
   border: 1px solid var(--border);
-  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.1), 0px 4px 8px rgba(0, 0, 0, 0.1),
+  box-shadow:
+    0px 1px 2px rgba(0, 0, 0, 0.1),
+    0px 4px 8px rgba(0, 0, 0, 0.1),
     0px 8px 16px rgba(0, 0, 0, 0.05);
 }
 .aboutText {
-  font-size: 24px;
+  font-size: 18px;
   color: var(--text-primary);
   max-width: 1000px;
   margin: 0 auto;

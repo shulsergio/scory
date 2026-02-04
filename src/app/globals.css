@@ -1,6 +1,15 @@
 :root {
   --background: #ffffff;
-  --background-header: #016969;
+
+  /* CodeHype */
+  --background-dark-ui: #171717;
+  --background-header: #171717;
+  /* Тонкая линия белая */
+  --border-subtle: rgba(255, 255, 255, 0.1);
+  /* Текст */
+  --text-white: #f8f9fa;
+
+  /* мои цвета */
   --text-blue-title-primary: #200089;
   --text-blue-title-secondary: #0c0034;
   --text-primary: #000000;
@@ -12,8 +21,8 @@
 
 /*   [data-theme="dark"]   */
 .dark {
-  --background: #0a0a0a;
-  --background-header: #003a3a;
+  --background: #171717;
+  --background-header: #171717;
   --text-blue-title-primary: #7c5cff;
   --text-blue-title-secondary: #94a3b8;
   --text-primary: #ededed;
