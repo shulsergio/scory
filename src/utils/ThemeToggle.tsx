@@ -1,5 +1,7 @@
 "use client";
 
+import ButtonBox from "@/components/ButtonBox/ButtonBox";
+import css from "./ThemeToggle.module.css";
 import { useTheme } from "next-themes";
 import { useEffect, useState, startTransition } from "react";
 
@@ -16,13 +18,13 @@ export function ThemeToggle() {
   if (!mounted) return <div style={{ width: "100px", height: "20px" }} />;
 
   return (
-    <button
-      onClick={() => {
-        setTheme(resolvedTheme === "light" ? "dark" : "light");
-      }}
-      style={{ cursor: "pointer" }}
+    <ButtonBox
+      option="button"
+      variant="transparent"
+      onClick={() => setTheme(resolvedTheme === "light" ? "dark" : "light")}
+      className={css.toggleSize}
     >
       {resolvedTheme === "light" ? "🌙" : "☀️"}
-    </button>
+    </ButtonBox>
   );
 }

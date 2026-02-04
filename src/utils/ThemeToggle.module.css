@@ -1,0 +1,8 @@
+.toggleSize {
+  padding: 6px;
+  border-radius: 12px;
+  width: 36px;
+  height: 36px;
+  line-height: 1;
+  font-size: 20px;
+}

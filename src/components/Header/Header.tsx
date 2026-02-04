@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { useSession, signOut } from "next-auth/react";
 import css from "./Header.module.css";
 import { ThemeToggle } from "@/utils/ThemeToggle";
+import ButtonBox from "../ButtonBox/ButtonBox";
 
 const navLinks = [
   { name: "Matches", href: "/matches" },
@@ -23,8 +24,8 @@ const navLinks = [
 export default function Header() {
   const pathname = usePathname();
   const { data: session, status } = useSession();
-  console.log("session", session);
-  console.log("status", status);
+  // console.log("session", session);
+  // console.log("status", status);
   const loading = status === "loading";
   return (
     <header className={css.header}>
@@ -57,15 +58,19 @@ export default function Header() {
                   <span className={css.points}>🏆 {session.user.points}</span>
                   <span className={css.nickname}>{session.user.name}</span>
                 </div>
-                <button onClick={() => signOut()} className={css.logoutBtn}>
+                <ButtonBox
+                  option="button"
+                  variant="white"
+                  onClick={() => signOut()}
+                >
                   Logout
-                </button>
+                </ButtonBox>
               </div>
             ) : (
               // Блок для гостя
-              <Link href="/enter" className={css.loginBtn}>
-                Login
-              </Link>
+              <ButtonBox option="link" variant="white" href="/enter">
+                Started
+              </ButtonBox>
             )}
           </div>
         </div>
