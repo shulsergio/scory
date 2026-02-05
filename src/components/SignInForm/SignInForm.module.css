@@ -1,0 +1,37 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.inputGroup {
+  width: 100%;
+}
+
+.input {
+  width: 100%;
+  padding: 14px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  color: #fff;
+  font-size: 16px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.input:focus {
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+.errorMessage {
+  background: rgba(255, 77, 77, 0.1);
+  border-left: 4px solid #ff4d4d;
+  color: #ff4d4d;
+  padding: 10px;
+  font-size: 14px;
+  border-radius: 4px;
+}
