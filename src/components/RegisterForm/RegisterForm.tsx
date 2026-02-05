@@ -1,9 +1,9 @@
 "use client";
 
 import { useActionState } from "react";
-import { registerUser } from "@/app/register/actions";
 import css from "./RegisterForm.module.css";
 import ButtonBox from "../ButtonBox/ButtonBox";
+import { registerUser } from "@/utils/actions";
 
 export default function RegisterForm() {
   const [state, formAction, isPending] = useActionState(registerUser, null);
