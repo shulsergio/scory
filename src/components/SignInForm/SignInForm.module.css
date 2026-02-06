@@ -3,8 +3,13 @@
   flex-direction: column;
   gap: 20px;
   width: 100%;
-  max-width: 400px;
+  max-width: 300px;
   margin: 0 auto;
+  padding: 30px;
+  background-color: var(--bg-card);
+  border-radius: 16px;
+  border: 1px solid var(--primary-500);
+  box-shadow: 0 4px 6px 0px rgba(249, 115, 22, 0.4);
 }
 
 .inputGroup {
@@ -14,24 +19,30 @@
 .input {
   width: 100%;
   padding: 14px;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: var(--input-bg);
+  border: 1px solid var(--border-subtle);
   border-radius: 8px;
-  color: #fff;
+  color: var(--text-main);
   font-size: 16px;
   outline: none;
-  transition: border-color 0.2s;
+  transition: all 0.3s ease;
 }
-
 .input:focus {
-  border-color: rgba(255, 255, 255, 0.4);
+  border-color: var(--primary-500);
+  box-shadow: 0 0 8px rgba(249, 115, 22, 0.3);
+  background: transparent;
+}
+.input::placeholder {
+  color: var(--text-secondary);
+  opacity: 0.6;
 }
 
 .errorMessage {
-  background: rgba(255, 77, 77, 0.1);
-  border-left: 4px solid #ff4d4d;
-  color: #ff4d4d;
-  padding: 10px;
+  background: rgba(122, 36, 6, 0.1);
+  border-left: 4px solid var(--primary-500);
+  color: var(--primary-500);
+  padding: 12px;
   font-size: 14px;
   border-radius: 4px;
+  font-weight: 500;
 }
