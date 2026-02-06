@@ -1,6 +1,6 @@
 .footer {
   width: 100%;
-  background-color: var(--background-header);
+  background-color: var(--bg-header-main);
   padding: 15px 0;
   margin-top: auto;
   border-top: 1px solid var(--border-subtle);
@@ -11,7 +11,6 @@
   padding: 0 20px;
   display: flex;
   justify-content: space-between;
-  color: var(--text-secondary);
   font-size: 14px;
 }
 .logo {
@@ -19,7 +18,7 @@
   font-style: italic;
   font-weight: 900;
   font-size: 20px;
-  color: var(--text-secondary-white);
+  color: var(--secondary-500);
   display: flex;
   align-items: center;
   text-align: center;

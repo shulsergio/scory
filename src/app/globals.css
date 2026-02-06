@@ -1,33 +1,51 @@
 :root {
-  --background: #ffffff;
+  /* Primary (Оранжевый) */
+  --primary-50: #fff4f0;
+  --primary-100: #ffe8e0;
+  --primary-500: #f97316; /* Основной акцент */
+  --primary-900: #7a2406;
 
-  /* CodeHype */
-  --background-dark-ui: #171717;
-  --background-header: #171717;
-  /* Тонкая линия белая */
-  --border-subtle: rgba(255, 255, 255, 0.1);
-  /* Текст */
+  /* Secondary (Синий) */
+  --secondary-50: #f0f9ff;
+  --secondary-500: #0ea5e9; /* Основной акцент */
+  --secondary-900: #0c4a6e;
+
+  /* Accent (Зеленый) */
+  --accent-50: #ecfdf5;
+  --accent-500: #10b981; /* Основной акцент */
+  --accent-900: #064e3b;
+
+  /* Neutral (Серый) — Фон и текст */
+  --neutral-50: #fafafa;
+  --neutral-100: #f5f5f5;
+  --neutral-800: #262626;
+  --neutral-900: #171717;
   --text-white: #f8f9fa;
 
   /* мои цвета */
-  --text-blue-title-primary: #200089;
-  --text-blue-title-secondary: #0c0034;
-  --text-primary: #000000;
-  --text-secondary: #999;
-  --text-secondary-white: #f5f5f5;
-  --border: #000000;
+  --bg-main: var(--neutral-50);
+  --bg-header-main: var(--neutral-900);
+  --bg-card: #ffffff;
+  --text-main: var(--neutral-900);
+  --text-secondary: var(--neutral-50);
+  --input-bg: var(--neutral-800);
+  --btn-text: #ffffff;
+  --border-subtle: #ffffff9f;
   --font-family-Kanit: "Kanit", sans-serif;
 }
 
 /*   [data-theme="dark"]   */
 .dark {
-  --background: #171717;
-  --background-header: #171717;
-  --text-blue-title-primary: #7c5cff;
-  --text-blue-title-secondary: #94a3b8;
-  --text-primary: #ededed;
-  --text-secondary: #a1a1a1;
-  --border: #262626;
+  --bg-main: var(--neutral-900);
+  --bg-header-main: var(--neutral-900);
+  --bg-card: var(--neutral-800);
+  --text-main: var(--neutral-50);
+  --text-secondary: var(--neutral-100);
+  --border-subtle: #ffffff9f;
+  --input-bg: rgba(255, 255, 255, 0.05);
+  --btn-text: #ffffff;
+
+  --card-border: var(--secondary-900);
 }
 * {
   box-sizing: border-box;

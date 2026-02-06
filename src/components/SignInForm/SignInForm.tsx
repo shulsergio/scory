@@ -42,7 +42,6 @@ export default function SignInForm() {
         />
       </div>
 
-      {/* Вывод ошибки от бэкенда (например, "User not found") */}
       {state?.error && <div className={css.errorMessage}>{state.error}</div>}
 
       <ButtonBox

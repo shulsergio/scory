@@ -1,6 +1,6 @@
 .header {
   width: 100%;
-  background-color: var(--background-header);
+  background-color: var(--bg-header-main);
   height: 60px;
   display: flex;
   align-items: center;
@@ -24,7 +24,7 @@
   font-style: italic;
   font-weight: 900;
   font-size: 22px;
-  color: var(--text-secondary-white);
+  color: var(--secondary-500);
   height: 100%;
   padding-bottom: 5px;
   display: flex;
@@ -46,7 +46,7 @@
   padding: 0 5px;
 }
 .link.active {
-  color: var(--text-secondary-white);
+  color: var(--btn-text);
   /* border-bottom: 1px solid red; -- тут поменять если подчеркивать */
 }
 .adding {
@@ -73,12 +73,11 @@
 }
 .statusText {
   font-size: 10px;
-  color: var(--background-header);
+  color: var(--btn-text);
 }
 .loginBtn {
   padding: 4px 12px;
   font-size: 14px;
-  background-color: var(--text-blue-title-primary);
   color: white;
   border: none;
   border-radius: 4px;
