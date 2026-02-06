@@ -1,0 +1,34 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  max-width: 300px;
+  margin: 0 auto;
+  padding: 30px;
+  background-color: var(--bg-card);
+  border-radius: 16px;
+  border: 1px solid var(--primary-500);
+  box-shadow: 0 4px 6px 0px rgba(249, 115, 22, 0.4);
+}
+
+.input {
+  width: 100%;
+  padding: 14px;
+  background: var(--input-bg);
+  border: 1px solid var(--border-subtle);
+  border-radius: 8px;
+  color: var(--text-main);
+  font-size: 16px;
+  outline: none;
+  transition: all 0.3s ease;
+}
+.input:focus {
+  border-color: var(--primary-500);
+  box-shadow: 0 0 8px rgba(249, 115, 22, 0.3);
+  background: transparent;
+}
+.input::placeholder {
+  color: var(--text-secondary);
+  opacity: 0.6;
+}

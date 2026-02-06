@@ -47,7 +47,7 @@ export default function SignInForm() {
       <ButtonBox
         option="button"
         type="submit"
-        variant="white"
+        variant="primary"
         disabled={isPending}
       >
         {isPending ? "Logging in..." : "OK!!!"}

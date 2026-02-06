@@ -37,10 +37,10 @@ export default function RegisterForm() {
       <ButtonBox
         option="button"
         type="submit"
-        variant="white"
+        variant="primary"
         disabled={isPending}
       >
-        {isPending ? "Loading..." : "Get Started"}
+        {isPending ? "Loading..." : "Sign Up"}
       </ButtonBox>
     </form>
   );
