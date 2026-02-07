@@ -1,25 +1,42 @@
 "use client";
 
-import { useActionState } from "react";
+import { useState } from "react";
+import { signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
 import css from "./SignInForm.module.css";
 import ButtonBox from "../ButtonBox/ButtonBox";
-import { loginUserAction } from "@/utils/actions";
 
-/**
- * Компонент формы логина.
- *
- * state — сюда придет { error: ... } если пароль неверный
- * formAction — привязываем к атрибуту action у тега form
- * isPending — станет true, пока мы ждем ответа от Render
- *
- * @export
- * @return {*} {JSX.Element}
- */
 export default function SignInForm() {
-  const [state, formAction, isPending] = useActionState(loginUserAction, null);
+  const [error, setError] = useState<string | null>(null);
+  const [isPending, setIsPending] = useState(false);
+  const router = useRouter();
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsPending(true);
+    setError(null);
+
+    const formData = new FormData(e.currentTarget);
+    const userNickname = formData.get("userNickname");
+    const password = formData.get("password");
+
+    const result = await signIn("credentials", {
+      userNickname,
+      password,
+      redirect: false,
+    });
+
+    if (result?.error) {
+      setError("Error. Check your nickname and password");
+      setIsPending(false);
+    } else {
+      router.push("/profile");
+      router.refresh();
+    }
+  };
 
   return (
-    <form action={formAction} className={css.form}>
+    <form onSubmit={handleSubmit} className={css.form}>
       <div className={css.inputGroup}>
         <input
           name="userNickname"
@@ -27,10 +44,8 @@ export default function SignInForm() {
           placeholder="Nickname"
           required
           className={css.input}
-          autoComplete="nickname"
         />
       </div>
-
       <div className={css.inputGroup}>
         <input
           name="password"
@@ -38,11 +53,10 @@ export default function SignInForm() {
           placeholder="Password"
           required
           className={css.input}
-          autoComplete="current-password"
         />
       </div>
 
-      {state?.error && <div className={css.errorMessage}>{state.error}</div>}
+      {error && <div className={css.errorMessage}>{error}</div>}
 
       <ButtonBox
         option="button"

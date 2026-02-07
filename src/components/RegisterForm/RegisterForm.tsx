@@ -1,6 +1,7 @@
 "use client";
 
-import { useActionState } from "react";
+import { useActionState, useEffect } from "react";
+import { signIn } from "next-auth/react";
 import css from "./RegisterForm.module.css";
 import ButtonBox from "../ButtonBox/ButtonBox";
 import { registerUser } from "@/utils/actions";
@@ -8,26 +9,37 @@ import { registerUser } from "@/utils/actions";
 export default function RegisterForm() {
   const [state, formAction, isPending] = useActionState(registerUser, null);
 
+  // Следим за состоянием: если регистрация успешна — логинимся
+  useEffect(() => {
+    if (state?.success && state.credentials) {
+      signIn("credentials", {
+        userNickname: state.credentials.userNickname,
+        password: state.credentials.password,
+        callbackUrl: "/profile", // Сразу в личный кабинет!
+      });
+    }
+  }, [state]);
+
   return (
     <form action={formAction} className={css.form}>
       <input
-        name="name"
+        name="userNickname" // Совпадает с бэкендом
         type="text"
-        placeholder="Nickname"
+        placeholder="Choose a Nickname"
         required
         className={css.input}
       />
       <input
         name="email"
         type="email"
-        placeholder="Email"
+        placeholder="Your Email"
         required
         className={css.input}
       />
       <input
         name="password"
         type="password"
-        placeholder="Password"
+        placeholder="Create Password"
         required
         className={css.input}
       />
@@ -40,8 +52,15 @@ export default function RegisterForm() {
         variant="primary"
         disabled={isPending}
       >
-        {isPending ? "Loading..." : "Sign Up"}
+        {isPending ? "Creating account..." : "Join Scory"}
       </ButtonBox>
+
+      <p className={css.footerText}>
+        Already a player?{" "}
+        <a href="/signIn" className={css.link}>
+          Login here
+        </a>
+      </p>
     </form>
   );
 }

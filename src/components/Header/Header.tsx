@@ -13,20 +13,16 @@ const navLinks = [
 ];
 
 /**
- * Компонент Header отображает навигационную панель с логотипом,
- * ссылками на страницы и информацией о пользователе.
- *
- * Использует хуки useSession для получения данных о текущей сессии и usePathname для определения активной ссылки.
- * В зависимости от статуса сессии отображает информацию о пользователе или кнопку входа.
- * @export
- * @return {*}
+ * Компонент Header: управляет навигацией и состоянием сессии игрока.
+ * Автоматически переключается между гостевым режимом и профилем игрока.
  */
 export default function Header() {
   const pathname = usePathname();
   const { data: session, status } = useSession();
-  // console.log("session", session);
-  // console.log("status", status);
-  const loading = status === "loading";
+
+  const isLoading = status === "loading";
+  console.log("Header session", session);
+  console.log("Header status", status);
   return (
     <header className={css.header}>
       <div className={css.navContainer}>
@@ -47,34 +43,49 @@ export default function Header() {
             );
           })}
         </nav>
-        {/* */}
+
         <div className={css.adding}>
           <div className={css.actions}>
-            {loading ? (
-              <span className={css.statusText}>-</span>
+            {isLoading ? (
+              <div className={css.loaderPlaceholder}>-</div>
             ) : session ? (
-              <div className={css.userProfile}>
-                <div className={css.stats}>
-                  <span className={css.points}>🏆 {session.user.points}</span>
-                  <span className={css.nickname}>{session.user.name}</span>
+              /* Блок авторизованного игрока */
+              <div className={css.userZone}>
+                <div className={css.userPill}>
+                  <div className={css.userStats}>
+                    <span className={css.points}>
+                      🏆 {session.user.points ?? 0}
+                    </span>
+                    <span className={css.nickname}>
+                      {session.user.nickname || session.user.name}
+                    </span>
+                  </div>
+                  <div className={css.avatar}>
+                    {(session.user.nickname ||
+                      session.user.name ||
+                      "U")[0].toUpperCase()}
+                  </div>
                 </div>
+
                 <ButtonBox
                   option="button"
                   variant="white"
                   onClick={() => signOut()}
                 >
-                  Logout
+                  Exit
                 </ButtonBox>
               </div>
             ) : (
-              // Блок для гостя
-              <ButtonBox option="link" variant="white" href="/register">
-                Started
-              </ButtonBox>
+              /* Блок для гостя (только если не залогинен) */
+              <div className={css.guestZone}>
+                <ButtonBox option="link" variant="white" href="/register">
+                  Started
+                </ButtonBox>
+              </div>
             )}
           </div>
+          <ThemeToggle />
         </div>
-        <ThemeToggle />
       </div>
     </header>
   );
