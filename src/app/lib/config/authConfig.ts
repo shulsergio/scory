@@ -1,9 +1,17 @@
-import { NextAuthOptions } from "next-auth";
+import { NextAuthOptions, User } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
+ 
+interface ExtendedUser extends User {
+  id: string;
+  points: number;
+  accessToken: string;
+  nickname: string;
+}
 
 export const authOptions: NextAuthOptions = {
   session: {
     strategy: "jwt",
+    maxAge: 30 * 24 * 60 * 60,  
   },
   providers: [
     CredentialsProvider({
@@ -15,52 +23,61 @@ export const authOptions: NextAuthOptions = {
       async authorize(credentials) {
         if (!credentials?.userNickname || !credentials?.password) return null;
 
-        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/login`, {
-          method: "POST",
-          body: JSON.stringify({
-            userNickname: credentials.userNickname,
-            password: credentials.password,
-          }),
-          headers: { "Content-Type": "application/json" },
-        });
+        try {
+          const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/login`, {
+            method: "POST",
+            body: JSON.stringify({
+              userNickname: credentials.userNickname,
+              password: credentials.password,
+            }),
+            headers: { "Content-Type": "application/json" },
+          });
 
-        const response = await res.json();
+          const response = await res.json();
 
-        if (res.ok && response.data) {
-          // Возвращаем объект. Благодаря нашим типам, TS знает, что тут должны быть эти поля
-          return {
-            id: response.data.user.id,
-            name: response.data.user.nickname,
-            points: response.data.user.points,
-            accessToken: response.data.accessToken,
-          };
+          // Если бэкенд на Render ответил добром
+          if (res.ok && response.data) {
+            return {
+              id: response.data.user.id,
+              name: response.data.user.nickname, // NextAuth любит поле name
+              nickname: response.data.user.nickname,
+              points: response.data.user.points || 0,
+              accessToken: response.data.accessToken,
+            } as ExtendedUser;
+          }
+          
+          return null;
+        } catch (error) {
+          console.error("Auth error:", error);
+          return null;
         }
-
-        return null;
       },
     }),
   ],
   callbacks: {
     async jwt({ token, user }) {
-      // Больше никакого "as any"! Если файл .d.ts подхватился, TS всё увидит сам
+      // Передаем данные из authorize в JWT токен
       if (user) {
-        token.accessToken = user.accessToken;
-        token.points = user.points;
-        token.id = user.id;
+        const u = user as ExtendedUser;
+        token.id = u.id;
+        token.points = u.points;
+        token.nickname = u.nickname;
+        token.accessToken = u.accessToken;
       }
       return token;
     },
-    async session({ session, token }) {
+    async session({ session, token }) { 
       if (session.user) {
-        session.user.accessToken = token.accessToken;
-        session.user.points = token.points;
-        session.user.id = token.id;
+        session.user.id = token.id as string;
+        session.user.points = token.points as number;
+        session.user.nickname = token.nickname as string;
+        session.user.accessToken = token.accessToken as string;
       }
       return session;
     },
   },
   pages: {
-    signIn: "/login", 
+    signIn: "/signIn",  
   },
   secret: process.env.NEXTAUTH_SECRET,
 };
