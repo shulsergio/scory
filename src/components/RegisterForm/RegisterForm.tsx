@@ -9,13 +9,12 @@ import { registerUser } from "@/utils/actions";
 export default function RegisterForm() {
   const [state, formAction, isPending] = useActionState(registerUser, null);
 
-  // Следим за состоянием: если регистрация успешна — логинимся
   useEffect(() => {
     if (state?.success && state.credentials) {
       signIn("credentials", {
         userNickname: state.credentials.userNickname,
         password: state.credentials.password,
-        callbackUrl: "/profile", // Сразу в личный кабинет!
+        callbackUrl: "/profile",
       });
     }
   }, [state]);
@@ -23,7 +22,7 @@ export default function RegisterForm() {
   return (
     <form action={formAction} className={css.form}>
       <input
-        name="userNickname" // Совпадает с бэкендом
+        name="userNickname"
         type="text"
         placeholder="Choose a Nickname"
         required
@@ -52,15 +51,8 @@ export default function RegisterForm() {
         variant="primary"
         disabled={isPending}
       >
-        {isPending ? "Creating account..." : "Join Scory"}
+        {isPending ? "Creating..." : "JOIN"}
       </ButtonBox>
-
-      <p className={css.footerText}>
-        Already a player?{" "}
-        <a href="/signIn" className={css.link}>
-          Login here
-        </a>
-      </p>
     </form>
   );
 }

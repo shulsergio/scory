@@ -59,11 +59,11 @@ export default function Header() {
               <div className={css.loaderPlaceholder}>-</div>
             ) : session ? (
               <div className={css.userPill}>
-                <div className={css.userStats}>
-                  <span className={css.nickname}>
-                    {session.user.nickname || session.user.name}
-                  </span>
-                </div>
+                {/* <div className={css.userStats}> */}
+                <span className={css.nickname}>
+                  {session.user.nickname || session.user.name}
+                </span>
+                {/* </div> */}
               </div>
             ) : (
               <div className={css.desktopOnly}>
@@ -106,7 +106,7 @@ export default function Header() {
           <div className={css.mobileActions}>
             {session ? (
               <button className={css.mobileExitBtn} onClick={() => signOut()}>
-                Exit Account
+                Log out
               </button>
             ) : (
               <ButtonBox
