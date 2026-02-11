@@ -6,6 +6,13 @@ interface MatchRowProps {
   match: Match;
 }
 
+/**
+ * Компонент прорисовки строки матча в таблице на странице матчей
+ *
+ * @export
+ * @param {MatchRowProps} { match }
+ * @return {*}
+ */
 export default function MatchRow({ match }: MatchRowProps) {
   console.log(match);
   return (
