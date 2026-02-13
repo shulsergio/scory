@@ -1,0 +1,75 @@
+.leaguesContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+}
+
+.leagueCard {
+  background: var(--neutral-800);
+  border: 1px solid var(--neutral-700);
+  border-radius: 12px;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  transition:
+    transform 0.2s,
+    border-color 0.2s;
+  cursor: pointer;
+}
+
+.leagueCard:hover {
+  border-color: var(--primary-500);
+  transform: translateY(-2px);
+}
+
+.leagueInfo {
+  flex-grow: 1;
+}
+
+.leagueName {
+  margin: 0;
+  font-size: 1rem;
+  color: var(--text-white);
+}
+
+.playerCount {
+  font-size: 0.75rem;
+  color: var(--text-gray);
+}
+
+.rankInfo {
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+}
+
+.rankLabel {
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  color: var(--text-gray);
+}
+
+.rankValue {
+  font-weight: bold;
+  color: var(--secondary-500);
+  font-size: 1.1rem;
+}
+
+.addLeagueBtn {
+  margin-top: 10px;
+  background: transparent;
+  border: 2px dashed var(--neutral-700);
+  color: var(--text-gray);
+  padding: 12px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.2s;
+}
+
+.addLeagueBtn:hover {
+  border-color: var(--primary-500);
+  color: var(--primary-500);
+}
