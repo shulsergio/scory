@@ -1,6 +1,7 @@
 "use client";
 
 import { useSession } from "next-auth/react";
+import css from "./UserStatus.module.css";
 
 /**
  * Компонент отображения данных юзера для страницы Профиля
@@ -19,9 +20,9 @@ export default function UserStatus() {
   const rank = 111; //session?.user?.rank || "Unranked";
   const points = 222; //session?.user?.points || 0;
   return (
-    <>
+    <div className={css.wrapper }>
       <p>Rank# {rank}</p>
       <p>Points# {points}</p>
-    </>
+   </div>
   );
 }
