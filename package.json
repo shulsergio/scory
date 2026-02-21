@@ -11,6 +11,7 @@
   "dependencies": {
     "@tanstack/react-query": "^5.90.16",
     "@tanstack/react-query-devtools": "^5.91.2",
+    "lucide-react": "^0.575.0",
     "next": "16.1.1",
     "next-auth": "^4.24.13",
     "next-navigation": "^1.0.6",

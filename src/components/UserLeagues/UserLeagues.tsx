@@ -1,4 +1,5 @@
 "use client";
+
 import { useSession } from "next-auth/react";
 import css from "./UserLeagues.module.css";
 import { useEffect, useState } from "react";
@@ -6,6 +7,7 @@ import Loader from "../Loader/Loader";
 import Image from "next/image";
 import { fetchUserLeagues } from "@/utils/fetch";
 import Modal from "../Modal/Modal";
+import { MoveRight, Star } from "lucide-react";
 import CreateLeagueForm from "../CreateLeagueForm/CreateLeagueForm";
 
 interface League {
@@ -13,27 +15,32 @@ interface League {
   leagueName: string;
   leagueAvatar?: string;
   totalPoints: number;
-  isAdmin?: boolean;
+  adminId: string;
 }
 
 export default function UserLeagues() {
   const { data: session, status } = useSession();
   const [leagues, setLeagues] = useState<League[] | null>(null);
   const [error, setError] = useState<string | null>(null);
-
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  // 1. Добавляем счетчик обновлений
+  const [refreshCount, setRefreshCount] = useState(0);
+
+  // Функция для "пинка" useEffect
+  const triggerRefresh = () => setRefreshCount((prev) => prev + 1);
 
   const isInitialLoading =
     status === "loading" || (status === "authenticated" && leagues === null);
 
   useEffect(() => {
     if (status === "unauthenticated") return;
+
     if (status === "authenticated" && session?.user?.accessToken) {
       const fetchLeagues = async () => {
         try {
           const result = await fetchUserLeagues(session.user.accessToken);
           const actualLeagues = Array.isArray(result) ? result : result.data;
-
           setLeagues(actualLeagues || []);
         } catch (err) {
           setError(err instanceof Error ? err.message : "Error");
@@ -42,14 +49,17 @@ export default function UserLeagues() {
       };
       fetchLeagues();
     }
-  }, [status, session?.user?.accessToken]);
+    // 2. Добавляем refreshCount в зависимости, чтобы эффект срабатывал при его изменении
+  }, [status, session?.user?.accessToken, refreshCount]);
 
   if (isInitialLoading) {
     return <Loader />;
   }
+
   if (status === "unauthenticated") {
     return <p className={css.emptyState}>Войдите, чтобы увидеть свои лиги.</p>;
   }
+
   if (error) {
     return (
       <div className={css.errorContainer}>
@@ -82,7 +92,14 @@ export default function UserLeagues() {
             <div className={css.leagueInfo}>
               <h3 className={css.leagueName}>
                 {league.leagueName}
-                {league.isAdmin && <span title="Admin">*</span>}
+                {league.adminId === session?.user?.id && (
+                  <Star
+                    size={16}
+                    className={css.adminIcon}
+                    fill="gold"
+                    color="orange"
+                  />
+                )}
               </h3>
               <span className={css.pointsLabel}>
                 Your points: {league.totalPoints}
@@ -90,7 +107,7 @@ export default function UserLeagues() {
             </div>
 
             <div className={css.actionArea}>
-              <span className={css.arrow}>→</span>
+              <MoveRight />
             </div>
           </div>
         ))
@@ -99,6 +116,7 @@ export default function UserLeagues() {
           <p>No any leagues yet, find league.</p>
         </div>
       )}
+
       <div className={css.buttonsContainer}>
         <button
           className={css.addLeagueBtn}
@@ -106,8 +124,9 @@ export default function UserLeagues() {
         >
           create NEW league
         </button>
-        <button className={css.addLeagueBtn}>view all leagues</button>{" "}
+        <button className={css.addLeagueBtn}>view all leagues</button>
       </div>
+
       <Modal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
@@ -117,6 +136,8 @@ export default function UserLeagues() {
           token={session?.user?.accessToken || ""}
           onSuccess={() => {
             setIsModalOpen(false);
+            // 3. Вызываем триггер при успешном создании
+            triggerRefresh();
           }}
         />
       </Modal>
