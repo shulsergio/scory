@@ -1,0 +1,56 @@
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  backdrop-filter: blur(2px);
+}
+
+.modalContent {
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  position: relative;
+  min-width: 400px;
+  max-width: 400px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.closeBtn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: transparent;
+  border: none;
+  font-size: 28px;
+  line-height: 1;
+  cursor: pointer;
+  color: #888;
+  transition: color 0.2s;
+  padding: 5px;
+}
+
+.closeBtn:hover {
+  color: #333;
+}
+
+.modalHeader {
+  margin-bottom: 20px;
+  padding-right: 20px;
+}
+
+.titleText {
+  margin: 0;
+  font-size: 1.5rem;
+  color: #222;
+}
+
+.modalBody {
+  color: #444;
+}

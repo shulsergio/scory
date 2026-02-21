@@ -58,18 +58,30 @@
 }
 
 .addLeagueBtn {
-  margin-top: 10px;
   background: transparent;
-  border: 2px dashed var(--neutral-700);
+  border: 1px solid var(--neutral-100);
   color: var(--text-gray);
-  padding: 12px;
+  padding: 10px 14px;
   border-radius: 12px;
   cursor: pointer;
   font-weight: 600;
   transition: all 0.2s;
 }
-
+.emptyState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 .addLeagueBtn:hover {
   border-color: var(--primary-500);
   color: var(--primary-500);
+}
+
+.buttonsContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  /* padding-top: 10px; */
+
+  gap: 10px;
 }
