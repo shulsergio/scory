@@ -17,13 +17,14 @@ export default function Profile() {
         <h2 className={css.title}>User profile</h2>
         <UserStatus />
       </div>
-      <div className={css.wrapper}>
-        <h2 className={css.title}>Prognozes</h2>
-        {/* <UserStatus /> - тут будет список ближайших прогнозов */}
-      </div>
+
       <div className={css.wrapper}>
         <h2 className={css.title}>Leagues</h2>
         <UserLeagues /> {/* - тут будут лиги*/}
+      </div>
+      <div className={css.wrapper}>
+        <h2 className={css.title}>Prognozes</h2>
+        {/* <UserStatus /> - тут будет список ближайших прогнозов */}
       </div>
     </main>
   );

@@ -24,10 +24,7 @@ export default function UserLeagues() {
   const [error, setError] = useState<string | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  // 1. Добавляем счетчик обновлений
   const [refreshCount, setRefreshCount] = useState(0);
-
-  // Функция для "пинка" useEffect
   const triggerRefresh = () => setRefreshCount((prev) => prev + 1);
 
   const isInitialLoading =
@@ -49,7 +46,6 @@ export default function UserLeagues() {
       };
       fetchLeagues();
     }
-    // 2. Добавляем refreshCount в зависимости, чтобы эффект срабатывал при его изменении
   }, [status, session?.user?.accessToken, refreshCount]);
 
   if (isInitialLoading) {
@@ -136,7 +132,6 @@ export default function UserLeagues() {
           token={session?.user?.accessToken || ""}
           onSuccess={() => {
             setIsModalOpen(false);
-            // 3. Вызываем триггер при успешном создании
             triggerRefresh();
           }}
         />

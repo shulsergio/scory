@@ -1,30 +1,43 @@
-import { signIn } from "next-auth/react";
+import { signOut } from "next-auth/react";
 
 const BASE_URL = 'https://scory-backend.onrender.com';
 
 /**
- * 
- * Функция для получения всех матчей с сервера
- * 
- * @export
- * @return {Promise<Match[]>} Список матчей
- * 
- * **/
+ * Универсальный обработчик ошибок авторизации
+ */
+const handleAuthError = async (response: Response) => {
+  if (response.status === 401) {
+    console.warn("Сессия недействительна или токен просрочен. Выходим...");
+    
+    if (typeof window !== "undefined") {
+      // Полностью разлогиниваем пользователя и кидаем на страницу входа
+      await signOut({ callbackUrl: "/signIn" });
+    }
+    return;
+  }
+
+  const errorText = await response.text();
+  let errorMessage = `Error: ${response.status}`;
+  
+  try {
+    const errorData = JSON.parse(errorText);
+    errorMessage = errorData.message || errorMessage;
+  } catch {
+    errorMessage = errorText || errorMessage;
+  }
+  
+  throw new Error(errorMessage);
+};
+
 export const fetchAllMatches = async () => {
   try { 
     const response = await fetch(`${BASE_URL}/matches`, {
       method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        },
+      headers: { 'Content-Type': 'application/json' },
     });
 
-    if (!response.ok) {
-      throw new Error(`error: ${response.status}`);
-    }
-
+    if (!response.ok) throw new Error(`error: ${response.status}`);
     const result = await response.json();
- 
     return result.data; 
   } catch (error) {
     console.error("Fetch error:", error);
@@ -32,29 +45,15 @@ export const fetchAllMatches = async () => {
   }
 };
 
-/**
- * 
- * Функция для получения данных команды с сервера
- * 
- * @export 
- * @return {Promise<Team>} Данные команды
- * 
- * **/
 export const fetchTeamById = async (id: string) => {
   try { 
     const response = await fetch(`${BASE_URL}/teams/${id}`, {
       method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        },
+      headers: { 'Content-Type': 'application/json' },
     });
 
-    if (!response.ok) {
-      throw new Error(`error: ${response.status}`);
-    }
-
+    if (!response.ok) throw new Error(`error: ${response.status}`);
     const result = await response.json();
- 
     return result.data; 
   } catch (error) {
     console.error("Fetch error:", error);
@@ -62,9 +61,8 @@ export const fetchTeamById = async (id: string) => {
   }
 };
 
-
 export const fetchUserLeagues = async (token: string) => {
-const response = await fetch(`${BASE_URL}/leagues/user-leagues`, {
+  const response = await fetch(`${BASE_URL}/leagues/user-leagues`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -72,31 +70,12 @@ const response = await fetch(`${BASE_URL}/leagues/user-leagues`, {
     },
   });
 
-if (!response.ok) {
-    const errorText = await response.text(); 
-    let errorMessage = `Error: ${response.status}`;
-    try {
-      const errorData = JSON.parse(errorText);
-      errorMessage = errorData.message || errorMessage;
- 
-      if (errorData.error?.includes("expired") || errorData.message?.includes("expired")) {
-        console.warn("Токен просрочен, перенаправляем на вход...");
-         
-        if (typeof window !== "undefined") {
-          signIn();  
-        }
-      }
-    } catch (e) { 
-      errorMessage = errorText || errorMessage;
-      console.log(e);
-    }
-
-    throw new Error(errorMessage);
+  if (!response.ok) {
+    await handleAuthError(response);
   }
 
   return await response.json();   
 };
-
 
 export const fetchCreateLeague = async (token: string, name: string) => {
   const response = await fetch(`${BASE_URL}/leagues/createleague`, {
@@ -107,28 +86,9 @@ export const fetchCreateLeague = async (token: string, name: string) => {
     },
     body: JSON.stringify({ name }), 
   });
+
   if (!response.ok) {
-    const errorText = await response.text();
-    console.error("Status:", response.status);
-    console.error("Response Body:", errorText);
-
-    let errorMessage = `Error: ${response.status}`;
-    try {
-      const errorData = JSON.parse(errorText);
-      errorMessage = errorData.message || errorMessage;
- 
-      if (errorData.error?.includes("expired") || errorData.message?.includes("expired")) {
-        console.warn("Токен просрочен, перенаправляем на вход...");
-        if (typeof window !== "undefined") {
-          signIn();  
-        }
-      }
-    } catch (e) {
-      errorMessage = errorText || errorMessage;
-      console.log("Error parsing JSON:", e);
-    }
-
-    throw new Error(errorMessage);
+    await handleAuthError(response);
   }
 
   return await response.json();
