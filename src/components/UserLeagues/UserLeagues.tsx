@@ -9,6 +9,7 @@ import { fetchUserLeagues } from "@/utils/fetch";
 import Modal from "../Modal/Modal";
 import { MoveRight, Star } from "lucide-react";
 import CreateLeagueForm from "../CreateLeagueForm/CreateLeagueForm";
+import Link from "next/link";
 
 interface League {
   leagueId: string;
@@ -68,44 +69,51 @@ export default function UserLeagues() {
     <div className={css.leaguesContainer}>
       {leagues && leagues.length > 0 ? (
         leagues.map((league) => (
-          <div key={league.leagueId} className={css.leagueCard}>
-            <div className={css.leagueIcon}>
-              {league.leagueAvatar ? (
-                <Image
-                  src={league.leagueAvatar}
-                  alt={league.leagueName}
-                  width={40}
-                  height={40}
-                  className={css.avatarImage}
-                />
-              ) : (
-                <div className={css.avatarPlaceholder}>
-                  {league.leagueName[0]}
-                </div>
-              )}
-            </div>
-
-            <div className={css.leagueInfo}>
-              <h3 className={css.leagueName}>
-                {league.leagueName}
-                {league.adminId === session?.user?.id && (
-                  <Star
-                    size={16}
-                    className={css.adminIcon}
-                    fill="gold"
-                    color="orange"
+          // <div key={league.leagueId} className={css.leagueCard}>
+          <Link
+            href={`/leagues/${league.leagueId}`}
+            key={league.leagueId}
+            className={css.leagueLink}
+          >
+            <div className={css.leagueCard}>
+              <div className={css.leagueIcon}>
+                {league.leagueAvatar ? (
+                  <Image
+                    src={league.leagueAvatar}
+                    alt={league.leagueName}
+                    width={40}
+                    height={40}
+                    className={css.avatarImage}
                   />
+                ) : (
+                  <div className={css.avatarPlaceholder}>
+                    {league.leagueName[0]}
+                  </div>
                 )}
-              </h3>
-              <span className={css.pointsLabel}>
-                Your points: {league.totalPoints}
-              </span>
-            </div>
+              </div>
 
-            <div className={css.actionArea}>
-              <MoveRight />
+              <div className={css.leagueInfo}>
+                <h3 className={css.leagueName}>
+                  {league.leagueName}
+                  {league.adminId === session?.user?.id && (
+                    <Star
+                      size={16}
+                      className={css.adminIcon}
+                      fill="gold"
+                      color="orange"
+                    />
+                  )}
+                </h3>
+                <span className={css.pointsLabel}>
+                  Your points: {league.totalPoints}
+                </span>
+              </div>
+
+              <div className={css.actionArea}>
+                <MoveRight />
+              </div>
             </div>
-          </div>
+          </Link>
         ))
       ) : (
         <div className={css.emptyState}>

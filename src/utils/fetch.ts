@@ -7,11 +7,10 @@ const BASE_URL = 'https://scory-backend.onrender.com';
  */
 const handleAuthError = async (response: Response) => {
   if (response.status === 401) {
-    console.warn("Сессия недействительна или токен просрочен. Выходим...");
+    console.warn("Сессия недействительна.");
     
     if (typeof window !== "undefined") {
-      // Полностью разлогиниваем пользователя и кидаем на страницу входа
-      await signOut({ callbackUrl: "/signIn" });
+ await signOut({ callbackUrl: "/signIn" });
     }
     return;
   }
@@ -92,4 +91,21 @@ export const fetchCreateLeague = async (token: string, name: string) => {
   }
 
   return await response.json();
+};
+
+
+export const fetchLeagueResults = async (token: string, leagueId: string) => {
+  const response = await fetch(`${BASE_URL}/leagues/${leagueId}`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`  
+    },
+  });
+
+  if (!response.ok) {
+    await handleAuthError(response);
+  }
+
+  return await response.json(); 
 };

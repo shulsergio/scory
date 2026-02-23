@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import {  fetchCreateLeague } from "@/utils/fetch";
+import { fetchCreateLeague } from "@/utils/fetch";
 import css from "./CreateLeagueForm.module.css";
 
 interface CreateLeagueFormProps {
@@ -15,19 +15,21 @@ export default function CreateLeagueForm({
   const [name, setName] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const MIN_LENGTH = 3;
+  const isValid = name.trim().length >= MIN_LENGTH;
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!name.trim()) return;
+    if (!isValid || isSubmitting) return;
 
     setIsSubmitting(true);
     setError(null);
 
     try {
       await fetchCreateLeague(token, name.trim());
-      onSuccess();  
+      onSuccess();
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Не удалось создать лигу");
+      setError(err instanceof Error ? err.message : "Failed to create league");
     } finally {
       setIsSubmitting(false);
     }
@@ -35,23 +37,27 @@ export default function CreateLeagueForm({
 
   return (
     <form className={css.form} onSubmit={handleSubmit}>
-      <p className={css.description}>
-        Придумайте яркое название для вашей лиги. Позже вы сможете пригласить
-        друзей.
-      </p>
+      <div className={css.description}>
+        <p>Enter a name for your league.</p>
+        <p className={css.smallText}>You can invite your friends later.</p>
+      </div>
 
       <div className={css.inputGroup}>
-        <label htmlFor="leagueName">Название лиги</label>
+        <label htmlFor="leagueName">League Name</label>
         <input
           id="leagueName"
           type="text"
           value={name}
           onChange={(e) => setName(e.target.value)}
-          placeholder="Например: Ночной Дозор"
+          placeholder="For example: Night clowns"
           disabled={isSubmitting}
           required
           autoFocus
+          maxLength={25}
         />
+        {name.length > 0 && name.length < MIN_LENGTH && (
+          <span className={css.hint}>Minimum {MIN_LENGTH} characters</span>
+        )}
       </div>
 
       {error && <p className={css.errorText}>{error}</p>}
@@ -60,9 +66,9 @@ export default function CreateLeagueForm({
         <button
           type="submit"
           className={css.submitBtn}
-          disabled={isSubmitting || !name.trim()}
+          disabled={isSubmitting || !isValid}
         >
-          {isSubmitting ? "Создание..." : "Создать"}
+          {isSubmitting ? "Creating..." : "Create"}
         </button>
       </div>
     </form>

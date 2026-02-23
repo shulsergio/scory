@@ -8,8 +8,12 @@
 .description {
   font-size: 0.9rem;
   color: #666;
-  line-height: 1.4;
-  margin-bottom: 5px;
+  /* line-height: 1.4; */
+}
+.smallText {
+  padding-top: 7px;
+  font-size: 0.8rem;
+  color: #999;
 }
 
 .inputGroup {
@@ -50,7 +54,6 @@
 }
 
 .actions {
-  margin-top: 10px;
   display: flex;
   justify-content: flex-end;
 }
