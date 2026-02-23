@@ -1,0 +1,66 @@
+.container {
+  padding: 10px;
+  max-width: 800px;
+  min-width: 95%;
+  margin: 0 auto;
+}
+
+.title {
+  color: var(--primary-500);
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.subtitle {
+  text-align: center;
+  color: #666;
+  margin-bottom: 30px;
+}
+
+.tableWrapper {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table th {
+  background: #f8f9fa;
+  padding: 8px 10px;
+  text-align: left;
+  font-size: 0.9rem;
+  /* text-transform: uppercase; */
+  color: #888;
+}
+
+.table td {
+  padding: 8px 10px;
+  border-top: 1px solid #eee;
+}
+
+.topOne {
+  background: rgba(255, 140, 0, 0.05);
+  font-weight: bold;
+}
+
+.rank {
+  width: 50px;
+  color: var(--primary-500);
+  font-weight: bold;
+}
+
+.points {
+  width: 40px;
+  text-align: right;
+  color: #333;
+  font-variant-numeric: tabular-nums;
+}
+.nickname {
+  color: #242424;
+  font-weight: 500;
+}

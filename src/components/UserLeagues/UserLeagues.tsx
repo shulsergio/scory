@@ -2,54 +2,27 @@
 
 import { useSession } from "next-auth/react";
 import css from "./UserLeagues.module.css";
-import { useEffect, useState } from "react";
-import Loader from "../Loader/Loader";
+import { useState } from "react";
 import Image from "next/image";
-import { fetchUserLeagues } from "@/utils/fetch";
+import { League } from "@/utils/fetch";
 import Modal from "../Modal/Modal";
 import { MoveRight, Star } from "lucide-react";
 import CreateLeagueForm from "../CreateLeagueForm/CreateLeagueForm";
+import Link from "next/link";
 
-interface League {
-  leagueId: string;
-  leagueName: string;
-  leagueAvatar?: string;
-  totalPoints: number;
-  adminId: string;
+interface UserLeaguesProps {
+  leagues: League[] | null;
+  error: string | null;
 }
 
-export default function UserLeagues() {
+export default function UserLeagues({ leagues, error }: UserLeaguesProps) {
   const { data: session, status } = useSession();
-  const [leagues, setLeagues] = useState<League[] | null>(null);
-  const [error, setError] = useState<string | null>(null);
+  // const [leagues, setLeagues] = useState<League[] | null>(null);
+
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const [refreshCount, setRefreshCount] = useState(0);
-  const triggerRefresh = () => setRefreshCount((prev) => prev + 1);
-
-  const isInitialLoading =
-    status === "loading" || (status === "authenticated" && leagues === null);
-
-  useEffect(() => {
-    if (status === "unauthenticated") return;
-
-    if (status === "authenticated" && session?.user?.accessToken) {
-      const fetchLeagues = async () => {
-        try {
-          const result = await fetchUserLeagues(session.user.accessToken);
-          const actualLeagues = Array.isArray(result) ? result : result.data;
-          setLeagues(actualLeagues || []);
-        } catch (err) {
-          setError(err instanceof Error ? err.message : "Error");
-          setLeagues([]);
-        }
-      };
-      fetchLeagues();
-    }
-  }, [status, session?.user?.accessToken, refreshCount]);
-
-  if (isInitialLoading) {
-    return <Loader />;
+  if (leagues === null && !error && status !== "unauthenticated") {
+    return null;
   }
 
   if (status === "unauthenticated") {
@@ -68,44 +41,50 @@ export default function UserLeagues() {
     <div className={css.leaguesContainer}>
       {leagues && leagues.length > 0 ? (
         leagues.map((league) => (
-          <div key={league.leagueId} className={css.leagueCard}>
-            <div className={css.leagueIcon}>
-              {league.leagueAvatar ? (
-                <Image
-                  src={league.leagueAvatar}
-                  alt={league.leagueName}
-                  width={40}
-                  height={40}
-                  className={css.avatarImage}
-                />
-              ) : (
-                <div className={css.avatarPlaceholder}>
-                  {league.leagueName[0]}
-                </div>
-              )}
-            </div>
-
-            <div className={css.leagueInfo}>
-              <h3 className={css.leagueName}>
-                {league.leagueName}
-                {league.adminId === session?.user?.id && (
-                  <Star
-                    size={16}
-                    className={css.adminIcon}
-                    fill="gold"
-                    color="orange"
+          <Link
+            href={`/leagues/${league.leagueId}`}
+            key={league.leagueId}
+            className={css.leagueLink}
+          >
+            <div className={css.leagueCard}>
+              <div className={css.leagueIcon}>
+                {league.leagueAvatar ? (
+                  <Image
+                    src={league.leagueAvatar}
+                    alt={league.leagueName}
+                    width={40}
+                    height={40}
+                    className={css.avatarImage}
                   />
+                ) : (
+                  <div className={css.avatarPlaceholder}>
+                    {league.leagueName[0]}
+                  </div>
                 )}
-              </h3>
-              <span className={css.pointsLabel}>
-                Your points: {league.totalPoints}
-              </span>
-            </div>
+              </div>
 
-            <div className={css.actionArea}>
-              <MoveRight />
+              <div className={css.leagueInfo}>
+                <h3 className={css.leagueName}>
+                  {league.leagueName}
+                  {league.adminId === session?.user?.id && (
+                    <Star
+                      size={16}
+                      className={css.adminIcon}
+                      fill="gold"
+                      color="orange"
+                    />
+                  )}
+                </h3>
+                <span className={css.pointsLabel}>
+                  Your points: {league.totalPoints}
+                </span>
+              </div>
+
+              <div className={css.actionArea}>
+                <MoveRight />
+              </div>
             </div>
-          </div>
+          </Link>
         ))
       ) : (
         <div className={css.emptyState}>
@@ -132,7 +111,6 @@ export default function UserLeagues() {
           token={session?.user?.accessToken || ""}
           onSuccess={() => {
             setIsModalOpen(false);
-            triggerRefresh();
           }}
         />
       </Modal>
