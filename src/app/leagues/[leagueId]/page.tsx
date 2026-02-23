@@ -32,7 +32,7 @@ export default function LeagueDetailsPage() {
             session.user.accessToken,
             leagueId,
           );
-          setData(result.data);
+          setData(result);
         } catch (err) {
           console.error(err);
         } finally {

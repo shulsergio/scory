@@ -3,23 +3,18 @@
 import { useSession } from "next-auth/react";
 import css from "./UserLeagues.module.css";
 import { useEffect, useState } from "react";
-import Loader from "../Loader/Loader";
 import Image from "next/image";
-import { fetchUserLeagues } from "@/utils/fetch";
+import { fetchUserLeagues, League } from "@/utils/fetch";
 import Modal from "../Modal/Modal";
 import { MoveRight, Star } from "lucide-react";
 import CreateLeagueForm from "../CreateLeagueForm/CreateLeagueForm";
 import Link from "next/link";
 
-interface League {
-  leagueId: string;
-  leagueName: string;
-  leagueAvatar?: string;
-  totalPoints: number;
-  adminId: string;
+interface UserLeaguesProps {
+  onLoadUpdate?: (loading: boolean) => void;
 }
 
-export default function UserLeagues() {
+export default function UserLeagues({ onLoadUpdate }: UserLeaguesProps) {
   const { data: session, status } = useSession();
   const [leagues, setLeagues] = useState<League[] | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -28,29 +23,32 @@ export default function UserLeagues() {
   const [refreshCount, setRefreshCount] = useState(0);
   const triggerRefresh = () => setRefreshCount((prev) => prev + 1);
 
-  const isInitialLoading =
-    status === "loading" || (status === "authenticated" && leagues === null);
-
   useEffect(() => {
-    if (status === "unauthenticated") return;
+    if (status === "unauthenticated") {
+      onLoadUpdate?.(false);
+      return;
+    }
 
     if (status === "authenticated" && session?.user?.accessToken) {
       const fetchLeagues = async () => {
         try {
+          onLoadUpdate?.(true);
           const result = await fetchUserLeagues(session.user.accessToken);
-          const actualLeagues = Array.isArray(result) ? result : result.data;
-          setLeagues(actualLeagues || []);
+
+          setLeagues(result || []);
         } catch (err) {
           setError(err instanceof Error ? err.message : "Error");
           setLeagues([]);
+        } finally {
+          onLoadUpdate?.(false);
         }
       };
       fetchLeagues();
     }
-  }, [status, session?.user?.accessToken, refreshCount]);
+  }, [status, session?.user?.accessToken, refreshCount, onLoadUpdate]);
 
-  if (isInitialLoading) {
-    return <Loader />;
+  if (leagues === null && !error && status !== "unauthenticated") {
+    return null;
   }
 
   if (status === "unauthenticated") {
@@ -69,7 +67,6 @@ export default function UserLeagues() {
     <div className={css.leaguesContainer}>
       {leagues && leagues.length > 0 ? (
         leagues.map((league) => (
-          // <div key={league.leagueId} className={css.leagueCard}>
           <Link
             href={`/leagues/${league.leagueId}`}
             key={league.leagueId}

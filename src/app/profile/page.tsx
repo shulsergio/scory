@@ -1,31 +1,48 @@
+"use client";
+
+import { useState, useCallback } from "react";
+import { useSession } from "next-auth/react";
 import UserStatus from "@/components/UserStatus/UserStatus";
-import css from "./profile.module.css";
 import UserLeagues from "@/components/UserLeagues/UserLeagues";
+import Loader from "@/components/Loader/Loader";
+import css from "./profile.module.css";
 
-/**
- * Страница Профиля юзера после входа
- * Должно быть 3 блока - статус юзера, матчи, лиги
- *
- * @export
- * @return {* }
- *
- */
 export default function Profile() {
-  return (
-    <main className={css.mainContainer}>
-      <div className={css.wrapper}>
-        <h2 className={css.title}>User profile</h2>
-        <UserStatus />
-      </div>
+  const { status } = useSession();
+  const [isLeaguesLoading, setIsLeaguesLoading] = useState(true);
+  const handleLoadUpdate = useCallback((loading: boolean) => {
+    setIsLeaguesLoading(loading);
+  }, []);
 
-      <div className={css.wrapper}>
-        <h2 className={css.title}>Leagues</h2>
-        <UserLeagues /> {/* - тут будут лиги*/}
-      </div>
-      <div className={css.wrapper}>
-        <h2 className={css.title}>Prognozes</h2>
-        {/* <UserStatus /> - тут будет список ближайших прогнозов */}
-      </div>
-    </main>
+  const showFullPageLoader = status === "loading" || isLeaguesLoading;
+
+  return (
+    <>
+      {showFullPageLoader && (
+        <div className={css.fullPageLoader}>
+          <Loader />
+        </div>
+      )}
+
+      <main
+        className={`${css.mainContainer} ${showFullPageLoader ? css.hidden : ""}`}
+      >
+        <div className={css.wrapper}>
+          <h2 className={css.title}>User profile</h2>
+          <UserStatus />
+        </div>
+
+        <div className={css.wrapper}>
+          <h2 className={css.title}>Leagues</h2>
+          {/* Передаем onLoadUpdate в компонент */}
+          <UserLeagues onLoadUpdate={handleLoadUpdate} />
+        </div>
+
+        <div className={css.wrapper}>
+          <h2 className={css.title}>Prognozes</h2>
+          {/* Будущий список прогнозов */}
+        </div>
+      </main>
+    </>
   );
 }
