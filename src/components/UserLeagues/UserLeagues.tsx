@@ -2,50 +2,24 @@
 
 import { useSession } from "next-auth/react";
 import css from "./UserLeagues.module.css";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Image from "next/image";
-import { fetchUserLeagues, League } from "@/utils/fetch";
+import { League } from "@/utils/fetch";
 import Modal from "../Modal/Modal";
 import { MoveRight, Star } from "lucide-react";
 import CreateLeagueForm from "../CreateLeagueForm/CreateLeagueForm";
 import Link from "next/link";
 
 interface UserLeaguesProps {
-  onLoadUpdate?: (loading: boolean) => void;
+  leagues: League[] | null;
+  error: string | null;
 }
 
-export default function UserLeagues({ onLoadUpdate }: UserLeaguesProps) {
+export default function UserLeagues({ leagues, error }: UserLeaguesProps) {
   const { data: session, status } = useSession();
-  const [leagues, setLeagues] = useState<League[] | null>(null);
-  const [error, setError] = useState<string | null>(null);
+  // const [leagues, setLeagues] = useState<League[] | null>(null);
+
   const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const [refreshCount, setRefreshCount] = useState(0);
-  const triggerRefresh = () => setRefreshCount((prev) => prev + 1);
-
-  useEffect(() => {
-    if (status === "unauthenticated") {
-      onLoadUpdate?.(false);
-      return;
-    }
-
-    if (status === "authenticated" && session?.user?.accessToken) {
-      const fetchLeagues = async () => {
-        try {
-          onLoadUpdate?.(true);
-          const result = await fetchUserLeagues(session.user.accessToken);
-
-          setLeagues(result || []);
-        } catch (err) {
-          setError(err instanceof Error ? err.message : "Error");
-          setLeagues([]);
-        } finally {
-          onLoadUpdate?.(false);
-        }
-      };
-      fetchLeagues();
-    }
-  }, [status, session?.user?.accessToken, refreshCount, onLoadUpdate]);
 
   if (leagues === null && !error && status !== "unauthenticated") {
     return null;
@@ -137,7 +111,6 @@ export default function UserLeagues({ onLoadUpdate }: UserLeaguesProps) {
           token={session?.user?.accessToken || ""}
           onSuccess={() => {
             setIsModalOpen(false);
-            triggerRefresh();
           }}
         />
       </Modal>
