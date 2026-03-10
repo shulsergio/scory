@@ -9,6 +9,7 @@ import Modal from "../Modal/Modal";
 import { MoveRight, Star } from "lucide-react";
 import CreateLeagueForm from "../CreateLeagueForm/CreateLeagueForm";
 import Link from "next/link";
+import ButtonBox from "../ButtonBox/ButtonBox";
 
 interface UserLeaguesProps {
   leagues: League[] | null;
@@ -99,7 +100,14 @@ export default function UserLeagues({ leagues, error }: UserLeaguesProps) {
         >
           create NEW league
         </button>
-        <button className={css.addLeagueBtn}>view all leagues</button>
+        <ButtonBox
+          option="link"
+          href="/leagues"
+          variant="transparent"
+          className={css.addLeagueBtn}
+        >
+          view ALL leagues
+        </ButtonBox>
       </div>
 
       <Modal
