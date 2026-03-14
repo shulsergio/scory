@@ -1,15 +1,14 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { useSession } from "next-auth/react";
-// import { fetchAllLeagues } from "@/utils/fetch";
-import { League } from "@/utils/fetch";
+// import { useSession } from "next-auth/react";
+import { fetchAllLeagues, League } from "@/utils/fetch";
 import css from "./leaguesPage.module.css";
 import Loader from "@/components/Loader/Loader";
-// import LeagueCard from "@/components/LeagueCard/LeagueCard"; // отдельный компонент
+import LeagueCard from "@/components/LeagueCard/LeagueCard";
 
 export default function AllLeaguesPage() {
-  const { data: session, status } = useSession();
+  // const { data: session, status } = useSession();
   const [leagues, setLeagues] = useState<League[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [isLoading, setIsLoading] = useState(true);
@@ -17,8 +16,7 @@ export default function AllLeaguesPage() {
   useEffect(() => {
     const loadLeagues = async () => {
       try {
-        // const data = await fetchAllLeagues();  ДОБАВИТЬ на Бекенд!!!!
-        // const data = [];
+        const data = await fetchAllLeagues();
         setLeagues(data);
       } catch (err) {
         console.error(err);
@@ -53,8 +51,7 @@ export default function AllLeaguesPage() {
         {filteredLeagues.length > 0 ? (
           filteredLeagues.map((league) => (
             <div key={league.leagueId} className={css.cardWrapper}>
-              <LeagueCard league={league} showJoinButton={true} />{" "}
-              {/* component needdd!!! */}
+              <LeagueCard league={league} showJoinButton={true} />
             </div>
           ))
         ) : (
