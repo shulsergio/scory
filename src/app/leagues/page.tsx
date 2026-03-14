@@ -3,8 +3,8 @@
 import { useState, useEffect } from "react";
 // import { useSession } from "next-auth/react";
 import { fetchAllLeagues, League } from "@/utils/fetch";
-import css from "./leaguesPage.module.css";
 import Loader from "@/components/Loader/Loader";
+import css from "./league.module.css";
 import LeagueCard from "@/components/LeagueCard/LeagueCard";
 
 export default function AllLeaguesPage() {

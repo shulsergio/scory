@@ -10,6 +10,7 @@ import ButtonBox from "../ButtonBox/ButtonBox";
 
 const navLinks = [
   { name: "Matches", href: "/matches" },
+  { name: "Leagues", href: "/leagues" },
   { name: "About", href: "/about" },
 ];
 
@@ -20,7 +21,6 @@ export default function Header() {
 
   const isLoading = status === "loading";
 
-  // Блокировка скролла при открытом меню
   useEffect(() => {
     const originalOverflow = document.body.style.overflow;
     if (isOpen) {
