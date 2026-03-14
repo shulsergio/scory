@@ -14,7 +14,8 @@ export interface League {
   leagueId: string;
   leagueName: string;
   leagueAvatar?: string;
-  totalPoints: number;
+  membersCount?: number; 
+  totalPoints?: number;
   adminId: string;
 }
 
@@ -181,4 +182,38 @@ export const fetchLeagueResults = async (token: string, leagueId: string): Promi
     console.error("fetchLeagueResults error:", error);
     throw error;
   }
+};
+
+export const fetchAllLeagues = async (): Promise<League[]> => {
+  try {
+    const response = await fetch(`${BASE_URL}/leagues`, {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json' },
+    });
+
+    if (!response.ok) throw new Error(`Status: ${response.status}`);
+
+    const result = await response.json();
+    return result.data || [];
+  } catch (error) {
+    console.error("fetchAllLeagues error:", error);
+    return [];
+  }
+};
+
+
+export const joinLeague = async (token: string, leagueId: string) => {
+  const response = await fetch(`${BASE_URL}/leagues/${leagueId}/join`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    },
+  });
+
+  if (!response.ok) { 
+    throw new Error('Failed to join');
+  }
+
+  return await response.json();
 };
