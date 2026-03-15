@@ -53,30 +53,12 @@ export default function LeagueData({ league }: LeagueDataProps) {
         <h3 className={css.name}>{league.leagueName}</h3>
         <div className={css.members}>
           <span>
-            {" "}
             <Users size={14} />
-            {league.membersCount || 0}{" "}
+            {league.membersCount || 0}
             {league.membersCount === 1 ? "user" : "users"}
           </span>
         </div>
       </div>
-
-      {/* <div className={css.actions}>
-        {showJoinButton && !isJoined ? (
-          <button
-            className={css.joinBtn}
-            onClick={handleJoin}
-            disabled={isJoining}
-          >
-            {isJoining ? "..." : <PlusCircle size={20} />}
-          </button>
-        ) : (
-          <Link href={`/leagues/${league.leagueId}`} className={css.viewBtn}>
-            <MoveRight />
-          </Link>
-        )}
-        {isJoined && <span className={css.joinedLabel}>Joined!</span>}
-      </div> */}
     </div>
   );
 }

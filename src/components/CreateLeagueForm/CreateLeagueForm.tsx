@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { fetchCreateLeague } from "@/utils/fetch";
 import css from "./CreateLeagueForm.module.css";
+import Loader from "../Loader/Loader";
 
 interface CreateLeagueFormProps {
   onSuccess: () => void;
@@ -49,7 +50,7 @@ export default function CreateLeagueForm({
           type="text"
           value={name}
           onChange={(e) => setName(e.target.value)}
-          placeholder="For example: Night clowns"
+          placeholder="your league name"
           disabled={isSubmitting}
           required
           autoFocus
@@ -68,7 +69,7 @@ export default function CreateLeagueForm({
           className={css.submitBtn}
           disabled={isSubmitting || !isValid}
         >
-          {isSubmitting ? "Creating..." : "Create"}
+          {isSubmitting ? <Loader /> : "Create"}
         </button>
       </div>
     </form>
