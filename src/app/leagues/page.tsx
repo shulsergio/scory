@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import { fetchAllLeagues, League } from "@/utils/fetch";
 import Loader from "@/components/Loader/Loader";
 import css from "./league.module.css";
-import LeagueCard from "@/components/LeagueCard/LeagueCard";
+import LeagueCard from "@/components/LeagueData/LeagueData";
 
 export default function AllLeaguesPage() {
   // const { data: session, status } = useSession();
@@ -35,7 +35,7 @@ export default function AllLeaguesPage() {
 
   return (
     <main className={css.container}>
-      <h1 className={css.title}>Explore Leagues</h1>
+      <h1 className={css.title}>All leagues</h1>
 
       <div className={css.searchWrapper}>
         <input
@@ -55,7 +55,7 @@ export default function AllLeaguesPage() {
             </div>
           ))
         ) : (
-          <p className={css.empty}>No leagues found matching </p>
+          <p className={css.empty}>No leagues found</p>
         )}
       </div>
     </main>
