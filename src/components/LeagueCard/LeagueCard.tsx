@@ -17,7 +17,7 @@ export default function LeagueCard({
   league,
   currentUserId,
   isUserLeagueList = false,
-  //   isAllLeaguesList=false,
+  isAllLeaguesList = false,
 }: LeagueCardProps) {
   return (
     <Link href={`/leagues/${league.leagueId}`} className={css.leagueLink}>
@@ -51,6 +51,13 @@ export default function LeagueCard({
           {isUserLeagueList && (
             <span className={css.pointsLabel}>
               Your points: {league.totalPoints ?? 0}
+            </span>
+          )}
+
+          {isAllLeaguesList && (
+            <span>
+              total {league.membersCount === 1 ? "user" : "users"}:
+              {league.membersCount || 0}
             </span>
           )}
         </div>

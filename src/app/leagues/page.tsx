@@ -1,14 +1,14 @@
 "use client";
 
 import { useState, useEffect } from "react";
-// import { useSession } from "next-auth/react";
+import { useSession } from "next-auth/react";
 import { fetchAllLeagues, League } from "@/utils/fetch";
 import Loader from "@/components/Loader/Loader";
+import LeagueList from "@/components/LeagueList/LeagueList";
 import css from "./league.module.css";
-import LeagueCard from "@/components/LeagueData/LeagueData";
 
 export default function AllLeaguesPage() {
-  // const { data: session, status } = useSession();
+  const { data: session } = useSession();
   const [leagues, setLeagues] = useState<League[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [isLoading, setIsLoading] = useState(true);
@@ -46,18 +46,11 @@ export default function AllLeaguesPage() {
           onChange={(e) => setSearchTerm(e.target.value)}
         />
       </div>
-
-      <div className={css.grid}>
-        {filteredLeagues.length > 0 ? (
-          filteredLeagues.map((league) => (
-            <div key={league.leagueId} className={css.cardWrapper}>
-              <LeagueCard league={league} showJoinButton={true} />
-            </div>
-          ))
-        ) : (
-          <p className={css.empty}>No leagues found</p>
-        )}
-      </div>
+      <LeagueList
+        leagues={filteredLeagues}
+        currentUserId={session?.user?.id}
+        isAllLeaguesList={true}
+      />
     </main>
   );
 }

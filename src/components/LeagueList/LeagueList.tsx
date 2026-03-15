@@ -5,11 +5,15 @@ import css from "./LeagueList.module.css";
 interface LeagueListProps {
   leagues: League[];
   currentUserId?: string;
+  isUserLeagueList?: boolean;
+  isAllLeaguesList?: boolean;
 }
 
 export default function LeagueList({
   leagues,
   currentUserId,
+  isUserLeagueList = false,
+  isAllLeaguesList = false,
 }: LeagueListProps) {
   if (leagues.length === 0) {
     return (
@@ -26,6 +30,8 @@ export default function LeagueList({
           key={league.leagueId}
           league={league}
           currentUserId={currentUserId}
+          isUserLeagueList={isUserLeagueList}
+          isAllLeaguesList={isAllLeaguesList}
         />
       ))}
     </div>

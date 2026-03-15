@@ -34,7 +34,11 @@ export default function UserLeagues({ leagues, error }: UserLeaguesProps) {
   console.log("***** UserLeagues:", leagues);
   return (
     <div className={css.leaguesContainer}>
-      <LeagueList leagues={leagues || []} currentUserId={session?.user?.id} />
+      <LeagueList
+        leagues={leagues || []}
+        currentUserId={session?.user?.id}
+        isUserLeagueList={true}
+      />
 
       <div className={css.buttonsContainer}>
         <button

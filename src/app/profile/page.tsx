@@ -11,7 +11,7 @@ import UserLeagues from "@/components/UserLeagues/UserLeagues";
 export default function Profile() {
   const { data: session, status } = useSession();
   const [leagues, setLeagues] = useState<League[] | null>(null);
-  const [error, setError] = useState<string | null>(null); // Ошибка теперь здесь
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     if (status === "authenticated" && session?.user?.accessToken) {
@@ -22,7 +22,7 @@ export default function Profile() {
         })
         .catch((err) => {
           setError(err.message || "Ошибка загрузки");
-          setLeagues([]); // Чтобы убрать лоадер
+          setLeagues([]);
         });
     }
   }, [status, session]);

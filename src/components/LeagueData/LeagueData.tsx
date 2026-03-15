@@ -52,8 +52,9 @@ export default function LeagueData({ league }: LeagueDataProps) {
       <div className={css.content}>
         <h3 className={css.name}>{league.leagueName}</h3>
         <div className={css.members}>
-          <Users size={14} />
           <span>
+            {" "}
+            <Users size={14} />
             {league.membersCount || 0}{" "}
             {league.membersCount === 1 ? "user" : "users"}
           </span>
