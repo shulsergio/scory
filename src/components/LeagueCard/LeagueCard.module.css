@@ -1,0 +1,41 @@
+.leagueCard {
+  background: var(--neutral-800);
+  border: 1px solid var(--neutral-700);
+  border-radius: 12px;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  transition:
+    transform 0.2s,
+    border-color 0.2s;
+  cursor: pointer;
+}
+.leagueCard:hover {
+  border-color: var(--primary-500);
+  transform: translateY(-2px);
+}
+.leagueIcon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--neutral-900);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-gray);
+}
+
+.leagueInfo {
+  flex-grow: 1;
+}
+.leagueName {
+  margin: 0;
+  padding-bottom: 6px;
+  font-size: 1rem;
+  color: var(--text-white);
+}
+
+.adminIcon {
+  margin-left: 8px;
+}

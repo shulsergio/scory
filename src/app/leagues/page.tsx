@@ -40,7 +40,7 @@ export default function AllLeaguesPage() {
       <div className={css.searchWrapper}>
         <input
           type="text"
-          placeholder="Search leagues by name..."
+          placeholder="Search leagues by name"
           className={css.searchInput}
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}

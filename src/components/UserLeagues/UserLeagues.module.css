@@ -1,38 +1,8 @@
 .leaguesContainer {
+  width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  width: 100%;
-}
-
-.leagueCard {
-  background: var(--neutral-800);
-  border: 1px solid var(--neutral-700);
-  border-radius: 12px;
-  padding: 8px;
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  transition:
-    transform 0.2s,
-    border-color 0.2s;
-  cursor: pointer;
-}
-
-.leagueCard:hover {
-  border-color: var(--primary-500);
-  transform: translateY(-2px);
-}
-
-.leagueInfo {
-  flex-grow: 1;
-}
-
-.leagueName {
-  margin: 0;
-  padding-bottom: 6px;
-  font-size: 1rem;
-  color: var(--text-white);
+  gap: 16px;
 }
 
 .playerCount {
@@ -58,6 +28,14 @@
   font-size: 1.1rem;
 }
 
+.buttonsContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  /* padding-top: 10px; */
+  gap: 10px;
+}
+
 .addLeagueBtn {
   background: transparent;
   border: 1px solid var(--neutral-100);
@@ -68,34 +46,14 @@
   font-weight: 600;
   transition: all 0.2s;
 }
-.emptyState {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
+
 .addLeagueBtn:hover {
   border-color: var(--primary-500);
   color: var(--primary-500);
 }
-
-.buttonsContainer {
+.errorContainer {
   display: flex;
-  flex-direction: row;
-  justify-content: center;
-  /* padding-top: 10px; */
-
-  gap: 10px;
-}
-.adminIcon {
-  margin-left: 8px;
-}
-.avatarPlaceholder {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background: var(--neutral-900);
-  display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  color: var(--text-gray);
+  color: var(--error-500);
 }
