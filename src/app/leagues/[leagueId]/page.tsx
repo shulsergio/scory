@@ -33,10 +33,10 @@ export default function LeagueDetailsPage() {
   const [isJoining, setIsJoining] = useState(false);
 
   const loadData = useCallback(async () => {
-    if (!session?.user?.accessToken) return;
+    // if (!session?.user?.accessToken) return;
     try {
       const result = await fetchLeagueResults(
-        session.user.accessToken,
+        session?.user?.accessToken || "",
         leagueId,
       );
       setData(result);
@@ -48,15 +48,15 @@ export default function LeagueDetailsPage() {
   }, [leagueId, session?.user?.accessToken]);
 
   useEffect(() => {
-    if (status === "authenticated") {
+    if (status !== "loading") {
       loadData();
     }
   }, [status, loadData]);
 
-  const isAdmin = data?.adminId === session?.user?.id;
-  const isMember = data?.leaderboard.some(
-    (m) => m.nickname === session?.user?.nickname,
-  );
+  const isAdmin = !!session?.user?.id && data?.adminId === session?.user?.id;
+  const isMember =
+    !!session?.user?.nickname &&
+    data?.leaderboard.some((m) => m.nickname === session?.user?.nickname);
   console.log("LeagueDetailsPage isJoining=", isJoining);
   console.log("LeagueDetailsPage isAdmin=", isAdmin);
   console.log("LeagueDetailsPage data?.adminId=", data?.adminId);
@@ -101,27 +101,29 @@ export default function LeagueDetailsPage() {
       <div className={css.header}>
         <h1 className={css.title}>{data.leagueName}</h1>
         <div className={css.actions}>
-          {isAdmin ? (
-            <button
-              className={css.manageButton}
-              // onClick={() => setIsSettingsOpen(true)} ---управлениіе лигой для админа подумать
-            >
-              <Settings size={18} />
-              <span>Manage League</span>
-            </button>
-          ) : isMember ? (
-            <button className={css.leaveButton} onClick={handleLeaveClick}>
-              Leave League
-            </button>
+          {status === "unauthenticated" ? (
+            <p>Sign in to join league</p>
           ) : (
-            <button className={css.joinButton} onClick={handleJoinClick}>
-              <UserPlus size={18} />
-              <span>Join League</span>
-            </button>
+            <>
+              {isAdmin ? (
+                <button className={css.manageButton}>
+                  <Settings size={18} />
+                  <span>Manage League</span>
+                </button>
+              ) : isMember ? (
+                <button className={css.leaveButton} onClick={handleLeaveClick}>
+                  Leave League
+                </button>
+              ) : (
+                <button className={css.joinButton} onClick={handleJoinClick}>
+                  <UserPlus size={18} />
+                  <span>Join League</span>
+                </button>
+              )}
+            </>
           )}
         </div>
       </div>
-
       <h2 className={css.subtitle}>Table</h2>
 
       <div className={css.tableWrapper}>
