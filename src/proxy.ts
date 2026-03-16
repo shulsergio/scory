@@ -17,8 +17,11 @@ const authMiddleware = withAuth(
   },
   {
     callbacks: {
-      authorized: ({ req, token }) => {
-        if (req.nextUrl.pathname === "/") return true;
+authorized: ({ req, token }) => {
+        const path = req.nextUrl.pathname;
+        if (path === "/" || path.startsWith("/leagues")) {
+          return true;
+        }
         return !!token;
       },
     },

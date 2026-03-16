@@ -27,6 +27,7 @@ export interface LeaderboardEntry {
 
 export interface LeagueResults {
   leagueName: string;
+  adminId: string;
   leaderboard: LeaderboardEntry[];
 }
 
@@ -212,8 +213,28 @@ export const joinLeague = async (token: string, leagueId: string) => {
   });
 
   if (!response.ok) { 
-    throw new Error('Failed to join');
+await handleAuthError(response);
   }
 
-  return await response.json();
+const result = await response.json();
+  return result.data;
+};
+
+export const leaveLeague = async (token: string, leagueId: string) => {
+  const response = await fetch(`${BASE_URL}/leagues/${leagueId}/leave`, {
+method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    },
+  });
+
+if (!response.ok) { 
+    await handleAuthError(response);
+  }
+ 
+  if (response.status === 204) return null;
+  
+  const result = await response.json();
+  return result.data;
 };

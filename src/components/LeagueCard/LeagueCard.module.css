@@ -10,6 +10,7 @@
     transform 0.2s,
     border-color 0.2s;
   cursor: pointer;
+  min-width: 275px;
 }
 .leagueCard:hover {
   border-color: var(--primary-500);

@@ -2,27 +2,33 @@
 import { useSession } from "next-auth/react";
 import { useParams } from "next/navigation";
 import { useEffect, useState, useCallback } from "react";
-import { fetchLeagueResults, joinLeague } from "@/utils/fetch";
+import {
+  fetchLeagueResults,
+  joinLeague,
+  LeagueResults,
+  leaveLeague,
+} from "@/utils/fetch";
 import Loader from "@/components/Loader/Loader";
 import css from "./leagueData.module.css";
-import { UserPlus } from "lucide-react";
+import { Settings, UserPlus } from "lucide-react";
 
-interface LeaderboardEntry {
-  nickname: string;
-  points: number;
-  joinedAt: string;
-}
+// interface LeaderboardEntry {
+//   nickname: string;
+//   points: number;
+//   joinedAt: string;
+// }
 
-interface LeagueData {
-  leagueName: string;
-  leaderboard: LeaderboardEntry[];
-}
+// interface LeagueData {
+//   leagueName: string;
+//   adminId: string;
+//   leaderboard: LeaderboardEntry[];
+// }
 
 export default function LeagueDetailsPage() {
   const { leagueId } = useParams() as { leagueId: string };
   const { data: session, status } = useSession();
 
-  const [data, setData] = useState<LeagueData | null>(null);
+  const [data, setData] = useState<LeagueResults | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isJoining, setIsJoining] = useState(false);
 
@@ -47,9 +53,14 @@ export default function LeagueDetailsPage() {
     }
   }, [status, loadData]);
 
+  const isAdmin = data?.adminId === session?.user?.id;
   const isMember = data?.leaderboard.some(
     (m) => m.nickname === session?.user?.nickname,
   );
+  console.log("LeagueDetailsPage isJoining=", isJoining);
+  console.log("LeagueDetailsPage isAdmin=", isAdmin);
+  console.log("LeagueDetailsPage data?.adminId=", data?.adminId);
+  console.log("LeagueDetailsPage isMember=", isMember);
 
   const handleJoinClick = async () => {
     if (!session?.user?.accessToken) return;
@@ -64,31 +75,54 @@ export default function LeagueDetailsPage() {
     }
   };
 
+  const handleLeaveClick = async () => {
+    if (!session?.user?.accessToken) return;
+
+    const confirmLeave = confirm("Are you sure you want to leave this league?");
+    if (!confirmLeave) return;
+
+    setIsJoining(true);
+    try {
+      await leaveLeague(session.user.accessToken, leagueId);
+      await loadData();
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setIsJoining(false);
+    }
+  };
+
   if (status === "loading" || isLoading) return <Loader />;
   if (!data) return <p className={css.error}>League not found</p>;
 
   return (
     <div className={css.container}>
+      {isJoining && <Loader />}
       <div className={css.header}>
         <h1 className={css.title}>{data.leagueName}</h1>
-        {!isMember && (
-          <button
-            className={css.joinButton}
-            onClick={handleJoinClick}
-            disabled={isJoining}
-          >
-            {isJoining ? (<Loader />
-            ) : (
-              <>
-                <UserPlus size={18} />
-                <span>Join League</span>
-              </>
-            )}
-          </button>
-        )}
+        <div className={css.actions}>
+          {isAdmin ? (
+            <button
+              className={css.manageButton}
+              // onClick={() => setIsSettingsOpen(true)} ---управлениіе лигой для админа подумать
+            >
+              <Settings size={18} />
+              <span>Manage League</span>
+            </button>
+          ) : isMember ? (
+            <button className={css.leaveButton} onClick={handleLeaveClick}>
+              Leave League
+            </button>
+          ) : (
+            <button className={css.joinButton} onClick={handleJoinClick}>
+              <UserPlus size={18} />
+              <span>Join League</span>
+            </button>
+          )}
+        </div>
       </div>
 
-      <h2 className={css.subtitle}>Leaderboard</h2>
+      <h2 className={css.subtitle}>Table</h2>
 
       <div className={css.tableWrapper}>
         <table className={css.table}>
