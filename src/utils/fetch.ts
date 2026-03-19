@@ -238,3 +238,86 @@ if (!response.ok) {
   const result = await response.json();
   return result.data;
 };
+
+
+export interface PredictionData {
+  matchId: string;
+  homeGoals: number;
+  awayGoals: number;
+}
+
+export const savePrediction = async (token: string, data: PredictionData) => {
+  const response = await fetch(`${BASE_URL}/predictions`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`,
+    },
+    body: JSON.stringify(data),
+  });
+
+  if (!response.ok) {
+    await handleAuthError(response);
+  }
+
+  const result = await response.json();
+  return result.data;
+};
+
+
+export interface UserPrediction {
+  _id: string;
+  homeGoals: number;
+  awayGoals: number;
+  predictedAt: string;
+}
+ 
+export interface MatchWithPrediction {
+  _id: string;
+  matchNumber: number;
+  homeTeam: {
+    _id: string;
+    name: string;
+    logo: string;
+  };
+  awayTeam: {
+    _id: string;
+    name: string;
+    logo: string;
+  };
+  kickoffTime: string;
+  lockTime: string;
+  status: "scheduled" | "finished";
+  score?: {
+    home: number;
+    away: number;
+  };
+  group: string;
+  league: string; 
+  prediction: UserPrediction | null;
+}
+
+export const fetchMatchesWithPredictions = async (
+  token: string, 
+  league: string = 'WC2026'
+): Promise<MatchWithPrediction[]> => { 
+  const url = new URL(`${BASE_URL}/predictors/my-predictions`);
+  url.searchParams.append('league', league);
+
+  const response = await fetch(url.toString(), {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`,
+    },
+  });
+
+  if (!response.ok) { 
+    await handleAuthError(response);
+    throw new Error('Failed to fetch matches');
+  }
+
+  const result = await response.json();
+   
+  return result.data; 
+};

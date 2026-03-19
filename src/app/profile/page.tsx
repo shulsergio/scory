@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import css from "./profile.module.css";
 import UserStatus from "@/components/UserStatus/UserStatus";
 import UserLeagues from "@/components/UserLeagues/UserLeagues";
+import MatchCard, { MatchD } from "@/components/MatchCard/MatchCard";
 
 export default function Profile() {
   const { data: session, status } = useSession();
@@ -30,6 +31,16 @@ export default function Profile() {
   const isLoading =
     status === "loading" || (status === "authenticated" && leagues === null);
   if (isLoading) return <Loader />;
+
+  const openMatch: MatchD = {
+    _id: "match_001",
+    homeTeam: { _id: "t1", name: "Argentina" },
+    awayTeam: { _id: "t2", name: "France" },
+    kickoffTime: "2026-06-01T20:00:00Z",
+    lockTime: "2026-06-01T19:00:00Z",
+    status: "scheduled",
+  };
+
   return (
     <>
       {/* {showFullPageLoader && (
@@ -52,6 +63,10 @@ export default function Profile() {
 
         <div className={css.wrapper}>
           <h2 className={css.title}>Prognozes</h2>
+          <MatchCard
+            match={openMatch}
+            token={session?.user?.accessToken || ""}
+          />
           {/* Будущий список прогнозов */}
         </div>
       </main>

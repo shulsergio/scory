@@ -1,0 +1,143 @@
+.card {
+  background: #ffffff;
+  border-radius: 12-px;
+  padding: 16px;
+  margin-bottom: 12px;
+  border: 1px solid #e0e0e0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  transition: all 0.2s ease;
+}
+
+/* Состояние, когда прогноз изменять нельзя */
+.locked {
+  background: #f5f5f5;
+  border-color: #d0d0d0;
+  opacity: 0.8;
+}
+
+.timeInfo {
+  font-size: 12px;
+  color: #666;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  font-weight: 600;
+  text-align: center;
+}
+
+.matchMain {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.team {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+}
+
+/* Команда слева (Home) выравнивает текст по правому краю */
+.team:first-of-type {
+  justify-content: flex-end;
+  text-align: right;
+}
+
+/* Команда справа (Away) выравнивает текст по левому краю */
+.team:last-of-type {
+  justify-content: flex-start;
+  text-align: left;
+}
+
+.team span {
+  font-weight: 500;
+  font-size: 14px;
+  color: #333;
+}
+
+.scoreInput {
+  width: 45px;
+  height: 40px;
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+  border: 2px solid #ddd;
+  border-radius: 6px;
+  background: #fff;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.scoreInput:focus {
+  border-color: #003b7e; /* Твой основной синий цвет */
+}
+
+.scoreInput:disabled {
+  background: #eee;
+  cursor: not-allowed;
+  border-color: #ccc;
+}
+
+/* Убираем стрелочки у input type="number" */
+.scoreInput::-webkit-inner-spin-button,
+.scoreInput::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.divider {
+  font-weight: bold;
+  font-size: 20px;
+  color: #999;
+}
+
+.actionArea {
+  width: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.saveBtn {
+  background: #003b7e;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition:
+    background 0.2s,
+    transform 0.1s;
+}
+
+.saveBtn:hover:not(:disabled) {
+  background: #002a5a;
+}
+
+.saveBtn:active:not(:disabled) {
+  transform: scale(0.95);
+}
+
+.saveBtn:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+.lockIcon {
+  color: #888;
+}
+
+.finalResult {
+  margin-top: 12px;
+  padding-top: 8px;
+  border-top: 1px dashed #ddd;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 700;
+  color: #d32f2f; /* Красный для акцента на результате */
+}
