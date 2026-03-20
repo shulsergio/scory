@@ -68,10 +68,15 @@ export default function PredictionCard({
   return (
     <div className={`${css.card} ${isLocked ? css.locked : ""}`}>
       <div className={css.timeInfo}>
-        {new Date(match.kickoffTime).toLocaleString([], {
-          hour: "2-digit",
-          minute: "2-digit",
-        })}
+        {new Date(match.kickoffTime)
+          .toLocaleString("ru-RU", {
+            day: "2-digit",
+            month: "2-digit",
+            hour: "2-digit",
+            minute: "2-digit",
+          })
+          .replace(",", "")}
+
         {isLocked && !match.score && (
           <span className={css.liveBadge}>LIVE</span>
         )}

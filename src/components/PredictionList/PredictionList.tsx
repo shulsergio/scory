@@ -2,6 +2,8 @@ import PredictionCard from "@/components/PredictionCard/PredictionCard";
 import { MatchWithPrediction } from "@/utils/fetch";
 import css from "./PredictionList.module.css";
 
+const HOURS_BEFORE_KICKOFF = 36;
+
 interface PredictionListProps {
   matches: MatchWithPrediction[];
   token: string;
@@ -11,42 +13,40 @@ export default function PredictionList({
   matches,
   token,
 }: PredictionListProps) {
-  if (!matches || matches.length === 0) {
+  const now = new Date();
+  const ShowTimeFromNow = new Date(
+    now.getTime() + HOURS_BEFORE_KICKOFF * 60 * 60 * 1000,
+  );
+  console.log("!!!!! matches ---- ", matches);
+  const activePredictions = matches
+    .filter((m) => {
+      const kickoff = new Date(m.kickoffTime);
+      const lock = new Date(m.lockTime);
+
+      return lock > now && kickoff <= ShowTimeFromNow;
+    })
+    .sort(
+      (a, b) =>
+        new Date(a.kickoffTime).getTime() - new Date(b.kickoffTime).getTime(),
+    );
+
+  if (!activePredictions || activePredictions.length === 0) {
     return (
-      <div className={css.empty}>No matches available for prediction.</div>
+      <div className={css.empty}>
+        No active matches for predictions. Please check back later.
+      </div>
     );
   }
 
-  const grouped = matches.reduce(
-    (acc: { [key: string]: MatchWithPrediction[] }, match) => {
-      const day = new Date(match.kickoffTime).toLocaleDateString("uk-UA", {
-        day: "numeric",
-        month: "long",
-        weekday: "long",
-      });
-      if (!acc[day]) acc[day] = [];
-      acc[day].push(match);
-      return acc;
-    },
-    {},
-  );
-
   return (
     <div className={css.wrapper}>
-      {Object.entries(grouped).map(([date, dayMatches]) => (
-        <section key={date} className={css.daySection}>
-          <h2 className={css.dateHeader}>{date}</h2>
-          <div className={css.grid}>
-            {dayMatches.map((m) => (
-              <PredictionCard
-                key={m._id}
-                match={m}
-                initialPrediction={m.prediction}
-                token={token}
-              />
-            ))}
-          </div>
-        </section>
+      {activePredictions.map((m) => (
+        <PredictionCard
+          key={m._id}
+          match={m}
+          initialPrediction={m.prediction}
+          token={token}
+        />
       ))}
     </div>
   );
