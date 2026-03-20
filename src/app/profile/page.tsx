@@ -1,28 +1,39 @@
 "use client";
 
 import Loader from "@/components/Loader/Loader";
-import { fetchUserLeagues, League } from "@/utils/fetch";
+import {
+  fetchMatchesWithPredictions,
+  fetchUserLeagues,
+  League,
+  MatchWithPrediction,
+} from "@/utils/fetch";
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import css from "./profile.module.css";
 import UserStatus from "@/components/UserStatus/UserStatus";
 import UserLeagues from "@/components/UserLeagues/UserLeagues";
-import MatchCard, { MatchD } from "@/components/MatchCard/MatchCard";
+import PredictionList from "@/components/PredictionList/PredictionList";
 
 export default function Profile() {
   const { data: session, status } = useSession();
+
+  // Состояния для данных
   const [leagues, setLeagues] = useState<League[] | null>(null);
+  const [matches, setMatches] = useState<MatchWithPrediction[]>([]);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     if (status === "authenticated" && session?.user?.accessToken) {
-      fetchUserLeagues(session.user.accessToken)
-        .then((res) => {
-          const data = res;
-          setLeagues(data || []);
+      const token = session.user.accessToken;
+
+      Promise.all([fetchUserLeagues(token), fetchMatchesWithPredictions(token)])
+        .then(([leaguesRes, matchesRes]) => {
+          setLeagues(leaguesRes || []);
+          setMatches(matchesRes || []);
         })
         .catch((err) => {
-          setError(err.message || "Ошибка загрузки");
+          console.error("Profile load error:", err);
+          setError(err.message || "Ошибка загрузки данных");
           setLeagues([]);
         });
     }
@@ -30,16 +41,8 @@ export default function Profile() {
 
   const isLoading =
     status === "loading" || (status === "authenticated" && leagues === null);
-  if (isLoading) return <Loader />;
 
-  const openMatch: MatchD = {
-    _id: "match_001",
-    homeTeam: { _id: "t1", name: "Argentina" },
-    awayTeam: { _id: "t2", name: "France" },
-    kickoffTime: "2026-06-01T20:00:00Z",
-    lockTime: "2026-06-01T19:00:00Z",
-    status: "scheduled",
-  };
+  if (isLoading) return <Loader />;
 
   return (
     <>
@@ -57,17 +60,15 @@ export default function Profile() {
 
         <div className={css.wrapper}>
           <h2 className={css.title}>Leagues</h2>
-          {/* Передаем onLoadUpdate в компонент */}
           <UserLeagues leagues={leagues} error={error} />
         </div>
 
         <div className={css.wrapper}>
           <h2 className={css.title}>Prognozes</h2>
-          <MatchCard
-            match={openMatch}
+          <PredictionList
+            matches={matches}
             token={session?.user?.accessToken || ""}
           />
-          {/* Будущий список прогнозов */}
         </div>
       </main>
     </>
