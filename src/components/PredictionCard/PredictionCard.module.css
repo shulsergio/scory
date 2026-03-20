@@ -1,0 +1,45 @@
+.card {
+  width: 280px;
+  background: var(--bg-card);
+  border-radius: 8px;
+  border: 1px solid var(--neutral-800);
+  padding: 12px;
+  margin-bottom: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.timeInfo {
+  font-size: 16px;
+  color: var(--text-main);
+  margin: 0 auto;
+}
+.matchMain {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+
+  gap: 6px;
+}
+.team {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  justify-content: space-between;
+  color: var(--text-main);
+}
+.teamName {
+  padding: 0 8px;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-main);
+}
+.scoreInput {
+  width: 70px;
+  padding: 8px;
+  font-size: 18px;
+  text-align: center;
+  border: 1px solid var(--neutral-800);
+  border-radius: 4px;
+}

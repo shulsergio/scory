@@ -85,6 +85,11 @@ export default function PredictionCard({
       <div className={css.matchMain}>
         <div className={css.team}>
           <span className={css.teamName}>{match.homeTeam.name}</span>
+          {/* <span className={css.divider}>:</span> */}
+          <span className={css.teamName}>{match.awayTeam.name}</span>
+        </div>
+
+        <div className={css.team}>
           <input
             type="number"
             value={homeScore}
@@ -94,11 +99,7 @@ export default function PredictionCard({
             placeholder="-"
             min="0"
           />
-        </div>
-
-        <span className={css.divider}>:</span>
-
-        <div className={css.team}>
+          {/* <span className={css.divider}>:</span> */}
           <input
             type="number"
             value={awayScore}
@@ -108,7 +109,6 @@ export default function PredictionCard({
             placeholder="-"
             min="0"
           />
-          <span className={css.teamName}>{match.awayTeam.name}</span>
         </div>
 
         <div className={css.actionArea}>
@@ -126,7 +126,10 @@ export default function PredictionCard({
               ) : isSaving ? (
                 <span className={css.loader}></span>
               ) : (
-                <Save size={18} />
+                <span>
+                  Save
+                  <Save size={18} />
+                </span>
               )}
             </button>
           )}
