@@ -4,17 +4,19 @@ import { Match } from "@/types/interface";
 
 interface MatchRowProps {
   match: Match;
+  date?: "fullDate" | "shortDate";
 }
 
 /**
  * Компонент прорисовки строки матча в таблице на странице матчей
  *
  * @export
- * @param {MatchRowProps} { match }
+ * @param {MatchRowProps} { match, date }
  * @return {*}
  */
-export default function MatchRow({ match }: MatchRowProps) {
+export default function MatchRow({ match, date = "shortDate" }: MatchRowProps) {
   console.log(match);
+
   return (
     <tr>
       {/* ///////// */}
@@ -25,10 +27,16 @@ export default function MatchRow({ match }: MatchRowProps) {
           </div>
         ) : (
           <div>
-            {new Date(match.kickoffTime).toLocaleTimeString("ru-RU", {
-              hour: "2-digit",
-              minute: "2-digit",
-            })}
+            {new Date(match.kickoffTime)
+              .toLocaleString("ru-RU", {
+                hour: "2-digit",
+                minute: "2-digit",
+                ...(date === "fullDate" && {
+                  day: "2-digit",
+                  month: "2-digit",
+                }),
+              })
+              .replace(",", "")}
           </div>
         )}
       </td>

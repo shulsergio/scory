@@ -2,6 +2,7 @@
 
 import Loader from "@/components/Loader/Loader";
 import {
+  fetchAllMatches,
   fetchMatchesWithPredictions,
   fetchUserLeagues,
   League,
@@ -12,7 +13,8 @@ import { useEffect, useState } from "react";
 import css from "./profile.module.css";
 import UserStatus from "@/components/UserStatus/UserStatus";
 import UserLeagues from "@/components/UserLeagues/UserLeagues";
-import PredictionList from "@/components/PredictionList/PredictionList";
+// import PredictionList from "@/components/PredictionList/PredictionList";
+import PredictionMatches from "@/components/PredictionMatches/PredictionMatches";
 
 export default function Profile() {
   const { data: session, status } = useSession();
@@ -26,7 +28,7 @@ export default function Profile() {
     if (status === "authenticated" && session?.user?.accessToken) {
       const token = session.user.accessToken;
 
-      Promise.all([fetchUserLeagues(token), fetchMatchesWithPredictions(token)])
+      Promise.all([fetchUserLeagues(token), fetchAllMatches()])
         .then(([leaguesRes, matchesRes]) => {
           setLeagues(leaguesRes || []);
           setMatches(matchesRes || []);
@@ -54,18 +56,18 @@ export default function Profile() {
 
       <main className={`${css.mainContainer} `}>
         <div className={css.wrapper}>
-          <h2 className={css.title}>User profile</h2>
+          <h2 className={css.title}>My profile</h2>
           <UserStatus />
         </div>
 
         <div className={css.wrapper}>
-          <h2 className={css.title}>Leagues</h2>
+          <h2 className={css.title}>My leagues</h2>
           <UserLeagues leagues={leagues} error={error} />
         </div>
 
         <div className={css.wrapper}>
-          <h2 className={css.title}>Prognozes</h2>
-          <PredictionList
+          <h2 className={css.title}>Next matches</h2>
+          <PredictionMatches
             matches={matches}
             token={session?.user?.accessToken || ""}
           />

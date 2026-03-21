@@ -247,7 +247,7 @@ export interface PredictionData {
 }
 
 export const savePrediction = async (token: string, data: PredictionData) => {
-  const response = await fetch(`${BASE_URL}/predictions`, {
+  const response = await fetch(`${BASE_URL}/predictors`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
