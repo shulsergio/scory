@@ -44,10 +44,14 @@ export default function PredictionMatches({
     activeMatchesForDisplay,
   );
   return (
-    <>
-      {activeMatchesForDisplay.map((match) => (
-        <MatchRow key={match._id} match={match} date="fullDate" />
-      ))}
-    </>
+    <section className={css.container}>
+      <table className={css.table}>
+        <tbody>
+          {activeMatchesForDisplay.map((match) => (
+            <MatchRow key={match._id} match={match} date="fullDate" />
+          ))}
+        </tbody>
+      </table>
+    </section>
   );
 }

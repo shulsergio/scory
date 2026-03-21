@@ -2,7 +2,8 @@
   width: 60px;
   text-align: center;
   font-weight: normal;
-  font-size: 13px;
+  font-size: 14px;
+  padding: 7px;
 }
 .blockScore {
   font-weight: bold;
@@ -11,14 +12,13 @@
 }
 
 .blockTeam {
+  font-size: 15px;
   display: flex;
   flex-direction: column;
-  gap: 3px;
+  gap: 4px;
   width: 140px;
   padding: 7px;
   font-weight: bold;
-
-  font-size: 14px;
 }
 .groupInfo {
   font-weight: bold;
