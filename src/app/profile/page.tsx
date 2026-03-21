@@ -1,13 +1,7 @@
 "use client";
 
 import Loader from "@/components/Loader/Loader";
-import {
-  fetchAllMatches,
-  fetchMatchesWithPredictions,
-  fetchUserLeagues,
-  League,
-  MatchWithPrediction,
-} from "@/utils/fetch";
+import { fetchAllMatches, fetchUserLeagues, League } from "@/utils/fetch";
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import css from "./profile.module.css";
@@ -15,13 +9,14 @@ import UserStatus from "@/components/UserStatus/UserStatus";
 import UserLeagues from "@/components/UserLeagues/UserLeagues";
 // import PredictionList from "@/components/PredictionList/PredictionList";
 import PredictionMatches from "@/components/PredictionMatches/PredictionMatches";
+import { Match } from "@/types/interface";
 
 export default function Profile() {
   const { data: session, status } = useSession();
 
   // Состояния для данных
   const [leagues, setLeagues] = useState<League[] | null>(null);
-  const [matches, setMatches] = useState<MatchWithPrediction[]>([]);
+  const [matches, setMatches] = useState<Match[]>([]);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {

@@ -1,6 +1,8 @@
 import { Match } from "@/types/interface";
 import css from "./PredictionMatches.module.css";
 import MatchRow from "../MatchRow/MatchRow";
+import ButtonBox from "../ButtonBox/ButtonBox";
+import { MoveRight } from "lucide-react";
 // import { MatchWithPrediction } from "@/utils/fetch";
 
 const HOURS_BEFORE_KICKOFF_FOR_DISPLAY = 48;
@@ -52,6 +54,12 @@ export default function PredictionMatches({
           ))}
         </tbody>
       </table>
+      <div className={css.button}>
+              <ButtonBox option="link" href="/matches" className={css.buttonLink}>
+          Prognozes
+          <MoveRight />
+        </ButtonBox>
+      </div>
     </section>
   );
 }

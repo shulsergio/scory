@@ -5,3 +5,16 @@
 .table {
   width: 100%;
 }
+.button {
+  padding-top: 12px;
+  display: flex;
+  /* align-items: center; */
+  justify-content: center;
+  /* margin: 0 auto; */
+}
+.buttonLink {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 8px 12px;
+}
