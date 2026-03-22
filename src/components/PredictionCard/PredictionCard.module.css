@@ -4,7 +4,7 @@
   border-radius: 8px;
   border: 1px solid var(--neutral-800);
   padding: 12px;
-  margin-bottom: 12px;
+  /* margin-bottom: 12px; */
   display: flex;
   flex-direction: column;
   gap: 12px;

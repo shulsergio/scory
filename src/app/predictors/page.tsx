@@ -1,8 +1,8 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
-import css from "./predictors.module.css";
+// import css from "./predictors.module.css";
 import {
   fetchMatchesWithPredictions,
   MatchWithPrediction,
@@ -15,21 +15,37 @@ export default function PredictorsPage() {
   const [matches, setMatches] = useState<MatchWithPrediction[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  useEffect(() => {
-    if (status === "authenticated" && session?.user?.accessToken) {
-      fetchMatchesWithPredictions(session.user.accessToken)
-        .then((data) => setMatches(data || []))
-        .catch((err) => console.error("Error:", err))
-        .finally(() => setIsLoading(false));
+  const loadData = useCallback(async () => {
+    if (session?.user?.accessToken) {
+      try {
+        const data = await fetchMatchesWithPredictions(
+          session.user.accessToken,
+        );
+        setMatches(data || []);
+      } catch (err) {
+        console.error("Error loading predictions:", err);
+      } finally {
+        setIsLoading(false);
+      }
     }
-  }, [status, session]);
+  }, [session?.user?.accessToken]); // Функция обновится только если изменится токен
+
+  // 2. Теперь loadData можно безопасно добавить в зависимости
+  useEffect(() => {
+    if (status === "authenticated") {
+      loadData();
+    }
+  }, [status, loadData]);
 
   if (status === "loading" || isLoading) return <Loader />;
 
   return (
-    <main className={css.container}>
-      <h1>My predictions</h1>
-      <PredictionList matches={matches} token={session!.user.accessToken} />
+    <main>
+      <PredictionList
+        matches={matches}
+        token={session!.user.accessToken}
+        onRefresh={loadData}
+      />
     </main>
   );
 }

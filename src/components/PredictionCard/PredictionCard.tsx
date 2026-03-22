@@ -1,74 +1,38 @@
 "use client";
 
-import { useState } from "react";
-import { Lock, Save } from "lucide-react";
-import { savePrediction, UserPrediction } from "@/utils/fetch";
+import { MatchWithPrediction } from "@/utils/fetch";
 import css from "./PredictionCard.module.css";
-import ButtonBox from "../ButtonBox/ButtonBox";
-import Loader from "../Loader/Loader";
 
-interface Team {
-  _id: string;
-  name: string;
-  logo?: string;
-}
-
-export interface MatchData {
-  _id: string;
-  homeTeam: Team;
-  awayTeam: Team;
-  kickoffTime: string;
-  lockTime: string;
-  status: "scheduled" | "finished";
-  score?: { home: number; away: number };
-}
+export type ScoreValue = number | string;
 
 interface PredictionCardProps {
-  match: MatchData;
-  initialPrediction?: UserPrediction | null;
-  token: string;
+  match: MatchWithPrediction;
+  homeVal: ScoreValue; 
+  awayVal: ScoreValue;
+  onUpdate: (h: ScoreValue, a: ScoreValue) => void;
+  disabled: boolean;
 }
 
-export default function PredictionCard({
-  match,
-  initialPrediction,
-  token,
+export default function PredictionCard({ 
+  match, 
+  homeVal, 
+  awayVal, 
+  onUpdate, 
+  disabled 
 }: PredictionCardProps) {
-  const [homeScore, setHomeScore] = useState<string>(
-    initialPrediction?.homeGoals?.toString() || "",
-  );
-  const [awayScore, setAwayScore] = useState<string>(
-    initialPrediction?.awayGoals?.toString() || "",
-  );
+  
+  const handleInputChange = (type: "home" | "away", value: string) => { 
+    const val: ScoreValue = value === "" ? "" : Number(value);
 
-  const [isSaving, setIsSaving] = useState(false);
-  // const [isSaved, setIsSaved] = useState(false);
-
-  const isLocked = new Date() > new Date(match.lockTime);
-
-  const handleSave = async () => {
-    if (isLocked || homeScore === "" || awayScore === "") return;
-
-    setIsSaving(true);
-    try {
-      await savePrediction(token, {
-        matchId: match._id,
-        homeGoals: parseInt(homeScore),
-        awayGoals: parseInt(awayScore),
-      });
-
-      // setIsSaved(true);
-    } catch (err) {
-      console.error("Failed to save prediction", err);
-      alert("Error saving prediction. Please try again.");
-    } finally {
-      setIsSaving(false);
+    if (type === "home") {
+      onUpdate(val, awayVal); 
+    } else {
+      onUpdate(homeVal, val);
     }
   };
 
   return (
-    <div className={`${css.card} ${isLocked ? css.locked : ""}`}>
-      {isSaving && <Loader />}
+    <div className={css.card}>
       <div className={css.timeInfo}>
         {new Date(match.kickoffTime)
           .toLocaleString("ru-RU", {
@@ -78,65 +42,35 @@ export default function PredictionCard({
             minute: "2-digit",
           })
           .replace(",", "")}
-
-        {isLocked && !match.score && (
-          <span className={css.liveBadge}>LIVE</span>
-        )}
       </div>
 
-      <div className={css.matchMain}>
-        <div className={css.team}>
-          <span className={css.teamName}>{match.homeTeam.name}</span>
-          {/* <span className={css.divider}>-</span> */}
-          <span className={css.teamName}>{match.awayTeam.name}</span>
-        </div>
-
-        <div className={css.teamScore}>
+      <div className={css.matchContent}>
+        <div className={css.teamSection}>
+          <span className={css.name}>{match.homeTeam.name}</span>
           <input
             type="number"
-            value={homeScore}
-            onChange={(e) => setHomeScore(e.target.value)}
-            disabled={isLocked || isSaving}
-            className={css.scoreInput}
+            value={homeVal}
+            onChange={(e) => handleInputChange("home", e.target.value)}
+            disabled={disabled}
+            className={css.input}
             placeholder="-"
-            min="0"
           />
-          {/* <span className={css.divider}>-</span> */}
+        </div>
+
+        <span className={css.vs}>:</span>
+
+        <div className={css.teamSection}>
           <input
             type="number"
-            value={awayScore}
-            onChange={(e) => setAwayScore(e.target.value)}
-            disabled={isLocked || isSaving}
-            className={css.scoreInput}
+            value={awayVal}
+            onChange={(e) => handleInputChange("away", e.target.value)}
+            disabled={disabled}
+            className={css.input}
             placeholder="-"
-            min="0"
           />
+          <span className={css.name}>{match.awayTeam.name}</span>
         </div>
       </div>
-      <div className={css.actionArea}>
-        {isLocked ? (
-          <Lock size={18} className={css.lockIcon} />
-        ) : (
-          <ButtonBox
-            option="button"
-            onClick={handleSave}
-            disabled={isSaving || homeScore === "" || awayScore === ""}
-            className={css.saveBtn}
-          >
-            {/* <div className={css.btnContent}> */}
-            <p className={css.btnContent}>
-              Save <Save size={18} />
-            </p>
-            {/* </div> */}
-          </ButtonBox>
-        )}
-      </div>
-      {match.status === "finished" && (
-        <div className={css.finalResult}>
-          Result: {match.score?.home} - {match.score?.away}
-          {initialPrediction && <span className={css.pointsBadge}></span>}
-        </div>
-      )}
     </div>
   );
 }
