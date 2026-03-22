@@ -55,7 +55,7 @@ export default function PredictionMatches({
         </tbody>
       </table>
       <div className={css.button}>
-              <ButtonBox option="link" href="/matches" className={css.buttonLink}>
+        <ButtonBox option="link" href="/predictors" className={css.buttonLink}>
           Prognozes
           <MoveRight />
         </ButtonBox>

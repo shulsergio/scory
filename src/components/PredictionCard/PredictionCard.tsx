@@ -1,9 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import { Lock, Save, CheckCircle2 } from "lucide-react";
+import { Lock, Save } from "lucide-react";
 import { savePrediction, UserPrediction } from "@/utils/fetch";
 import css from "./PredictionCard.module.css";
+import ButtonBox from "../ButtonBox/ButtonBox";
+import Loader from "../Loader/Loader";
 
 interface Team {
   _id: string;
@@ -40,7 +42,7 @@ export default function PredictionCard({
   );
 
   const [isSaving, setIsSaving] = useState(false);
-  const [isSaved, setIsSaved] = useState(false);
+  // const [isSaved, setIsSaved] = useState(false);
 
   const isLocked = new Date() > new Date(match.lockTime);
 
@@ -55,8 +57,7 @@ export default function PredictionCard({
         awayGoals: parseInt(awayScore),
       });
 
-      setIsSaved(true);
-      setTimeout(() => setIsSaved(false), 3000);
+      // setIsSaved(true);
     } catch (err) {
       console.error("Failed to save prediction", err);
       alert("Error saving prediction. Please try again.");
@@ -67,6 +68,7 @@ export default function PredictionCard({
 
   return (
     <div className={`${css.card} ${isLocked ? css.locked : ""}`}>
+      {isSaving && <Loader />}
       <div className={css.timeInfo}>
         {new Date(match.kickoffTime)
           .toLocaleString("ru-RU", {
@@ -85,11 +87,11 @@ export default function PredictionCard({
       <div className={css.matchMain}>
         <div className={css.team}>
           <span className={css.teamName}>{match.homeTeam.name}</span>
-          {/* <span className={css.divider}>:</span> */}
+          {/* <span className={css.divider}>-</span> */}
           <span className={css.teamName}>{match.awayTeam.name}</span>
         </div>
 
-        <div className={css.team}>
+        <div className={css.teamScore}>
           <input
             type="number"
             value={homeScore}
@@ -99,7 +101,7 @@ export default function PredictionCard({
             placeholder="-"
             min="0"
           />
-          {/* <span className={css.divider}>:</span> */}
+          {/* <span className={css.divider}>-</span> */}
           <input
             type="number"
             value={awayScore}
@@ -110,32 +112,25 @@ export default function PredictionCard({
             min="0"
           />
         </div>
-
-        <div className={css.actionArea}>
-          {isLocked ? (
-            <Lock size={18} className={css.lockIcon} />
-          ) : (
-            <button
-              onClick={handleSave}
-              disabled={isSaving || homeScore === "" || awayScore === ""}
-              className={css.saveBtn}
-              title="Save prediction"
-            >
-              {isSaved ? (
-                <CheckCircle2 color="#4CAF50" size={20} />
-              ) : isSaving ? (
-                <span className={css.loader}></span>
-              ) : (
-                <span>
-                  Save
-                  <Save size={18} />
-                </span>
-              )}
-            </button>
-          )}
-        </div>
       </div>
-
+      <div className={css.actionArea}>
+        {isLocked ? (
+          <Lock size={18} className={css.lockIcon} />
+        ) : (
+          <ButtonBox
+            option="button"
+            onClick={handleSave}
+            disabled={isSaving || homeScore === "" || awayScore === ""}
+            className={css.saveBtn}
+          >
+            {/* <div className={css.btnContent}> */}
+            <p className={css.btnContent}>
+              Save <Save size={18} />
+            </p>
+            {/* </div> */}
+          </ButtonBox>
+        )}
+      </div>
       {match.status === "finished" && (
         <div className={css.finalResult}>
           Result: {match.score?.home} - {match.score?.away}

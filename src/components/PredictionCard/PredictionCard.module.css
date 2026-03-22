@@ -1,5 +1,5 @@
 .card {
-  width: 280px;
+  width: 100%;
   background: var(--bg-card);
   border-radius: 8px;
   border: 1px solid var(--neutral-800);
@@ -17,29 +17,52 @@
 .matchMain {
   display: flex;
   align-items: center;
-  flex-direction: column;
-
-  gap: 6px;
+  flex-direction: row;
 }
 .team {
-  width: 100%;
+  width: 65%;
   display: flex;
   align-items: center;
-  gap: 8px;
-  justify-content: space-between;
+  /* gap: 4px; */
+  justify-content: space-around;
   color: var(--text-main);
+}
+.teamScore {
+  width: 35%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
 }
 .teamName {
+  display: flex;
+  align-items: center;
+  width: 50%;
   padding: 0 8px;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 700;
   color: var(--text-main);
+  /*  align-self: center; */
+  align-items: center;
+  justify-self: center;
+  justify-content: center;
+  /* margin: 0 auto; */
 }
 .scoreInput {
-  width: 70px;
+  width: 50px;
   padding: 8px;
-  font-size: 18px;
+  font-size: 16px;
   text-align: center;
   border: 1px solid var(--neutral-800);
   border-radius: 4px;
+}
+.actionArea {
+  margin: 0 auto;
+}
+.saveBtn {
+  width: 120px;
+}
+.btnContent {
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }

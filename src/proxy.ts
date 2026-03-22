@@ -44,9 +44,11 @@ export default function proxy(req: NextRequestWithAuth, event: NextFetchEvent) {
  */
 export const config = {
   matcher: [
-    "/", 
+"/", 
     "/profile", 
     "/profile/:path*", 
-    "/leagues/:path*"
+    "/leagues/:path*",
+    "/predictors", 
+    "/predictors/:path*"  
   ],
 };

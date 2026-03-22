@@ -85,6 +85,18 @@ a {
   color: inherit;
   text-decoration: none;
 }
+h1 {
+  font-size: 18px;
+  font-weight: bold;
+  padding: 10px 0;
+  text-align: center;
+}
+h2 {
+  font-size: 18px;
+  font-weight: bold;
+  padding: 0;
+  text-align: center;
+}
 
 @media (min-width: 425px) {
   .main-container {
