@@ -16,3 +16,70 @@
   align-items: flex-start;
   padding: 40px 20px;
 }
+
+/* ДЛЯ пейджа 404 */
+
+.container {
+  min-height: calc(100vh - 130px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 20px;
+  background-color: var(--bg-main);
+  position: relative;
+  overflow: hidden;
+}
+
+.errorCode {
+  font-size: 120px;
+  font-weight: 900;
+  color: var(---text-blue-accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  line-height: 1;
+  margin-bottom: 20px;
+}
+
+.icon {
+  color: #fbbf24;
+  animation: bounce 2s infinite;
+}
+
+.title {
+  font-size: 32px;
+  margin-bottom: 15px;
+  color: #1e293b;
+}
+
+.message {
+  max-width: 450px;
+  margin: 0 auto 30px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.secondaryLink {
+  color: #003b7e;
+  text-decoration: underline;
+  font-weight: 500;
+}
+
+@keyframes bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}

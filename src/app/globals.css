@@ -27,7 +27,8 @@
   --bg-header-main: var(--neutral-900);
   --bg-card: #ffffff;
   --text-main: var(--neutral-900);
-  --text-secondary: var(--neutral-50);
+  --text-secondary: var(--neutral-800);
+  ---text-blue-accent: var(--secondary-500);
   --input-bg: var(--neutral-800);
   --btn-text: #ffffff;
   --border-subtle: #ffffff9f;
@@ -40,7 +41,8 @@
   --bg-header-main: var(--neutral-900);
   --bg-card: var(--neutral-800);
   --text-main: var(--neutral-50);
-  --text-secondary: var(--neutral-100);
+  --text-secondary: var(--neutral-50);
+  ---text-blue-accent: var(--secondary-900);
   --border-subtle: #ffffff9f;
   --input-bg: rgba(255, 255, 255, 0.05);
   --btn-text: #ffffff;
@@ -62,7 +64,7 @@ body {
 
 body {
   color: var(--text-primary);
-  background: var(--background);
+  background: var(--bg-main);
   font-family: Arial, Helvetica, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
