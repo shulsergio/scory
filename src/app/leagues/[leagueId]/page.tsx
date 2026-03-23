@@ -12,18 +12,6 @@ import Loader from "@/components/Loader/Loader";
 import css from "./leagueData.module.css";
 import { Settings, UserPlus } from "lucide-react";
 
-// interface LeaderboardEntry {
-//   nickname: string;
-//   points: number;
-//   joinedAt: string;
-// }
-
-// interface LeagueData {
-//   leagueName: string;
-//   adminId: string;
-//   leaderboard: LeaderboardEntry[];
-// }
-
 export default function LeagueDetailsPage() {
   const { leagueId } = useParams() as { leagueId: string };
   const { data: session, status } = useSession();

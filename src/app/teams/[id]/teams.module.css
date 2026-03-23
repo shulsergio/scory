@@ -1,9 +1,19 @@
 .teamHeader {
   font-weight: bold;
   font-size: 24px;
+  padding-bottom: 5px;
 }
 
 .teamsListItem {
   font-weight: normal;
   font-size: 18px;
+}
+.subtitle {
+  width: 100%;
+  display: flex;
+  font-weight: normal;
+  font-size: 14px;
+  justify-content: center;
+  align-self: center;
+  padding-bottom: 10px;
 }
