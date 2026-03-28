@@ -1,12 +1,15 @@
-.card {
+.container {
   width: 100%;
   background: var(--bg-card);
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
   border-radius: 8px;
   border: 1px solid var(--neutral-800);
   padding: 12px;
-  /* margin-bottom: 12px; */
-  display: flex;
-  flex-direction: column;
+
   gap: 12px;
 }
 .timeInfo {
@@ -14,46 +17,43 @@
   color: var(--text-main);
   margin: 0 auto;
 }
-.matchMain {
+.matchContent {
   display: flex;
   align-items: center;
   flex-direction: row;
 }
-.team {
-  width: 65%;
+.teamSection {
+  width: 50%;
   display: flex;
   align-items: center;
-  /* gap: 4px; */
+  flex-direction: row;
   justify-content: space-around;
-  color: var(--text-main);
 }
 .teamScore {
-  width: 35%;
+  width: 25%;
   display: flex;
   align-items: center;
   justify-content: space-around;
+  padding: 8px;
+  font-size: 16px;
+  text-align: center;
+  border: 1px solid var(--border-subtle);
+  border-radius: 4px;
 }
 .teamName {
   display: flex;
   align-items: center;
-  width: 50%;
-  padding: 0 8px;
+  width: 65%;
+  padding: 0 4px;
   font-size: 16px;
   font-weight: 700;
   color: var(--text-main);
-  /*  align-self: center; */
   align-items: center;
   justify-self: center;
   justify-content: center;
-  /* margin: 0 auto; */
 }
 .scoreInput {
   width: 50px;
-  padding: 8px;
-  font-size: 16px;
-  text-align: center;
-  border: 1px solid var(--neutral-800);
-  border-radius: 4px;
 }
 .actionArea {
   margin: 0 auto;

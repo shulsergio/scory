@@ -46,20 +46,26 @@ export default function PredictionMatches({
     activeMatchesForDisplay,
   );
   return (
-    <section className={css.container}>
-      <table className={css.table}>
-        <tbody>
-          {activeMatchesForDisplay.map((match) => (
-            <MatchRow key={match._id} match={match} date="fullDate" />
-          ))}
-        </tbody>
-      </table>
-      <div className={css.button}>
-        <ButtonBox option="link" href="/predictors" className={css.buttonLink}>
-          Prognozes
-          <MoveRight />
-        </ButtonBox>
-      </div>
-    </section>
+    <main className={css.container}>
+      <section>
+        <table className={css.table}>
+          <tbody>
+            {activeMatchesForDisplay.map((match) => (
+              <MatchRow key={match._id} match={match} date="fullDate" />
+            ))}
+          </tbody>
+        </table>
+        <div className={css.button}>
+          <ButtonBox
+            option="link"
+            href="/predictors"
+            className={css.buttonLink}
+          >
+            Prognozes
+            <MoveRight />
+          </ButtonBox>
+        </div>
+      </section>
+    </main>
   );
 }

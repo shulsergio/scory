@@ -21,7 +21,6 @@ export default function PredictionList({
   token,
   onRefresh,
 }: PredictionListProps) {
- 
   const [pendingChanges, setPendingChanges] = useState<
     Record<string, { home: ScoreValue; away: ScoreValue }>
   >({});
@@ -43,7 +42,6 @@ export default function PredictionList({
         new Date(a.kickoffTime).getTime() - new Date(b.kickoffTime).getTime(),
     );
 
-  // 2. Обновление черновика при вводе в инпут
   const handleUpdate = (id: string, home: ScoreValue, away: ScoreValue) => {
     setPendingChanges((prev) => ({
       ...prev,
@@ -51,37 +49,40 @@ export default function PredictionList({
     }));
   };
 
-  // 3. Массовое сохранение всех измененных прогнозов
-const handleSaveAll = async () => {
-  const ids = Object.keys(pendingChanges);
-  if (ids.length === 0) return;
+  const handleSaveAll = async () => {
+    const ids = Object.keys(pendingChanges);
+    if (ids.length === 0) return;
 
-  setIsSaving(true);
-  try {
-    const promises = ids.map((id) =>
-      savePrediction(token, {
-        matchId: id,
-        homeGoals:
-          pendingChanges[id].home === "" ? 0 : Number(pendingChanges[id].home),
-        awayGoals:
-          pendingChanges[id].away === "" ? 0 : Number(pendingChanges[id].away),
-      }),
-    );
- 
-    await Promise.all(promises);
- 
-    await onRefresh();
- 
-    setPendingChanges({});
+    setIsSaving(true);
+    try {
+      const promises = ids.map((id) =>
+        savePrediction(token, {
+          matchId: id,
+          homeGoals:
+            pendingChanges[id].home === ""
+              ? 0
+              : Number(pendingChanges[id].home),
+          awayGoals:
+            pendingChanges[id].away === ""
+              ? 0
+              : Number(pendingChanges[id].away),
+        }),
+      );
 
-    setIsSuccess(true);
-    setTimeout(() => setIsSuccess(false), 3000);
-  } catch (err) {
-    console.error( err);
-  } finally {
-    setIsSaving(false);
-  }
-};
+      await Promise.all(promises);
+
+      await onRefresh();
+
+      setPendingChanges({});
+
+      setIsSuccess(true);
+      setTimeout(() => setIsSuccess(false), 3000);
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setIsSaving(false);
+    }
+  };
 
   const changedCount = Object.keys(pendingChanges).length;
 
@@ -94,13 +95,12 @@ const handleSaveAll = async () => {
   }
 
   return (
-    <div className={css.wrapper}>
+    <main className={css.container}>
       <div className={css.grid}>
         {activeMatches.map((m) => (
           <PredictionCard
             key={m._id}
             match={m}
-            // Передаем либо измененное значение, либо то, что в базе
             homeVal={
               pendingChanges[m._id]?.home ?? m.prediction?.homeGoals ?? ""
             }
@@ -131,6 +131,6 @@ const handleSaveAll = async () => {
           </span>
         </ButtonBox>
       </div>
-    </div>
+    </main>
   );
 }

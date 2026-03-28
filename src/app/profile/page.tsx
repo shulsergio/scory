@@ -7,7 +7,6 @@ import { useEffect, useState } from "react";
 import css from "./profile.module.css";
 import UserStatus from "@/components/UserStatus/UserStatus";
 import UserLeagues from "@/components/UserLeagues/UserLeagues";
-// import PredictionList from "@/components/PredictionList/PredictionList";
 import PredictionMatches from "@/components/PredictionMatches/PredictionMatches";
 import { Match } from "@/types/interface";
 
@@ -35,39 +34,31 @@ export default function Profile() {
         });
     }
   }, [status, session]);
-
+  console.log("---setLeagues---", setLeagues);
   const isLoading =
     status === "loading" || (status === "authenticated" && leagues === null);
 
   if (isLoading) return <Loader />;
 
   return (
-    <>
-      {/* {showFullPageLoader && (
-        <div className={css.fullPageLoader}>
-          <Loader />
-        </div>
-      )} */}
+    <main className={`${css.mainContainer} `}>
+      <div className={css.wrapper}>
+        <h2 className={css.title}>My profile</h2>
+        <UserStatus />
+      </div>
 
-      <main className={`${css.mainContainer} `}>
-        <div className={css.wrapper}>
-          <h2 className={css.title}>My profile</h2>
-          <UserStatus />
-        </div>
+      <div className={css.wrapper}>
+        <h2 className={css.title}>My leagues</h2>
+        <UserLeagues leagues={leagues} error={error} />
+      </div>
 
-        <div className={css.wrapper}>
-          <h2 className={css.title}>My leagues</h2>
-          <UserLeagues leagues={leagues} error={error} />
-        </div>
-
-        <div className={css.wrapper}>
-          <h2 className={css.title}>Next matches</h2>
-          <PredictionMatches
-            matches={matches}
-            token={session?.user?.accessToken || ""}
-          />
-        </div>
-      </main>
-    </>
+      <div className={css.wrapper}>
+        <h2 className={css.title}>Next matches</h2>
+        <PredictionMatches
+          matches={matches}
+          token={session?.user?.accessToken || ""}
+        />
+      </div>
+    </main>
   );
 }

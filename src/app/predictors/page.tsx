@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
-// import css from "./predictors.module.css";
+import css from "./predictors.module.css";
 import {
   fetchMatchesWithPredictions,
   MatchWithPrediction,
@@ -28,9 +28,8 @@ export default function PredictorsPage() {
         setIsLoading(false);
       }
     }
-  }, [session?.user?.accessToken]); // Функция обновится только если изменится токен
+  }, [session?.user?.accessToken]);
 
-  // 2. Теперь loadData можно безопасно добавить в зависимости
   useEffect(() => {
     if (status === "authenticated") {
       loadData();
@@ -40,7 +39,8 @@ export default function PredictorsPage() {
   if (status === "loading" || isLoading) return <Loader />;
 
   return (
-    <main>
+    <main className={css.container}>
+      <h1>My prognozes</h1>
       <PredictionList
         matches={matches}
         token={session!.user.accessToken}
