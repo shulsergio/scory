@@ -321,3 +321,23 @@ export const fetchMatchesWithPredictions = async (
    
   return result.data; 
 };
+
+
+export const fetchUserProfile = async (token: string) =>{
+try {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/users/globaldata`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (!response.ok) throw new Error("Failed to fetch global stats");
+    
+    return await response.json(); // Ожидаем { points: number, rank: number }
+  } catch (error) {
+    console.error("fetchUserProfile error:", error);
+    return { points: 0, rank: 0 };
+  }
+};

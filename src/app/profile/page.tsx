@@ -1,7 +1,12 @@
 "use client";
 
 import Loader from "@/components/Loader/Loader";
-import { fetchAllMatches, fetchUserLeagues, League } from "@/utils/fetch";
+import {
+  fetchAllMatches,
+  fetchUserLeagues,
+  fetchUserProfile,
+  League,
+} from "@/utils/fetch";
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import css from "./profile.module.css";
@@ -17,15 +22,24 @@ export default function Profile() {
   const [leagues, setLeagues] = useState<League[] | null>(null);
   const [matches, setMatches] = useState<Match[]>([]);
   const [error, setError] = useState<string | null>(null);
+  const [userStats, setUserStats] = useState<{
+    points: number;
+    rank: number;
+  } | null>(null);
 
   useEffect(() => {
     if (status === "authenticated" && session?.user?.accessToken) {
       const token = session.user.accessToken;
 
-      Promise.all([fetchUserLeagues(token), fetchAllMatches()])
-        .then(([leaguesRes, matchesRes]) => {
+      Promise.all([
+        fetchUserLeagues(token),
+        fetchAllMatches(),
+        fetchUserProfile(token),
+      ])
+        .then(([leaguesRes, matchesRes, profileRes]) => {
           setLeagues(leaguesRes || []);
           setMatches(matchesRes || []);
+          setUserStats(profileRes);
         })
         .catch((err) => {
           console.error("Profile load error:", err);
@@ -44,7 +58,7 @@ export default function Profile() {
     <main className={`${css.mainContainer} `}>
       <div className={css.wrapper}>
         <h2 className={css.title}>My profile</h2>
-        <UserStatus />
+        <UserStatus rank={userStats?.rank} points={userStats?.points} />
       </div>
 
       <div className={css.wrapper}>
