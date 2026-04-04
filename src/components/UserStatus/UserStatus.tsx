@@ -2,6 +2,7 @@
 
 import { useSession } from "next-auth/react";
 import css from "./UserStatus.module.css";
+import Link from "next/link";
 
 interface UserStatusProps {
   rank?: number;
@@ -18,6 +19,7 @@ interface UserStatusProps {
 export default function UserStatus({ rank, points }: UserStatusProps) {
   const { data: session, status } = useSession();
   //   const isLoading = status === "loading";
+  const tournamentTag = "WC2026"; //----- !!!!! gjvtyznm!!!!
 
   console.log("session", session);
   console.log("status", status);
@@ -29,6 +31,9 @@ export default function UserStatus({ rank, points }: UserStatusProps) {
     <div className={css.wrapper}>
       <p>Global Rank: # {rank ?? "-"}</p>
       <p>Total Points: {points ?? 0}</p>
+      <Link href={`/ranking/${tournamentTag}`} className={css.leaderboardBtn}>
+        Full ranking
+      </Link>
     </div>
   );
 }

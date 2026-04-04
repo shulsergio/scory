@@ -1,0 +1,51 @@
+.container {
+  padding: 2rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.title {
+  text-align: center;
+  margin-bottom: 2rem;
+  color: #fff;
+}
+
+.tableWrapper {
+  background: #1a1a1a;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  color: #ddd;
+}
+
+.table th,
+.table td {
+  padding: 1rem;
+  text-align: left;
+  border-bottom: 1px solid #333;
+}
+
+.topThree {
+  background: rgba(255, 215, 0, 0.05); /* Золотистый оттенок для топа */
+}
+
+.avatar {
+  border-radius: 50%;
+  margin-right: 10px;
+  object-fit: cover;
+}
+
+.userCell {
+  display: flex;
+  align-items: center;
+}
+
+.points {
+  font-weight: bold;
+  color: #00ff88; /* Зеленый цвет для очков */
+}
