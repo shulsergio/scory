@@ -341,3 +341,22 @@ try {
     return { points: 0, rank: 0 };
   }
 };
+
+
+export const fetchLeaderboard = async (tournamentTag: string) => {
+  try {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/ranking/${tournamentTag}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (!response.ok) throw new Error("Ошибка при загрузке рейтинга");
+
+    return await response.json(); // Возвращает массив топ-50
+  } catch (error) {
+    console.error("fetchLeaderboard error:", error);
+    return [];
+  }
+};
