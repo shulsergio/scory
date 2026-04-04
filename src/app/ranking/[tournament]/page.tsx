@@ -25,7 +25,7 @@ export default function TournamentRankingPage() {
   useEffect(() => {
     if (tournament) {
       fetchLeaderboard(tournament as string).then((data) => {
-        setPlayers(data);
+        setPlayers(Array.isArray(data) ? data : []);
         setLoading(false);
       });
     }
