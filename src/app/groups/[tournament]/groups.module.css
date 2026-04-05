@@ -1,0 +1,76 @@
+.container {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.title {
+  text-align: center;
+  margin-bottom: 30px;
+  color: #fff;
+}
+
+/* Контейнер для всех групп */
+.groupsFlexContainer {
+  display: flex;
+  flex-wrap: wrap; /* Разрешаем перенос на новую строку */
+  gap: 20px; /* Расстояние между группами */
+  justify-content: center; /* Центрируем, если в ряду остается пустое место */
+}
+
+/* Карточка одной группы */
+.groupCard {
+  background: #1e1e1e;
+  border-radius: 10px;
+  padding: 15px;
+  border: 1px solid #333;
+
+  /* Магия Flexbox: 
+     1 - разрешаем расти, 
+     1 - разрешаем сужаться, 
+     320px - идеальная ширина одной группы */
+  flex: 1 1 320px;
+
+  max-width: 400px; /* Чтобы на огромных экранах группа не растянулась на пол-метра */
+}
+
+.groupLetter {
+  font-size: 1.2rem;
+  margin-bottom: 15px;
+  color: #00ff88;
+  border-bottom: 1px solid #333;
+  padding-bottom: 5px;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table th {
+  text-align: left;
+  font-size: 12px;
+  color: #888;
+  padding-bottom: 10px;
+}
+
+.table td {
+  padding: 10px 5px;
+  border-bottom: 1px solid #2a2a2a;
+}
+
+.teamCell {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.pts {
+  font-weight: bold;
+  color: #00ff88;
+  text-align: right;
+}
+
+.promoted {
+  background: rgba(0, 255, 136, 0.03);
+}
