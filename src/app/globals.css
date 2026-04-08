@@ -23,6 +23,7 @@
   --text-white: #f8f9fa;
 
   /* мои цвета */
+
   --bg-main: var(--neutral-50);
   --bg-header-main: var(--neutral-900);
   --bg-card: #ffffff;
@@ -32,6 +33,10 @@
   --input-bg: var(--neutral-800);
   --btn-text: #ffffff;
   --border-subtle: #ffffff9f;
+  --text-muted: #737373;
+  --card-border: #e5e5e5;
+  --row-hover: var(--primary-50);
+  --accent: #f97316;
   --font-family-Kanit: "Kanit", sans-serif;
 }
 
@@ -46,8 +51,11 @@
   --border-subtle: #ffffff9f;
   --input-bg: rgba(255, 255, 255, 0.05);
   --btn-text: #ffffff;
-
-  --card-border: var(--secondary-900);
+  --text-muted: #a3a3a3;
+  --border: #404040;
+  --card-border: #404040;
+  --row-hover: #351a0a;
+  --accent: #f97316;
 }
 * {
   box-sizing: border-box;

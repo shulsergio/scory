@@ -111,26 +111,18 @@ export default function GroupsPage() {
             <table className={css.table}>
               <thead>
                 <tr>
-                  <th>Team</th>
-                  <th style={{ textAlign: "center" }}>P</th>
-                  <th style={{ textAlign: "center" }}>GD</th>
-                  <th style={{ textAlign: "right" }}>Pts</th>
+                  <th className={css.teamCellHead}>Team</th>
+                  <th>P</th>
+                  <th>GD</th>
+                  <th>Pts</th>
                 </tr>
               </thead>
               <tbody>
-                {group.teams.map((team, index) => (
-                  <tr key={team.name} className={index < 2 ? css.promoted : ""}>
-                    <td className={css.teamCell}>
-                      <Image
-                        src={team.flag}
-                        alt={team.name}
-                        width={24}
-                        height={16}
-                      />
-                      <span>{team.name}</span>
-                    </td>
-                    <td style={{ textAlign: "center" }}>{team.p}</td>
-                    <td style={{ textAlign: "center" }}>{team.gd}</td>
+                {group.teams.map((team) => (
+                  <tr key={team.name}>
+                    <td className={css.teamCell}>{team.name}</td>
+                    <td>{team.p}</td>
+                    <td>{team.gd}</td>
                     <td className={css.pts}>{team.pts}</td>
                   </tr>
                 ))}
