@@ -1,110 +1,61 @@
 "use client";
 
 import { useParams } from "next/navigation";
-import Image from "next/image";
 import css from "./groups.module.css";
-const groupsMock = [
-  {
-    letter: "A",
-    teams: [
-      {
-        name: "USA",
-        flag: "/flags/usa.png",
-        p: 3,
-        w: 2,
-        d: 1,
-        l: 0,
-        gd: "+4",
-        pts: 7,
-      },
-      {
-        name: "Mexico",
-        flag: "/flags/mex.png",
-        p: 3,
-        w: 1,
-        d: 2,
-        l: 0,
-        gd: "+2",
-        pts: 5,
-      },
-      {
-        name: "Curaçao",
-        flag: "/flags/cuw.png",
-        p: 3,
-        w: 1,
-        d: 0,
-        l: 2,
-        gd: "-2",
-        pts: 3,
-      },
-      {
-        name: "Norway",
-        flag: "/flags/nor.png",
-        p: 3,
-        w: 0,
-        d: 1,
-        l: 2,
-        gd: "-4",
-        pts: 1,
-      },
-    ],
-  },
-  {
-    letter: "B",
-    teams: [
-      {
-        name: "Argentina",
-        flag: "/flags/arg.png",
-        p: 3,
-        w: 3,
-        d: 0,
-        l: 0,
-        gd: "+6",
-        pts: 9,
-      },
-      {
-        name: "Canada",
-        flag: "/flags/can.png",
-        p: 3,
-        w: 1,
-        d: 1,
-        l: 1,
-        gd: "0",
-        pts: 4,
-      },
-      {
-        name: "Iraq",
-        flag: "/flags/irq.png",
-        p: 3,
-        w: 1,
-        d: 0,
-        l: 2,
-        gd: "-2",
-        pts: 3,
-      },
-      {
-        name: "Scotland",
-        flag: "/flags/sco.png",
-        p: 3,
-        w: 0,
-        d: 1,
-        l: 2,
-        gd: "-4",
-        pts: 1,
-      },
-    ],
-  },
-];
+import { useEffect, useState } from "react";
+import { fetchTournamentGroups } from "@/utils/fetch";
+import Loader from "@/components/Loader/Loader";
+
+interface TeamData {
+  team: {
+    name: string;
+    logoUrl: string;
+    code: string;
+  };
+  points: number;
+  goalsFor: number;
+  goalsAgainst: number;
+  goalDifference: number;
+  matchesPlayed: number;
+}
+
+interface GroupData {
+  letter: string;
+  teams: TeamData[];
+}
 
 export default function GroupsPage() {
   const { tournament } = useParams();
+  const [groups, setGroups] = useState<GroupData[]>([]);
+  const [loading, setLoading] = useState(true);
 
+  useEffect(() => {
+    if (tournament) {
+      fetchTournamentGroups(tournament as string)
+        .then((data) => {
+          setGroups(data);
+        })
+        .finally(() => {
+          setLoading(false);
+        });
+    }
+  }, [tournament]);
+
+  if (loading) return <Loader />;
+
+  if (groups.length === 0) {
+    return (
+      <div className={css.empty}>
+        Данные турнира {tournament} пока не заполнены.
+      </div>
+    );
+  }
   return (
     <main className={css.container}>
       <h1 className={css.title}>Tournament Groups: {tournament}</h1>
 
       <div className={css.groupsFlexContainer}>
-        {groupsMock.map((group) => (
+        {groups.map((group) => (
           <section key={group.letter} className={css.groupCard}>
             <h2 className={css.groupLetter}>Group {group.letter}</h2>
 
@@ -119,11 +70,11 @@ export default function GroupsPage() {
               </thead>
               <tbody>
                 {group.teams.map((team) => (
-                  <tr key={team.name}>
-                    <td className={css.teamCell}>{team.name}</td>
-                    <td>{team.p}</td>
-                    <td>{team.gd}</td>
-                    <td className={css.pts}>{team.pts}</td>
+                  <tr key={team.team.name}>
+                    <td className={css.teamCell}>{team.team.name}</td>
+                    <td>{team.goalsFor}</td>
+                    <td>{team.goalsAgainst}</td>
+                    <td className={css.pts}>{team.points}</td>
                   </tr>
                 ))}
               </tbody>
