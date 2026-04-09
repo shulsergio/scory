@@ -360,3 +360,24 @@ export const fetchLeaderboard = async (tournamentTag: string) => {
     return [];
   }
 };
+
+
+export const fetchTournamentGroups = async (tournamentTag: string) => {
+  try {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/groups/${tournamentTag}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error("Не удалось загрузить данные групп");
+    }
+
+    return await response.json(); 
+  } catch (error) {
+    console.error("fetchTournamentGroups error:", error);
+    return [];
+  }
+};
