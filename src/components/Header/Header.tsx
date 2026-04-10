@@ -9,7 +9,7 @@ import { ThemeToggle } from "@/utils/ThemeToggle";
 import ButtonBox from "../ButtonBox/ButtonBox";
 
 const navLinks = [
-  { name: "Matches", href: "/matches" },
+  { name: "Matches", href: "/matches/WC2026" },
   { name: "Leagues", href: "/leagues" },
   { name: "Groups", href: "/groups/WC2026" },
   { name: "About", href: "/about" },
