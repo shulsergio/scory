@@ -5,9 +5,11 @@ import css from "./groups.module.css";
 import { useEffect, useState } from "react";
 import { fetchTournamentGroups } from "@/utils/fetch";
 import Loader from "@/components/Loader/Loader";
+import Link from "next/link";
 
 interface TeamData {
   team: {
+    _id: string;
     name: string;
     logoUrl: string;
     code: string;
@@ -40,7 +42,7 @@ export default function GroupsPage() {
         });
     }
   }, [tournament]);
-
+  console.log("GROUPS:::", groups);
   if (loading) return <Loader />;
 
   if (groups.length === 0) {
@@ -63,7 +65,9 @@ export default function GroupsPage() {
               <thead>
                 <tr>
                   <th className={css.teamCellHead}>Team</th>
-                  <th>P</th>
+                  <th>GP</th>
+                  <th>F</th>
+                  <th>A</th>
                   <th>GD</th>
                   <th>Pts</th>
                 </tr>
@@ -71,9 +75,15 @@ export default function GroupsPage() {
               <tbody>
                 {group.teams.map((team) => (
                   <tr key={team.team.name}>
-                    <td className={css.teamCell}>{team.team.name}</td>
+                    <td className={css.teamCell}>
+                      <Link href={`/teams/${team.team?._id}`}>
+                        {team.team.name}
+                      </Link>
+                    </td>
+                    <td>{team.matchesPlayed}</td>
                     <td>{team.goalsFor}</td>
                     <td>{team.goalsAgainst}</td>
+                    <td>{team.goalDifference}</td>
                     <td className={css.pts}>{team.points}</td>
                   </tr>
                 ))}

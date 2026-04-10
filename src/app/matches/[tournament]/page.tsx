@@ -3,31 +3,15 @@ import { fetchAllMatches } from "@/utils/fetch";
 import { Match } from "@/types/interface";
 import GroupMatchesByDate from "@/components/GroupMatchesByDate/GroupMatchesByDate";
 
-export const metadata = {
-  title: "World Cup 2026 Schedule & Results | Scory",
-  description:
-    "Check the full schedule of World Cup 2026. Stay updated with real-time match results, group standings, and upcoming fixtures.",
-  keywords: [
-    "World Cup 2026",
-    "football scores",
-    "WC 2026 schedule",
-    "football predictions",
-  ],
-  openGraph: {
-    title: "WC 2026 Full Match Schedule",
-    description: "Don't miss a single game of the World Cup 2026.",
-    type: "website",
-    images: ["/og-image-matches.png"],
-  },
-  robots: {
-    index: false, // ИЗМЕНИТЬ в конце!!!
-    follow: false, // ИЗМЕНИТЬ в конце!!!
-  },
-};
+export default async function Matches({
+  params,
+}: {
+  params: Promise<{ tournament: string }>;
+}) {
+  const { tournament } = await params;
+  const matches = await fetchAllMatches(); //
 
-export default async function Matches() {
-  const matches = await fetchAllMatches();
-
+  // JSON-LD для Google (структурированные данные)
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "ItemList",
@@ -45,6 +29,7 @@ export default async function Matches() {
     })),
   };
 
+  // Группировка дат
   const newDates = Array.from(
     new Set(
       matches.map((match: Match) =>
@@ -67,7 +52,8 @@ export default async function Matches() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      <h1 className={css.header}>WC 2026 matches</h1>
+      {/* Теперь заголовок меняется в зависимости от URL! */}
+      <h1 className={css.header}>{tournament.toUpperCase()} Matches</h1>
 
       <nav className={css.filters}>
         <button className={css.filterBtn}>All</button>
