@@ -13,6 +13,7 @@ const BASE_URL = 'https://scory-backend.onrender.com';
 export interface League {
   leagueId: string;
   leagueName: string;
+  tournament: string;
   leagueAvatar?: string;
   membersCount?: number; 
   totalPoints?: number;
@@ -323,24 +324,24 @@ export const fetchMatchesWithPredictions = async (
 };
 
 
-export const fetchUserProfile = async (token: string) =>{
-try {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/users/globaldata`, {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      },
-    });
+// export const fetchUserProfile = async (token: string) =>{
+// try {
+//     const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/users/globaldata`, {
+//       method: "GET",
+//       headers: {
+//         Authorization: `Bearer ${token}`,
+//         "Content-Type": "application/json",
+//       },
+//     });
 
-    if (!response.ok) throw new Error("Failed to fetch global stats");
+//     if (!response.ok) throw new Error("Failed to fetch global stats");
     
-    return await response.json(); // Ожидаем { points: number, rank: number }
-  } catch (error) {
-    console.error("fetchUserProfile error:", error);
-    return { points: 0, rank: 0 };
-  }
-};
+//     return await response.json(); // Ожидаем { points: number, rank: number }
+//   } catch (error) {
+//     console.error("fetchUserProfile error:", error);
+//     return { points: 0, rank: 0 };
+//   }
+// };
 
 
 export const fetchLeaderboard = async (tournamentTag: string) => {
@@ -363,16 +364,12 @@ export const fetchLeaderboard = async (tournamentTag: string) => {
 
 
 export const fetchTournamentGroups = async (tournamentTag: string) => {
-  const baseUrl = process.env.NEXT_PUBLIC_API_URL;
+  // const baseUrl = process.env.NEXT_PUBLIC_API_URL;
 
-  if (!baseUrl || baseUrl === "undefined") {
-    console.error("❌ КРИТИЧЕСКАЯ ОШИБКА: NEXT_PUBLIC_API_URL не задана в окружении!");
-    return [];
-  }
 
   try {
-    const fullUrl = `${baseUrl}/groups/${tournamentTag}`;
-    console.log("🚀 Делаю запрос на:", fullUrl);
+    const fullUrl = `${process.env.NEXT_PUBLIC_API_URL}/groups/${tournamentTag}`;
+    // console.log("🚀 Делаю запрос на:", fullUrl);
 
     const response = await fetch(fullUrl, {
       method: "GET",
@@ -384,13 +381,13 @@ export const fetchTournamentGroups = async (tournamentTag: string) => {
 
     if (!response.ok) {
       const errorText = await response.text();
-      console.error(`❌ Ошибка бэкенда (${response.status}):`, errorText);
+      console.error(`Ошибка бэкенда (${response.status}):`, errorText);
       throw new Error("Не удалось загрузить данные групп");
     }
 
     return await response.json(); 
   } catch (error) {
-    console.error("❌ fetchTournamentGroups error:", error);
+    console.error("fetchTournamentGroups error:", error);
     return [];
   }
 };

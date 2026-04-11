@@ -40,3 +40,11 @@
 .adminIcon {
   margin-left: 8px;
 }
+.blockData {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.blockData p {
+  color: rgb(83, 83, 83);
+}

@@ -79,6 +79,7 @@ export default function LeagueDetailsPage() {
       setIsJoining(false);
     }
   };
+  console.log("LeagueDetailsPage data=", data);
 
   if (status === "loading" || isLoading) return <Loader />;
   if (!data) return <p className={css.error}>League not found</p>;
@@ -88,6 +89,7 @@ export default function LeagueDetailsPage() {
       {isJoining && <Loader />}
       <div className={css.header}>
         <h1 className={css.title}>{data.leagueName}</h1>
+        <h2>{data.leagueName}</h2>
         <div className={css.actions}>
           {status === "unauthenticated" ? (
             <p>Sign in to join league</p>

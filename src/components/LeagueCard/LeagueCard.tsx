@@ -49,9 +49,12 @@ export default function LeagueCard({
             )}
           </h3>
           {isUserLeagueList && (
-            <span className={css.pointsLabel}>
-              Your points: {league.totalPoints ?? 0}
-            </span>
+            <div className={css.blockData}>
+              <span className={css.pointsLabel}>
+                Your points: {league.totalPoints ?? 0}
+              </span>
+              <p>{league.tournament}</p>
+            </div>
           )}
 
           {isAllLeaguesList && (
