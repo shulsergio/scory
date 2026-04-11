@@ -1,16 +1,10 @@
 "use client";
 
 import Loader from "@/components/Loader/Loader";
-import {
-  fetchAllMatches,
-  fetchUserLeagues,
-  fetchUserProfile,
-  League,
-} from "@/utils/fetch";
+import { fetchAllMatches, fetchUserLeagues, League } from "@/utils/fetch";
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import css from "./profile.module.css";
-import UserStatus from "@/components/UserStatus/UserStatus";
 import UserLeagues from "@/components/UserLeagues/UserLeagues";
 import PredictionMatches from "@/components/PredictionMatches/PredictionMatches";
 import { Match } from "@/types/interface";
@@ -22,10 +16,10 @@ export default function Profile() {
   const [leagues, setLeagues] = useState<League[] | null>(null);
   const [matches, setMatches] = useState<Match[]>([]);
   const [error, setError] = useState<string | null>(null);
-  const [userStats, setUserStats] = useState<{
-    points: number;
-    rank: number;
-  } | null>(null);
+  // const [userStats, setUserStats] = useState<{
+  //   points: number;
+  //   rank: number;
+  // } | null>(null);
 
   useEffect(() => {
     if (status === "authenticated" && session?.user?.accessToken) {
@@ -34,12 +28,12 @@ export default function Profile() {
       Promise.all([
         fetchUserLeagues(token),
         fetchAllMatches(),
-        fetchUserProfile(token),
+        // fetchUserProfile(token),
       ])
-        .then(([leaguesRes, matchesRes, profileRes]) => {
+        .then(([leaguesRes, matchesRes]) => {
           setLeagues(leaguesRes || []);
           setMatches(matchesRes || []);
-          setUserStats(profileRes);
+          // setUserStats(profileRes);
         })
         .catch((err) => {
           console.error("Profile load error:", err);
@@ -58,7 +52,7 @@ export default function Profile() {
     <main className={`${css.mainContainer} `}>
       <div className={css.wrapper}>
         <h2 className={css.title}>My profile</h2>
-        <UserStatus rank={userStats?.rank} points={userStats?.points} />
+        {/* <UserStatus rank={userStats?.rank} points={userStats?.points} /> */}
       </div>
 
       <div className={css.wrapper}>

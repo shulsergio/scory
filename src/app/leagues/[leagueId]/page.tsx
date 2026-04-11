@@ -11,6 +11,7 @@ import {
 import Loader from "@/components/Loader/Loader";
 import css from "./leagueData.module.css";
 import { Settings, UserPlus } from "lucide-react";
+import Link from "next/link";
 
 export default function LeagueDetailsPage() {
   const { leagueId } = useParams() as { leagueId: string };
@@ -79,6 +80,7 @@ export default function LeagueDetailsPage() {
       setIsJoining(false);
     }
   };
+  console.log("LeagueDetailsPage data=", data);
 
   if (status === "loading" || isLoading) return <Loader />;
   if (!data) return <p className={css.error}>League not found</p>;
@@ -88,6 +90,7 @@ export default function LeagueDetailsPage() {
       {isJoining && <Loader />}
       <div className={css.header}>
         <h1 className={css.title}>{data.leagueName}</h1>
+        <h2>{data.leagueName}</h2>
         <div className={css.actions}>
           {status === "unauthenticated" ? (
             <p>Sign in to join league</p>
@@ -136,7 +139,9 @@ export default function LeagueDetailsPage() {
                 }
               >
                 <td className={css.rank}>{index + 1}</td>
-                <td className={css.nickname}>{member.nickname}</td>
+                <td className={css.nickname}>
+                  <Link href={`/users/${member.id}`}>{member.nickname}</Link>
+                </td>
                 <td className={css.points}>{member.points}</td>
               </tr>
             ))}
