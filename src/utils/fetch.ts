@@ -21,6 +21,7 @@ export interface League {
 }
 
 export interface LeaderboardEntry {
+  id: string;
   nickname: string;
   points: number;
   joinedAt: string;
@@ -389,5 +390,66 @@ export const fetchTournamentGroups = async (tournamentTag: string) => {
   } catch (error) {
     console.error("fetchTournamentGroups error:", error);
     return [];
+  }
+};
+
+export interface UserTournamentStat {
+  tournament: string;
+  points: number;
+  matchesPredicted: number;
+  rankInTournament: number;
+}
+
+export interface UserPrediction {
+  matchId: string;
+  homeTeam: string;
+  awayTeam: string;
+  prediction: { home: number; away: number };
+  actualResult?: { home: number; away: number };
+  pointsEarned: number;
+}
+
+export interface FullUserProfile {
+  _id: string;
+  nickname: string;
+  name?: string;
+  avatarUrl?: string;
+  totalPoints: number;
+  globalRank: number;
+  statsByTournaments: UserTournamentStat[];
+  recentPredictions: UserPrediction[];
+  createdAt: string; 
+}
+
+export const fetchUserProfileById = async (userId: string, token?: string): Promise<FullUserProfile | null> => {
+  const baseUrl = process.env.NEXT_PUBLIC_API_URL;
+
+  if (!baseUrl) {
+    console.error("NEXT_PUBLIC_API_URL не задана!");
+    return null;
+  }
+
+  try {
+    const response = await fetch(`${baseUrl}/users/profile/${userId}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        ...(token && { Authorization: `Bearer ${token}` }),
+      },
+      next: { revalidate: 300 }  
+    });
+
+    if (!response.ok) {
+      if (response.status === 404) {
+        console.warn(`User ${userId} not found`);
+        return null;
+      }
+      throw new Error("Не удалось загрузить профиль пользователя");
+    }
+
+    return await response.json();
+  } catch (error) {
+    console.error("fetchUserProfileById error:", error);
+    return null;
   }
 };

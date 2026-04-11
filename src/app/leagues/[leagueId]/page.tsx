@@ -11,6 +11,7 @@ import {
 import Loader from "@/components/Loader/Loader";
 import css from "./leagueData.module.css";
 import { Settings, UserPlus } from "lucide-react";
+import Link from "next/link";
 
 export default function LeagueDetailsPage() {
   const { leagueId } = useParams() as { leagueId: string };
@@ -138,7 +139,9 @@ export default function LeagueDetailsPage() {
                 }
               >
                 <td className={css.rank}>{index + 1}</td>
-                <td className={css.nickname}>{member.nickname}</td>
+                <td className={css.nickname}>
+                  <Link href={`/users/${member.id}`}>{member.nickname}</Link>
+                </td>
                 <td className={css.points}>{member.points}</td>
               </tr>
             ))}
