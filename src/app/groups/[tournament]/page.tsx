@@ -30,7 +30,7 @@ export default function GroupsPage() {
   const { tournament } = useParams();
   const [groups, setGroups] = useState<GroupData[]>([]);
   const [loading, setLoading] = useState(true);
-
+  console.log("!! function GroupsPage tournament!!- ", tournament);
   useEffect(() => {
     if (tournament) {
       fetchTournamentGroups(tournament as string)

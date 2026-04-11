@@ -363,21 +363,34 @@ export const fetchLeaderboard = async (tournamentTag: string) => {
 
 
 export const fetchTournamentGroups = async (tournamentTag: string) => {
+  const baseUrl = process.env.NEXT_PUBLIC_API_URL;
+
+  if (!baseUrl || baseUrl === "undefined") {
+    console.error("❌ КРИТИЧЕСКАЯ ОШИБКА: NEXT_PUBLIC_API_URL не задана в окружении!");
+    return [];
+  }
+
   try {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/groups/${tournamentTag}`, {
+    const fullUrl = `${baseUrl}/groups/${tournamentTag}`;
+    console.log("🚀 Делаю запрос на:", fullUrl);
+
+    const response = await fetch(fullUrl, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
       },
+      next: { revalidate: 60 } 
     });
 
     if (!response.ok) {
+      const errorText = await response.text();
+      console.error(`❌ Ошибка бэкенда (${response.status}):`, errorText);
       throw new Error("Не удалось загрузить данные групп");
     }
 
     return await response.json(); 
   } catch (error) {
-    console.error("fetchTournamentGroups error:", error);
+    console.error("❌ fetchTournamentGroups error:", error);
     return [];
   }
 };
