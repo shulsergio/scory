@@ -1,4 +1,4 @@
-import { fetchUserProfileById, FullUserProfile } from "@/utils/fetch";
+import { fetchUserProfileById } from "@/utils/fetch";
 import { Trophy, Target, Star, Calendar } from "lucide-react";
 import css from "./users.module.css";
 //ChevronRight
@@ -7,28 +7,20 @@ type Props = {
   params: Promise<{ id: string }>;
 };
 
-const getPointsColor = (points: number) => {
-  if (points >= 5) return "#fbbf24";
-  if (points >= 2) return "#4ad381";
-  if (points > 0) return "#60a5fa";
-  return "#94a3b8";
-};
-
 export default async function UserProfilePage({ params }: Props) {
   const { id } = await params;
 
-  // Получаем данные с твоего нового эндпоинта
-  const data = (await fetchUserProfileById(id)) as FullUserProfile | null;
+  const data = await fetchUserProfileById(id);
 
   if (!data) {
     return (
       <div className={css.notFound}>
-        <h1>Пользователь не найден</h1>
-        <p>К сожалению, профиль этого игрока пуст или не существует.</p>
+        <h2>Пользователь не найден</h2>
+        <p>Профиль этого игрока пуст или не существует.</p>
       </div>
     );
   }
-
+  console.log("UserProfilePage data---", data);
   const { user, stats, predictions } = data;
 
   const finishedPredictions = predictions.filter(
@@ -47,7 +39,7 @@ export default async function UserProfilePage({ params }: Props) {
           <div className={css.badgesRow}>
             <div className={css.badge}>
               <Star size={14} />
-              <span>Scout</span>
+              <span>ИМЯЯЯЯ</span>
             </div>
             <div className={`${css.badge} ${css.dateBadge}`}>
               <Calendar size={14} />
@@ -121,7 +113,7 @@ export default async function UserProfilePage({ params }: Props) {
                     </div>
                     <div className={css.scoresInfo}>
                       <span className={css.userPred}>
-                        Прогноз:{" "}
+                        Прогноз:
                         <b>
                           {pred.userPrediction.home}:{pred.userPrediction.away}
                         </b>
@@ -132,15 +124,6 @@ export default async function UserProfilePage({ params }: Props) {
                         </span>
                       )}
                     </div>
-                  </div>
-
-                  <div
-                    className={css.pointsResult}
-                    style={{
-                      backgroundColor: getPointsColor(pred.pointsEarned),
-                    }}
-                  >
-                    +{pred.pointsEarned}
                   </div>
                 </div>
               ))

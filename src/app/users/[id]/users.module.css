@@ -3,6 +3,8 @@
   margin: 0 auto;
   padding: 20px;
   color: #fff;
+  display: flex;
+  flex-direction: column;
 }
 
 .profileHeader {
@@ -26,6 +28,12 @@
   justify-content: center;
   font-size: 32px;
   font-weight: bold;
+  flex-shrink: 0; /* Чтобы аватар не сжимался */
+}
+
+.userMainInfo {
+  display: flex;
+  flex-direction: column;
 }
 
 .nickname {
@@ -36,6 +44,7 @@
 .badgesRow {
   display: flex;
   gap: 10px;
+  flex-wrap: wrap; /* Для мобилок */
 }
 
 .badge {
@@ -48,11 +57,12 @@
   font-size: 13px;
 }
 
+/* ЗАМЕНА GRID НА FLEX */
 .statsGrid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  display: flex;
   gap: 20px;
   margin-bottom: 40px;
+  width: 100%;
 }
 
 .statCard {
@@ -63,27 +73,47 @@
   align-items: center;
   gap: 15px;
   border: 1px solid #222;
+  flex: 1; /* Карточки будут делить пространство поровну */
 }
 
 .statIcon {
   width: 32px;
   height: 32px;
+  flex-shrink: 0;
+}
+
+.statContent {
+  display: flex;
+  flex-direction: column;
 }
 
 .label {
-  display: block;
   font-size: 14px;
   color: #888;
 }
 
 .value {
   font-size: 24px;
+  font-weight: bold;
 }
 
+/* ОСНОВНОЙ ЛАЙАУТ НА FLEX */
 .mainLayout {
-  display: grid;
-  grid-template-columns: 300px 1fr;
+  display: flex;
   gap: 30px;
+  align-items: flex-start;
+}
+
+.sideSection {
+  flex: 0 0 300px; /* Фиксированная ширина 300px, не растет, не сжимается */
+  display: flex;
+  flex-direction: column;
+}
+
+.mainSection {
+  flex: 1; /* Занимает всё оставшееся пространство */
+  display: flex;
+  flex-direction: column;
 }
 
 .sectionTitle {
@@ -93,12 +123,19 @@
   padding-left: 12px;
 }
 
+.tournamentList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
 .tournamentCard {
   background: #1a1a1a;
   padding: 15px;
   border-radius: 12px;
-  margin-bottom: 12px;
   border: 1px solid #222;
+  display: flex;
+  flex-direction: column;
 }
 
 .tHeader {
@@ -115,20 +152,32 @@
   color: #888;
 }
 
+.predictionFeed {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
 .predictionItem {
   background: #1a1a1a;
   padding: 15px 20px;
   border-radius: 15px;
-  margin-bottom: 15px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   border: 1px solid #222;
 }
 
+.matchData {
+  display: flex;
+  flex-direction: column;
+}
+
 .teamsRow {
   font-weight: bold;
   margin-bottom: 5px;
+  display: flex;
+  align-items: center;
 }
 
 .vs {
@@ -140,28 +189,35 @@
   font-size: 14px;
   display: flex;
   gap: 15px;
+  flex-wrap: wrap;
 }
 
 .actualScore {
   color: #4ad381;
 }
 
-.pointsResult {
-  width: 45px;
-  height: 45px;
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: bold;
-  color: #000;
-}
-
+/* АДАПТИВНОСТЬ ЧЕРЕЗ FLEX-DIRECTION */
 @media (max-width: 768px) {
-  .mainLayout {
-    grid-template-columns: 1fr;
-  }
   .statsGrid {
-    grid-template-columns: 1fr;
+    flex-direction: column;
+  }
+
+  .mainLayout {
+    flex-direction: column;
+  }
+
+  .sideSection {
+    flex: 1 1 auto;
+    width: 100%;
+  }
+
+  .profileHeader {
+    flex-direction: column;
+    text-align: center;
+    padding: 20px;
+  }
+
+  .badgesRow {
+    justify-content: center;
   }
 }
