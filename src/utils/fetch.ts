@@ -396,29 +396,34 @@ export const fetchTournamentGroups = async (tournamentTag: string) => {
 export interface UserTournamentStat {
   tournament: string;
   points: number;
+  rank: number;
+  prevRank: number;
   matchesPredicted: number;
-  rankInTournament: number;
+  exactScores: number;
+  correctOutcomes: number;
 }
 
 export interface UserPrediction {
-  matchId: string;
-  homeTeam: string;
-  awayTeam: string;
-  prediction: { home: number; away: number };
-  actualResult?: { home: number; away: number };
+  id: string;
+  match: {
+    _id: string;
+    homeTeam: { name: string; _id: string };
+    awayTeam: { name: string; _id: string };
+    score: { home: number; away: number };
+    status: string;
+    league: string;
+  };
+  userPrediction: { home: number; away: number };
   pointsEarned: number;
 }
 
 export interface FullUserProfile {
-  _id: string;
-  nickname: string;
-  name?: string;
-  avatarUrl?: string;
-  totalPoints: number;
-  globalRank: number;
-  statsByTournaments: UserTournamentStat[];
-  recentPredictions: UserPrediction[];
-  createdAt: string; 
+  user: {
+    nickname: string;
+    memberSince: string;
+  };
+  stats: UserTournamentStat[];
+  predictions: UserPrediction[];
 }
 
 export const fetchUserProfileById = async (userId: string, token?: string): Promise<FullUserProfile | null> => {

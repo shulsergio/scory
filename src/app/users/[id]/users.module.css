@@ -1,0 +1,167 @@
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+  color: #fff;
+}
+
+.profileHeader {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+  margin-bottom: 40px;
+  background: #1a1a1a;
+  padding: 30px;
+  border-radius: 20px;
+  border: 1px solid #333;
+}
+
+.avatar {
+  width: 80px;
+  height: 80px;
+  background: linear-gradient(135deg, #f97316, #ea580c);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  font-weight: bold;
+}
+
+.nickname {
+  font-size: 28px;
+  margin: 0 0 10px 0;
+}
+
+.badgesRow {
+  display: flex;
+  gap: 10px;
+}
+
+.badge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: #333;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 13px;
+}
+
+.statsGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-bottom: 40px;
+}
+
+.statCard {
+  background: #1a1a1a;
+  padding: 20px;
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  border: 1px solid #222;
+}
+
+.statIcon {
+  width: 32px;
+  height: 32px;
+}
+
+.label {
+  display: block;
+  font-size: 14px;
+  color: #888;
+}
+
+.value {
+  font-size: 24px;
+}
+
+.mainLayout {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: 30px;
+}
+
+.sectionTitle {
+  font-size: 20px;
+  margin-bottom: 20px;
+  border-left: 4px solid #f97316;
+  padding-left: 12px;
+}
+
+.tournamentCard {
+  background: #1a1a1a;
+  padding: 15px;
+  border-radius: 12px;
+  margin-bottom: 12px;
+  border: 1px solid #222;
+}
+
+.tHeader {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+
+.tDetails {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  color: #888;
+}
+
+.predictionItem {
+  background: #1a1a1a;
+  padding: 15px 20px;
+  border-radius: 15px;
+  margin-bottom: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid #222;
+}
+
+.teamsRow {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.vs {
+  color: #f97316;
+  margin: 0 10px;
+}
+
+.scoresInfo {
+  font-size: 14px;
+  display: flex;
+  gap: 15px;
+}
+
+.actualScore {
+  color: #4ad381;
+}
+
+.pointsResult {
+  width: 45px;
+  height: 45px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  color: #000;
+}
+
+@media (max-width: 768px) {
+  .mainLayout {
+    grid-template-columns: 1fr;
+  }
+  .statsGrid {
+    grid-template-columns: 1fr;
+  }
+}
