@@ -428,9 +428,11 @@ export const fetchUserProfileById = async (userId: string, token?: string): Prom
     console.error("NEXT_PUBLIC_API_URL не задана!");
     return null;
   }
+  console.log('fetchUserProfileById userId --- ', userId);
+   console.log(' fetch --- ', `${baseUrl}/users/${userId}`);
 
   try {
-    const response = await fetch(`${baseUrl}/users/profile/${userId}`, {
+    const response = await fetch(`${baseUrl}/users/${userId}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

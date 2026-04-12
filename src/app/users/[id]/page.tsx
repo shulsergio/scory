@@ -4,13 +4,14 @@ import css from "./users.module.css";
 import { Trophy, Target, Star, Calendar } from "lucide-react";
 
 type Props = {
-  params: Promise<{ userId: string }>;
+  params: Promise<{ id: string }>;
 };
 
 export default async function UserProfilePage({ params }: Props) {
-  const { userId } = await params;
-  const user = await fetchUserProfileById(userId);
-
+  const { id } = await params;
+  console.log("--- UserProfilePage userId ---", id);
+  const user = await fetchUserProfileById(id);
+  console.log("--- UserProfilePage user ---", user);
   if (!user) {
     return (
       <div className={css.notFound}>
@@ -22,11 +23,10 @@ export default async function UserProfilePage({ params }: Props) {
 
   return (
     <main className={css.container}>
-      {/* Header: Никнейм и Глобальный ранг */}
       <section className={css.profileHeader}>
-        <div className={css.avatarPlaceholder}>
+        {/* <div className={css.avatarPlaceholder}>
           {user.nickname.charAt(0).toUpperCase()}
-        </div>
+        </div> */}
         <div className={css.info}>
           <h1 className={css.nickname}>{user.nickname}</h1>
           <div className={css.badge}>
