@@ -396,29 +396,34 @@ export const fetchTournamentGroups = async (tournamentTag: string) => {
 export interface UserTournamentStat {
   tournament: string;
   points: number;
+  rank: number;
+  prevRank: number;
   matchesPredicted: number;
-  rankInTournament: number;
+  exactScores: number;
+  correctOutcomes: number;
 }
 
 export interface UserPrediction {
-  matchId: string;
-  homeTeam: string;
-  awayTeam: string;
-  prediction: { home: number; away: number };
-  actualResult?: { home: number; away: number };
+  id: string;
+  match: {
+    _id: string;
+    homeTeam: { name: string; _id: string };
+    awayTeam: { name: string; _id: string };
+    score: { home: number; away: number };
+    status: string;
+    league: string;
+  };
+  userPrediction: { home: number; away: number };
   pointsEarned: number;
 }
 
 export interface FullUserProfile {
-  _id: string;
-  nickname: string;
-  name?: string;
-  avatarUrl?: string;
-  totalPoints: number;
-  globalRank: number;
-  statsByTournaments: UserTournamentStat[];
-  recentPredictions: UserPrediction[];
-  createdAt: string; 
+  user: {
+    nickname: string;
+    memberSince: string;
+  };
+  stats: UserTournamentStat[];
+  predictions: UserPrediction[];
 }
 
 export const fetchUserProfileById = async (userId: string, token?: string): Promise<FullUserProfile | null> => {
@@ -428,9 +433,11 @@ export const fetchUserProfileById = async (userId: string, token?: string): Prom
     console.error("NEXT_PUBLIC_API_URL не задана!");
     return null;
   }
+  console.log('fetchUserProfileById userId --- ', userId);
+   console.log(' fetch --- ', `${baseUrl}/users/${userId}`);
 
   try {
-    const response = await fetch(`${baseUrl}/users/profile/${userId}`, {
+    const response = await fetch(`${baseUrl}/users/${userId}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
