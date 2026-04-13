@@ -27,12 +27,10 @@ export default async function UserProfilePage({ params }: Props) {
   );
 
   const totalPoints = stats.reduce((acc, s) => acc + s.points, 0);
-
+  console.log("UserProfilePage user.nickname---", user.nickname);
   return (
     <main className={css.container}>
       <section className={css.profileHeader}>
-        <div className={css.avatarWrapper}></div>
-
         <div className={css.userMainInfo}>
           <h1 className={css.nickname}>{user.nickname}</h1>
           <div className={css.badgesRow}>
@@ -51,24 +49,29 @@ export default async function UserProfilePage({ params }: Props) {
       </section>
 
       {/* КАРТОЧКИ СТАТИСТИКИ */}
-      <div className={css.statsGrid}>
-        <div className={css.statCard}>
-          <Trophy className={css.statIcon} color="#fbbf24" />
-          <div className={css.statContent}>
-            <span className={css.label}>Total points</span>
-            <strong className={css.value}>{totalPoints}</strong>
+      <section>
+        <h2 className={css.sectionTitle}>Global data</h2>
+        <div className={css.statsBlock}>
+          <div className={css.statCard}>
+            <Trophy className={css.statIcon} color="#fbbf24" />
+            <div className={css.statContent}>
+              <span className={css.label}>Total points</span>
+              <strong className={css.value}>{totalPoints}</strong>
+            </div>
+          </div>
+          <div className={css.statCard}>
+            <Target className={css.statIcon} color="#60a5fa" />
+            <div className={css.statContent}>
+              <span className={css.label}>Total predictions</span>
+              <strong className={css.value}>
+                {finishedPredictions.length}
+              </strong>
+            </div>
           </div>
         </div>
-        <div className={css.statCard}>
-          <Target className={css.statIcon} color="#60a5fa" />
-          <div className={css.statContent}>
-            <span className={css.label}>Total predictions</span>
-            <strong className={css.value}>{finishedPredictions.length}</strong>
-          </div>
-        </div>
-      </div>
+      </section>
 
-      <div className={css.mainLayout}>
+      <section className={css.mainLayout}>
         {/* ЛЕВАЯ КОЛОНКА: Статистика по турнирам */}
         <section className={css.sideSection}>
           <h2 className={css.sectionTitle}>Tournaments</h2>
@@ -81,8 +84,8 @@ export default async function UserProfilePage({ params }: Props) {
                     <span className={css.tPoints}>{s.points} pts</span>
                   </div>
                   <div className={css.tDetails}>
-                    <span>Место: #{s.rank || "-"}</span>
-                    <span>Точных: {s.exactScores}</span>
+                    <span>Rank: #{s.rank || "-"}</span>
+                    <span>exact scores: {s.exactScores}</span>
                   </div>
                 </div>
               ))
@@ -131,7 +134,7 @@ export default async function UserProfilePage({ params }: Props) {
             )}
           </div>
         </section>
-      </div>
+      </section>
     </main>
   );
 }
