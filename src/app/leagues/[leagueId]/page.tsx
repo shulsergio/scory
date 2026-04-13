@@ -132,7 +132,7 @@ export default function LeagueDetailsPage() {
                 key={member.nickname}
                 className={
                   member.nickname === session?.user?.nickname
-                    ? css.currentUserRow
+                    ? css.nickname
                     : index === 0
                       ? css.topOne
                       : ""

@@ -15,8 +15,7 @@ export default async function UserProfilePage({ params }: Props) {
   if (!data) {
     return (
       <div className={css.notFound}>
-        <h2>Пользователь не найден</h2>
-        <p>Профиль этого игрока пуст или не существует.</p>
+        <h2>User not found</h2>
       </div>
     );
   }
@@ -28,12 +27,10 @@ export default async function UserProfilePage({ params }: Props) {
   );
 
   const totalPoints = stats.reduce((acc, s) => acc + s.points, 0);
-
+  console.log("UserProfilePage user.nickname---", user.nickname);
   return (
     <main className={css.container}>
       <section className={css.profileHeader}>
-        <div className={css.avatarWrapper}></div>
-
         <div className={css.userMainInfo}>
           <h1 className={css.nickname}>{user.nickname}</h1>
           <div className={css.badgesRow}>
@@ -44,8 +41,7 @@ export default async function UserProfilePage({ params }: Props) {
             <div className={`${css.badge} ${css.dateBadge}`}>
               <Calendar size={14} />
               <span>
-                В игре с{" "}
-                {new Date(user.memberSince).toLocaleDateString("ru-RU")}
+                from -{new Date(user.memberSince).toLocaleDateString("ru-RU")}
               </span>
             </div>
           </div>
@@ -53,27 +49,32 @@ export default async function UserProfilePage({ params }: Props) {
       </section>
 
       {/* КАРТОЧКИ СТАТИСТИКИ */}
-      <div className={css.statsGrid}>
-        <div className={css.statCard}>
-          <Trophy className={css.statIcon} color="#fbbf24" />
-          <div className={css.statContent}>
-            <span className={css.label}>Всего очков</span>
-            <strong className={css.value}>{totalPoints}</strong>
+      <section>
+        <h2 className={css.sectionTitle}>Global data</h2>
+        <div className={css.statsBlock}>
+          <div className={css.statCard}>
+            <Trophy className={css.statIcon} color="#fbbf24" />
+            <div className={css.statContent}>
+              <span className={css.label}>Total points</span>
+              <strong className={css.value}>{totalPoints}</strong>
+            </div>
+          </div>
+          <div className={css.statCard}>
+            <Target className={css.statIcon} color="#60a5fa" />
+            <div className={css.statContent}>
+              <span className={css.label}>Total predictions</span>
+              <strong className={css.value}>
+                {finishedPredictions.length}
+              </strong>
+            </div>
           </div>
         </div>
-        <div className={css.statCard}>
-          <Target className={css.statIcon} color="#60a5fa" />
-          <div className={css.statContent}>
-            <span className={css.label}>Прогнозов</span>
-            <strong className={css.value}>{finishedPredictions.length}</strong>
-          </div>
-        </div>
-      </div>
+      </section>
 
-      <div className={css.mainLayout}>
+      <section className={css.mainLayout}>
         {/* ЛЕВАЯ КОЛОНКА: Статистика по турнирам */}
         <section className={css.sideSection}>
-          <h2 className={css.sectionTitle}>Турниры</h2>
+          <h2 className={css.sectionTitle}>Tournaments</h2>
           <div className={css.tournamentList}>
             {stats.length > 0 ? (
               stats.map((s) => (
@@ -83,20 +84,20 @@ export default async function UserProfilePage({ params }: Props) {
                     <span className={css.tPoints}>{s.points} pts</span>
                   </div>
                   <div className={css.tDetails}>
-                    <span>Место: #{s.rank || "-"}</span>
-                    <span>Точных: {s.exactScores}</span>
+                    <span>Rank: #{s.rank || "-"}</span>
+                    <span>exact scores: {s.exactScores}</span>
                   </div>
                 </div>
               ))
             ) : (
-              <p className={css.emptyText}>Нет активных турниров</p>
+              <p className={css.emptyText}>No active tournaments</p>
             )}
           </div>
         </section>
 
         {/* ПРАВАЯ КОЛОНКА: Последняя активность */}
         <section className={css.mainSection}>
-          <h2 className={css.sectionTitle}>Последние прогнозы</h2>
+          <h2 className={css.sectionTitle}>Last predictions</h2>
           <div className={css.predictionFeed}>
             {finishedPredictions.length > 0 ? (
               finishedPredictions.map((pred) => (
@@ -104,23 +105,24 @@ export default async function UserProfilePage({ params }: Props) {
                   <div className={css.matchData}>
                     <div className={css.teamsRow}>
                       <span className={css.teamName}>
-                        {pred.match.homeTeam?.name || "Команда А"}
+                        {pred.match.homeTeam?.name || "Team A"}
                       </span>
                       <span className={css.vs}>vs</span>
                       <span className={css.teamName}>
-                        {pred.match.awayTeam?.name || "Команда Б"}
+                        {pred.match.awayTeam?.name || "Team B"}
                       </span>
                     </div>
                     <div className={css.scoresInfo}>
                       <span className={css.userPred}>
-                        Прогноз:
+                        Prediction:
                         <b>
                           {pred.userPrediction.home}:{pred.userPrediction.away}
                         </b>
                       </span>
                       {pred.match.status === "finished" && (
                         <span className={css.actualScore}>
-                          Итог: {pred.match.score.home}:{pred.match.score.away}
+                          Match score: {pred.match.score.home}:
+                          {pred.match.score.away}
                         </span>
                       )}
                     </div>
@@ -132,7 +134,7 @@ export default async function UserProfilePage({ params }: Props) {
             )}
           </div>
         </section>
-      </div>
+      </section>
     </main>
   );
 }

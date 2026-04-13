@@ -1,7 +1,6 @@
 .container {
-  padding: 10px;
   max-width: 800px;
-  min-width: 95%;
+  width: 100%;
   margin: 0 auto;
 }
 
@@ -18,9 +17,11 @@
 }
 
 .tableWrapper {
-  background: #fff;
-  border-radius: 6px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 12px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
   overflow: hidden;
 }
 
@@ -30,37 +31,40 @@
 }
 
 .table th {
-  background: #f8f9fa;
-  padding: 8px 10px;
-  text-align: left;
-  font-size: 0.9rem;
-  /* text-transform: uppercase; */
-  color: #888;
+  background: var(--bg-card);
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+  padding: 0 4px 8px;
+  text-align: center;
+  font-size: 13px;
 }
 
 .table td {
   padding: 8px 10px;
-  border-top: 1px solid #eee;
+  border-bottom: 1px solid var(--card-border);
 }
-
+.nickname {
+  font-weight: 600;
+  color: var(--text-main);
+}
 .topOne {
-  background: rgba(255, 140, 0, 0.05);
-  font-weight: bold;
+  background: rgba(0, 217, 255, 0.5);
 }
 
 .rank {
+  text-align: center;
   width: 50px;
   color: var(--primary-500);
   font-weight: bold;
 }
 
 .points {
-  width: 40px;
-  text-align: right;
-  color: #333;
+  width: 50px;
+  text-align: center;
+  color: var(--text-main);
   font-variant-numeric: tabular-nums;
 }
-.nickname {
-  color: #242424;
-  font-weight: 500;
+.table tr:hover {
+  background-color: var(--row-hover);
+  cursor: default;
 }

@@ -72,7 +72,7 @@
   text-align: center;
   padding: 8px 4px;
   color: var(--text-main);
-  border-bottom: 1px solid var(--border);
+  border-bottom: 1px solid var(--card-border);
 }
 .table .teamCellHead {
   max-width: 60%;

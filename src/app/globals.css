@@ -34,8 +34,9 @@
   --btn-text: #ffffff;
   --border-subtle: #ffffff9f;
   --text-muted: #737373;
-  --card-border: #e5e5e5;
-  --row-hover: var(--primary-50);
+  --border: #303030;
+  --card-border: #c1c1c1;
+  --row-hover: #ffb37d;
   --accent: #f97316;
   --font-family-Kanit: "Kanit", sans-serif;
 }
@@ -52,9 +53,9 @@
   --input-bg: rgba(255, 255, 255, 0.05);
   --btn-text: #ffffff;
   --text-muted: #a3a3a3;
-  --border: #404040;
+  --border: #e5e5e5;
   --card-border: #404040;
-  --row-hover: #351a0a;
+  --row-hover: #ffb37d;
   --accent: #f97316;
 }
 * {
