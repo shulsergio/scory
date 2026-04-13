@@ -8,17 +8,6 @@
   /* transition: background 0.3s ease; Плавный переход тем */
 }
 
-/* .title {
-  text-align: center;
-  color: var(--text-main);
-  font-size: 2rem;
-  font-weight: 900;
-  text-transform: uppercase;
-  margin-bottom: 40px;
-} */
-/* th {
-  align-items: center;
-} */
 .groupsFlexContainer {
   display: flex;
   flex-wrap: wrap;
@@ -96,4 +85,7 @@
 .table tr:hover {
   background-color: var(--row-hover);
   cursor: default;
+}
+.groupCard:hover {
+  border-color: var(--primary-500);
 }

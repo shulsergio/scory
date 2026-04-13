@@ -420,6 +420,8 @@ export interface UserPrediction {
 export interface FullUserProfile {
   user: {
     nickname: string;
+    userName: string;
+    lastVisit: string;
     memberSince: string;
   };
   stats: UserTournamentStat[];

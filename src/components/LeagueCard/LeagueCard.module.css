@@ -14,7 +14,7 @@
 }
 .leagueCard:hover {
   border-color: var(--primary-500);
-  transform: translateY(-2px);
+  transform: translateY(-1px);
 }
 .leagueIcon {
   width: 48px;

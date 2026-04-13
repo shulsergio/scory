@@ -1,5 +1,5 @@
 import { fetchUserProfileById } from "@/utils/fetch";
-import { Trophy, Target, Star, Calendar } from "lucide-react";
+import { Trophy, Target, Calendar } from "lucide-react";
 import css from "./users.module.css";
 //ChevronRight
 
@@ -27,21 +27,32 @@ export default async function UserProfilePage({ params }: Props) {
   );
 
   const totalPoints = stats.reduce((acc, s) => acc + s.points, 0);
-  console.log("UserProfilePage user.nickname---", user.nickname);
   return (
     <main className={css.container}>
       <section className={css.profileHeader}>
         <div className={css.userMainInfo}>
-          <h1 className={css.nickname}>{user.nickname}</h1>
+          <h2 className={css.nickname}>
+            {user.userName === "" ? "User" : user.userName}
+            {user.nickname && (
+              <>
+                <span className={css.aka}> aka </span>
+                {user.nickname}
+              </>
+            )}
+          </h2>
           <div className={css.badgesRow}>
-            <div className={css.badge}>
-              <Star size={14} />
-              <span>ИМЯЯЯЯ</span>
+            <div className={`${css.badge} ${css.dateBadge}`}>
+              <Calendar size={14} />
+              <span>
+                registered -
+                {new Date(user.memberSince).toLocaleDateString("ru-RU")}
+              </span>
             </div>
             <div className={`${css.badge} ${css.dateBadge}`}>
               <Calendar size={14} />
               <span>
-                from -{new Date(user.memberSince).toLocaleDateString("ru-RU")}
+                last visit -
+                {new Date(user.lastVisit).toLocaleDateString("ru-RU")}
               </span>
             </div>
           </div>
@@ -98,7 +109,7 @@ export default async function UserProfilePage({ params }: Props) {
         {/* ПРАВАЯ КОЛОНКА: Последняя активность */}
         <section className={css.mainSection}>
           <h2 className={css.sectionTitle}>Last predictions</h2>
-          <div className={css.predictionFeed}>
+          <div className={css.predictionBlock}>
             {finishedPredictions.length > 0 ? (
               finishedPredictions.map((pred) => (
                 <div key={pred.id} className={css.predictionItem}>
@@ -130,7 +141,7 @@ export default async function UserProfilePage({ params }: Props) {
                 </div>
               ))
             ) : (
-              <p className={css.emptyText}>История прогнозов пуста</p>
+              <p className={css.emptyText}>No predictions</p>
             )}
           </div>
         </section>
