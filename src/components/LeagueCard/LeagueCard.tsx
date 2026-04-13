@@ -27,12 +27,12 @@ export default function LeagueCard({
             <Image
               src={league.leagueAvatar}
               alt={league.leagueName}
-              width={40}
-              height={40}
               className={css.avatarImage}
             />
           ) : (
-            <div className={css.avatarPlaceholder}>{league.leagueName[0]}</div>
+            <div className={css.avatarPlaceholder}>
+              {league.leagueName[0].toLocaleUpperCase()}
+            </div>
           )}
         </div>
 
