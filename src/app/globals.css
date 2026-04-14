@@ -30,7 +30,7 @@
   --text-main: var(--neutral-900);
   --text-secondary: var(--neutral-800);
   ---text-blue-accent: var(--secondary-500);
-  --input-bg: var(--neutral-800);
+  --input-bg: var(--neutral-100);
   --btn-text: #ffffff;
   --border-subtle: #ffffff9f;
   --text-muted: #737373;
@@ -50,7 +50,7 @@
   --text-secondary: var(--neutral-50);
   ---text-blue-accent: var(--secondary-900);
   --border-subtle: #ffffff9f;
-  --input-bg: rgba(255, 255, 255, 0.05);
+  --input-bg: rgba(255, 255, 255, 0.1);
   --btn-text: #ffffff;
   --text-muted: #a3a3a3;
   --border: #e5e5e5;

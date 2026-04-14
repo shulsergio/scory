@@ -23,28 +23,33 @@
 }
 
 .userMainInfo {
+  width: 100%;
   display: flex;
   flex-direction: column;
+  gap: 10px;
 }
 
 .nickname {
-  font-size: 28px;
-  margin: 0 0 10px 0;
+  font-size: 24px;
+  color: var(--accent);
 }
-
+.aka {
+  padding: 0 10px;
+  font-size: 14px;
+  color: var(--text-muted);
+}
 .badgesRow {
+  color: var(--text-muted);
+  width: 100%;
   display: flex;
-  gap: 10px;
-  flex-wrap: wrap; /* Для мобилок */
+  /* gap: 10px; */
+  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: end;
 }
 
 .badge {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  background: var(--bg-card);
-  padding: 4px 12px;
-  border-radius: 20px;
+  padding: 2px 12px;
   font-size: 13px;
 }
 
@@ -147,7 +152,7 @@
   color: #888;
 }
 
-.predictionFeed {
+.predictionBlock {
   display: flex;
   flex-direction: column;
   background: var(--bg-card);
@@ -161,10 +166,9 @@
   display: flex;
   flex-direction: column;
   gap: 4px;
-  padding: 8px 0 8px 30px;
+  padding: 8px 0 8px 15px;
   border-bottom: 1px solid var(--card-border);
 }
-
 .teamsRow {
   font-weight: bold;
   display: flex;
@@ -173,8 +177,8 @@
 }
 
 .vs {
-  color: #f97316;
-  padding: 0 15px;
+  color: var(--accent);
+  padding: 0 12px;
 }
 
 .scoresInfo {
@@ -186,6 +190,13 @@
 
 .actualScore {
   color: #4ad381;
+}
+
+.profileHeader:hover,
+.statsBlock:hover,
+.tournamentList:hover,
+.predictionBlock:hover {
+  border-color: var(--primary-500);
 }
 
 /* АДАПТИВНОСТЬ ЧЕРЕЗ FLEX-DIRECTION */
