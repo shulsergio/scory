@@ -16,19 +16,29 @@
   width: 100%;
   padding: 14px;
   background: var(--input-bg);
-  border: 1px solid var(--border-subtle);
+  border: 1px solid var(--card-border);
   border-radius: 8px;
   color: var(--text-main);
   font-size: 16px;
   outline: none;
   transition: all 0.3s ease;
 }
+.input:hover {
+  border-color: #676767;
+}
 .input:focus {
-  border-color: var(--primary-500);
-  box-shadow: 0 0 8px rgba(249, 115, 22, 0.3);
-  background: transparent;
+  border-color: var(--accent);
+  background: var(--input-bg);
+  box-shadow: 0 0 4px 2px rgba(249, 115, 22, 0.4);
+  color: var(--text-main);
 }
 .input::placeholder {
-  color: var(--text-secondary);
-  opacity: 0.6;
+  color: #7a7a7a;
+  font-size: 14px;
+  letter-spacing: 1.05;
+}
+
+.input::selection {
+  background: var(--accent);
+  color: #000;
 }
