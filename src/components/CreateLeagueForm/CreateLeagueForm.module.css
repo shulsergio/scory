@@ -4,12 +4,49 @@
   gap: 20px;
   width: 100%;
 }
+.descriptionHeader {
+  margin: 0 auto;
+}
+.select {
+  width: 100%;
+  background: var(--input-bg);
+  color: var(--text-main);
+  border: 1px solid var(--card-border);
+  padding: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  outline: none;
+}
 
 .description {
   font-size: 0.9rem;
   color: #666;
   /* line-height: 1.4; */
 }
+
+.textarea {
+  width: 100%;
+  background: var(--input-bg);
+  color: var(--text-main);
+  border: 1px solid var(--card-border);
+  padding: 12px;
+  border-radius: 10px;
+  font-family: inherit;
+  resize: none;
+  outline: none;
+}
+
+.textarea:focus,
+.select:focus {
+  border-color: var(--accent);
+}
+
+.smallText {
+  font-size: 13px;
+  color: #888;
+  margin-top: 4px;
+}
+
 .smallText {
   padding-top: 7px;
   font-size: 0.8rem;
