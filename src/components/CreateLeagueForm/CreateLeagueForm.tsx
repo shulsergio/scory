@@ -4,6 +4,13 @@ import { fetchCreateLeague } from "@/utils/fetch";
 import css from "./CreateLeagueForm.module.css";
 import Loader from "../Loader/Loader";
 
+const AVAILABLE_TOURNAMENTS = [
+  { id: "WC2026", name: "World Cup 2026" },
+  { id: "EPL", name: "English Premier League" },
+  { id: "LALIGA", name: "La Liga" },
+  { id: "SERIE_A", name: "Serie A" },
+];
+
 interface CreateLeagueFormProps {
   onSuccess: () => void;
   token: string;
@@ -14,8 +21,13 @@ export default function CreateLeagueForm({
   token,
 }: CreateLeagueFormProps) {
   const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
+  const [tournamentTag, setTournamentTag] = useState(
+    AVAILABLE_TOURNAMENTS[0].id,
+  );
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
   const MIN_LENGTH = 3;
   const isValid = name.trim().length >= MIN_LENGTH;
 
@@ -27,7 +39,11 @@ export default function CreateLeagueForm({
     setError(null);
 
     try {
-      await fetchCreateLeague(token, name.trim());
+      await fetchCreateLeague(token, {
+        name: name.trim(),
+        description: description.trim(),
+        tournament: tournamentTag,
+      });
       onSuccess();
     } catch (err) {
       setError(err instanceof Error ? err.message : "Failed to create league");
@@ -38,27 +54,59 @@ export default function CreateLeagueForm({
 
   return (
     <form className={css.form} onSubmit={handleSubmit}>
-      <div className={css.description}>
-        <p>Enter a name for your league.</p>
-        <p className={css.smallText}>You can invite your friends later.</p>
+      <div className={css.descriptionHeader}>
+        <p>add info about your league</p>
       </div>
 
+      {/* Выбор Турнира */}
       <div className={css.inputGroup}>
-        <label htmlFor="leagueName">League Name</label>
+        <label htmlFor="tournament">Tournament</label>
+        <select
+          id="tournament"
+          value={tournamentTag}
+          onChange={(e) => setTournamentTag(e.target.value)}
+          disabled={isSubmitting}
+          className={css.select}
+        >
+          {AVAILABLE_TOURNAMENTS.map((t) => (
+            <option key={t.id} value={t.id}>
+              {t.name}
+            </option>
+          ))}
+        </select>
+      </div>
+
+      {/* Имя Лиги */}
+      <div className={css.inputGroup}>
+        <label htmlFor="leagueName">League name</label>
         <input
           id="leagueName"
           type="text"
           value={name}
           onChange={(e) => setName(e.target.value)}
-          placeholder="your league name"
+          placeholder="Example: friends league"
           disabled={isSubmitting}
           required
-          autoFocus
           maxLength={25}
         />
         {name.length > 0 && name.length < MIN_LENGTH && (
-          <span className={css.hint}>Minimum {MIN_LENGTH} characters</span>
+          <span className={css.hint}>min {MIN_LENGTH} words</span>
         )}
+      </div>
+
+      {/* Описание Лиги */}
+      <div className={css.inputGroup}>
+        <label htmlFor="description">description</label>
+        <textarea
+          id="description"
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+          placeholder="about league..."
+          disabled={isSubmitting}
+          className={css.textarea}
+          rows={3}
+          maxLength={150}
+        />
       </div>
 
       {error && <p className={css.errorText}>{error}</p>}
@@ -69,7 +117,7 @@ export default function CreateLeagueForm({
           className={css.submitBtn}
           disabled={isSubmitting || !isValid}
         >
-          {isSubmitting ? <Loader /> : "Create"}
+          {isSubmitting ? <Loader /> : "Create league"}
         </button>
       </div>
     </form>

@@ -141,8 +141,14 @@ export const fetchUserLeagues = async (token: string): Promise<League[]> => {
   }
 };
 
+
+interface CreateLeaguePayload {
+  name: string;
+  description?: string; // Опционально
+  tournament: string;
+}
 /** Создание новой лиги */
-export const fetchCreateLeague = async (token: string, name: string): Promise<League> => {
+export const fetchCreateLeague = async (token: string, data:CreateLeaguePayload): Promise<League> => {
   try {
     const response = await fetch(`${BASE_URL}/leagues/createleague`, {
       method: 'POST',
@@ -150,7 +156,7 @@ export const fetchCreateLeague = async (token: string, name: string): Promise<Le
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${token}`
       },
-      body: JSON.stringify({ name }), 
+body: JSON.stringify(data),
     });
 
     if (!response.ok) {
