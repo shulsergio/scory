@@ -144,11 +144,12 @@ export const fetchUserLeagues = async (token: string): Promise<League[]> => {
 
 interface CreateLeaguePayload {
   name: string;
-  description?: string; // Опционально
-  tournament: string;
+  description?: string;
+  tournament: string;  
 }
+
 /** Создание новой лиги */
-export const fetchCreateLeague = async (token: string, data:CreateLeaguePayload): Promise<League> => {
+export const fetchCreateLeague = async (token: string, data: CreateLeaguePayload): Promise<League> => {
   try {
     const response = await fetch(`${BASE_URL}/leagues/createleague`, {
       method: 'POST',
@@ -156,17 +157,44 @@ export const fetchCreateLeague = async (token: string, data:CreateLeaguePayload)
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${token}`
       },
-body: JSON.stringify(data),
+      body: JSON.stringify(data),
     });
 
-    if (!response.ok) {
-      await handleAuthError(response);
+    if (!response.ok) { 
+      const errorData = await response.json();
+      throw new Error(errorData.message || 'Ошибка при создании лиги');
     }
 
-    return await response.json();
+    const result = await response.json(); 
+    return result.data; 
   } catch (error) {
     console.error("fetchCreateLeague error:", error);
     throw error;
+  }
+};
+export interface Tournament {
+  _id: string;    
+  name: string;     
+  slug: string;    
+  status: 'upcoming' | 'active' | 'finished'; 
+  logoUrl?: string;  
+  startDate?: string;  
+  endDate?: string;
+  createdAt?: string;
+  updatedAt?: string;
+}
+export const fetchActiveTournaments = async (): Promise<Tournament[]> => {
+  try {
+    const response = await fetch(`${BASE_URL}/tournaments?status=active`); 
+    if (!response.ok) {
+      throw new Error('Не удалось загрузить список турниров');
+    }
+
+    const result = await response.json(); 
+    return result.data || []; 
+  } catch (error) {
+    console.error("fetchActiveTournaments error:", error);
+    return [];  
   }
 };
 
