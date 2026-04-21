@@ -22,11 +22,12 @@
   --neutral-900: #171717;
   --text-white: #f8f9fa;
 
+  --bg-main-color: #ffffff;
   /* мои цвета */
 
-  --bg-main: var(--neutral-50);
+  --bg-main: var(--bg-main-color);
   --bg-header-main: var(--neutral-900);
-  --bg-card: #ffffff;
+  --bg-card: #f7f9ff;
   --text-main: var(--neutral-900);
   --text-secondary: var(--neutral-800);
   ---text-blue-accent: var(--secondary-500);
