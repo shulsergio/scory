@@ -42,7 +42,6 @@ export default function Profile() {
         });
     }
   }, [status, session]);
-  console.log("---setLeagues---", setLeagues);
   const isLoading =
     status === "loading" || (status === "authenticated" && leagues === null);
 

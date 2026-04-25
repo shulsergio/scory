@@ -13,7 +13,8 @@ const BASE_URL = 'https://scory-backend.onrender.com';
 export interface League {
   leagueId: string;
   leagueName: string;
-  tournament: string;
+  tournamentName: string;
+  tournamentSlug: string;
   leagueAvatar?: string;
   membersCount?: number; 
   totalPoints?: number;
@@ -31,6 +32,10 @@ export interface LeagueResults {
   leagueName: string;
   adminId: string;
   leaderboard: LeaderboardEntry[];
+  tournamentName: string;
+  tournamentSlug: string;
+  description: string;
+
 }
 
 /**
