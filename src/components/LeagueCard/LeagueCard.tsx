@@ -48,12 +48,12 @@ export default function LeagueCard({
               />
             )}
           </h3>
+          <h4 className={css.tournamentName}>{league.tournamentName}</h4>
           {isUserLeagueList && (
             <div className={css.blockData}>
               <span className={css.pointsLabel}>
                 Your points: {league.totalPoints ?? 0}
               </span>
-              <p>{league.tournament}</p>
             </div>
           )}
 

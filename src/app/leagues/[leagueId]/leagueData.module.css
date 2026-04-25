@@ -1,4 +1,4 @@
-.container {
+/* .container {
   max-width: 800px;
   width: 100%;
   margin: 0 auto;
@@ -17,6 +17,7 @@
 }
 
 .tableWrapper {
+  margin-top: 12px;
   background: var(--bg-card);
   border: 1px solid var(--border);
   border-radius: 16px;
@@ -67,4 +68,217 @@
 .table tr:hover {
   background-color: var(--row-hover);
   cursor: default;
+} */
+
+.container {
+  max-width: 800px;
+  width: 100%;
+  margin: 20px auto;
+  padding: 0 16px;
+}
+
+/* --- Шапка лиги --- */
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  padding: 32px 20px;
+  border-radius: 24px;
+  margin-bottom: 24px;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+  text-align: center;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--text-main);
+  margin: 0 0 8px 0;
+  letter-spacing: -0.02em;
+}
+
+/* Стилизуем турнир как красивый бейдж */
+.header h2 {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  background: var(--primary-500);
+  color: white;
+  padding: 4px 12px;
+  border-radius: 100px;
+  margin-bottom: 16px;
+  font-weight: 700;
+}
+
+/* Описание лиги */
+.header h3 {
+  font-size: 1rem;
+  color: var(--text-muted);
+  font-weight: 400;
+  max-width: 500px;
+  line-height: 1.5;
+  margin-bottom: 24px;
+  font-style: italic;
+}
+
+/* --- Кнопки действий --- */
+.actions {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+  justify-content: center;
+}
+.loginButton {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 24px;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: 1px solid var(--primary-500);
+  background: transparent;
+  color: var(--primary-500);
+}
+
+.loginButton:hover {
+  background: var(--primary-500);
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 217, 255, 0.3);
+}
+.joinButton,
+.leaveButton,
+.manageButton {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 24px;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: none;
+}
+
+.joinButton {
+  background: var(--primary-500);
+  color: white;
+}
+
+.joinButton:hover {
+  background: var(--primary-600);
+  transform: translateY(-2px);
+}
+
+.leaveButton {
+  background: rgba(239, 68, 68, 0.1);
+  color: #ef4444;
+  border: 1px solid rgba(239, 68, 68, 0.2);
+}
+
+.leaveButton:hover {
+  background: #ef4444;
+  color: white;
+}
+
+.manageButton {
+  background: var(--bg-body);
+  color: var(--text-main);
+  border: 1px solid var(--border);
+}
+
+.manageButton:hover {
+  border-color: var(--primary-500);
+  color: var(--primary-500);
+}
+
+/* --- Таблица лидеров --- */
+.tableWrapper {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 4px;
+}
+
+.table th {
+  padding: 16px;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--border);
+}
+
+.table td {
+  padding: 14px 16px;
+  background: transparent;
+  transition: background 0.2s ease;
+}
+
+.table tr td:first-child {
+  border-radius: 12px 0 0 12px;
+}
+.table tr td:last-child {
+  border-radius: 0 12px 12px 0;
+}
+
+.table tr:hover td {
+  background: var(--row-hover);
+}
+
+/* Подсветка первого места */
+.topOne td {
+  background: rgba(255, 215, 0, 0.1);
+}
+.topOne .rank {
+  color: #fbbf24;
+}
+
+.table tr.nickname td {
+  background: rgba(0, 217, 255, 0.1);
+  border-top: 1px solid var(--primary-500);
+  border-bottom: 1px solid var(--primary-500);
+}
+
+.rank {
+  font-family: "Inter", sans-serif;
+  font-size: 1.1rem;
+  color: var(--text-muted);
+  width: 60px;
+}
+
+.nickname a {
+  text-decoration: none;
+  color: var(--text-main);
+  font-weight: 700;
+  transition: color 0.2s;
+}
+
+.nickname a:hover {
+  color: var(--primary-500);
+}
+
+.points {
+  font-weight: 800;
+  color: var(--primary-500);
+  font-size: 1.1rem;
+}
+
+.error {
+  text-align: center;
+  padding: 50px;
+  color: #ef4444;
 }

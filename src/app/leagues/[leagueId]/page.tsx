@@ -1,5 +1,5 @@
 "use client";
-import { useSession } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 import { useParams } from "next/navigation";
 import { useEffect, useState, useCallback } from "react";
 import {
@@ -10,7 +10,7 @@ import {
 } from "@/utils/fetch";
 import Loader from "@/components/Loader/Loader";
 import css from "./leagueData.module.css";
-import { Settings, UserPlus } from "lucide-react";
+import { LogIn, Settings, UserPlus } from "lucide-react";
 import Link from "next/link";
 
 export default function LeagueDetailsPage() {
@@ -90,10 +90,14 @@ export default function LeagueDetailsPage() {
       {isJoining && <Loader />}
       <div className={css.header}>
         <h1 className={css.title}>{data.leagueName}</h1>
-        <h2>{data.leagueName}</h2>
+        <h2>{data.tournamentName}</h2>
+        <h3>{data.description}</h3>
         <div className={css.actions}>
           {status === "unauthenticated" ? (
-            <p>Sign in to join league</p>
+            <button className={css.loginButton} onClick={() => signIn()}>
+              <LogIn size={18} />
+              <span>Sign in to join league</span>
+            </button>
           ) : (
             <>
               {isAdmin ? (
@@ -115,7 +119,7 @@ export default function LeagueDetailsPage() {
           )}
         </div>
       </div>
-      <h2 className={css.subtitle}>Table</h2>
+      {/* <h2 className={css.subtitle}>Table</h2> */}
 
       <div className={css.tableWrapper}>
         <table className={css.table}>

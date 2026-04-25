@@ -33,12 +33,20 @@
 }
 .leagueName {
   margin: 0;
-  padding-bottom: 6px;
-  font-size: 20px;
-  font-weight: 800;
+
+  /* padding-bottom: 6px; */
+  font-size: 22px;
+  font-weight: 700;
   color: var(--accent);
 }
-
+.tournamentName {
+  padding-left: 8px;
+  margin: 0;
+  padding-bottom: 12px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-main);
+}
 .adminIcon {
   margin-left: 8px;
 }
