@@ -10,7 +10,8 @@
 .select {
   width: 100%;
   background: var(--input-bg);
-  color: var(--text-main);
+  /* color: var(--text-main); */
+  color: #0022ff;
   border: 1px solid var(--card-border);
   padding: 10px;
   border-radius: 8px;
