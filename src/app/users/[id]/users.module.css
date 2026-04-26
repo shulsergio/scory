@@ -5,11 +5,13 @@
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
+}
+.dataBoxContainer {
+  padding-top: 15px;
   display: flex;
   flex-direction: column;
   gap: 15px;
 }
-
 .profileHeader {
   display: flex;
   align-items: center;
@@ -94,21 +96,18 @@
   font-weight: bold;
 }
 
-/* ОСНОВНОЙ ЛАЙАУТ НА FLEX */
-.mainLayout {
+/* .mainLayout {
   display: flex;
   gap: 15px;
-  /* align-items: flex-start; */
-}
+  align-items: flex-start;
+} */
 
 .sideSection {
-  /* flex: 0 0 300px; Фиксированная ширина 300px, не растет, не сжимается */
   display: flex;
   flex-direction: column;
 }
 
 .mainSection {
-  /* flex: 1; Занимает всё оставшееся пространство */
   display: flex;
   flex-direction: column;
 }
@@ -124,7 +123,7 @@
 .tournamentList {
   display: flex;
   flex-direction: column;
-  background: var(--bg-card);
+  /* background: var(--bg-card); */
   border-radius: 20px;
   padding: 20px;
   border: 1px solid var(--border);
@@ -141,7 +140,7 @@
 .tHeader {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 8px;
+  padding-bottom: 8px;
   font-weight: bold;
 }
 
@@ -155,7 +154,13 @@
 .predictionBlock {
   display: flex;
   flex-direction: column;
-  background: var(--bg-card);
+  /* background: var(--bg-card); */
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.5)),
+    url("/bg_stats.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   border-radius: 20px;
   padding: 12px 20px;
   border: 1px solid var(--border);
@@ -222,5 +227,73 @@
 
   .badgesRow {
     justify-content: center;
+  }
+}
+@media (min-width: 1200px) {
+  .container {
+    padding: 20px 0;
+  }
+
+  .dataBoxContainer {
+    padding-top: 20px;
+    display: flex;
+    flex-direction: row;
+    gap: 35px;
+  }
+  .predictionBlock {
+    width: 350px;
+    min-height: 300px;
+    background:
+      linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.5)),
+      url("/bg_stats.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+  .tournamentList {
+    width: 350px;
+    min-height: 300px;
+    background:
+      linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.6)),
+      url("/bg_tournament.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+  .statsBlock {
+    width: 350px;
+    min-height: 300px;
+    background:
+      linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.5)),
+      url("/bg_globalData.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  .badge {
+    padding: 4px 14px;
+    font-size: 15px;
+  }
+
+  .statIcon {
+    width: 38px;
+    height: 38px;
+  }
+
+  .label {
+    font-size: 16px;
+    color: #888;
+  }
+
+  .value {
+    font-size: 32px;
+    font-weight: bold;
+  }
+
+  .tHeader {
+    padding-bottom: 6px;
+    font-weight: bold;
+    font-size: 20px;
   }
 }

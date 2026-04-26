@@ -1,15 +1,14 @@
 import { Metadata } from "next";
 
-type Props = {
-  params: Promise<{ nickname: string }>;
-};
+// type Props = {
+//   params: Promise<{ nickname: string }>;
+// };
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { nickname } = await params;
-  const tName = nickname;
+export async function generateMetadata(): Promise<Metadata> {
+  // const { nickname } = await params;
 
-  const title = `User: ${tName} | Scory`;
-  const description = `User ${tName} predictors, tables, points`;
+  const title = `User profile | Scory`;
+  const description = `User predictors, tables, points`;
 
   return {
     title,

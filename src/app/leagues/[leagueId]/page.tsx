@@ -90,7 +90,10 @@ export default function LeagueDetailsPage() {
       {isJoining && <Loader />}
       <div className={css.header}>
         <h1 className={css.title}>{data.leagueName}</h1>
-        <h2>{data.tournamentName}</h2>
+        <Link href={`/groups/${data.tournamentSlug}`}>
+          {data.tournamentName}
+        </Link>
+        <h2 className={css.tournamentName}>{data.tournamentName}</h2>
         <h3>{data.description}</h3>
         <div className={css.actions}>
           {status === "unauthenticated" ? (
