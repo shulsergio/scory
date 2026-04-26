@@ -1,8 +1,4 @@
-/* .container {
-  max-width: 800px;
-  width: 100%;
-  margin: 0 auto;
-}
+/* 
 
 .title {
   color: var(--primary-500);
@@ -84,7 +80,7 @@
   align-items: center;
   background: var(--bg-card);
   border: 1px solid var(--border);
-  padding: 32px 20px;
+  padding: 16px 16px;
   border-radius: 24px;
   margin-bottom: 24px;
   box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
@@ -92,16 +88,16 @@
 }
 
 .title {
-  font-size: 2rem;
+  font-size: 24px;
   font-weight: 800;
-  color: var(--text-main);
-  margin: 0 0 8px 0;
-  letter-spacing: -0.02em;
+  color: var(--primary-500);
+  text-align: center;
+  padding: 0 0 8px 0;
+  letter-spacing: 0.05em;
 }
 
-/* Стилизуем турнир как красивый бейдж */
-.header h2 {
-  font-size: 0.75rem;
+.tournamentName {
+  font-size: 12px;
   text-transform: uppercase;
   letter-spacing: 0.1em;
   background: var(--primary-500);
@@ -112,7 +108,6 @@
   font-weight: 700;
 }
 
-/* Описание лиги */
 .header h3 {
   font-size: 1rem;
   color: var(--text-muted);
@@ -123,7 +118,6 @@
   font-style: italic;
 }
 
-/* --- Кнопки действий --- */
 .actions {
   display: flex;
   gap: 12px;
@@ -198,7 +192,6 @@
   color: var(--primary-500);
 }
 
-/* --- Таблица лидеров --- */
 .tableWrapper {
   background: var(--bg-card);
   border: 1px solid var(--border);

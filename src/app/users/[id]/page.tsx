@@ -58,31 +58,31 @@ export default async function UserProfilePage({ params }: Props) {
           </div>
         </div>
       </section>
-
-      {/* КАРТОЧКИ СТАТИСТИКИ */}
-      <section>
-        <h2 className={css.sectionTitle}>Global data</h2>
-        <div className={css.statsBlock}>
-          <div className={css.statCard}>
-            <Trophy className={css.statIcon} color="#fbbf24" />
-            <div className={css.statContent}>
-              <span className={css.label}>Total points</span>
-              <strong className={css.value}>{totalPoints}</strong>
+      <div className={css.dataBoxContainer}>
+        {/* КАРТОЧКИ СТАТИСТИКИ */}
+        <section>
+          <h2 className={css.sectionTitle}>Global data</h2>
+          <div className={css.statsBlock}>
+            <div className={css.statCard}>
+              <Trophy className={css.statIcon} color="#fbbf24" />
+              <div className={css.statContent}>
+                <span className={css.label}>Total points</span>
+                <strong className={css.value}>{totalPoints}</strong>
+              </div>
+            </div>
+            <div className={css.statCard}>
+              <Target className={css.statIcon} color="#60a5fa" />
+              <div className={css.statContent}>
+                <span className={css.label}>Total predictions</span>
+                <strong className={css.value}>
+                  {finishedPredictions.length}
+                </strong>
+              </div>
             </div>
           </div>
-          <div className={css.statCard}>
-            <Target className={css.statIcon} color="#60a5fa" />
-            <div className={css.statContent}>
-              <span className={css.label}>Total predictions</span>
-              <strong className={css.value}>
-                {finishedPredictions.length}
-              </strong>
-            </div>
-          </div>
-        </div>
-      </section>
+        </section>
 
-      <section className={css.mainLayout}>
+        {/* <section className={css.mainLayout}> */}
         {/* ЛЕВАЯ КОЛОНКА: Статистика по турнирам */}
         <section className={css.sideSection}>
           <h2 className={css.sectionTitle}>Tournaments</h2>
@@ -106,7 +106,6 @@ export default async function UserProfilePage({ params }: Props) {
           </div>
         </section>
 
-        {/* ПРАВАЯ КОЛОНКА: Последняя активность */}
         <section className={css.mainSection}>
           <h2 className={css.sectionTitle}>Last predictions</h2>
           <div className={css.predictionBlock}>
@@ -145,7 +144,8 @@ export default async function UserProfilePage({ params }: Props) {
             )}
           </div>
         </section>
-      </section>
+        {/* </section> */}
+      </div>
     </main>
   );
 }
