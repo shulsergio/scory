@@ -10,11 +10,11 @@
     transform 0.2s,
     border-color 0.2s;
   cursor: pointer;
-  min-width: 275px;
+  width: 100%;
 }
 .leagueCard:hover {
   border-color: var(--primary-500);
-  transform: translateY(-1px);
+  /* transform: translateY(-1px); */
 }
 .leagueIcon {
   width: 48px;
@@ -60,4 +60,17 @@
 }
 .actionArea {
   color: var(--accent);
+}
+
+@media (min-width: 1200px) {
+  .leagueCard {
+    width: 180px;
+    height: 260px;
+    background:
+      linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.5)),
+      url("/bg_stats.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
 }

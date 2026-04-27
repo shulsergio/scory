@@ -1,6 +1,7 @@
 import { League } from "@/utils/fetch";
 import LeagueCard from "../LeagueCard/LeagueCard";
 import css from "./LeagueList.module.css";
+import { useState } from "react";
 
 interface LeagueListProps {
   leagues: League[];
@@ -15,6 +16,13 @@ export default function LeagueList({
   isUserLeagueList = false,
   isAllLeaguesList = false,
 }: LeagueListProps) {
+  const ITEMS_PER_PAGE = 6;
+  const [visibleCount, setVisibleCount] = useState(ITEMS_PER_PAGE);
+
+  const handleLoadMore = () => {
+    setVisibleCount((prev) => prev + ITEMS_PER_PAGE);
+  };
+
   if (leagues.length === 0) {
     return (
       <div className={css.emptyState}>
@@ -23,17 +31,33 @@ export default function LeagueList({
     );
   }
 
+  const visibleLeagues = leagues.slice(0, visibleCount);
+  const hasMore = visibleCount < leagues.length;
+
   return (
-    <div className={css.listWrapper}>
-      {leagues.map((league) => (
-        <LeagueCard
-          key={league.leagueId}
-          league={league}
-          currentUserId={currentUserId}
-          isUserLeagueList={isUserLeagueList}
-          isAllLeaguesList={isAllLeaguesList}
-        />
-      ))}
+    <div className={css.container}>
+      <div className={css.listWrapper}>
+        {visibleLeagues.map((league) => (
+          <LeagueCard
+            key={league.leagueId}
+            league={league}
+            currentUserId={currentUserId}
+            isUserLeagueList={isUserLeagueList}
+            isAllLeaguesList={isAllLeaguesList}
+          />
+        ))}
+      </div>
+
+      {hasMore && (
+        <div className={css.actions}>
+          <button className={css.loadMoreBtn} onClick={handleLoadMore}>
+            Show more
+            <span className={css.countBadge}>
+              {leagues.length - visibleCount} left
+            </span>
+          </button>
+        </div>
+      )}
     </div>
   );
 }

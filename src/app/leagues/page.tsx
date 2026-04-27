@@ -35,7 +35,7 @@ export default function AllLeaguesPage() {
 
   return (
     <main className={css.container}>
-      <h1 className={css.title}>All leagues</h1>
+      {/* <h1 className={css.title}>All leagues</h1> */}
 
       <div className={css.searchWrapper}>
         <input
