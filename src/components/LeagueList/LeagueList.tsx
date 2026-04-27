@@ -52,9 +52,6 @@ export default function LeagueList({
         <div className={css.actions}>
           <button className={css.loadMoreBtn} onClick={handleLoadMore}>
             Show more
-            <span className={css.countBadge}>
-              {leagues.length - visibleCount} left
-            </span>
           </button>
         </div>
       )}
