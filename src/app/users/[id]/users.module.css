@@ -17,7 +17,14 @@
   align-items: center;
   gap: 25px;
   /* margin-bottom: 40px; */
-  background: var(--bg-card);
+  /* background: var(--bg-card); */
+
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.5)), url("/bg.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
   padding: 20px;
   border-radius: 20px;
   border: 1px solid var(--border);
@@ -251,10 +258,10 @@
     flex-direction: row;
     gap: 35px;
   }
-  .container {
+  /* .container {
     width: 350px;
     min-height: 300px;
-  }
+  } */
   .tournamentList,
   .statsBlock,
   .predictionBlock {
