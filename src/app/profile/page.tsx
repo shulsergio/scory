@@ -49,10 +49,10 @@ export default function Profile() {
 
   return (
     <main className={`${css.mainContainer} `}>
-      <div className={css.wrapper}>
-        <h2 className={css.title}>My profile</h2>
-        {/* <UserStatus rank={userStats?.rank} points={userStats?.points} /> */}
-      </div>
+      {/* <div className={css.wrapper}>
+        <h2 className={css.title}>My profile</h2> */}
+      {/* <UserStatus rank={userStats?.rank} points={userStats?.points} /> */}
+      {/* </div> */}
 
       <div className={css.wrapper}>
         <h2 className={css.title}>My leagues</h2>
