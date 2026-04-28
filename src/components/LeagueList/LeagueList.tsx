@@ -2,6 +2,7 @@ import { League } from "@/utils/fetch";
 import LeagueCard from "../LeagueCard/LeagueCard";
 import css from "./LeagueList.module.css";
 import { useState } from "react";
+import ButtonBox from "../ButtonBox/ButtonBox";
 
 interface LeagueListProps {
   leagues: League[];
@@ -50,9 +51,9 @@ export default function LeagueList({
 
       {hasMore && (
         <div className={css.actions}>
-          <button className={css.loadMoreBtn} onClick={handleLoadMore}>
+          <ButtonBox option="link" variant="primary" onClick={handleLoadMore}>
             Show more
-          </button>
+          </ButtonBox>
         </div>
       )}
     </div>
