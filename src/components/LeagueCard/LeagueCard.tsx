@@ -38,7 +38,7 @@ export default function LeagueCard({
 
         <div className={css.leagueInfo}>
           <h3 className={css.leagueName}>
-            {league.leagueName}
+            <span className={css.nameText}>{league.leagueName}</span>
             {league.adminId === currentUserId && (
               <Star
                 size={16}

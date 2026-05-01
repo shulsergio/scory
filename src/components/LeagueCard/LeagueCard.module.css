@@ -81,14 +81,31 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    gap: 6px;
+    gap: 12px;
   }
   .leagueName {
     margin: 0;
-
+    display: flex;
+    align-items: center;
+    width: 100%;
     /* padding-bottom: 6px; */
     font-size: 22px;
     font-weight: 700;
     color: var(--accent);
+  }
+
+  .nameText {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 150px;
+    display: inline-block;
+  }
+
+  .tournamentName {
+    padding: 0;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-main);
   }
 }
