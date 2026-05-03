@@ -1,25 +1,104 @@
-/* 
-
-.title {
-  color: var(--primary-500);
-  text-align: center;
-  margin-bottom: 10px;
+.container {
+  padding: 10px 0;
+  background-color: var(--bg-main);
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
-.subtitle {
-  text-align: center;
-  color: #666;
-  margin-bottom: 30px;
+.dataBoxContainer {
+  padding-top: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.5)), url("/bg.png");
+  background-size: cover;
+  background-position: center;
+  padding: 15px;
+  border-radius: 15px;
+  border: 1px solid var(--border);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.leagueMainInfo {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.title {
+  font-size: 28px;
+  color: var(--accent);
+  font-weight: bold;
+}
+
+.badgesRow {
+  display: flex;
+  gap: 10px;
+}
+
+.badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(0, 0, 0, 0.3);
+  padding: 0 12px;
+  border-radius: 100px;
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+.sectionTitle {
+  font-size: 20px;
+  text-align: left;
+  border-left: 4px solid var(--accent);
+  padding-left: 20px;
+  padding-bottom: 8px;
+  color: var(--text-main);
+}
+
+.infoBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 15px;
+  border-radius: 15px;
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.6)),
+    url("/bg_tournament.png");
+  background-size: cover;
+  border: 1px solid var(--border);
+  min-height: 150px;
+}
+
+.descriptionBox {
+  display: flex;
+  gap: 12px;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+.infoIcon {
+  flex-shrink: 0;
+  color: var(--accent);
 }
 
 .tableWrapper {
-  margin-top: 12px;
-  background: var(--bg-card);
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.5)),
+    url("/bg_stats.png");
+  background-size: cover;
+  border-radius: 15px;
+  padding: 15px;
   border: 1px solid var(--border);
-  border-radius: 16px;
-  padding: 12px;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
 }
 
 .table {
@@ -28,250 +107,126 @@
 }
 
 .table th {
-  background: var(--bg-card);
-  letter-spacing: 0.05em;
+  text-align: left;
+  padding: 10px;
   color: var(--text-muted);
-  padding: 0 4px 8px;
-  text-align: center;
-  font-size: 13px;
-}
-
-.table td {
-  padding: 8px 10px;
-  border-bottom: 1px solid var(--card-border);
-}
-.nickname {
-  font-weight: 600;
-  color: var(--text-main);
-}
-.topOne {
-  background: rgba(0, 217, 255, 0.5);
-}
-
-.rank {
-  text-align: center;
-  width: 50px;
-  color: var(--primary-500);
-  font-weight: bold;
-}
-
-.points {
-  width: 50px;
-  text-align: center;
-  color: var(--text-main);
-  font-variant-numeric: tabular-nums;
-}
-.table tr:hover {
-  background-color: var(--row-hover);
-  cursor: default;
-} */
-
-.container {
-  max-width: 800px;
-  width: 100%;
-  margin: 20px auto;
-  padding: 0 16px;
-}
-
-/* --- Шапка лиги --- */
-.header {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  padding: 16px 16px;
-  border-radius: 24px;
-  margin-bottom: 24px;
-  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
-  text-align: center;
-}
-
-.title {
-  font-size: 24px;
-  font-weight: 800;
-  color: var(--primary-500);
-  text-align: center;
-  padding: 0 0 8px 0;
-  letter-spacing: 0.05em;
-}
-
-.tournamentName {
-  font-size: 12px;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  background: var(--primary-500);
-  color: white;
-  padding: 4px 12px;
-  border-radius: 100px;
-  margin-bottom: 16px;
-  font-weight: 700;
-}
-
-.header h3 {
-  font-size: 1rem;
-  color: var(--text-muted);
-  font-weight: 400;
-  max-width: 500px;
-  line-height: 1.5;
-  margin-bottom: 24px;
-  font-style: italic;
-}
-
-.actions {
-  display: flex;
-  gap: 12px;
-  width: 100%;
-  justify-content: center;
-}
-.loginButton {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 10px 24px;
-  border-radius: 12px;
-  font-weight: 600;
-  font-size: 0.95rem;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  border: 1px solid var(--primary-500);
-  background: transparent;
-  color: var(--primary-500);
-}
-
-.loginButton:hover {
-  background: var(--primary-500);
-  color: white;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 217, 255, 0.3);
-}
-.joinButton,
-.leaveButton,
-.manageButton {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 10px 24px;
-  border-radius: 12px;
-  font-weight: 600;
-  font-size: 0.95rem;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  border: none;
-}
-
-.joinButton {
-  background: var(--primary-500);
-  color: white;
-}
-
-.joinButton:hover {
-  background: var(--primary-600);
-  transform: translateY(-2px);
-}
-
-.leaveButton {
-  background: rgba(239, 68, 68, 0.1);
-  color: #ef4444;
-  border: 1px solid rgba(239, 68, 68, 0.2);
-}
-
-.leaveButton:hover {
-  background: #ef4444;
-  color: white;
-}
-
-.manageButton {
-  background: var(--bg-body);
-  color: var(--text-main);
-  border: 1px solid var(--border);
-}
-
-.manageButton:hover {
-  border-color: var(--primary-500);
-  color: var(--primary-500);
-}
-
-.tableWrapper {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: 20px;
-  padding: 8px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-}
-
-.table {
-  width: 100%;
-  border-collapse: separate;
-  border-spacing: 0 4px;
-}
-
-.table th {
-  padding: 16px;
-  color: var(--text-muted);
-  font-size: 0.85rem;
-  font-weight: 600;
-  text-transform: uppercase;
   border-bottom: 1px solid var(--border);
+  font-size: 14px;
 }
 
 .table td {
-  padding: 14px 16px;
-  background: transparent;
-  transition: background 0.2s ease;
-}
-
-.table tr td:first-child {
-  border-radius: 12px 0 0 12px;
-}
-.table tr td:last-child {
-  border-radius: 0 12px 12px 0;
-}
-
-.table tr:hover td {
-  background: var(--row-hover);
-}
-
-/* Подсветка первого места */
-.topOne td {
-  background: rgba(255, 215, 0, 0.1);
-}
-.topOne .rank {
-  color: #fbbf24;
-}
-
-.table tr.nickname td {
-  background: rgba(0, 217, 255, 0.1);
-  border-top: 1px solid var(--primary-500);
-  border-bottom: 1px solid var(--primary-500);
-}
-
-.rank {
-  font-family: "Inter", sans-serif;
-  font-size: 1.1rem;
-  color: var(--text-muted);
-  width: 60px;
+  padding: 12px 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .nickname a {
-  text-decoration: none;
   color: var(--text-main);
-  font-weight: 700;
-  transition: color 0.2s;
+  text-decoration: none;
+  font-weight: 600;
 }
 
 .nickname a:hover {
-  color: var(--primary-500);
+  color: var(--accent);
 }
 
 .points {
-  font-weight: 800;
-  color: var(--primary-500);
-  font-size: 1.1rem;
+  font-weight: bold;
+  color: var(--accent);
 }
 
-.error {
-  text-align: center;
-  padding: 50px;
+.topOne {
+  background: rgba(251, 191, 36, 0.1);
+}
+.gold {
+  background: rgba(255, 215, 0, 0.15);
+  border-left: 4px solid #ffd700;
+}
+.gold .points {
+  color: #ffd700;
+  text-shadow: 0 0 10px rgba(255, 215, 0, 0.7);
+}
+
+.silver {
+  background: rgba(192, 192, 192, 0.1);
+  border-left: 4px solid #c0c0c0;
+}
+.silver .points {
+  color: #c0c0c0;
+}
+
+.bronze {
+  background: rgba(205, 127, 50, 0.08);
+  border-left: 4px solid #cd7f32;
+}
+.bronze .points {
+  color: #cd7f32;
+}
+.currentUserRow:not(.gold):not(.silver):not(.bronze) {
+  background: rgba(0, 217, 255, 0.1);
+  border-left: 4px solid var(--accent);
+}
+
+.actions {
+  margin-top: auto;
+  display: flex;
+  gap: 10px;
+}
+
+.loginButton,
+.joinButton,
+.manageButton,
+.leaveButton {
+  padding: 10px 20px;
+  border-radius: 12px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  border: none;
+  transition: 0.3s;
+}
+
+.joinButton {
+  background: var(--accent);
+  color: black;
+}
+.loginButton {
+  background: var(--primary-500);
+  color: white;
+}
+.manageButton {
+  background: #4b5563;
+  color: white;
+}
+.leaveButton {
+  background: transparent;
+  border: 1px solid #ef4444;
   color: #ef4444;
+}
+
+.header:hover,
+.infoBlock:hover,
+.tableWrapper:hover {
+  border-color: var(--primary-500);
+}
+
+@media (min-width: 1200px) {
+  .dataBoxContainer {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+  .sideSection {
+    width: 350px;
+    flex-shrink: 0;
+  }
+  .mainSection {
+    flex-grow: 1;
+  }
+  .infoBlock {
+    min-height: 300px;
+  }
+  .tableWrapper {
+    min-height: 300px;
+  }
 }

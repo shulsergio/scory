@@ -10,7 +10,7 @@ import {
 } from "@/utils/fetch";
 import Loader from "@/components/Loader/Loader";
 import css from "./leagueData.module.css";
-import { LogIn, Settings, UserPlus } from "lucide-react";
+import { LogIn, Settings, UserPlus, Trophy, Info } from "lucide-react";
 import Link from "next/link";
 
 export default function LeagueDetailsPage() {
@@ -22,7 +22,6 @@ export default function LeagueDetailsPage() {
   const [isJoining, setIsJoining] = useState(false);
 
   const loadData = useCallback(async () => {
-    // if (!session?.user?.accessToken) return;
     try {
       const result = await fetchLeagueResults(
         session?.user?.accessToken || "",
@@ -46,10 +45,6 @@ export default function LeagueDetailsPage() {
   const isMember =
     !!session?.user?.nickname &&
     data?.leaderboard.some((m) => m.nickname === session?.user?.nickname);
-  console.log("LeagueDetailsPage isJoining=", isJoining);
-  console.log("LeagueDetailsPage isAdmin=", isAdmin);
-  console.log("LeagueDetailsPage data?.adminId=", data?.adminId);
-  console.log("LeagueDetailsPage isMember=", isMember);
 
   const handleJoinClick = async () => {
     if (!session?.user?.accessToken) return;
@@ -66,10 +61,8 @@ export default function LeagueDetailsPage() {
 
   const handleLeaveClick = async () => {
     if (!session?.user?.accessToken) return;
-
     const confirmLeave = confirm("Are you sure you want to leave this league?");
     if (!confirmLeave) return;
-
     setIsJoining(true);
     try {
       await leaveLeague(session.user.accessToken, leagueId);
@@ -80,81 +73,104 @@ export default function LeagueDetailsPage() {
       setIsJoining(false);
     }
   };
-  console.log("LeagueDetailsPage data=", data);
 
   if (status === "loading" || isLoading) return <Loader />;
   if (!data) return <p className={css.error}>League not found</p>;
 
   return (
-    <div className={css.container}>
+    <main className={css.container}>
       {isJoining && <Loader />}
-      <div className={css.header}>
-        <h1 className={css.title}>{data.leagueName}</h1>
-        <Link href={`/groups/${data.tournamentSlug}`}>
-          {data.tournamentName}
-        </Link>
-        <h2 className={css.tournamentName}>{data.tournamentName}</h2>
-        <h3>{data.description}</h3>
-        <div className={css.actions}>
-          {status === "unauthenticated" ? (
-            <button className={css.loginButton} onClick={() => signIn()}>
-              <LogIn size={18} />
-              <span>Sign in to join league</span>
-            </button>
-          ) : (
-            <>
-              {isAdmin ? (
-                <button className={css.manageButton}>
-                  <Settings size={18} />
-                  <span>Manage League</span>
-                </button>
-              ) : isMember ? (
-                <button className={css.leaveButton} onClick={handleLeaveClick}>
-                  Leave League
+      <section className={css.header}>
+        <div className={css.leagueMainInfo}>
+          <h2 className={css.title}>{data.leagueName}</h2>
+          <div className={css.badgesRow}>
+            <div className={css.badge}>
+              <Trophy size={14} color="var(--accent)" />
+              <span>{data.tournamentName}</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div className={css.dataBoxContainer}>
+        <section className={css.sideSection}>
+          <h2 className={css.sectionTitle}>About League</h2>
+          <div className={css.infoBlock}>
+            <div className={css.descriptionBox}>
+              <Info size={20} className={css.infoIcon} />
+              <p>{data.description || "No description provided"}</p>
+            </div>
+
+            <div className={css.actions}>
+              {status === "unauthenticated" ? (
+                <button className={css.loginButton} onClick={() => signIn()}>
+                  <LogIn size={18} />
+                  <span>Sign in to join</span>
                 </button>
               ) : (
-                <button className={css.joinButton} onClick={handleJoinClick}>
-                  <UserPlus size={18} />
-                  <span>Join League</span>
-                </button>
+                <>
+                  {isAdmin ? (
+                    <button className={css.manageButton}>
+                      <Settings size={18} />
+                      <span>Manage League</span>
+                    </button>
+                  ) : isMember ? (
+                    <button
+                      className={css.leaveButton}
+                      onClick={handleLeaveClick}
+                    >
+                      Leave League
+                    </button>
+                  ) : (
+                    <button
+                      className={css.joinButton}
+                      onClick={handleJoinClick}
+                    >
+                      <UserPlus size={18} />
+                      <span>Join League</span>
+                    </button>
+                  )}
+                </>
               )}
-            </>
-          )}
-        </div>
+            </div>
+          </div>
+        </section>
+        <section className={css.mainSection}>
+          <h2 className={css.sectionTitle}>Leaderboard</h2>
+          <div className={css.tableWrapper}>
+            <table className={css.table}>
+              <thead>
+                <tr>
+                  <th>Rank</th>
+                  <th>Nickname</th>
+                  <th>Points</th>
+                </tr>
+              </thead>
+              <tbody>
+                {data.leaderboard.map((member, index) => (
+                  <tr
+                    key={member.nickname}
+                    className={`
+    ${member.nickname === session?.user?.nickname ? css.currentUserRow : ""}
+    ${index === 0 ? css.gold : ""}
+    ${index === 1 ? css.silver : ""}
+    ${index === 2 ? css.bronze : ""}
+  `}
+                  >
+                    <td className={css.rank}>{index + 1}</td>
+                    <td className={css.nickname}>
+                      <Link href={`/users/${member.id}`}>
+                        {member.nickname}
+                      </Link>
+                    </td>
+                    <td className={css.points}>{member.points}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </section>
       </div>
-      {/* <h2 className={css.subtitle}>Table</h2> */}
-
-      <div className={css.tableWrapper}>
-        <table className={css.table}>
-          <thead>
-            <tr>
-              <th>Rank</th>
-              <th>Nickname</th>
-              <th>Points</th>
-            </tr>
-          </thead>
-          <tbody>
-            {data.leaderboard.map((member, index) => (
-              <tr
-                key={member.nickname}
-                className={
-                  member.nickname === session?.user?.nickname
-                    ? css.nickname
-                    : index === 0
-                      ? css.topOne
-                      : ""
-                }
-              >
-                <td className={css.rank}>{index + 1}</td>
-                <td className={css.nickname}>
-                  <Link href={`/users/${member.id}`}>{member.nickname}</Link>
-                </td>
-                <td className={css.points}>{member.points}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    </div>
+    </main>
   );
 }
