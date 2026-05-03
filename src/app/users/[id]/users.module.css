@@ -1,7 +1,6 @@
 .container {
   padding: 10px 0;
   background-color: var(--bg-main);
-  /* min-height: 100vh; */
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
@@ -16,8 +15,6 @@
   display: flex;
   align-items: center;
   gap: 25px;
-  /* margin-bottom: 40px; */
-  /* background: var(--bg-card); */
 
   background:
     linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.5)), url("/bg.png");
@@ -25,8 +22,8 @@
   background-position: center;
   background-repeat: no-repeat;
 
-  padding: 20px;
-  border-radius: 20px;
+  padding: 15px;
+  border-radius: 15px;
   border: 1px solid var(--border);
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
 }
@@ -67,8 +64,8 @@
   flex-direction: row;
   gap: 15px;
   width: 100%;
-  padding: 20px;
-  border-radius: 20px;
+  padding: 15px;
+  border-radius: 15px;
   /* background: var(--bg-card); */
   background:
     linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.5)),
@@ -85,7 +82,7 @@
   align-items: center;
   gap: 20px;
   width: 50%;
-  flex: 1; /* Карточки будут делить пространство поровну */
+  flex: 1;
 }
 
 .statIcon {
@@ -109,12 +106,6 @@
   font-weight: bold;
 }
 
-/* .mainLayout {
-  display: flex;
-  gap: 15px;
-  align-items: flex-start;
-} */
-
 .sideSection {
   display: flex;
   flex-direction: column;
@@ -130,15 +121,15 @@
   text-align: left;
   border-left: 4px solid var(--accent);
   padding-left: 20px;
-  padding-bottom: 10px;
+  padding-bottom: 8px;
 }
 
 .tournamentList {
   display: flex;
   flex-direction: column;
   /* background: var(--bg-card); */
-  border-radius: 20px;
-  padding: 20px;
+  border-radius: 15px;
+  padding: 15px;
   border: 1px solid var(--border);
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
   background:
@@ -172,7 +163,6 @@
 .predictionBlock {
   display: flex;
   flex-direction: column;
-  /* background: var(--bg-card); */
   background:
     linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.5)),
     url("/bg_stats.png");
@@ -180,7 +170,7 @@
   background-position: center;
   background-repeat: no-repeat;
   border-radius: 20px;
-  padding: 12px 20px;
+  padding: 8px 20px;
   border: 1px solid var(--border);
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
 }
@@ -188,15 +178,14 @@
 .matchData {
   display: flex;
   flex-direction: column;
-  gap: 4px;
-  padding: 8px 0 8px 15px;
+  gap: 2px;
+  padding: 4px 0 4px 15px;
   border-bottom: 1px solid var(--card-border);
 }
 .teamsRow {
   font-weight: bold;
   display: flex;
   align-items: center;
-  /* justify-content: center; */
 }
 
 .vs {
@@ -222,12 +211,7 @@
   border-color: var(--primary-500);
 }
 
-/* АДАПТИВНОСТЬ ЧЕРЕЗ FLEX-DIRECTION */
-@media (max-width: 768px) {
-  /* .statsBlock {
-    flex-direction: column;
-  } */
-
+@media (min-width: 481px) and (max-width: 768px) {
   .mainLayout {
     flex-direction: column;
   }
@@ -247,6 +231,7 @@
     justify-content: center;
   }
 }
+
 @media (min-width: 1200px) {
   .container {
     padding: 20px 0;
