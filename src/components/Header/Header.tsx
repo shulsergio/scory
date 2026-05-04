@@ -70,13 +70,15 @@ export default function Header() {
                 </Link>
 
                 {/* Кнопка выхода для десктопа */}
-                <ButtonBox
-                  option="button"
-                  variant="white"
-                  onClick={() => signOut()}
-                >
-                  Log out
-                </ButtonBox>
+                <div className={css.logoutBtn}>
+                  <ButtonBox
+                    option="button"
+                    variant="white"
+                    onClick={() => signOut()}
+                  >
+                    Log out
+                  </ButtonBox>
+                </div>
               </div>
             ) : (
               <div className={css.desktopOnly}>

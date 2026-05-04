@@ -80,6 +80,7 @@
     justify-content: flex-start;
     align-items: center;
     gap: 12px;
+    color: var(--text-muted);
   }
   .leagueName {
     margin: 0;

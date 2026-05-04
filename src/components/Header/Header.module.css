@@ -29,6 +29,10 @@
   text-align: center;
 }
 /* --- Навигация --- */
+.logoutBtn {
+  display: none;
+}
+
 .desktopNav {
   display: none;
   gap: 30px;
@@ -199,6 +203,9 @@
 
 @media (min-width: 1200px) {
   .logoutBtn {
+    display: flex;
+  }
+  /* .logoutBtn {
     background: transparent;
     border: 1px solid var(--border);
     color: var(--text-muted);
@@ -208,7 +215,7 @@
     font-weight: 500;
     cursor: pointer;
     transition: all 0.2s ease;
-  }
+  } */
   .userDesktopWrapper {
     display: flex;
     align-items: center;
