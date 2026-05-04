@@ -33,8 +33,6 @@
 }
 .leagueName {
   margin: 0;
-
-  /* padding-bottom: 6px; */
   font-size: 22px;
   font-weight: 700;
   color: var(--accent);

@@ -108,19 +108,28 @@
 
 .table th {
   text-align: left;
-  padding: 10px;
+  padding: 8px;
   color: var(--text-muted);
   border-bottom: 1px solid var(--border);
   font-size: 14px;
 }
-
+.table th:nth-child(1) {
+  width: 15%;
+}
+.table th:nth-child(2) {
+  width: 65%;
+}
+.table th:nth-child(3) {
+  width: 20%;
+}
 .table td {
-  padding: 12px 10px;
+  padding: 8px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  color: var(--text-muted);
 }
 
 .nickname a {
-  color: var(--text-main);
+  color: var(--text-muted);
   text-decoration: none;
   font-weight: 600;
 }

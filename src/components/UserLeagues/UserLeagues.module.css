@@ -38,7 +38,7 @@
 
 .addLeagueBtn {
   background: transparent;
-  border: 1px solid var(--neutral-100);
+  border: 1px solid var(--border);
   color: var(--text-gray);
   padding: 10px 14px;
   border-radius: 12px;

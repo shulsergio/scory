@@ -34,7 +34,7 @@
   --input-bg: var(--neutral-100);
   --btn-text: #ffffff;
   --border-subtle: #ffffff9f;
-  --text-muted: #737373;
+  --text-muted: #ffffff;
   --border: #303030;
   --card-border: #c1c1c1;
   --row-hover: #ffb37d;
@@ -53,7 +53,7 @@
   --border-subtle: #ffffff9f;
   --input-bg: rgba(255, 255, 255, 0.1);
   --btn-text: #ffffff;
-  --text-muted: #a3a3a3;
+  --text-muted: var(--neutral-50);
   --border: #e5e5e5;
   --card-border: #404040;
   --row-hover: #ffb37d;
