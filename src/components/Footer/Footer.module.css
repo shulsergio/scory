@@ -24,7 +24,7 @@
   text-align: center;
 }
 .copyright {
-  color: var(--text-secondary);
+  color: var(--text-muted);
   font-size: 12px;
   display: flex;
   align-items: center;

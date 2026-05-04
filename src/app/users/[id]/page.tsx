@@ -101,7 +101,7 @@ export default async function UserProfilePage({ params }: Props) {
                 </div>
               ))
             ) : (
-              <p className={css.emptyText}>No active tournaments</p>
+              <p className={css.emptyText}>No tournaments</p>
             )}
           </div>
         </section>

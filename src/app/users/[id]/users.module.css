@@ -98,12 +98,13 @@
 
 .label {
   font-size: 14px;
-  color: #888;
+  color: var(--text-muted);
 }
 
 .value {
   font-size: 24px;
   font-weight: bold;
+  color: var(--text-muted);
 }
 
 .sideSection {
@@ -151,15 +152,18 @@
   justify-content: space-between;
   padding-bottom: 8px;
   font-weight: bold;
+  color: var(--text-muted);
 }
 
 .tDetails {
   display: flex;
   justify-content: space-between;
   font-size: 13px;
-  color: #888;
+  color: var(--text-muted);
 }
-
+.emptyText {
+  color: var(--text-muted);
+}
 .predictionBlock {
   display: flex;
   flex-direction: column;
@@ -180,6 +184,7 @@
   flex-direction: column;
   gap: 2px;
   padding: 4px 0 4px 15px;
+  color: var(--text-muted);
   border-bottom: 1px solid var(--card-border);
 }
 .teamsRow {

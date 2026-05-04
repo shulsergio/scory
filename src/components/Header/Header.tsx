@@ -59,12 +59,26 @@ export default function Header() {
             {isLoading ? (
               <div className={css.loaderPlaceholder}>-</div>
             ) : session ? (
-              <div className={css.userPill}>
-                {/* <div className={css.userStats}> */}
-                <span className={css.nickname}>
-                  {session.user.nickname || session.user.name}
-                </span>
-                {/* </div> */}
+              <div className={css.userDesktopWrapper}>
+                <Link
+                  href={`/users/${session.user.id}`}
+                  className={css.userPill}
+                >
+                  <span className={css.nickname}>
+                    {session.user.nickname || session.user.name}
+                  </span>
+                </Link>
+
+                {/* Кнопка выхода для десктопа */}
+                <div className={css.logoutBtn}>
+                  <ButtonBox
+                    option="button"
+                    variant="white"
+                    onClick={() => signOut()}
+                  >
+                    Log out
+                  </ButtonBox>
+                </div>
               </div>
             ) : (
               <div className={css.desktopOnly}>
