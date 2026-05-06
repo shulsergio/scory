@@ -4,17 +4,16 @@ import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import { fetchLeaderboard } from "@/utils/fetch";
 import Loader from "@/components/Loader/Loader";
-import Image from "next/image";
+// import Image from "next/image";
 import css from "./tournament.module.css";
 
 interface TournamentRankingPageProps {
-  rank: number;
-  points: number;
+  rank: number; //
+  points: number; //
   matchesPredicted: number;
-  user: {
-    username: string;
-    avatarUrl?: string;
-  };
+  exactScores: number;
+  userName: string;
+  userNickname: string;
 }
 
 export default function TournamentRankingPage() {
@@ -31,6 +30,7 @@ export default function TournamentRankingPage() {
     }
   }, [tournament]);
 
+  console.log("Fetched leaderboard data:", players);
   if (loading) return <Loader />;
 
   return (
@@ -44,6 +44,7 @@ export default function TournamentRankingPage() {
               <th>Rank</th>
               <th>Player</th>
               <th>Matches</th>
+              <th>Exact Scores</th>
               <th>Points</th>
             </tr>
           </thead>
@@ -53,23 +54,14 @@ export default function TournamentRankingPage() {
                 key={player.rank}
                 className={player.rank <= 3 ? css.topThree : ""}
               >
-                <td className={css.rank}>
-                  {player.rank === 1 && "🥇"}
-                  {player.rank === 2 && "🥈"}
-                  {player.rank === 3 && "🥉"}
-                  {player.rank > 3 && `#${player.rank}`}
-                </td>
+                <td className={css.rank}> {player.rank}</td>
                 <td className={css.userCell}>
-                  <Image
-                    src={player.user?.avatarUrl || "/default-avatar.png"}
-                    alt="avatar"
-                    width={32}
-                    height={32}
-                    className={css.avatar}
-                  />
-                  <span>{player.user?.username || "Anonymous"}</span>
+                  <span>
+                    {`${player.userName || "User"}${" aka "} ${player.userNickname || ""}`}
+                  </span>
                 </td>
                 <td>{player.matchesPredicted}</td>
+                <td className={css.points}>{player.exactScores}</td>
                 <td className={css.points}>{player.points}</td>
               </tr>
             ))}

@@ -45,7 +45,7 @@ export default function LeagueDetailsPage() {
   const isMember =
     !!session?.user?.nickname &&
     data?.leaderboard.some((m) => m.nickname === session?.user?.nickname);
-
+  console.log("League Results DATA--- ", data);
   const handleJoinClick = async () => {
     if (!session?.user?.accessToken) return;
     setIsJoining(true);
