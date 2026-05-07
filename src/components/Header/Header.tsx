@@ -13,6 +13,7 @@ const navLinks = [
   { name: "Leagues", href: "/leagues" },
   { name: "WC2026", href: "/groups/WC2026" },
   { name: "About", href: "/about" },
+  { name: "Ranking", href: "/ranking/WC2026" },
 ];
 
 export default function Header() {

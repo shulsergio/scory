@@ -1,51 +1,224 @@
 .container {
-  padding: 2rem;
-  max-width: 800px;
+  padding: 10px 0;
+  background-color: var(--bg-main);
+  width: 100%;
+  max-width: 1200px;
   margin: 0 auto;
 }
 
+.dataBoxContainer {
+  padding-top: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.5)), url("/bg.png");
+  background-size: cover;
+  background-position: center;
+  padding: 25px;
+  border-radius: 20px;
+  border: 1px solid var(--border);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.leagueMainInfo {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
 .title {
-  text-align: center;
-  margin-bottom: 2rem;
-  color: #fff;
+  font-size: 28px;
+  color: var(--accent);
+  font-weight: bold;
+}
+
+.badgesRow {
+  display: flex;
+  gap: 10px;
+}
+
+.badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(0, 0, 0, 0.4);
+  padding: 4px 14px;
+  border-radius: 100px;
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+.sectionTitle {
+  font-size: 20px;
+  text-align: left;
+  border-left: 4px solid var(--accent);
+  padding-left: 20px;
+  padding-bottom: 8px;
+  color: var(--text-main);
+}
+
+.infoBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+  border-radius: 20px;
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.6)),
+    url("/bg_tournament.png");
+  background-size: cover;
+  border: 1px solid var(--border);
+}
+
+.descriptionBox {
+  display: flex;
+  gap: 12px;
+  color: var(--text-muted);
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.infoIcon {
+  flex-shrink: 0;
+  color: var(--accent);
 }
 
 .tableWrapper {
-  background: #1a1a1a;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.5)),
+    url("/bg_stats.png");
+  background-size: cover;
+  border-radius: 20px;
+  padding: 15px;
+  border: 1px solid var(--border);
 }
 
 .table {
   width: 100%;
   border-collapse: collapse;
-  color: #ddd;
 }
 
-.table th,
-.table td {
-  padding: 1rem;
+.table th {
   text-align: left;
-  border-bottom: 1px solid #333;
+  padding: 12px 8px;
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--border);
+  font-size: 13px;
+  text-transform: uppercase;
 }
 
-.topThree {
-  background: rgba(255, 215, 0, 0.05); /* Золотистый оттенок для топа */
+.table th:nth-child(1) {
+  width: 10%;
+} /* Rank */
+.table th:nth-child(2) {
+  width: 45%;
+} /* Player */
+.table th:nth-child(3) {
+  width: 10%;
+} /* Matches */
+.table th:nth-child(4) {
+  width: 15%;
+} /* Exact */
+.table th:nth-child(5) {
+  width: 20%;
+} /* Points */
+
+.table td {
+  padding: 12px 8px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  color: var(--text-main);
 }
 
-.avatar {
-  border-radius: 50%;
-  margin-right: 10px;
-  object-fit: cover;
+.rankCell {
+  font-weight: bold;
+  text-align: center;
+  font-size: 16px;
 }
 
-.userCell {
+.nickname a {
+  text-decoration: none;
   display: flex;
-  align-items: center;
+  flex-direction: column;
+}
+
+.mainName {
+  color: var(--text-main);
+  font-weight: 600;
+}
+
+.akaText {
+  font-size: 11px;
+  color: var(--text-muted);
 }
 
 .points {
-  font-weight: bold;
-  color: #00ff88; /* Зеленый цвет для очков */
+  font-weight: 800;
+  color: var(--accent);
+  font-size: 16px;
+}
+
+.exactCell {
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+/* Медалисты */
+.gold {
+  background: rgba(255, 215, 0, 0.1);
+  border-left: 4px solid #ffd700;
+}
+.silver {
+  background: rgba(192, 192, 192, 0.07);
+  border-left: 4px solid #c0c0c0;
+}
+.bronze {
+  background: rgba(205, 127, 50, 0.05);
+  border-left: 4px solid #cd7f32;
+}
+
+.header:hover,
+.infoBlock:hover,
+.tableWrapper:hover {
+  border-color: var(--primary-500);
+}
+
+@media (min-width: 1200px) {
+  .dataBoxContainer {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 30px;
+  }
+  .sideSection {
+    width: 350px;
+    flex-shrink: 0;
+  }
+  .mainSection {
+    flex-grow: 1;
+  }
+  .infoBlock,
+  .tableWrapper {
+    min-height: 400px;
+  }
+}
+
+@media (max-width: 768px) {
+  .header {
+    padding: 15px;
+  }
+  .title {
+    font-size: 22px;
+  }
+  .table th {
+    font-size: 11px;
+  }
+  .table td {
+    font-size: 13px;
+  }
 }
