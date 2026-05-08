@@ -46,34 +46,46 @@ export default async function Matches({
   });
 
   return (
-    <div className={css.pageWrapper}>
+    <div className={css.container}>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      {/* Теперь заголовок меняется в зависимости от URL! */}
-      <h1 className={css.header}>{tournament.toUpperCase()} Matches</h1>
+      <section className={css.header}>
+        <h1 className={css.headerText}>{tournament.toUpperCase()} Matches</h1>
+      </section>
 
-      <nav className={css.filters}>
-        <button className={css.filterBtn}>All</button>
-        <button className={css.filterBtn}>Scheduled</button>
-        <button className={css.filterBtn}>Finished</button>
-      </nav>
+      <div className={css.dataBoxContainer}>
+        <section className={css.sideSection}>
+          <h2 className={css.sectionTitle}>Filters</h2>
+          <div className={css.infoBlock}>
+            <nav className={css.filters}>
+              <button className={css.filterBtn}>All</button>
+              <button className={css.filterBtn}>Scheduled</button>
+              <button className={css.filterBtn}>Finished</button>
+            </nav>
+          </div>
+        </section>
+        <section className={css.mainSection}>
+          <h2 className={css.sectionTitle}>Matches</h2>
 
-      <div className={css.matchesList}>
-        {newDates.map((date: string) => {
-          const matchesInDay = matches.filter(
-            (match: Match) =>
-              new Date(match.kickoffTime).toLocaleDateString("ru-RU") === date,
-          );
+          <div className={css.mainBlock}>
+            {newDates.map((date: string) => {
+              const matchesInDay = matches.filter(
+                (match: Match) =>
+                  new Date(match.kickoffTime).toLocaleDateString("ru-RU") ===
+                  date,
+              );
 
-          return (
-            <section key={date} className={css.daySection}>
-              <GroupMatchesByDate date={date} matches={matchesInDay} />
-            </section>
-          );
-        })}
+              return (
+                <section key={date} className={css.daySection}>
+                  <GroupMatchesByDate date={date} matches={matchesInDay} />
+                </section>
+              );
+            })}
+          </div>
+        </section>
       </div>
     </div>
   );

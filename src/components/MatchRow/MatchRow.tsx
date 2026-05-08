@@ -18,7 +18,7 @@ export default function MatchRow({ match, date = "shortDate" }: MatchRowProps) {
   console.log(match);
 
   return (
-    <tr>
+    <tr className={css.matchRow}>
       {/* ///////// */}
       <td className={css.blockTime}>
         {match.status === "finished" ? (
@@ -41,18 +41,22 @@ export default function MatchRow({ match, date = "shortDate" }: MatchRowProps) {
         )}
       </td>
       {/* ///////// */}
-      <td className={css.blockTeam}>
-        <Link href={`/teams/${match.homeTeam?._id}`}>
-          {match.homeTeam?.name || "-"}
-        </Link>
-        <Link href={`/teams/${match.awayTeam?._id}`}>
-          {match.awayTeam?.name || "-"}
-        </Link>
+      <td className={css.teamsRow}>
+        <div className={css.blockTeam}>
+          <Link href={`/teams/${match.homeTeam?._id}`}>
+            {match.homeTeam?.name || "-"}
+          </Link>
+          <Link href={`/teams/${match.awayTeam?._id}`}>
+            {match.awayTeam?.name || "-"}
+          </Link>
+        </div>
       </td>
       {/* ///////// */}
-      <td className={css.blockInfo}>
-        <div className={css.groupInfo}>Group {match.group}</div>
-        <div>{match.stadium}</div>
+      <td className={css.GroupRow}>
+        <div className={css.blockInfo}>
+          <div className={css.groupInfo}>Group {match.group}</div>
+          <div>{match.stadium}</div>
+        </div>
       </td>
     </tr>
   );

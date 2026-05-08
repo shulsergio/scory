@@ -1,4 +1,25 @@
+.container {
+  padding: 10px 0;
+  background-color: var(--bg-main);
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
 .header {
+  display: flex;
+  align-items: center;
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.5)), url("/bg.png");
+  background-size: cover;
+  background-position: center;
+  padding: 15px;
+  border-radius: 15px;
+  border: 1px solid var(--border);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.headerText {
   font-size: 18px;
   font-weight: bold;
   padding: 10px 0;
@@ -8,4 +29,50 @@
   font-size: 16px;
   font-weight: bold;
   padding: 5px 0;
+}
+.dataBoxContainer {
+  padding-top: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+.descriptionBox {
+  display: flex;
+  gap: 12px;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+.sectionTitle {
+  font-size: 20px;
+  text-align: left;
+  border-left: 4px solid var(--accent);
+  padding-left: 20px;
+  padding-bottom: 8px;
+  color: var(--text-main);
+}
+.infoBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 15px;
+  border-radius: 15px;
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.6)),
+    url("/bg_tournament.png");
+  background-size: cover;
+  border: 1px solid var(--border);
+  min-height: 80px;
+}
+.mainBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 12px 6px;
+  border-radius: 15px;
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.6)),
+    url("/bg_tournament.png");
+  background-size: cover;
+  border: 1px solid var(--border);
+  min-height: 80px;
 }
