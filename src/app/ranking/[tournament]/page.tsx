@@ -54,7 +54,7 @@ export default function TournamentRankingPage() {
       </section>
 
       <div className={css.dataBoxContainer}>
-        <section className={css.sideSection}>
+        {/* <section className={css.sideSection}>
           <h2 className={css.sectionTitle}>Ranking Info</h2>
           <div className={css.infoBlock}>
             <div className={css.descriptionBox}>
@@ -74,7 +74,7 @@ export default function TournamentRankingPage() {
               </div>
             </div>
           </div>
-        </section>
+        </section> */}
 
         <section className={css.mainSection}>
           <h2 className={css.sectionTitle}>Tournament Standings</h2>
