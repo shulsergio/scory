@@ -141,9 +141,9 @@ export default function LeagueDetailsPage() {
             <table className={css.table}>
               <thead>
                 <tr>
-                  <th>Rank</th>
-                  <th>Nickname</th>
-                  <th>Points</th>
+                  <th className={css.th}>Rank</th>
+                  <th className={css.th}>Nickname</th>
+                  <th className={css.th}>Points</th>
                 </tr>
               </thead>
               <tbody>

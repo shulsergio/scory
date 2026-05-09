@@ -53,7 +53,7 @@ export default async function Matches({
       />
 
       <section className={css.header}>
-        <h1 className={css.headerText}>{tournament.toUpperCase()} Matches</h1>
+        <h1 className={css.headerText}>{tournament.toUpperCase()} matches</h1>
       </section>
 
       <div className={css.dataBoxContainer}>

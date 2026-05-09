@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { fetchTournamentGroups } from "@/utils/fetch";
 import Loader from "@/components/Loader/Loader";
 import Link from "next/link";
+import ButtonBox from "@/components/ButtonBox/ButtonBox";
 
 interface TeamData {
   team: {
@@ -54,43 +55,62 @@ export default function GroupsPage() {
   }
   return (
     <main className={css.container}>
-      <h1 className={css.title}>Tournament Groups: {tournament}</h1>
+      <div className={css.WcMainBlock}>
+        <section className={css.mathesSection}>
+          <h2 className={css.sectionTitle}>WC 20206 Matches</h2>
+          <div className={css.infoMatchesBlock}>
+            <p>top matches</p>
+            <div className={css.matchesButtonBlock}>
+              <ButtonBox
+                option="link"
+                variant="primary"
+                href={`/matches/${tournament}`}
+              >
+                All matches
+              </ButtonBox>
+            </div>
+          </div>
+        </section>
+        <section className={css.groupsData}>
+          <h2 className={css.sectionTitle}>Tournament Groups: {tournament}</h2>
 
-      <div className={css.groupsFlexContainer}>
-        {groups.map((group) => (
-          <section key={group.letter} className={css.groupCard}>
-            <h2 className={css.groupLetter}>Group {group.letter}</h2>
+          <div className={css.groupsFlexContainer}>
+            {groups.map((group) => (
+              <section key={group.letter} className={css.groupCard}>
+                <h2 className={css.groupLetter}>Group {group.letter}</h2>
 
-            <table className={css.table}>
-              <thead>
-                <tr>
-                  <th className={css.teamCellHead}>Team</th>
-                  <th>GP</th>
-                  <th>F</th>
-                  <th>A</th>
-                  <th>GD</th>
-                  <th>Pts</th>
-                </tr>
-              </thead>
-              <tbody>
-                {group.teams.map((team) => (
-                  <tr key={team.team.name}>
-                    <td className={css.teamCell}>
-                      <Link href={`/teams/${team.team?._id}`}>
-                        {team.team.name}
-                      </Link>
-                    </td>
-                    <td>{team.matchesPlayed}</td>
-                    <td>{team.goalsFor}</td>
-                    <td>{team.goalsAgainst}</td>
-                    <td>{team.goalDifference}</td>
-                    <td className={css.pts}>{team.points}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </section>
-        ))}
+                <table className={css.table}>
+                  <thead>
+                    <tr>
+                      <th className={css.teamCellHead}>Team</th>
+                      <th>GP</th>
+                      <th>F</th>
+                      <th>A</th>
+                      <th>GD</th>
+                      <th>Pts</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {group.teams.map((team) => (
+                      <tr key={team.team.name}>
+                        <td className={css.teamCell}>
+                          <Link href={`/teams/${team.team?._id}`}>
+                            {team.team.name}
+                          </Link>
+                        </td>
+                        <td>{team.matchesPlayed}</td>
+                        <td>{team.goalsFor}</td>
+                        <td>{team.goalsAgainst}</td>
+                        <td>{team.goalDifference}</td>
+                        <td className={css.pts}>{team.points}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </section>
+            ))}
+          </div>
+        </section>
       </div>
     </main>
   );

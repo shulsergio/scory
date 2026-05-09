@@ -7,7 +7,35 @@
   margin: 0 auto;
   /* transition: background 0.3s ease; Плавный переход тем */
 }
-
+.WcMainBlock{
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+.sectionTitle {
+  font-size: 20px;
+  text-align: left;
+  border-left: 4px solid var(--accent);
+  padding-left: 20px;
+  padding-bottom: 8px;
+  color: var(--text-main);
+}
+.matchesButtonBlock{
+   margin-top: auto;
+}
+.infoMatchesBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 15px;
+  border-radius: 15px;
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.6)),
+    url("/bg_tournament.png");
+  background-size: cover;
+  border: 1px solid var(--border);
+  min-height: 150px;
+}
 .groupsFlexContainer {
   display: flex;
   flex-wrap: wrap;
@@ -28,8 +56,8 @@
 .groupLetter {
   font-size: 20px;
   font-weight: 800;
-  color: var(--accent); /* Твой оранжевый! */
-  margin-bottom: 15px;
+  color: var(--accent);  
+  margin-bottom: 5px;
   display: flex;
   align-items: center;
   gap: 10px;
@@ -53,13 +81,13 @@
   font-size: 11px;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  color: var(--text-muted);
-  padding: 8px 4px;
+  color: var(--text-main);
+  padding: 4px 4px;
 }
 
 .table td {
   text-align: center;
-  padding: 8px 4px;
+  padding: 2px 4px;
   color: var(--text-main);
   border-bottom: 1px solid var(--card-border);
 }
@@ -88,4 +116,11 @@
 }
 .groupCard:hover {
   border-color: var(--primary-500);
+}
+@media (min-width: 1200px) {
+.WcMainBlock{
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
 }
