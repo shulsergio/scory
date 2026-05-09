@@ -5,7 +5,7 @@ import { useParams } from "next/navigation";
 import { fetchLeaderboard } from "@/utils/fetch";
 import Loader from "@/components/Loader/Loader";
 import Link from "next/link";
-import { Trophy, Target, Users } from "lucide-react";
+import { Trophy, Users } from "lucide-react";
 import css from "./tournament.module.css";
 
 interface TournamentRankingPageProps {
