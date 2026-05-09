@@ -168,10 +168,10 @@
 .bronze .points {
   color: #cd7f32;
 }
-/* .currentUserRow:not(.gold):not(.silver):not(.bronze) {
+.currentUserRow:not(.gold):not(.silver):not(.bronze) {
   background: rgba(0, 217, 255, 0.1);
   border-left: 4px solid var(--accent);
-} */
+}
 
 .actions {
   margin-top: auto;

@@ -82,31 +82,35 @@ export default function TournamentRankingPage() {
             <table className={css.table}>
               <thead>
                 <tr>
-                  <th>Rank</th>
-                  <th>Player</th>
+                  <th>#</th>
+                  <th>Nickname</th>
                   <th>M</th>
                   <th>EX</th>
-                  <th>Points</th>
+                  <th>Pts</th>
                 </tr>
               </thead>
               <tbody>
-                {players.map((player) => (
-                  <tr key={player.userId || player.rank}>
+                {players.map((player, index) => (
+                  <tr
+                    key={player.userId || player.rank}
+                    className={`
+    ${player.userNickname === player?.userNickname ? css.currentUserRow : ""}
+    ${index === 0 ? css.gold : ""}
+    ${index === 1 ? css.silver : ""}
+    ${index === 2 ? css.bronze : ""}
+  `}
+                  >
                     <td className={css.rankCell}>{player.rank}</td>
                     <td className={css.nickname}>
                       <Link href={`/users/${player.userId}`}>
                         <span className={css.mainName}>
-                          {player.userName || "User"}
+                          {player.userName || "User"}{" "}
+                          <span className={css.akaText}>aka</span>{" "}
+                          {player.userNickname}
                         </span>
-                        {player.userNickname && (
-                          <span className={css.akaText}>
-                            {" "}
-                            aka {player.userNickname}
-                          </span>
-                        )}
                       </Link>
                     </td>
-                    <td>{player.matchesPredicted}</td>
+                    <td className={css.exactCell}>{player.matchesPredicted}</td>
                     <td className={css.exactCell}>{player.exactScores}</td>
                     <td className={css.points}>{player.points}</td>
                   </tr>
