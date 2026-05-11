@@ -13,13 +13,14 @@
     linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.5)), url("/bg.png");
   background-size: cover;
   background-position: center;
-  padding: 15px;
-  border-radius: 15px;
+  padding: 12px;
+  border-radius: 12px;
   border: 1px solid var(--border);
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
 }
 
 .headerText {
+  color: var(--accent);
   font-size: 18px;
   font-weight: bold;
   padding: 0;
@@ -31,7 +32,7 @@
   padding: 5px 0;
 }
 .dataBoxContainer {
-  padding-top: 15px;
+  padding-top: 8px;
   display: flex;
   flex-direction: column;
   gap: 15px;
@@ -50,7 +51,7 @@
   padding-bottom: 8px;
   color: var(--text-main);
 }
-.infoBlock {
+/* .infoBlock {
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -62,11 +63,11 @@
   background-size: cover;
   border: 1px solid var(--border);
   min-height: 80px;
-}
+} */
 .mainBlock {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 5px;
   padding: 12px 6px;
   border-radius: 15px;
   background:

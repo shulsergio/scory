@@ -82,13 +82,13 @@ export default async function TeamPage({
   // ---
 
   return (
-    <main>
+    <main className={css.container}>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <header className={css.header}>
-        <h1 className={css.teamHeader}>{team.name}</h1>
+        <h1 className={css.headerText}>{team.name}</h1>
         <p className={css.subtitle}>National Team Schedule & Results</p>
       </header>
       <table className={css.table}>
