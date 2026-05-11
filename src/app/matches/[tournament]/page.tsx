@@ -57,20 +57,16 @@ export default async function Matches({
       </section>
 
       <div className={css.dataBoxContainer}>
-        <section className={css.sideSection}>
-          <h2 className={css.sectionTitle}>Filters</h2>
-          <div className={css.infoBlock}>
+        <section className={css.mainSection}>
+          <h2 className={css.sectionTitle}>Matches</h2>
+          {/* <div className={css.infoBlock}></div> */}
+
+          <div className={css.mainBlock}>
             <nav className={css.filters}>
               <button className={css.filterBtn}>All</button>
               <button className={css.filterBtn}>Scheduled</button>
               <button className={css.filterBtn}>Finished</button>
             </nav>
-          </div>
-        </section>
-        <section className={css.mainSection}>
-          <h2 className={css.sectionTitle}>Matches</h2>
-
-          <div className={css.mainBlock}>
             {newDates.map((date: string) => {
               const matchesInDay = matches.filter(
                 (match: Match) =>
