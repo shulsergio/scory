@@ -1,84 +1,208 @@
-.page {
-  padding-top: 40px;
+.container {
+  padding: 10px 0;
+  background-color: var(--bg-main);
   width: 100%;
-  /* display: flex;
-  align-items: center;
-  justify-content: center; */
-  font-family: var(--font-geist-sans);
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
-.main {
+.dataBoxContainer {
+  /* padding-top: 15px; */
   display: flex;
-  /* width: 100%; */
-  /* max-width: 800px; */
   flex-direction: column;
-  /* align-items: flex-start; */
-  /* justify-content: space-between; */
-  /* background-color: var(--foreground); */
+  gap: 15px;
 }
 
-.intro {
-  text-align: center;
-  /* gap: 24px; */
-}
-
-.title {
-  font-family: var(--font-family-Kanit);
-  font-weight: 900;
-  font-style: italic;
-  font-size: 60px;
-  text-align: center;
-  width: 100%;
-  /* ФОН ТЕКСТРА */
-  display: block;
-  background: linear-gradient(to bottom, #0008ff 10%, #ffffff 90%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  color: transparent;
-}
-
-/* .descriptionTop { 
-  font-size: 24px; 
-  color: var(--text-blue-title-secondary);
-  padding-bottom: 20px;
-} */
-.descriptionBottom {
-  font-style: italic;
-  /* max-width: 440px; */
-  font-size: 18px;
-  line-height: 0px;
-  text-wrap: balance;
-  color: var(--text-blue-title-secondary);
-  padding-bottom: 40px;
-}
-.descriptionBottom {
-  font-style: italic;
-  /* max-width: 440px; */
-  font-size: 18px;
-  line-height: 0px;
-  text-wrap: balance;
-  color: var(--text-blue-title-secondary);
-}
-.comingSoon {
-  color: var(--text-primary);
-  margin: 0 auto;
-  width: 300px;
-  text-align: center;
-  padding: 30px 20px;
-  border-radius: 4px;
-  font-weight: 600;
-  font-size: 20px;
+.header {
+  display: flex;
+  align-items: center;
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.5)), url("/bg.png");
+  background-size: cover;
+  background-position: center;
+  padding: 30px;
+  border-radius: 20px;
   border: 1px solid var(--border);
-  box-shadow:
-    0px 1px 2px rgba(0, 0, 0, 0.1),
-    0px 4px 8px rgba(0, 0, 0, 0.1),
-    0px 8px 16px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
 }
+
+/* .mainInfo {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+} */
+
+/* .title {
+  font-size: 32px;
+  color: var(--accent);
+  font-weight: 900;
+  letter-spacing: 0.05em;
+} */
+
+/* .badgesRow {
+  display: flex;
+  gap: 10px;
+}
+
+.badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(0, 0, 0, 0.4);
+  padding: 0 10px;
+  border-radius: 100px;
+  font-size: 14px;
+  color: var(--text-muted);
+} */
+
+.sectionTitle {
+  font-size: 20px;
+  text-align: left;
+  border-left: 4px solid var(--accent);
+  padding-left: 20px;
+  padding-bottom: 8px;
+  color: var(--text-main);
+}
+
+.infoBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 15px;
+  border-radius: 15px;
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.6)),
+    url("/bg_tournament.png");
+  background-size: cover;
+  border: 1px solid var(--border);
+}
+
 .aboutText {
-  font-size: 18px;
-  color: var(--text-primary);
-  max-width: 1000px;
-  margin: 0 auto;
-  text-align: center;
+  color: var(--text-muted);
+  line-height: 1.6;
+  font-size: 15px;
+}
+
+.leagueFeature {
+  background: rgba(0, 0, 0, 0.2);
+  padding: 8px 16px 0 16px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.featureTitleRow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.featureTitleRow h3 {
+  font-size: 16px;
+  color: var(--text-muted);
+  font-weight: bold;
+}
+
+.featureText {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+.tableWrapper {
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.5)),
+    url("/bg_stats.png");
+  background-size: cover;
+  border-radius: 15px;
+  padding: 15px;
+  border: 1px solid var(--border);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.tableIntro {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: var(--text-muted);
+  padding-bottom: 10px;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.table th {
+  text-align: left;
+  padding: 8px;
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--border);
+  /* font-size: 13px; */
+  text-transform: uppercase;
+}
+
+.table td {
+  padding: 6px 4px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  /* font-size: 14px; */
+  color: var(--text-muted);
+}
+
+.ruleName {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.pointsValue {
+  font-weight: 800;
+  /* font-size: 15px; */
+  color: var(--accent);
+}
+.goldRow {
+  background: rgba(255, 215, 0, 0.2);
+}
+
+.silverRow {
+  background: rgba(192, 192, 192, 0.2);
+}
+
+.bronzeRow {
+  background: rgba(205, 127, 50, 0.2);
+}
+
+/* ---------------------- */
+.header:hover,
+.infoBlock:hover,
+.tableWrapper:hover {
+  border-color: var(--primary-500);
+}
+
+/* ---------------------- */
+@media (min-width: 1200px) {
+  .dataBoxContainer {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 35px;
+  }
+  .sideSection {
+    width: 400px;
+    flex-shrink: 0;
+  }
+  .mainSection {
+    flex-grow: 1;
+  }
+  .infoBlock,
+  .tableWrapper {
+    min-height: 350px;
+  }
+
+  .aboutText,
+  .featureText,
+  .table {
+    font-size: 16px;
+  }
 }

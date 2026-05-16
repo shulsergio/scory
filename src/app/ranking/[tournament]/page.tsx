@@ -39,7 +39,7 @@ export default function TournamentRankingPage() {
       {/* ХЕДЕР СТРАНИЦЫ */}
       <section className={css.header}>
         <div className={css.leagueMainInfo}>
-          <h2 className={css.title}>Global Leaderboard</h2>
+          <h2 className={css.title}>Global Ranking</h2>
           <div className={css.badgesRow}>
             <div className={css.badge}>
               <Trophy size={14} color="var(--accent)" />
