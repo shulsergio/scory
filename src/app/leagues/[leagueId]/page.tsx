@@ -7,11 +7,13 @@ import {
   joinLeague,
   LeagueResults,
   leaveLeague,
+  updateLeagueDescription,
 } from "@/utils/fetch";
 import Loader from "@/components/Loader/Loader";
 import css from "./leagueData.module.css";
-import { LogIn, Settings, UserPlus, Trophy, Info } from "lucide-react";
+import { LogIn, Settings, UserPlus, Trophy, Info, X } from "lucide-react";
 import Link from "next/link";
+import ButtonBox from "@/components/ButtonBox/ButtonBox";
 
 export default function LeagueDetailsPage() {
   const { leagueId } = useParams() as { leagueId: string };
@@ -20,6 +22,10 @@ export default function LeagueDetailsPage() {
   const [data, setData] = useState<LeagueResults | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isJoining, setIsJoining] = useState(false);
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [editDescription, setEditDescription] = useState("");
+  const [isUpdating, setIsUpdating] = useState(false);
 
   const loadData = useCallback(async () => {
     try {
@@ -46,6 +52,7 @@ export default function LeagueDetailsPage() {
     !!session?.user?.nickname &&
     data?.leaderboard.some((m) => m.nickname === session?.user?.nickname);
   console.log("League Results DATA--- ", data);
+
   const handleJoinClick = async () => {
     if (!session?.user?.accessToken) return;
     setIsJoining(true);
@@ -74,6 +81,31 @@ export default function LeagueDetailsPage() {
     }
   };
 
+  // -------------------------
+  const handleManageClick = () => {
+    setEditDescription(data?.description || "");
+    setIsModalOpen(true);
+  };
+
+  const handleSaveDescription = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!session?.user?.accessToken) return;
+    setIsUpdating(true);
+    try {
+      await updateLeagueDescription(
+        session.user.accessToken,
+        leagueId,
+        editDescription,
+      );
+      await loadData();
+      setIsModalOpen(false);
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setIsUpdating(false);
+    }
+  };
+
   if (status === "loading" || isLoading) return <Loader />;
   if (!data) return <p className={css.error}>League not found</p>;
 
@@ -91,7 +123,6 @@ export default function LeagueDetailsPage() {
           </div>
         </div>
       </section>
-
       <div className={css.dataBoxContainer}>
         <section className={css.sideSection}>
           <h2 className={css.sectionTitle}>About League</h2>
@@ -110,7 +141,10 @@ export default function LeagueDetailsPage() {
               ) : (
                 <>
                   {isAdmin ? (
-                    <button className={css.manageButton}>
+                    <button
+                      className={css.manageButton}
+                      onClick={handleManageClick}
+                    >
                       <Settings size={18} />
                       <span>Manage League</span>
                     </button>
@@ -136,7 +170,7 @@ export default function LeagueDetailsPage() {
           </div>
         </section>
         <section className={css.mainSection}>
-          <h2 className={css.sectionTitle}>Leaderboard</h2>
+          <h2 className={css.sectionTitle}>Table</h2>
           <div className={css.tableWrapper}>
             <table className={css.table}>
               <thead>
@@ -171,6 +205,51 @@ export default function LeagueDetailsPage() {
           </div>
         </section>
       </div>
+      {/* // ------------------------- */}
+
+      {isModalOpen && (
+        <div className={css.modalOverlay} onClick={() => setIsModalOpen(false)}>
+          <div
+            className={css.modalContent}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className={css.modalHeader}>
+              <h3>Edit Settings</h3>
+              <button
+                className={css.closeModalBtn}
+                onClick={() => setIsModalOpen(false)}
+              >
+                <X size={18} />
+              </button>
+            </div>
+
+            <form onSubmit={handleSaveDescription} className={css.modalForm}>
+              <label className={css.modalLabel}>League Description</label>
+              <textarea
+                className={css.modalTextarea}
+                value={editDescription}
+                onChange={(e) => setEditDescription(e.target.value)}
+                placeholder="Write something about your league..."
+                maxLength={250}
+              />
+              <div className={css.modalActions}>
+                <ButtonBox
+                  option="button"
+                  variant="white"
+                  onClick={() => setIsModalOpen(false)}
+                >
+                  Cancel
+                </ButtonBox>
+                <ButtonBox option="button" type="submit">
+                  Save Changes
+                </ButtonBox>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
+      {/* // ------------------------- */}
     </main>
   );
 }

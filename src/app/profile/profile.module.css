@@ -14,7 +14,19 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  border: 1px solid var(--primary-500);
-  border-radius: 12px;
+  border-radius: 15px;
+  padding: 12px 4px;
+  border: 1px solid var(--border);
   gap: 10px;
+}
+.sectionWrapper {
+  width: 100%;
+}
+.sectionTitle {
+  font-size: 20px;
+  text-align: left;
+  border-left: 4px solid var(--accent);
+  padding-left: 20px;
+  padding-bottom: 8px;
+  color: var(--text-main);
 }

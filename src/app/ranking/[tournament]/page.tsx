@@ -36,25 +36,25 @@ export default function TournamentRankingPage() {
 
   return (
     <main className={css.container}>
-      {/* ХЕДЕР СТРАНИЦЫ */}
-      <section className={css.header}>
-        <div className={css.leagueMainInfo}>
-          <h2 className={css.title}>Global Ranking</h2>
-          <div className={css.badgesRow}>
-            <div className={css.badge}>
-              <Trophy size={14} color="var(--accent)" />
-              <span>{tournament}</span>
-            </div>
-            <div className={css.badge}>
-              <Users size={14} />
-              <span>{players.length} participants</span>
+      <div className={css.globalDiv}>
+        <section className={css.header}>
+          <div className={css.leagueMainInfo}>
+            <h2 className={css.title}>Global Ranking</h2>
+            <div className={css.badgesRow}>
+              <div className={css.badge}>
+                <Trophy size={14} color="var(--accent)" />
+                <span>{tournament}</span>
+              </div>
+              <div className={css.badge}>
+                <Users size={14} />
+                <span>{players.length} participants</span>
+              </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      <div className={css.dataBoxContainer}>
-        {/* <section className={css.sideSection}>
+        <div className={css.dataBoxContainer}>
+          {/* <section className={css.sideSection}>
           <h2 className={css.sectionTitle}>Ranking Info</h2>
           <div className={css.infoBlock}>
             <div className={css.descriptionBox}>
@@ -76,49 +76,52 @@ export default function TournamentRankingPage() {
           </div>
         </section> */}
 
-        <section className={css.mainSection}>
-          <h2 className={css.sectionTitle}>Tournament Standings</h2>
-          <div className={css.tableWrapper}>
-            <table className={css.table}>
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>Nickname</th>
-                  <th>M</th>
-                  <th>EX</th>
-                  <th>Pts</th>
-                </tr>
-              </thead>
-              <tbody>
-                {players.map((player, index) => (
-                  <tr
-                    key={player.userId || player.rank}
-                    className={`
+          <section className={css.mainSection}>
+            <h2 className={css.sectionTitle}>Tournament Standings</h2>
+            <div className={css.tableWrapper}>
+              <table className={css.table}>
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Nickname</th>
+                    <th>M</th>
+                    <th>EX</th>
+                    <th>Pts</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {players.map((player, index) => (
+                    <tr
+                      key={player.userId || player.rank}
+                      className={`
     ${player.userNickname === player?.userNickname ? css.currentUserRow : ""}
     ${index === 0 ? css.gold : ""}
     ${index === 1 ? css.silver : ""}
     ${index === 2 ? css.bronze : ""}
   `}
-                  >
-                    <td className={css.rankCell}>{player.rank}</td>
-                    <td className={css.nickname}>
-                      <Link href={`/users/${player.userId}`}>
-                        <span className={css.mainName}>
-                          {player.userName || "User"}{" "}
-                          <span className={css.akaText}>aka</span>{" "}
-                          {player.userNickname}
-                        </span>
-                      </Link>
-                    </td>
-                    <td className={css.exactCell}>{player.matchesPredicted}</td>
-                    <td className={css.exactCell}>{player.exactScores}</td>
-                    <td className={css.points}>{player.points}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </section>
+                    >
+                      <td className={css.rankCell}>{player.rank}</td>
+                      <td className={css.nickname}>
+                        <Link href={`/users/${player.userId}`}>
+                          <span className={css.mainName}>
+                            {player.userName || "User"}{" "}
+                            <span className={css.akaText}>aka</span>{" "}
+                            {player.userNickname}
+                          </span>
+                        </Link>
+                      </td>
+                      <td className={css.exactCell}>
+                        {player.matchesPredicted}
+                      </td>
+                      <td className={css.exactCell}>{player.exactScores}</td>
+                      <td className={css.points}>{player.points}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </section>
+        </div>
       </div>
     </main>
   );

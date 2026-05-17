@@ -5,7 +5,11 @@
   max-width: 1200px;
   margin: 0 auto;
 }
-
+.globalDiv {
+  display: flex;
+  flex-direction: column;
+  /* gap: 20px; */
+}
 .dataBoxContainer {
   padding-top: 15px;
   display: flex;
@@ -95,7 +99,7 @@
     linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.5)),
     url("/bg_stats.png");
   background-size: cover;
-  border-radius: 20px;
+  border-radius: 15px;
   padding: 15px;
   border: 1px solid var(--border);
 }
@@ -207,7 +211,7 @@
   }
 }
 
-@media (min-width: 491px) and (max-width: 1199px) {
+@media (min-width: 491px) {
   .header {
     padding: 15px;
   }
@@ -215,9 +219,17 @@
     font-size: 22px;
   }
   .table th {
-    font-size: 14px;
+    font-size: 16px;
   }
   .table td {
-    font-size: 14px;
+    font-size: 16px;
+  }
+}
+@media (min-width: 1200px) {
+  .mainName {
+    font-size: 18px;
+  }
+  .akaText {
+    font-size: 13px;
   }
 }
