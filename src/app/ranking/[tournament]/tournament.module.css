@@ -99,7 +99,7 @@
     linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.5)),
     url("/bg_stats.png");
   background-size: cover;
-  border-radius: 20px;
+  border-radius: 15px;
   padding: 15px;
   border: 1px solid var(--border);
 }

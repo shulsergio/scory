@@ -53,19 +53,21 @@ export default function Profile() {
         <h2 className={css.title}>My profile</h2> */}
       {/* <UserStatus rank={userStats?.rank} points={userStats?.points} /> */}
       {/* </div> */}
-
-      <div className={css.wrapper}>
-        <h2 className={css.title}>My leagues</h2>
-        <UserLeagues leagues={leagues} error={error} />
-      </div>
-
-      <div className={css.wrapper}>
-        <h2 className={css.title}>Next matches</h2>
-        <PredictionMatches
-          matches={matches}
-          token={session?.user?.accessToken || ""}
-        />
-      </div>
+      <section className={css.sectionWrapper}>
+        <h2 className={css.sectionTitle}>My leagues</h2>
+        <div className={css.wrapper}>
+          <UserLeagues leagues={leagues} error={error} />
+        </div>
+      </section>
+      <section className={css.sectionWrapper}>
+        <h2 className={css.sectionTitle}>Next matches</h2>
+        <div className={css.wrapper}>
+          <PredictionMatches
+            matches={matches}
+            token={session?.user?.accessToken || ""}
+          />
+        </div>
+      </section>
     </main>
   );
 }
