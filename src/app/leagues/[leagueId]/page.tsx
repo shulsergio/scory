@@ -136,7 +136,7 @@ export default function LeagueDetailsPage() {
           </div>
         </section>
         <section className={css.mainSection}>
-          <h2 className={css.sectionTitle}>Leaderboard</h2>
+          <h2 className={css.sectionTitle}>Table</h2>
           <div className={css.tableWrapper}>
             <table className={css.table}>
               <thead>

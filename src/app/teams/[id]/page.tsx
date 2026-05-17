@@ -89,7 +89,7 @@ export default async function TeamPage({
       />
       <header className={css.header}>
         <h1 className={css.headerText}>{team.name}</h1>
-        <p className={css.subtitle}>National Team Schedule & Results</p>
+        <p className={css.subtitle}>Team Schedule & Results</p>
       </header>
       <table className={css.table}>
         <tbody>

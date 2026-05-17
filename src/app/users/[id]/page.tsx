@@ -1,6 +1,7 @@
 import { fetchUserProfileById } from "@/utils/fetch";
 import { Trophy, Target, Calendar } from "lucide-react";
 import css from "./users.module.css";
+import Link from "next/link";
 //ChevronRight
 
 type Props = {
@@ -114,13 +115,19 @@ export default async function UserProfilePage({ params }: Props) {
                 <div key={pred.id} className={css.predictionItem}>
                   <div className={css.matchData}>
                     <div className={css.teamsRow}>
-                      <span className={css.teamName}>
+                      <Link
+                        className={css.teamName}
+                        href={`/teams/${pred.match.homeTeam?._id}`}
+                      >
                         {pred.match.homeTeam?.name || "Team A"}
-                      </span>
+                      </Link>
                       <span className={css.vs}>vs</span>
-                      <span className={css.teamName}>
+                      <Link
+                        className={css.teamName}
+                        href={`/teams/${pred.match.awayTeam?._id}`}
+                      >
                         {pred.match.awayTeam?.name || "Team B"}
-                      </span>
+                      </Link>
                     </div>
                     <div className={css.scoresInfo}>
                       <span className={css.userPred}>
