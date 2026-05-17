@@ -501,3 +501,17 @@ export const fetchUserProfileById = async (userId: string, token?: string): Prom
     return null;
   }
 };
+
+
+export const updateLeagueDescription = async (token: string, leagueId: string, description: string) => {
+  const response = await fetch(`https://scory-backend.onrender.com/leagues/${leagueId}`, {
+    method: "PATCH",  
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({ description }),
+  });
+  if (!response.ok) throw new Error("Failed to update description");
+  return response.json();
+};
