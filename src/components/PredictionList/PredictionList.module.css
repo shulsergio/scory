@@ -9,3 +9,11 @@
 .grid {
   width: 100%;
 }
+@media (min-width: 1200px) {
+  .grid {
+    width: 100%;
+    display: grid;
+    gap: 8px;
+    grid-template-columns: 1fr 1fr;
+  }
+}
