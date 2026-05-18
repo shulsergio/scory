@@ -40,12 +40,15 @@ export default function PredictorsPage() {
 
   return (
     <main className={css.container}>
-      <h1>My prognozes</h1>
-      <PredictionList
-        matches={matches}
-        token={session!.user.accessToken}
-        onRefresh={loadData}
-      />
+      <h2 className={css.sectionTitle}>Predictions</h2>
+
+      <div className={css.infoBlock}>
+        <PredictionList
+          matches={matches}
+          token={session!.user.accessToken}
+          onRefresh={loadData}
+        />{" "}
+      </div>
     </main>
   );
 }

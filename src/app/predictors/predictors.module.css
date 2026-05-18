@@ -1,3 +1,21 @@
 .container {
+  padding: 10px 0;
   width: 100%;
+  max-width: 1200px;
+}
+.sectionTitle {
+  font-size: 20px;
+  text-align: left;
+  border-left: 4px solid var(--accent);
+  padding-left: 20px;
+  padding-bottom: 8px;
+  color: var(--text-main);
+}
+.infoBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 15px;
+  border: 1px solid var(--border);
+  border-radius: 15px;
 }

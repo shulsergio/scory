@@ -6,14 +6,14 @@
 .card {
   display: flex;
   flex-direction: column;
-  border-radius: 8px;
-  border: 1px solid var(--neutral-800);
-  padding: 12px;
-
-  gap: 12px;
+  /* border-radius: 8px; */
+  /* border: 1px solid var(--neutral-800); */
+  border-bottom: 1px solid var(--border);
+  padding: 6px;
+  gap: 4px;
 }
 .timeInfo {
-  font-size: 16px;
+  font-size: 14px;
   color: var(--text-main);
   margin: 0 auto;
 }
@@ -34,7 +34,7 @@
   display: flex;
   align-items: center;
   justify-content: space-around;
-  padding: 8px;
+  padding: 4px 8px;
   font-size: 16px;
   text-align: center;
   border: 1px solid var(--border-subtle);
@@ -65,4 +65,17 @@
   display: flex;
   align-items: center;
   gap: 12px;
+}
+
+@media (min-width: 1200px) {
+  .card {
+    display: flex;
+    flex-direction: column;
+    border-bottom: 1px solid var(--border);
+    padding: 8px;
+    gap: 8px;
+  }
+  .timeInfo {
+    font-size: 16px;
+  }
 }
