@@ -7,6 +7,7 @@
   font-weight: normal;
   font-size: 14px;
   padding: 4px 2px;
+  color: var(--text-muted);
 }
 .blockScore {
   font-weight: bold;
@@ -17,7 +18,7 @@
   width: 50%;
 }
 .blockTeam {
-  color: var(--text-main);
+  color: var(--text-muted);
   font-size: 14px;
   display: flex;
   flex-direction: column;
