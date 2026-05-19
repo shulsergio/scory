@@ -29,7 +29,7 @@ export default function PredictorsPage() {
       }
     }
   }, [session?.user?.accessToken]);
-
+  console.log(" PredictorsPage matches-", matches);
   useEffect(() => {
     if (status === "authenticated") {
       loadData();

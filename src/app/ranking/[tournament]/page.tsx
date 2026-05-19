@@ -31,7 +31,8 @@ export default function TournamentRankingPage() {
       });
     }
   }, [tournament]);
-
+  console.log("TournamentRankingPage players---", players);
+  console.log("TournamentRankingPage tournament---", tournament);
   if (loading) return <Loader />;
 
   return (
