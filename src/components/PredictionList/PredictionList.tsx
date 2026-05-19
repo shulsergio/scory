@@ -96,6 +96,7 @@ export default function PredictionList({
 
   return (
     <main className={css.container}>
+      {isSaving && <Loader />}
       <div className={css.grid}>
         {activeMatches.map((m) => (
           <PredictionCard
@@ -123,11 +124,13 @@ export default function PredictionList({
           disabled={isSaving || changedCount === 0}
           className={`${css.saveBtn} ${isSuccess ? css.btnSuccess : ""}`}
         >
-          {isSaving ? <Loader /> : isSuccess ? <CheckCircle /> : <Save />}
+          {isSuccess ? <CheckCircle /> : <Save />}
           <span>
             {isSuccess
               ? "Saved Successfully!"
-              : `Save ${changedCount} Predictions`}
+              : isSaving
+                ? "Saving..."
+                : `Save ${changedCount} Predictions`}
           </span>
         </ButtonBox>
       </div>

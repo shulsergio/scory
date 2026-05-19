@@ -433,7 +433,8 @@ export const fetchTournamentGroups = async (tournamentTag: string) => {
 };
 
 export interface UserTournamentStat {
-  tournament: string;
+  tournamentSlug: string;
+  tournamentName: string;
   points: number;
   rank: number;
   prevRank: number;
@@ -484,7 +485,8 @@ export const fetchUserProfileById = async (userId: string, token?: string): Prom
         "Content-Type": "application/json",
         ...(token && { Authorization: `Bearer ${token}` }),
       },
-      next: { revalidate: 300 }  
+      // next: { revalidate: 300 }  
+      cache: "no-store"
     });
 
     if (!response.ok) {
