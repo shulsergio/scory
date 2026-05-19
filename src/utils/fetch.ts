@@ -433,7 +433,8 @@ export const fetchTournamentGroups = async (tournamentTag: string) => {
 };
 
 export interface UserTournamentStat {
-  tournament: string;
+  tournamentSlug: string;
+  tournamentName: string;
   points: number;
   rank: number;
   prevRank: number;

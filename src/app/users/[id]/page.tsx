@@ -90,14 +90,14 @@ export default async function UserProfilePage({ params }: Props) {
           <div className={css.tournamentList}>
             {stats.length > 0 ? (
               stats.map((s) => (
-                <div key={s.tournament} className={css.tournamentCard}>
+                <div key={s.tournamentSlug} className={css.tournamentCard}>
                   <div className={css.tHeader}>
-                    <span className={css.tName}>{s.tournament}</span>
+                    <span className={css.tName}>{s.tournamentName}</span>
                     <span className={css.tPoints}>{s.points} pts</span>
                   </div>
                   <div className={css.tDetails}>
-                    <span>Rank: #{s.rank || "-"}</span>
-                    <span>exact scores: {s.exactScores}</span>
+                    <span>matches: {s.matchesPredicted || "-"}</span>
+                    <span>exact scores: {s.exactScores || "-"}</span>
                   </div>
                 </div>
               ))

@@ -37,7 +37,9 @@
   padding: 4px 8px;
   font-size: 16px;
   text-align: center;
-  border: 1px solid var(--border-subtle);
+  /* border: 1px solid var(--border-subtle);
+   */
+  border: 1px solid var(--accent);
   border-radius: 4px;
 }
 .teamName {
