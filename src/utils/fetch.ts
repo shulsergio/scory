@@ -384,9 +384,9 @@ export const fetchMatchesWithPredictions = async (
 // };
 
 
-export const fetchLeaderboard = async (tournamentTag: string) => {
+export const fetchLeaderboard = async (tournamentTag: string, page = 1, limit = 5) => {
   try {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/ranking/${tournamentTag}`, {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/ranking/${tournamentTag}?page=${page}&limit=${limit}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -395,10 +395,13 @@ export const fetchLeaderboard = async (tournamentTag: string) => {
 
     if (!response.ok) throw new Error("Ошибка при загрузке рейтинга");
 
-    return await response.json(); // Возвращает массив топ-50
+    return await response.json(); 
   } catch (error) {
     console.error("fetchLeaderboard error:", error);
-    return [];
+    return {
+      pagination: { totalPlayers: 0, totalPages: 1, currentPage: page, limit },
+      data: []
+    };
   }
 };
 
@@ -491,7 +494,7 @@ export const fetchUserProfileById = async (userId: string, token?: string): Prom
 
     if (!response.ok) {
       if (response.status === 404) {
-        console.warn(`User ${userId} not found`);
+        console.log(`User ${userId} not found`);
         return null;
       }
       throw new Error("Не удалось загрузить профиль пользователя");

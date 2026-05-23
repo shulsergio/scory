@@ -1,12 +1,13 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import { fetchLeaderboard } from "@/utils/fetch";
 import Loader from "@/components/Loader/Loader";
 import Link from "next/link";
-import { Trophy, Users } from "lucide-react";
+import { ChevronLeft, ChevronRight, Trophy, Users } from "lucide-react";
 import css from "./tournament.module.css";
+import { useSession } from "next-auth/react";
 
 interface TournamentRankingPageProps {
   userId: string;
@@ -19,20 +20,47 @@ interface TournamentRankingPageProps {
 }
 
 export default function TournamentRankingPage() {
+  const { data: session } = useSession();
   const { tournament } = useParams();
   const [players, setPlayers] = useState<TournamentRankingPageProps[]>([]);
   const [loading, setLoading] = useState(true);
 
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const [totalParticipants, setTotalParticipants] = useState(0);
+
   useEffect(() => {
-    if (tournament) {
-      fetchLeaderboard(tournament as string).then((data) => {
-        setPlayers(Array.isArray(data) ? data : []);
+    if (!tournament) return;
+
+    const loadLeaderboardData = async () => {
+      setLoading(true);
+      try {
+        const res = await fetchLeaderboard(
+          tournament as string,
+          currentPage,
+          7,
+        );
+
+        setPlayers(res.data || []);
+        setTotalPages(res.pagination.totalPages || 1);
+        setTotalParticipants(res.pagination.totalPlayers || 0);
+      } catch (err) {
+        console.error("Ошибка при загрузке лидерборда:", err);
+      } finally {
         setLoading(false);
-      });
-    }
-  }, [tournament]);
+      }
+    };
+
+    loadLeaderboardData();
+  }, [tournament, currentPage]);
+
+  if (loading && players.length === 0) return <Loader />;
   console.log("TournamentRankingPage players---", players);
   console.log("TournamentRankingPage tournament---", tournament);
+  console.log("player.userId с бэка:", players[0]?.userId);
+  console.log("session.user из Next-Auth:", session?.user);
+  console.log("totalParticipants:", totalParticipants);
+
   if (loading) return <Loader />;
 
   return (
@@ -48,7 +76,7 @@ export default function TournamentRankingPage() {
               </div>
               <div className={css.badge}>
                 <Users size={14} />
-                <span>{players.length} participants</span>
+                <span>{totalParticipants} participants</span>
               </div>
             </div>
           </div>
@@ -91,35 +119,70 @@ export default function TournamentRankingPage() {
                   </tr>
                 </thead>
                 <tbody>
-                  {players.map((player, index) => (
-                    <tr
-                      key={player.userId || player.rank}
-                      className={`
-    ${player.userNickname === player?.userNickname ? css.currentUserRow : ""}
-    ${index === 0 ? css.gold : ""}
-    ${index === 1 ? css.silver : ""}
-    ${index === 2 ? css.bronze : ""}
-  `}
-                    >
-                      <td className={css.rankCell}>{player.rank}</td>
-                      <td className={css.nickname}>
-                        <Link href={`/users/${player.userId}`}>
-                          <span className={css.mainName}>
-                            {player.userName || "User"}{" "}
-                            <span className={css.akaText}>aka</span>{" "}
-                            {player.userNickname}
-                          </span>
-                        </Link>
-                      </td>
-                      <td className={css.exactCell}>
-                        {player.matchesPredicted}
-                      </td>
-                      <td className={css.exactCell}>{player.exactScores}</td>
-                      <td className={css.points}>{player.points}</td>
-                    </tr>
-                  ))}
+                  {players.map((player) => {
+                    const currentUserId = String(session?.user?.id).trim();
+                    const playerUserId = String(player.userId).trim();
+
+                    const isCurrentPlayer =
+                      currentUserId &&
+                      playerUserId &&
+                      currentUserId === playerUserId;
+                    console.log("isCurrentPlayer:", isCurrentPlayer);
+                    return (
+                      <tr
+                        key={player.userId || player.rank}
+                        className={`
+          ${isCurrentPlayer ? css.currentUserRow : ""}
+          ${player.rank === 1 ? css.gold : ""}
+          ${player.rank === 2 ? css.silver : ""}
+          ${player.rank === 3 ? css.bronze : ""}
+        `}
+                      >
+                        <td className={css.rankCell}>{player.rank}</td>
+                        <td className={css.nickname}>
+                          <Link href={`/users/${player.userId}`}>
+                            <span className={css.mainName}>
+                              {player.userName || "User"}{" "}
+                              <span className={css.akaText}>aka</span>{" "}
+                              {player.userNickname}
+                            </span>
+                          </Link>
+                        </td>
+                        <td className={css.exactCell}>
+                          {player.matchesPredicted}
+                        </td>
+                        <td className={css.exactCell}>{player.exactScores}</td>
+                        <td className={css.points}>{player.points}</td>
+                      </tr>
+                    );
+                  })}
                 </tbody>
               </table>
+              {totalPages > 1 && (
+                <div className={css.pagination}>
+                  <button
+                    onClick={() => setCurrentPage((p) => Math.max(p - 1, 1))}
+                    disabled={currentPage === 1 || loading}
+                    className={css.paginationBtn}
+                  >
+                    <ChevronLeft size={18} />
+                  </button>
+
+                  <span className={css.pageInfo}>
+                    Page <b>{currentPage}</b> of <b>{totalPages}</b>
+                  </span>
+
+                  <button
+                    onClick={() =>
+                      setCurrentPage((p) => Math.min(p + 1, totalPages))
+                    }
+                    disabled={currentPage === totalPages || loading}
+                    className={css.paginationBtn}
+                  >
+                    <ChevronRight size={18} />
+                  </button>
+                </div>
+              )}
             </div>
           </section>
         </div>

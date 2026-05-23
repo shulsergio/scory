@@ -186,10 +186,110 @@
 .bronze .points {
   color: #cd7f32;
 }
+
+.currentUserRow:not(.gold):not(.silver):not(.bronze) {
+  background: rgba(0, 217, 255, 0.1);
+  border-left: 4px solid var(--accent);
+}
+
 .header:hover,
 .infoBlock:hover,
 .tableWrapper:hover {
   border-color: var(--primary-500);
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-top: 4px;
+  padding: 4px 8px;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 50px;
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(6px);
+}
+
+.paginationBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(145deg, #1e1e1e, #141414);
+  color: #a0a0a0;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  width: 42px;
+  height: 42px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.paginationBtn:hover:not(:disabled) {
+  color: #000000;
+  background: var(--accent, #fbbf24);
+  border-color: var(--accent, #fbbf24);
+  /* transform: translateY(-2px); */
+  box-shadow: 0 6px 20px rgba(251, 191, 36, 0.4);
+}
+
+.paginationBtn:active:not(:disabled) {
+  /* transform: translateY(0); */
+  box-shadow: 0 2px 8px rgba(251, 191, 36, 0.2);
+}
+
+.paginationBtn:disabled {
+  opacity: 0.25;
+  cursor: not-allowed;
+  background: #161616;
+  border-color: rgba(255, 255, 255, 0.05);
+  color: #555555;
+  transform: none;
+  box-shadow: none;
+}
+
+.pageInfo {
+  font-size: 14px;
+  color: #888888;
+  letter-spacing: 0.5px;
+  user-select: none;
+}
+
+.pageInfo b {
+  color: #ffffff;
+  font-weight: 600;
+  background: rgba(255, 255, 255, 0.08);
+  padding: 4px 10px;
+  border-radius: 6px;
+  margin: 0 4px;
+  border: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+.pageInfo b:first-of-type {
+  color: var(--accent, #fbbf24);
+  background: rgba(251, 191, 36, 0.1);
+  border: 1px solid rgba(251, 191, 36, 0.2);
+}
+
+@media (min-width: 491px) {
+  .header {
+    padding: 15px;
+  }
+  .title {
+    font-size: 22px;
+  }
+  .table th {
+    font-size: 16px;
+  }
+  .table td {
+    font-size: 16px;
+  }
 }
 
 @media (min-width: 1200px) {
@@ -209,27 +309,32 @@
   .tableWrapper {
     min-height: 400px;
   }
-}
 
-@media (min-width: 491px) {
-  .header {
-    padding: 15px;
-  }
-  .title {
-    font-size: 22px;
-  }
-  .table th {
-    font-size: 16px;
-  }
-  .table td {
-    font-size: 16px;
-  }
-}
-@media (min-width: 1200px) {
   .mainName {
     font-size: 18px;
   }
   .akaText {
-    font-size: 13px;
+    font-size: 14px;
+  }
+  .table td {
+    font-size: 18px;
+  }
+
+  .pagination {
+    gap: 16px;
+    margin-top: 12px;
+    padding: 8px 12px;
+  }
+  .pageInfo {
+    font-size: 18px;
+
+    letter-spacing: 0.8px;
+  }
+
+  .pageInfo b {
+    color: #ffffff;
+    padding: 8px 12px;
+    border-radius: 6px;
+    margin: 0 8px;
   }
 }
