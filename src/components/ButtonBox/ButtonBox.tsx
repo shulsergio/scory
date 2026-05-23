@@ -10,6 +10,7 @@ interface ButtonBoxProps {
   type?: "submit" | "button";
   children?: React.ReactNode;
   href?: string;
+  target?: string;
   onClick?:
     | React.MouseEventHandler<HTMLButtonElement | HTMLAnchorElement>
     | (() => void);
@@ -22,6 +23,7 @@ export default function ButtonBox({
   variant = "primary",
   type = "button",
   href = "",
+  target = "_self",
   onClick,
   children = null,
   disabled = false,
@@ -30,7 +32,13 @@ export default function ButtonBox({
   const combinedClass = `${css.linkBox} ${css[variant]} ${className}`;
   if (option === "link") {
     return (
-      <Link href={href} className={combinedClass} onClick={onClick}>
+      <Link
+        href={href}
+        className={combinedClass}
+        onClick={onClick}
+        target={target}
+        rel={target === "_blank" ? "noopener noreferrer" : undefined}
+      >
         {children}
       </Link>
     );
