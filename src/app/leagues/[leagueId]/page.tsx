@@ -126,46 +126,59 @@ export default function LeagueDetailsPage() {
       <div className={css.dataBoxContainer}>
         <section className={css.sideSection}>
           <h2 className={css.sectionTitle}>About League</h2>
-          <div className={css.infoBlock}>
-            <div className={css.descriptionBox}>
-              <Info size={20} className={css.infoIcon} />
-              <p>{data.description || "No description provided"}</p>
-            </div>
+          <div className={css.leftBlock}>
+            <div className={css.infoBlock}>
+              <div className={css.descriptionBox}>
+                <Info size={20} className={css.infoIcon} />
+                <p>{data.description || "No description provided"}</p>
+              </div>
 
-            <div className={css.actions}>
-              {status === "unauthenticated" ? (
-                <button className={css.loginButton} onClick={() => signIn()}>
-                  <LogIn size={18} />
-                  <span>Sign in to join</span>
-                </button>
-              ) : (
-                <>
-                  {isAdmin ? (
-                    <button
-                      className={css.manageButton}
-                      onClick={handleManageClick}
-                    >
-                      <Settings size={18} />
-                      <span>Manage League</span>
-                    </button>
-                  ) : isMember ? (
-                    <button
-                      className={css.leaveButton}
-                      onClick={handleLeaveClick}
-                    >
-                      Leave League
-                    </button>
-                  ) : (
-                    <button
-                      className={css.joinButton}
-                      onClick={handleJoinClick}
-                    >
-                      <UserPlus size={18} />
-                      <span>Join League</span>
-                    </button>
-                  )}
-                </>
-              )}
+              <div className={css.actions}>
+                {status === "unauthenticated" ? (
+                  <button className={css.loginButton} onClick={() => signIn()}>
+                    <LogIn size={18} />
+                    <span>Sign in to join</span>
+                  </button>
+                ) : (
+                  <>
+                    {isAdmin ? (
+                      <button
+                        className={css.manageButton}
+                        onClick={handleManageClick}
+                      >
+                        <Settings size={18} />
+                        <span>Manage League</span>
+                      </button>
+                    ) : isMember ? (
+                      <button
+                        className={css.leaveButton}
+                        onClick={handleLeaveClick}
+                      >
+                        Leave League
+                      </button>
+                    ) : (
+                      <button
+                        className={css.joinButton}
+                        onClick={handleJoinClick}
+                      >
+                        <UserPlus size={18} />
+                        <span>Join League</span>
+                      </button>
+                    )}
+                  </>
+                )}
+              </div>
+            </div>
+            <div className={css.advertisingBlock}>
+              <ButtonBox
+                className={css.advertisingLink}
+                option="link"
+                variant="white"
+                href="https://t.me/+n9s8Xo2l7aQyZTI0"
+                target="_blank"
+              >
+                Join to our telegram chat
+              </ButtonBox>
             </div>
           </div>
         </section>

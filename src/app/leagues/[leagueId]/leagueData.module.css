@@ -62,6 +62,11 @@
   padding-bottom: 8px;
   color: var(--text-main);
 }
+.leftBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
 
 .infoBlock {
   display: flex;
@@ -76,7 +81,18 @@
   border: 1px solid var(--border);
   min-height: 150px;
 }
-
+.advertisingBlock {
+  border-radius: 15px;
+  padding: 15px;
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.6)),
+    url("/bg_tournament.png");
+  background-size: cover;
+  border: 1px solid var(--border);
+  min-height: 150px;
+  display: flex;
+  flex-direction: column;
+}
 .descriptionBox {
   display: flex;
   gap: 12px;
@@ -178,7 +194,17 @@
   display: flex;
   gap: 10px;
 }
-
+.advertisingLink {
+  padding: 10px 20px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  margin-top: auto;
+  width: 75%;
+  text-align: center;
+}
 .loginButton,
 .joinButton,
 .manageButton,
@@ -333,7 +359,7 @@
     flex-grow: 1;
   }
   .infoBlock {
-    min-height: 300px;
+    min-height: 150px;
   }
   .tableWrapper {
     min-height: 300px;
