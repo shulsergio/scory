@@ -37,7 +37,8 @@ export default function PredictionMatches({
   if (!activeMatchesForDisplay || activeMatchesForDisplay.length === 0) {
     return (
       <div className={css.empty}>
-        No active matches for predictions. Please check back later.
+        No active matches for predictions. <br />
+        Please check back later.
       </div>
     );
   }

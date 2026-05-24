@@ -42,3 +42,9 @@
   background: var(--accent);
   color: #000;
 }
+
+@media (min-width: 1200px) {
+  .input {
+    font-size: 16px;
+  }
+}
