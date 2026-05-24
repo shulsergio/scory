@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import { fetchLeaderboard } from "@/utils/fetch";
 import Loader from "@/components/Loader/Loader";
@@ -8,6 +8,8 @@ import Link from "next/link";
 import { ChevronLeft, ChevronRight, Trophy, Users } from "lucide-react";
 import css from "./tournament.module.css";
 import { useSession } from "next-auth/react";
+
+const ITEMS_PER_PAGE = 15;
 
 interface TournamentRankingPageProps {
   userId: string;
@@ -38,7 +40,7 @@ export default function TournamentRankingPage() {
         const res = await fetchLeaderboard(
           tournament as string,
           currentPage,
-          7,
+          ITEMS_PER_PAGE,
         );
 
         setPlayers(res.data || []);
