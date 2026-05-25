@@ -11,9 +11,27 @@ import {
 } from "@/utils/fetch";
 import Loader from "@/components/Loader/Loader";
 import css from "./leagueData.module.css";
-import { LogIn, Settings, UserPlus, Trophy, Info, X } from "lucide-react";
+import {
+  LogIn,
+  Settings,
+  UserPlus,
+  Trophy,
+  Info,
+  X,
+  ChevronRight,
+  ChevronLeft,
+} from "lucide-react";
 import Link from "next/link";
 import ButtonBox from "@/components/ButtonBox/ButtonBox";
+
+const ITEMS_PER_PAGE = 4;
+
+interface LeagueMember {
+  id: string;
+  nickname: string;
+  points: number;
+  rank: number;
+}
 
 export default function LeagueDetailsPage() {
   const { leagueId } = useParams() as { leagueId: string };
@@ -27,19 +45,30 @@ export default function LeagueDetailsPage() {
   const [editDescription, setEditDescription] = useState("");
   const [isUpdating, setIsUpdating] = useState(false);
 
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const [players, setPlayers] = useState<LeagueMember[]>([]);
+
   const loadData = useCallback(async () => {
     try {
+      setIsLoading(true);
       const result = await fetchLeagueResults(
         session?.user?.accessToken || "",
         leagueId,
+        currentPage,
+        ITEMS_PER_PAGE,
       );
+
       setData(result);
+
+      setPlayers(result?.leaderboard || []);
+      setTotalPages(result?.pagination?.totalPages || 1);
     } catch (err) {
       console.error(err);
     } finally {
       setIsLoading(false);
     }
-  }, [leagueId, session?.user?.accessToken]);
+  }, [leagueId, session?.user?.accessToken, currentPage]);
 
   useEffect(() => {
     if (status !== "loading") {
@@ -48,6 +77,7 @@ export default function LeagueDetailsPage() {
   }, [status, loadData]);
 
   const isAdmin = !!session?.user?.id && data?.adminId === session?.user?.id;
+
   const isMember =
     !!session?.user?.nickname &&
     data?.leaderboard.some((m) => m.nickname === session?.user?.nickname);
@@ -182,39 +212,81 @@ export default function LeagueDetailsPage() {
             </div>
           </div>
         </section>
+
         <section className={css.mainSection}>
-          <h2 className={css.sectionTitle}>Table</h2>
+          <h2 className={css.sectionTitle}>League Table</h2>
           <div className={css.tableWrapper}>
-            <table className={css.table}>
-              <thead>
-                <tr>
-                  <th className={css.th}>Rank</th>
-                  <th className={css.th}>Nickname</th>
-                  <th className={css.th}>Points</th>
-                </tr>
-              </thead>
-              <tbody>
-                {data.leaderboard.map((member, index) => (
-                  <tr
-                    key={member.nickname}
-                    className={`
-    ${member.nickname === session?.user?.nickname ? css.currentUserRow : ""}
-    ${index === 0 ? css.gold : ""}
-    ${index === 1 ? css.silver : ""}
-    ${index === 2 ? css.bronze : ""}
-  `}
-                  >
-                    <td className={css.rank}>{index + 1}</td>
-                    <td className={css.nickname}>
-                      <Link href={`/users/${member.id}`}>
-                        {member.nickname}
-                      </Link>
-                    </td>
-                    <td className={css.points}>{member.points}</td>
+            {isLoading ? (
+              <div style={{ padding: "20px", textAlign: "center" }}>
+                <Loader />
+              </div>
+            ) : (
+              <table className={css.table}>
+                <thead>
+                  <tr>
+                    <th className={css.th}>Rank</th>
+                    <th className={css.th}>Nickname</th>
+                    <th className={css.th}>Points</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody>
+                  {players.map((member) => {
+                    const isCurrentPlayer =
+                      session?.user?.id &&
+                      member.id &&
+                      String(member.id) === String(session.user.id);
+
+                    return (
+                      <tr
+                        key={member.id || member.rank}
+                        className={`
+                          ${isCurrentPlayer ? css.currentUserRow : ""}
+                          ${member.rank === 1 ? css.gold : ""}
+                          ${member.rank === 2 ? css.silver : ""}
+                          ${member.rank === 3 ? css.bronze : ""}
+                        `}
+                      >
+                        <td className={css.rank}>{member.rank}</td>
+                        <td className={css.nickname}>
+                          <Link href={`/users/${member.id}`}>
+                            {member.nickname}
+                          </Link>
+                        </td>
+                        <td className={css.points}>{member.points}</td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            )}
+
+            {/* --- КАПСУЛЬНАЯ ПАГИНАЦИЯ ДЛЯ ТАБЛИЦЫ ЛИГИ --- */}
+            {totalPages > 1 && (
+              <div className={css.pagination}>
+                <button
+                  onClick={() => setCurrentPage((p) => Math.max(p - 1, 1))}
+                  disabled={currentPage === 1 || isLoading}
+                  className={css.paginationBtn}
+                >
+                  <ChevronLeft size={18} />
+                </button>
+
+                <span className={css.pageInfo}>
+                  Page <b>{currentPage}</b> of <b>{totalPages}</b>
+                </span>
+
+                <button
+                  onClick={() =>
+                    setCurrentPage((p) => Math.min(p + 1, totalPages))
+                  }
+                  disabled={currentPage === totalPages || isLoading}
+                  className={css.paginationBtn}
+                >
+                  <ChevronRight size={18} />
+                </button>
+              </div>
+            )}
+            {/* -------------------------------------------- */}
           </div>
         </section>
       </div>
