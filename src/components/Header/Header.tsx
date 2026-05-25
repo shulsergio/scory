@@ -3,13 +3,13 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useSession, signOut } from "next-auth/react";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import css from "./Header.module.css";
 import { ThemeToggle } from "@/utils/ThemeToggle";
 import ButtonBox from "../ButtonBox/ButtonBox";
+import { User, LogOut, Sliders, Trophy } from "lucide-react";
 
 const navLinks = [
-  // { name: "Matches", href: "/matches/WC2026" },
   { name: "Leagues", href: "/leagues" },
   { name: "WC2026", href: "/groups/WC2026" },
   { name: "About", href: "/about" },
@@ -21,8 +21,21 @@ export default function Header() {
   const { data: session, status } = useSession();
   const [isOpen, setIsOpen] = useState(false);
 
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
   const isLoading = status === "loading";
 
+  const UserLinks = session
+    ? [
+        { name: "My profile", href: "/profile" },
+        { name: "My stats", href: `/users/${session.user.id}` },
+        { name: "Settings", href: "/settings" },
+      ]
+    : [];
+
+  // Блокировка скролла для мобилки
   useEffect(() => {
     const originalOverflow = document.body.style.overflow;
     if (isOpen) {
@@ -32,6 +45,23 @@ export default function Header() {
       document.body.style.overflow = originalOverflow;
     };
   }, [isOpen]);
+
+  // Закрытие выпадающего меню при клике вне его области
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
+        setIsDropdownOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   return (
     <header className={css.header}>
@@ -60,26 +90,50 @@ export default function Header() {
             {isLoading ? (
               <div className={css.loaderPlaceholder}>-</div>
             ) : session ? (
-              <div className={css.userDesktopWrapper}>
-                <Link
-                  href={`/users/${session.user.id}`}
-                  className={css.userPill}
+              <div className={css.userDesktopWrapper} ref={dropdownRef}>
+                <button
+                  onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                  className={`${css.userPill} ${isDropdownOpen ? css.userPillActive : ""}`}
                 >
                   <span className={css.nickname}>
                     {session.user.nickname || session.user.name}
                   </span>
-                </Link>
 
-                {/* Кнопка выхода для десктопа */}
-                <div className={css.logoutBtn}>
-                  <ButtonBox
-                    option="button"
-                    variant="white"
-                    onClick={() => signOut()}
+                  <span
+                    className={`${css.arrow} ${isDropdownOpen ? css.arrowRotate : ""}`}
                   >
-                    Log out
-                  </ButtonBox>
-                </div>
+                    ▾
+                  </span>
+                </button>
+
+                {/* ---------- ВЫПАДАЮЩЕЕ МЕНЮ */}
+                {isDropdownOpen && (
+                  <div className={css.dropdownMenu}>
+                    {UserLinks.map((user) => (
+                      <Link
+                        key={user.href}
+                        href={user.href}
+                        className={css.dropdownItem}
+                        onClick={() => setIsDropdownOpen(false)}
+                      >
+                        {user.name === "My profile" && <User size={16} />}
+                        {user.name === "My stats" && <Trophy size={16} />}{" "}
+                        {user.name === "Settings" && <Sliders size={16} />}
+                        <span>{user.name}</span>
+                      </Link>
+                    ))}
+
+                    <hr className={css.divider} />
+
+                    <button
+                      onClick={() => signOut()}
+                      className={`${css.dropdownItem} ${css.logoutItem}`}
+                    >
+                      <LogOut size={16} />
+                      <span>Log out</span>
+                    </button>
+                  </div>
+                )}
               </div>
             ) : (
               <div className={css.desktopOnly}>
@@ -93,6 +147,7 @@ export default function Header() {
             )}
           </div>
           <ThemeToggle />
+
           <button
             className={`${css.hamburger} ${isOpen ? css.hamburgerActive : ""}`}
             onClick={() => setIsOpen(!isOpen)}
@@ -105,7 +160,7 @@ export default function Header() {
         </div>
       </div>
 
-      {/* МОБИЛЬНОЕ МЕНЮ (Overlay) */}
+      {/* ---------- МОБИЛЬНОЕ МЕНЮ  */}
       <div className={`${css.mobileMenu} ${isOpen ? css.menuOpen : ""}`}>
         <nav className={css.mobileNavLinks}>
           {navLinks.map((link) => (
@@ -121,9 +176,21 @@ export default function Header() {
 
           <div className={css.mobileActions}>
             {session ? (
-              <button className={css.mobileExitBtn} onClick={() => signOut()}>
-                Log out
-              </button>
+              <>
+                {UserLinks.map((user) => (
+                  <Link
+                    key={user.href}
+                    href={user.href}
+                    className={`${css.mobileLink} ${pathname === user.href ? css.active : ""}`}
+                    onClick={() => setIsOpen(false)}
+                  >
+                    {user.name}
+                  </Link>
+                ))}
+                <button className={css.mobileExitBtn} onClick={() => signOut()}>
+                  Log out
+                </button>
+              </>
             ) : (
               <ButtonBox
                 option="link"

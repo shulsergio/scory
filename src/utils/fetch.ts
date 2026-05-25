@@ -20,11 +20,18 @@ export interface League {
   totalPoints?: number;
   adminId: string;
 }
+export interface PaginationEntry {
+  currentPage: number;
+  limit: number;
+  totalPages: number;
+  totalPlayers: number;
+}
 
 export interface LeaderboardEntry {
   id: string;
   nickname: string;
   points: number;
+  rank: number;
   joinedAt: string;
 }
 
@@ -35,7 +42,7 @@ export interface LeagueResults {
   tournamentName: string;
   tournamentSlug: string;
   description: string;
-
+ pagination: PaginationEntry;  
 }
 
 /**
@@ -204,11 +211,14 @@ export const fetchActiveTournaments = async (): Promise<Tournament[]> => {
 };
 
 /** Получение результатов конкретной лиги */
-export const fetchLeagueResults = async (token: string, leagueId: string): Promise<LeagueResults> => {
+export const fetchLeagueResults = async (token: string, 
+  leagueId: string, 
+  page: number = 1, 
+  limit: number = 10): Promise<LeagueResults> => {
   try {
-    const response = await fetch(`${BASE_URL}/leagues/${leagueId}`, {
+    const response = await fetch(`${BASE_URL}/leagues/${leagueId}?page=${page}&limit=${limit}`, {
       method: 'GET',
-      headers: {
+      headers: {  
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${token}`  
       },
@@ -219,7 +229,10 @@ export const fetchLeagueResults = async (token: string, leagueId: string): Promi
     }
 
     const result = await response.json();
-    return result.data;
+   console.log("!!! fetchLeagueResults result:", result);
+   
+       console.log("!!! fetchLeagueResults result.data:", result.data);
+   return result ;
   } catch (error) {
     console.error("fetchLeagueResults error:", error);
     throw error;

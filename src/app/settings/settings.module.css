@@ -1,0 +1,138 @@
+.container {
+  /* max-width: 650px; */
+  /* margin: 40px auto; */
+  padding: 15px 0;
+}
+
+.pageTitle {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--accent);
+  /* margin-bottom: 24px; */
+}
+
+.formWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* Карточки-секции */
+.sectionBox {
+  background: #181818;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  padding: 24px;
+}
+
+.sectionTitle {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  padding-bottom: 10px;
+}
+
+.sectionIcon {
+  color: var(--accent, #fbbf24);
+}
+
+/* Элементы форм */
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.inputGroup:last-child {
+  margin-bottom: 0;
+}
+
+.label {
+  font-size: 14px;
+  font-weight: 500;
+  color: #cccccc;
+}
+
+.input,
+.select {
+  background: #222222;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: 10px 14px;
+  color: #ffffff;
+  font-size: 15px;
+  outline: none;
+  transition: border-color 0.2s ease;
+  width: 100%;
+}
+
+.input:focus,
+.select:focus {
+  border-color: var(--accent, #fbbf24);
+}
+
+/* Заблокированный инпут */
+.disabledInputWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.inputDisabled {
+  background: #141414;
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  border-radius: 8px;
+  padding: 10px 14px;
+  color: #666666;
+  font-size: 15px;
+  cursor: not-allowed;
+  width: 100%;
+  padding-right: 40px;
+}
+
+.lockIcon {
+  position: absolute;
+  right: 14px;
+  color: #555555;
+}
+
+.hint {
+  font-size: 12px;
+  color: #666666;
+  margin: 0;
+}
+
+/* Кнопка отправки */
+.actionsRow {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 8px;
+}
+
+.saveBtn {
+  background: var(--accent, #fbbf24);
+  color: #000000;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 24px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.saveBtn:hover {
+  opacity: 0.9;
+}
+
+.saveBtn:disabled {
+  background: #444444;
+  color: #888888;
+  cursor: not-allowed;
+}
