@@ -32,8 +32,7 @@ authorized: ({ req, token }) => {
 );
 
 /**
- * ЭКСПОРТ PROXY
- * Теперь используем официальный тип NextProxy
+ * ЭКСПОРТ PROXY 
  */
 export default function proxy(req: NextRequestWithAuth, event: NextFetchEvent) {
  return (authMiddleware as unknown as NextProxy)(req, event);
@@ -44,7 +43,7 @@ export default function proxy(req: NextRequestWithAuth, event: NextFetchEvent) {
  */
 export const config = {
   matcher: [
-"/", 
+"/settings",
     "/profile", 
     "/profile/:path*", 
     "/leagues/:path*",

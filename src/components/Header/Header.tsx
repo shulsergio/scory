@@ -22,7 +22,7 @@ export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  // Реф для отслеживания клика мимо меню
+
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   const isLoading = status === "loading";
@@ -106,7 +106,7 @@ export default function Header() {
                   </span>
                 </button>
 
-                {/* ---------- САМО ВЫПАДАЮЩЕЕ МЕНЮ */}
+                {/* ---------- ВЫПАДАЮЩЕЕ МЕНЮ */}
                 {isDropdownOpen && (
                   <div className={css.dropdownMenu}>
                     {UserLinks.map((user) => (
@@ -118,7 +118,6 @@ export default function Header() {
                       >
                         {user.name === "My profile" && <User size={16} />}
                         {user.name === "My stats" && <Trophy size={16} />}{" "}
-                        {/* Сюда можно Trophy поставить при желании */}
                         {user.name === "Settings" && <Sliders size={16} />}
                         <span>{user.name}</span>
                       </Link>
@@ -161,7 +160,7 @@ export default function Header() {
         </div>
       </div>
 
-      {/* МОБИЛЬНОЕ МЕНЮ (Оставляем как было) */}
+      {/* ---------- МОБИЛЬНОЕ МЕНЮ  */}
       <div className={`${css.mobileMenu} ${isOpen ? css.menuOpen : ""}`}>
         <nav className={css.mobileNavLinks}>
           {navLinks.map((link) => (
