@@ -29,6 +29,10 @@
   text-align: center;
 }
 /* --- Навигация --- */
+.userDesktopWrapper {
+  display: none;
+}
+
 .logoutBtn {
   display: none;
 }
@@ -90,6 +94,109 @@
   /* text-transform: uppercase; */
   color: var(--text-gray);
 }
+/* ------------------ */
+
+.userPill {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 8px 20px;
+  border-radius: 20px;
+  color: #ffffff;
+  font-weight: 500;
+
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.userPill:hover,
+.userPillActive {
+  background: rgba(251, 191, 36, 0.1);
+  border-color: var(--accent, #fbbf24);
+}
+
+.arrow {
+  font-size: 24px;
+  color: var(--text-muted, #888888);
+  transition: transform 0.2s ease;
+  line-height: 1;
+}
+
+.arrowRotate {
+  transform: rotate(180deg);
+  color: var(--accent, #fbbf24);
+}
+
+.dropdownMenu {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  background: #181818;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  width: 180px;
+  padding: 6px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  z-index: 100; /* Чтобы парило над таблицами и банерами */
+  display: flex;
+  flex-direction: column;
+  animation: fadeIn 0.15s ease-out;
+}
+
+/* .dropdownHeader {
+  padding: 6px 12px;
+}
+
+.dropdownUserTitle {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: #666666;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+} */
+
+.dropdownItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  color: #cccccc;
+  font-size: 14px;
+  text-decoration: none;
+  background: transparent;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.15s ease;
+  width: 100%;
+}
+
+.dropdownItem:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: #ffffff;
+}
+
+.divider {
+  border: none;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  margin: 6px 0;
+}
+
+.logoutItem:hover {
+  background: rgba(239, 68, 68, 0.1);
+  color: #ef4444;
+}
+
+.mobileProfileLink {
+  color: var(--accent, #fbbf24);
+  text-decoration: none;
+  font-weight: 600;
+  padding: 10px 0;
+  font-size: 16px;
+}
 
 /* --- БУРГЕР МЕНЮ --- */
 .hamburger {
@@ -131,6 +238,13 @@
   .hamburger {
     display: none;
   }
+
+  .userDesktopWrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
 }
 
 /* --- Мобильное меню (Overlay) --- */
@@ -161,7 +275,7 @@
 }
 
 .mobileLink {
-  font-size: 22px;
+  font-size: 20px;
   text-decoration: none;
   color: var(--text-main);
   font-family: var(--font-family-Kanit);
@@ -204,22 +318,6 @@
 @media (min-width: 1200px) {
   .logoutBtn {
     display: flex;
-  }
-  /* .logoutBtn {
-    background: transparent;
-    border: 1px solid var(--border);
-    color: var(--text-muted);
-    padding: 6px 16px;
-    border-radius: 100px;
-    font-size: 14px;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.2s ease;
-  } */
-  .userDesktopWrapper {
-    display: flex;
-    align-items: center;
-    gap: 15px;
   }
 
   .logoutBtn:hover {
