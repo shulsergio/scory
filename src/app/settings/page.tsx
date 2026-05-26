@@ -4,31 +4,34 @@ import { useSession } from "next-auth/react";
 import { useState, useEffect } from "react";
 import Loader from "@/components/Loader/Loader";
 import css from "./settings.module.css";
-import { User, Globe, Lock } from "lucide-react";
+import { Lock } from "lucide-react";
+import { updateUserSettings } from "@/utils/fetch";
 
 const countries = [
-  { code: "UA", name: "Ukraine", flag: "🇺🇦" },
-  { code: "PL", name: "Poland", flag: "🇵🇱" },
-  { code: "CZ", name: "Czech Republic", flag: "🇨🇿" },
-  { code: "DE", name: "Germany", flag: "🇩🇪" },
-  { code: "FR", name: "France", flag: "🇫🇷" },
-  { code: "IT", name: "Italy", flag: "🇮🇹" },
-  { code: "ES", name: "Spain", flag: "🇪🇸" },
-  { code: "PT", name: "Portugal", flag: "🇵🇹" },
-  { code: "NO", name: "Norway", flag: "🇳🇴" },
-  { code: "GB", name: "United Kingdom", flag: "🇬🇧" },
-  { code: "US", name: "United States", flag: "🇺🇸" },
-  { code: "MX", name: "Mexico", flag: "🇲🇽" },
-  { code: "CA", name: "Canada", flag: "🇨🇦" },
+  { code: "UA", name: "Ukraine", flag: "ua" },
+  { code: "PL", name: "Poland", flag: "pl" },
+  { code: "CZ", name: "Czech Republic", flag: "cz" },
+  { code: "DE", name: "Germany", flag: "de" },
+  { code: "FR", name: "France", flag: "fr" },
+  { code: "IT", name: "Italy", flag: "it" },
+  { code: "ES", name: "Spain", flag: "es" },
+  { code: "PT", name: "Portugal", flag: "pt" },
+  { code: "NO", name: "Norway", flag: "no" },
+  { code: "GB", name: "United Kingdom", flag: "gb" },
+  { code: "US", name: "United States", flag: "us" },
+  { code: "MX", name: "Mexico", flag: "mx" },
+  { code: "CA", name: "Canada", flag: "ca" },
 ];
 
 export default function SettingsPage() {
   const { data: session, status } = useSession();
-
+  const userDataSession = session?.user;
+  const token = session?.user?.accessToken || "";
   const [name, setName] = useState("");
   const [country, setCountry] = useState("");
   const [isSaving, setIsSaving] = useState(false);
-
+  console.log("SettingsPage userDataSession---", userDataSession);
+  console.log("SettingsPage session---", session);
   useEffect(() => {
     if (session?.user) {
       setName(session.user.name || "");
@@ -43,7 +46,10 @@ export default function SettingsPage() {
     setIsSaving(true);
 
     try {
-      // !!!!! бэкенд
+      await updateUserSettings(token, {
+        name: name,
+        country: country,
+      });
       console.log("Сохраняем данные на бэкенд:", { name, country });
 
       alert("OK!");

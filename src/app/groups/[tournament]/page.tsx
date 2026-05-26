@@ -7,6 +7,7 @@ import { fetchTournamentGroups } from "@/utils/fetch";
 import Loader from "@/components/Loader/Loader";
 import Link from "next/link";
 import ButtonBox from "@/components/ButtonBox/ButtonBox";
+import ImageFlag from "@/components/ImageFlag/ImageFlag";
 
 interface TeamData {
   team: {
@@ -14,6 +15,7 @@ interface TeamData {
     name: string;
     logoUrl: string;
     code: string;
+    flagCode: string;
   };
   points: number;
   goalsFor: number;
@@ -94,6 +96,7 @@ export default function GroupsPage() {
                     {group.teams.map((team) => (
                       <tr key={team.team.name}>
                         <td className={css.teamCell}>
+                          <ImageFlag code={team.team?.flagCode} w="28" h="20" />
                           <Link href={`/teams/${team.team?._id}`}>
                             {team.team.name}
                           </Link>

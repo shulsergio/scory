@@ -7,7 +7,7 @@
   margin: 0 auto;
   /* transition: background 0.3s ease; Плавный переход тем */
 }
-.WcMainBlock{
+.WcMainBlock {
   display: flex;
   flex-direction: column;
   gap: 15px;
@@ -20,8 +20,8 @@
   padding-bottom: 8px;
   color: var(--text-main);
 }
-.matchesButtonBlock{
-   margin-top: auto;
+.matchesButtonBlock {
+  margin-top: auto;
 }
 .infoMatchesBlock {
   display: flex;
@@ -56,7 +56,7 @@
 .groupLetter {
   font-size: 20px;
   font-weight: 800;
-  color: var(--accent);  
+  color: var(--accent);
   margin-bottom: 5px;
   display: flex;
   align-items: center;
@@ -89,6 +89,7 @@
   text-align: center;
   padding: 2px 4px;
   color: var(--text-main);
+  font-size: 14px;
   border-bottom: 1px solid var(--card-border);
 }
 .table .teamCellHead {
@@ -98,6 +99,7 @@
 .table .teamCell {
   width: 60%;
   /* display: flex; */
+  font-size: 15px;
   text-align: left;
   /* align-items: center; */
   font-weight: 600;
@@ -118,9 +120,16 @@
   border-color: var(--primary-500);
 }
 @media (min-width: 1200px) {
-.WcMainBlock{
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-}
+  .WcMainBlock {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  .table td {
+    font-size: 16px;
+  }
+  .table .teamCell {
+    font-size: 17px;
+    letter-spacing: 0.04em;
+  }
 }

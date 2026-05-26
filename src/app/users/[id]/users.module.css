@@ -36,11 +36,11 @@
 }
 
 .nickname {
-  font-size: 24px;
+  font-size: 20px;
   color: var(--accent);
 }
 .aka {
-  padding: 0 10px;
+  padding: 0 4px;
   font-size: 14px;
   color: var(--text-muted);
 }
@@ -216,7 +216,7 @@
   border-color: var(--primary-500);
 }
 
-@media (min-width: 481px) and (max-width: 768px) {
+@media (min-width: 491px) {
   .mainLayout {
     flex-direction: column;
   }
@@ -286,5 +286,8 @@
   }
   .tDetails {
     font-size: 15px;
+  }
+  .nickname {
+    font-size: 22px;
   }
 }

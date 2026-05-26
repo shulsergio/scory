@@ -2,6 +2,7 @@ import { fetchUserProfileById } from "@/utils/fetch";
 import { Trophy, Target, Calendar } from "lucide-react";
 import css from "./users.module.css";
 import Link from "next/link";
+import ImageFlag from "@/components/ImageFlag/ImageFlag";
 //ChevronRight
 
 type Props = {
@@ -33,6 +34,7 @@ export default async function UserProfilePage({ params }: Props) {
       <section className={css.profileHeader}>
         <div className={css.userMainInfo}>
           <h2 className={css.nickname}>
+            <ImageFlag code={user.country.toLocaleLowerCase()} w="28" h="20" />
             {user.userName === "" ? "User" : user.userName}
             {user.nickname && (
               <>

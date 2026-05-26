@@ -100,7 +100,7 @@
     url("/bg_stats.png");
   background-size: cover;
   border-radius: 15px;
-  padding: 15px;
+  padding: 15px 5px;
   border: 1px solid var(--border);
 }
 
@@ -114,28 +114,29 @@
   padding: 0 4px 4px 4px;
   color: var(--text-muted);
   border-bottom: 1px solid var(--border);
-  font-size: 14px;
+  font-size: 13px;
   /* text-transform: uppercase; */
 }
 
 .table th:nth-child(1) {
-  width: 10%;
+  width: 8%;
 } /* Rank */
 .table th:nth-child(2) {
-  width: 55%;
+  width: 68%;
 } /* Nickname */
 .table th:nth-child(3) {
-  width: 10%;
+  width: 8%;
 } /* Matches */
 .table th:nth-child(4) {
-  width: 10%;
+  width: 8%;
 } /* Exact */
 .table th:nth-child(5) {
-  width: 15%;
+  width: 8%;
 } /* Points */
 
 .table td {
-  padding: 6px;
+  padding: 6px 2px;
+  font-size: 14px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
   color: var(--text-muted);
 }
@@ -156,13 +157,16 @@
   color: var(--text-muted);
   font-weight: 600;
 }
+.desktopName{
+  display: none;
+}
 .exactCell {
   font-size: 15px;
   color: var(--text-muted);
   font-weight: 500;
 }
 .akaText {
-  font-size: 11px;
+  font-size: 10px;
   color: var(--text-muted);
 }
 .gold {
@@ -278,6 +282,12 @@
 }
 
 @media (min-width: 491px) {
+  .mobileName{
+    display: none;
+  }
+  .desktopName{
+    display: inline;
+  }
   .header {
     padding: 15px;
   }

@@ -256,7 +256,14 @@ export const fetchAllLeagues = async (): Promise<League[]> => {
   }
 };
 
-
+/** 
+ *
+ * Присоединение к конкретной лиге по ID 
+ * @param {string} token - Токен доступа пользователя
+ * @param {string} leagueId - ID лиги, к которой нужно присоединиться
+ * @returns {Promise<League>} - Данные присоединенной лиги
+ * 
+ * */
 export const joinLeague = async (token: string, leagueId: string) => {
   const response = await fetch(`${BASE_URL}/leagues/${leagueId}/join`, {
     method: 'POST',
@@ -274,6 +281,14 @@ const result = await response.json();
   return result.data;
 };
 
+/** 
+ *
+ * Покинуть лигу по ID
+ * @param {string} token - Токен доступа пользователя
+ * @param {string} leagueId - ID лиги, которую нужно покинуть
+ * @returns {Promise<void>} - Результат операции
+ * 
+ **/
 export const leaveLeague = async (token: string, leagueId: string) => {
   const response = await fetch(`${BASE_URL}/leagues/${leagueId}/leave`, {
 method: 'DELETE',
@@ -286,9 +301,8 @@ method: 'DELETE',
 if (!response.ok) { 
     await handleAuthError(response);
   }
- 
+
   if (response.status === 204) return null;
-  
   const result = await response.json();
   return result.data;
 };
@@ -376,27 +390,6 @@ export const fetchMatchesWithPredictions = async (
   return result.data; 
 };
 
-
-// export const fetchUserProfile = async (token: string) =>{
-// try {
-//     const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/users/globaldata`, {
-//       method: "GET",
-//       headers: {
-//         Authorization: `Bearer ${token}`,
-//         "Content-Type": "application/json",
-//       },
-//     });
-
-//     if (!response.ok) throw new Error("Failed to fetch global stats");
-    
-//     return await response.json(); // Ожидаем { points: number, rank: number }
-//   } catch (error) {
-//     console.error("fetchUserProfile error:", error);
-//     return { points: 0, rank: 0 };
-//   }
-// };
-
-
 export const fetchLeaderboard = async (tournamentTag: string, page = 1, limit = 5) => {
   try {
     const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/ranking/${tournamentTag}?page=${page}&limit=${limit}`, {
@@ -407,7 +400,7 @@ export const fetchLeaderboard = async (tournamentTag: string, page = 1, limit = 
     });
 
     if (!response.ok) throw new Error("Ошибка при загрузке рейтинга");
-
+    console.log("fetchLeaderboard response---", response);
     return await response.json(); 
   } catch (error) {
     console.error("fetchLeaderboard error:", error);
@@ -479,6 +472,7 @@ export interface FullUserProfile {
     userName: string;
     lastVisit: string;
     memberSince: string;
+    country: string;
   };
   stats: UserTournamentStat[];
   predictions: UserPrediction[];
@@ -520,7 +514,6 @@ export const fetchUserProfileById = async (userId: string, token?: string): Prom
   }
 };
 
-
 export const updateLeagueDescription = async (token: string, leagueId: string, description: string) => {
   const response = await fetch(`https://scory-backend.onrender.com/leagues/${leagueId}`, {
     method: "PATCH",  
@@ -532,4 +525,40 @@ export const updateLeagueDescription = async (token: string, leagueId: string, d
   });
   if (!response.ok) throw new Error("Failed to update description");
   return response.json();
+};
+
+
+/**
+ * 
+ * Интерфейс+ функция для данных, необходимых при обновлении Settings Page
+ * @export
+ * @interface UpdateSettingsPayload
+ * 
+ */
+export interface UpdateSettingsPayload {
+  name: string;
+  country: string;
+}
+
+export const updateUserSettings = async (
+  token: string,
+  payload: UpdateSettingsPayload
+) => {
+  if (!token) throw new Error("No access token provided");
+
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/users/settings`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,  
+    },
+    body: JSON.stringify(payload),
+  });
+
+  if (!response.ok) {
+    const errorData = await response.json().catch(() => ({}));
+    throw new Error(errorData.message || "not able to update settings");
+  }
+
+  return await response.json();
 };
