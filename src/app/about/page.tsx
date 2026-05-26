@@ -109,7 +109,7 @@ export default function About() {
                   <td>
                     You predicted <strong>2:1</strong>
                   </td>
-                  <td className={css.pointsValue}>+3 pts</td>
+                  <td className={css.pointsValue}>+5 pts</td>
                 </tr>
                 <tr className={css.silverRow}>
                   <td className={css.ruleName}>
@@ -119,7 +119,7 @@ export default function About() {
                   <td>
                     You predicted <strong>1:0</strong> or <strong>3:2</strong>
                   </td>
-                  <td className={css.pointsValue}>+2 pts</td>
+                  <td className={css.pointsValue}>+3 pts</td>
                 </tr>
                 <tr className={css.bronzeRow}>
                   <td className={css.ruleName}>
@@ -127,9 +127,9 @@ export default function About() {
                     <strong>Match Outcome</strong>
                   </td>
                   <td>
-                    You predicted <strong>2:0</strong> (Winner only)
+                    You predicted <strong>2:0</strong> (winner only)
                   </td>
-                  <td className={css.pointsValue}>+1 pt</td>
+                  <td className={css.pointsValue}>+2 pt</td>
                 </tr>
                 <tr>
                   <td className={css.ruleName}>
@@ -144,6 +144,21 @@ export default function About() {
                     style={{ color: "var(--text-muted)" }}
                   >
                     0 pts
+                  </td>
+                </tr>
+                <tr>
+                  <td className={css.ruleName}>
+                    <Shield size={16} color="var(--text-muted)" />
+                    <span>Bonus Points</span>
+                  </td>
+                  <td>
+                    You predicted <strong>0:3</strong> (total goals)
+                  </td>
+                  <td
+                    className={css.pointsValue}
+                    style={{ color: "var(--text-muted)" }}
+                  >
+                    +1 pt
                   </td>
                 </tr>
               </tbody>

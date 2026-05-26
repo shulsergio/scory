@@ -8,8 +8,9 @@ import Link from "next/link";
 import { ChevronLeft, ChevronRight, Trophy, Users } from "lucide-react";
 import css from "./tournament.module.css";
 import { useSession } from "next-auth/react";
+import ImageFlag from "@/components/ImageFlag/ImageFlag";
 
-const ITEMS_PER_PAGE = 15;
+const ITEMS_PER_PAGE = 10;
 
 interface TournamentRankingPageProps {
   userId: string;
@@ -19,6 +20,7 @@ interface TournamentRankingPageProps {
   exactScores: number;
   userName: string;
   userNickname: string;
+  country: string;
 }
 
 export default function TournamentRankingPage() {
@@ -144,7 +146,18 @@ export default function TournamentRankingPage() {
                         <td className={css.nickname}>
                           <Link href={`/users/${player.userId}`}>
                             <span className={css.mainName}>
-                              {player.userName || "User"}{" "}
+                              <ImageFlag code={player.country} w="28" h="20" />
+                              <span>
+                                {/* Для мобилок (экран <= 491px): берем имя, проверяем длину и режем, если надо */}
+                                <span className={css.mobileName}>
+                                  {(player.userName || "User").length > 11
+                                    ? `${(player.userName || "User").slice(0, 11)}.`
+                                    : player.userName || "User"}
+                                </span>
+                                <span className={css.desktopName}>
+                                  {player.userName || "User"}
+                                </span>
+                              </span>{" "}
                               <span className={css.akaText}>aka</span>{" "}
                               {player.userNickname}
                             </span>
