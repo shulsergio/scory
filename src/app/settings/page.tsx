@@ -56,88 +56,84 @@ export default function SettingsPage() {
 
   return (
     <main className={css.container}>
-      <h1 className={css.pageTitle}>Settings</h1>
-
+      <section className={css.header}>
+        <h1 className={css.title}>Settings</h1>
+      </section>
       <form onSubmit={handleSubmit} className={css.formWrapper}>
         {/* БЛОК 1: ЛИЧНЫЕ ДАННЫЕ */}
-        <section className={css.sectionBox}>
-          <h2 className={css.sectionTitle}>
-            <User size={18} className={css.sectionIcon} />
-            Personal data
-          </h2>
-
-          <div className={css.inputGroup}>
-            <label className={css.label}>Your nickname</label>
-            <div className={css.disabledInputWrapper}>
-              <input
-                type="text"
-                className={css.inputDisabled}
-                value={session.user.nickname || session.user.name || ""}
-                disabled
-              />
-              <Lock size={14} className={css.lockIcon} />
-            </div>
-            {/* <p className={css.hint}>
+        <div className={css.dataBoxContainer}>
+          <section>
+            <h2 className={css.sectionTitle}>Personal data</h2>
+            <div className={css.infoBlock}>
+              <div className={css.inputGroup}>
+                <label className={css.label}>Your nickname</label>
+                <div className={css.disabledInputWrapper}>
+                  <input
+                    type="text"
+                    className={css.inputDisabled}
+                    value={session.user.nickname || session.user.name || ""}
+                    disabled
+                  />
+                  <Lock size={14} className={css.lockIcon} />
+                </div>
+                {/* <p className={css.hint}>
               Nickname is used for authentication and cannot be changed.
             </p> */}
-          </div>
-
-          <div className={css.inputGroup}>
-            <label className={css.label} htmlFor="nameInput">
-              Name
-            </label>
-            <input
-              id="nameInput"
-              type="text"
-              className={css.input}
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              placeholder="Enter your name"
-              maxLength={25}
-              required
-            />
-            {/* <p className={css.hint}>
+              </div>
+              <div className={css.inputGroup}>
+                <label className={css.label} htmlFor="nameInput">
+                  Name
+                </label>
+                <input
+                  id="nameInput"
+                  type="text"
+                  className={css.input}
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  placeholder="Enter your name"
+                  maxLength={25}
+                  required
+                />
+                {/* <p className={css.hint}>
               This name will be seen by other players in leagues and tables.
             </p> */}
-          </div>
-        </section>
-
-        {/* БЛОК 2: ГЕОГРАФИЯ */}
-        <section className={css.sectionBox}>
-          <h2 className={css.sectionTitle}>
-            <Globe size={18} className={css.sectionIcon} />
-            Country
-          </h2>
-
-          <div className={css.inputGroup}>
-            <label className={css.label} htmlFor="countrySelect">
-              Country
-            </label>
-            <select
-              id="countrySelect"
-              className={css.select}
-              value={country}
-              onChange={(e) => setCountry(e.target.value)}
-            >
-              <option value="">Choose your country...</option>
-              {countries.map((c) => (
-                <option key={c.code} value={c.code}>
-                  {c.flag} &nbsp; {c.name}
-                </option>
-              ))}
-            </select>
-            {/* <p className={css.hint}>
+              </div>
+            </div>
+          </section>
+          {/* БЛОК 2: ГЕОГРАФИЯ */}
+          <section>
+            <h2 className={css.sectionTitle}>Country</h2>
+            <div className={css.infoBlock}>
+              <div className={css.inputGroup}>
+                {/* <label className={css.label} htmlFor="countrySelect">
+                  Country
+                </label> */}
+                <select
+                  id="countrySelect"
+                  className={css.select}
+                  value={country}
+                  onChange={(e) => setCountry(e.target.value)}
+                >
+                  <option value="">Choose your country...</option>
+                  {countries.map((c) => (
+                    <option key={c.code} value={c.code}>
+                      {c.flag} &nbsp; {c.name}
+                    </option>
+                  ))}
+                </select>
+                {/* <p className={css.hint}>
               Рядом с вашим профилем в лидерборде будет отображаться флаг этой
               страны.
             </p> */}
-          </div>
-        </section>
+              </div>
+            </div>
+          </section>
 
-        {/* КНОПКА СОХРАНЕНИЯ */}
-        <div className={css.actionsRow}>
-          <button type="submit" disabled={isSaving} className={css.saveBtn}>
-            {isSaving ? "Saving..." : "Save changes"}
-          </button>
+          <div className={css.actionsRow}>
+            <button type="submit" disabled={isSaving} className={css.saveBtn}>
+              {isSaving ? "Saving..." : "Save changes"}
+            </button>
+          </div>
         </div>
       </form>
     </main>

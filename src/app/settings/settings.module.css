@@ -1,23 +1,42 @@
 .container {
   /* max-width: 650px; */
   /* margin: 40px auto; */
-  padding: 15px 0;
+  padding: 10px 0;
+  background-color: var(--bg-main);
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
 }
-
-.pageTitle {
-  font-size: 22px;
-  font-weight: 700;
+.header {
+  display: flex;
+  align-items: center;
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.5)), url("/bg.png");
+  background-size: cover;
+  background-position: center;
+  padding: 15px;
+  border-radius: 15px;
+  border: 1px solid var(--border);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+.title {
+  font-size: 24px;
   color: var(--accent);
-  /* margin-bottom: 24px; */
+  font-weight: bold;
+padding: 0;
 }
-
+.dataBoxContainer {
+  padding-top: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
 .formWrapper {
   display: flex;
   flex-direction: column;
   gap: 24px;
 }
-
-/* Карточки-секции */
+ 
 .sectionBox {
   background: #181818;
   border: 1px solid rgba(255, 255, 255, 0.05);
@@ -26,27 +45,35 @@
 }
 
 .sectionTitle {
+  font-size: 20px;
+  text-align: left;
+  border-left: 4px solid var(--accent);
+  padding-left: 20px;
+  padding-bottom: 8px;
+  color: var(--text-main);
+}
+ 
+.infoBlock {
   display: flex;
-  align-items: center;
-  gap: 10px;
-  font-size: 16px;
-  font-weight: 600;
-  color: #ffffff;
-  margin-bottom: 10px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-  padding-bottom: 10px;
+  flex-direction: column;
+  gap: 20px;
+  padding: 15px;
+  border-radius: 15px;
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.6)),
+    url("/bg_tournament.png");
+  background-size: cover;
+  border: 1px solid var(--border);
+  min-height: 100px;
 }
-
-.sectionIcon {
-  color: var(--accent, #fbbf24);
-}
-
-/* Элементы форм */
+ 
 .inputGroup {
   display: flex;
   flex-direction: column;
   gap: 8px;
-  margin-bottom: 16px;
+  width: 100%;
+  max-width: 500px;
+  /* margin-bottom: 16px; */
 }
 
 .inputGroup:last-child {
@@ -56,7 +83,7 @@
 .label {
   font-size: 14px;
   font-weight: 500;
-  color: #cccccc;
+  color: var(--text-muted);
 }
 
 .input,
@@ -76,8 +103,7 @@
 .select:focus {
   border-color: var(--accent, #fbbf24);
 }
-
-/* Заблокированный инпут */
+ 
 .disabledInputWrapper {
   position: relative;
   display: flex;
@@ -101,17 +127,10 @@
   right: 14px;
   color: #555555;
 }
-
-.hint {
-  font-size: 12px;
-  color: #666666;
-  margin: 0;
-}
-
-/* Кнопка отправки */
+ 
 .actionsRow {
   display: flex;
-  justify-content: flex-end;
+  justify-content: flex-start;
   margin-top: 8px;
 }
 
