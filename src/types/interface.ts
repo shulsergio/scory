@@ -1,8 +1,10 @@
 export interface Team {
   _id: string;
   name: string;
+  country: string;
   code?: string;
-  flagUrl?: string;
+  flagCode?: string;
+league?: string;
 }
 
 export interface Score {
@@ -22,6 +24,7 @@ export interface Match {
   group: string;
   score: Score;
   isCalculated: boolean;
+  tournament: string;
 }
 
 export interface TeamWithMatches extends Team {
