@@ -42,3 +42,15 @@
   color: gray;
   padding: 4px 2px;
 }
+@media (min-width: 1200px) {
+  .blockTime {
+    font-size: 16px;
+  }
+  .blockTeam {
+    font-size: 17px;
+    letter-spacing: 0.7px;
+  }
+  .blockInfo {
+    font-size: 16px;
+  }
+}
