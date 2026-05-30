@@ -5,6 +5,7 @@ import { signIn } from "next-auth/react";
 import css from "./RegisterForm.module.css";
 import ButtonBox from "../ButtonBox/ButtonBox";
 import { registerUser } from "@/utils/actions";
+import Loader from "../Loader/Loader";
 
 export default function RegisterForm() {
   const [state, formAction, isPending] = useActionState(registerUser, null);
@@ -51,7 +52,7 @@ export default function RegisterForm() {
         variant="primary"
         disabled={isPending}
       >
-        {isPending ? "Creating..." : "JOIN"}
+        {isPending ? <Loader /> : "JOIN"}
       </ButtonBox>
     </form>
   );

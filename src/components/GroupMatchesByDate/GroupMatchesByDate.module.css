@@ -12,3 +12,8 @@
   width: 100%;
   border-collapse: collapse;
 }
+@media (min-width: 1200px) {
+  .dateOfMatches {
+    font-size: 15px;
+  }
+}

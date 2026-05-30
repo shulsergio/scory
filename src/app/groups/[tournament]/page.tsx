@@ -2,12 +2,13 @@
 
 import { useParams } from "next/navigation";
 import css from "./groups.module.css";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { fetchTournamentGroups } from "@/utils/fetch";
 import Loader from "@/components/Loader/Loader";
 import Link from "next/link";
 import ButtonBox from "@/components/ButtonBox/ButtonBox";
 import ImageFlag from "@/components/ImageFlag/ImageFlag";
+import UpcomingMatchesWidget from "@/components/UpcomingMatchesWidget/UpcomingMatchesWidget";
 
 interface TeamData {
   team: {
@@ -49,19 +50,16 @@ export default function GroupsPage() {
   if (loading) return <Loader />;
 
   if (groups.length === 0) {
-    return (
-      <div className={css.empty}>
-        Данные турнира {tournament} пока не заполнены.
-      </div>
-    );
+    return <div className={css.empty}>no {tournament} groups available.</div>;
   }
   return (
     <main className={css.container}>
       <div className={css.WcMainBlock}>
         <section className={css.mathesSection}>
-          <h2 className={css.sectionTitle}>WC 20206 Matches</h2>
+          <h2 className={css.sectionTitle}>Upcoming Matches</h2>
+
           <div className={css.infoMatchesBlock}>
-            <p>top matches</p>
+            <UpcomingMatchesWidget tournament={tournament as string} />
             <div className={css.matchesButtonBlock}>
               <ButtonBox
                 option="link"

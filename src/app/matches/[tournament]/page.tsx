@@ -2,15 +2,26 @@ import css from "./matches.module.css";
 import { fetchAllMatches } from "@/utils/fetch";
 import { Match } from "@/types/interface";
 import GroupMatchesByDate from "@/components/GroupMatchesByDate/GroupMatchesByDate";
+import Link from "next/link";
 
 export default async function Matches({
   params,
+  searchParams,
 }: {
   params: Promise<{ tournament: string }>;
+  searchParams: Promise<{ status?: string }>;
 }) {
   const { tournament } = await params;
-  const matches = await fetchAllMatches(); //
+  const { status } = await searchParams;
 
+  const allMatches = await fetchAllMatches();
+
+  // 2. 🔥 Фильтруем массив прямо тут, на сервере Next.js
+  const matches = allMatches.filter((match: Match) => {
+    if (!status || status === "all") return true;
+
+    return match.status === status;
+  });
   // JSON-LD для Google (структурированные данные)
   const jsonLd = {
     "@context": "https://schema.org",
@@ -29,7 +40,6 @@ export default async function Matches({
     })),
   };
 
-  // Группировка дат
   const newDates = Array.from(
     new Set(
       matches.map((match: Match) =>
@@ -59,27 +69,51 @@ export default async function Matches({
       <div className={css.dataBoxContainer}>
         <section className={css.mainSection}>
           <h2 className={css.sectionTitle}>Matches</h2>
-          {/* <div className={css.infoBlock}></div> */}
 
           <div className={css.mainBlock}>
-            <nav className={css.filters}>
-              <button className={css.filterBtn}>All</button>
-              <button className={css.filterBtn}>Scheduled</button>
-              <button className={css.filterBtn}>Finished</button>
-            </nav>
-            {newDates.map((date: string) => {
-              const matchesInDay = matches.filter(
-                (match: Match) =>
-                  new Date(match.kickoffTime).toLocaleDateString("ru-RU") ===
-                  date,
-              );
+            <div className={css.matchesdataBox}>
+              <nav className={css.filters}>
+                <Link
+                  href="?status=all"
+                  className={`${css.filterBtn} ${!status || status === "all" ? css.activeFilter : ""}`}
+                >
+                  All
+                </Link>
+                <Link
+                  href="?status=scheduled"
+                  className={`${css.filterBtn} ${status === "scheduled" ? css.activeFilter : ""}`}
+                >
+                  Scheduled
+                </Link>
+                <Link
+                  href="?status=finished"
+                  className={`${css.filterBtn} ${status === "finished" ? css.activeFilter : ""}`}
+                >
+                  Finished
+                </Link>
+              </nav>
 
-              return (
-                <section key={date} className={css.daySection}>
-                  <GroupMatchesByDate date={date} matches={matchesInDay} />
-                </section>
-              );
-            })}
+              {newDates.length === 0 ? (
+                <p className={css.noMatches}>
+                  No matches found for this status.
+                </p>
+              ) : (
+                newDates.map((date: string) => {
+                  const matchesInDay = matches.filter(
+                    (match: Match) =>
+                      new Date(match.kickoffTime).toLocaleDateString(
+                        "ru-RU",
+                      ) === date,
+                  );
+
+                  return (
+                    <section key={date} className={css.daySection}>
+                      <GroupMatchesByDate date={date} matches={matchesInDay} />
+                    </section>
+                  );
+                })
+              )}
+            </div>
           </div>
         </section>
       </div>
