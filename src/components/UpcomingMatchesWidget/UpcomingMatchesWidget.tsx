@@ -18,10 +18,8 @@ export default function UpcomingMatchesWidget({
   useEffect(() => {
     if (!tournament) return;
 
-    // 1. Сначала объявляем флаг, чтобы отменить запись, если компонент размонтировался
     let isMounted = true;
 
-    // 2. Делаем запрос СРАЗУ, без предварительных синхронных setMatches или setLoading
     fetchAllMatches()
       .then((allMatches: Match[]) => {
         if (!isMounted) return;
@@ -42,7 +40,6 @@ export default function UpcomingMatchesWidget({
           )
           .slice(0, 3);
 
-        // И матчи, и лоадер ставим АСИНХРОННО в одном цикле обновления
         setMatches(upcoming);
         setLoading(false);
       })
@@ -51,7 +48,6 @@ export default function UpcomingMatchesWidget({
         if (isMounted) setLoading(false);
       });
 
-    // Функция очистки (cleanup) — защищает от каскадных ререндеров при быстрой смене турниров
     return () => {
       isMounted = false;
     };
@@ -64,9 +60,7 @@ export default function UpcomingMatchesWidget({
       </div>
     );
   }
-
   console.log("UpcomingMatchesWidget matches:::", matches);
-
   if (matches.length === 0) return null;
 
   return (
@@ -97,12 +91,12 @@ export default function UpcomingMatchesWidget({
             <div className={css.teamsBlock}>
               <div className={css.teamRow}>
                 <ImageFlag code={match.homeTeam?.flagCode} w="24" h="16" />
-                <span className={css.teamName}>{match.homeTeam?.name}</span>
+                <span className={css.teamName}>{match.homeTeam?.code}</span>
               </div>
               <div className={css.vs}>VS</div>
               <div className={css.teamRow}>
                 <ImageFlag code={match.awayTeam?.flagCode} w="24" h="16" />
-                <span className={css.teamName}>{match.awayTeam?.name}</span>
+                <span className={css.teamName}>{match.awayTeam?.code}</span>
               </div>
             </div>
 

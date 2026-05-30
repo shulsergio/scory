@@ -2,7 +2,7 @@
 
 import { useParams } from "next/navigation";
 import css from "./groups.module.css";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { fetchTournamentGroups } from "@/utils/fetch";
 import Loader from "@/components/Loader/Loader";
 import Link from "next/link";
@@ -58,10 +58,8 @@ export default function GroupsPage() {
         <section className={css.mathesSection}>
           <h2 className={css.sectionTitle}>Upcoming Matches</h2>
 
-          {/* Вставляем наш новый автономный виджет */}
-          <UpcomingMatchesWidget tournament={tournament as string} />
-
           <div className={css.infoMatchesBlock}>
+            <UpcomingMatchesWidget tournament={tournament as string} />
             <div className={css.matchesButtonBlock}>
               <ButtonBox
                 option="link"
