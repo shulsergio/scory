@@ -5,7 +5,6 @@
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
-  /* transition: background 0.3s ease; Плавный переход тем */
 }
 .WcMainBlock {
   display: flex;
@@ -22,6 +21,8 @@
 }
 .matchesButtonBlock {
   margin-top: auto;
+  display: flex;
+  gap: 30px;
 }
 .infoMatchesBlock {
   display: flex;
@@ -131,5 +132,11 @@
   .table .teamCell {
     font-size: 17px;
     letter-spacing: 0.04em;
+  }
+
+  .infoMatchesBlock {
+    padding: 15px;
+    border-radius: 15px;
+    gap: 25px;
   }
 }

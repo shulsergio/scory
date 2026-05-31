@@ -5,7 +5,6 @@ import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import css from "./SignInForm.module.css";
 import ButtonBox from "../ButtonBox/ButtonBox";
-import Loader from "../Loader/Loader";
 
 export default function SignInForm() {
   const [error, setError] = useState<string | null>(null);
@@ -29,12 +28,14 @@ export default function SignInForm() {
 
     if (result?.error) {
       setError("Error. Check your nickname and password");
-      setIsPending(false);
+      setIsPending(false); // Возвращаем кнопку в обычное состояние при ошибке
     } else {
       router.push("/profile");
       router.refresh();
     }
   };
+
+  // 🛠️ Строку if (status === "loading") убрали отсюда вообще!
 
   return (
     <form onSubmit={handleSubmit} className={css.form}>
@@ -65,8 +66,7 @@ export default function SignInForm() {
         variant="primary"
         disabled={isPending}
       >
-        {/* {isPending ? "Logging in..." : "OK!!!"} */}
-      {isPending ? <Loader /> : "OK!!!"}
+        {isPending ? "Logging in..." : "OK!!!"}
       </ButtonBox>
     </form>
   );

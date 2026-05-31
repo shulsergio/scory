@@ -52,7 +52,7 @@ export default function RegisterForm() {
         variant="primary"
         disabled={isPending}
       >
-        {isPending ? <Loader /> : "JOIN"}
+        {isPending ? "Waiting..." : "JOIN"}
       </ButtonBox>
     </form>
   );
