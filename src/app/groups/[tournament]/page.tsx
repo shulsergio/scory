@@ -68,6 +68,9 @@ export default function GroupsPage() {
               >
                 All matches
               </ButtonBox>
+              <ButtonBox option="link" variant="primary" href={`/predictors`}>
+                Prognozes
+              </ButtonBox>
             </div>
           </div>
         </section>

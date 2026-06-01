@@ -6,6 +6,7 @@ import { Match } from "@/types/interface";
 import Loader from "@/components/Loader/Loader";
 import ImageFlag from "@/components/ImageFlag/ImageFlag";
 import css from "./UpcomingMatchesWidget.module.css";
+import ButtonBox from "../ButtonBox/ButtonBox";
 
 export default function UpcomingMatchesWidget({
   tournament,
@@ -64,46 +65,48 @@ export default function UpcomingMatchesWidget({
   if (matches.length === 0) return null;
 
   return (
-    <div className={css.widgetContainer}>
-      {matches.map((match) => {
-        const localTime = new Date(match.kickoffTime).toLocaleTimeString(
-          "ru-RU",
-          {
-            hour: "2-digit",
-            minute: "2-digit",
-          },
-        );
-        const localDate = new Date(match.kickoffTime).toLocaleDateString(
-          "ru-RU",
-          {
-            day: "numeric",
-            month: "short",
-          },
-        );
+    <div className={css.globalContainer}>
+      <div className={css.widgetContainer}>
+        {matches.map((match) => {
+          const localTime = new Date(match.kickoffTime).toLocaleTimeString(
+            "ru-RU",
+            {
+              hour: "2-digit",
+              minute: "2-digit",
+            },
+          );
+          const localDate = new Date(match.kickoffTime).toLocaleDateString(
+            "ru-RU",
+            {
+              day: "numeric",
+              month: "numeric",
+            },
+          );
 
-        return (
-          <div key={match._id} className={css.matchCard}>
-            <div className={css.cardHeader}>
-              <span className={css.date}>{localDate}</span>
-              <span className={css.time}>{localTime}</span>
-            </div>
-
-            <div className={css.teamsBlock}>
-              <div className={css.teamRow}>
-                <ImageFlag code={match.homeTeam?.flagCode} w="24" h="16" />
-                <span className={css.teamName}>{match.homeTeam?.code}</span>
+          return (
+            <div key={match._id} className={css.matchCard}>
+              <div className={css.cardHeader}>
+                <span className={css.date}>{localDate}</span>
+                <span className={css.time}>{localTime}</span>
               </div>
-              <div className={css.vs}>VS</div>
-              <div className={css.teamRow}>
-                <ImageFlag code={match.awayTeam?.flagCode} w="24" h="16" />
-                <span className={css.teamName}>{match.awayTeam?.code}</span>
-              </div>
-            </div>
 
-            <div className={css.stadium}>{match.stadium}</div>
-          </div>
-        );
-      })}
+              <div className={css.teamsBlock}>
+                <div className={css.teamRow}>
+                  <ImageFlag code={match.homeTeam?.flagCode} w="24" h="16" />
+                  <span className={css.teamName}>{match.homeTeam?.code}</span>
+                </div>
+                <div className={css.vs}>VS</div>
+                <div className={css.teamRow}>
+                  <ImageFlag code={match.awayTeam?.flagCode} w="24" h="16" />
+                  <span className={css.teamName}>{match.awayTeam?.code}</span>
+                </div>
+              </div>
+
+              <div className={css.group}>Group {match.group}</div>
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 }
