@@ -2,7 +2,7 @@
 
 import { useParams } from "next/navigation";
 import css from "./groups.module.css";
-import { Suspense, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { fetchTournamentGroups } from "@/utils/fetch";
 import Loader from "@/components/Loader/Loader";
 import Link from "next/link";
