@@ -418,7 +418,7 @@ export const fetchTournamentGroups = async (tournamentTag: string) => {
 
   try {
     const fullUrl = `${process.env.NEXT_PUBLIC_API_URL}/groups/${tournamentTag}`;
-    // console.log("🚀 Делаю запрос на:", fullUrl);
+ 
 
     const response = await fetch(fullUrl, {
       method: "GET",
@@ -562,3 +562,31 @@ export const updateUserSettings = async (
 
   return await response.json();
 };
+
+/**
+ * Отправляет запрос на бэкенд для изменения забытого пароля
+ * @param token - Криптографический токен из письма
+ * @param password - Новый пароль пользователя
+ */
+export async function resetPasswordRequest(token: string, password: string): Promise<void> {
+ 
+  // БАЗА ДАННІХ Бекенд!!!!
+  const API_URL = process.env.NEXT_PUBLIC_API_URL;
+
+  // БАЗА ДАННІХ Бекенд!!!!
+
+  const res = await fetch(`${API_URL}/auth/reset-password`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ token, password }),
+  });
+
+  const data = await res.json();
+
+  if (!res.ok) {
+ 
+    throw new Error(data.message || "Не удалось изменить пароль");
+  }
+}
