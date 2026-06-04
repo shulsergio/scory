@@ -590,3 +590,26 @@ export async function resetPasswordRequest(token: string, password: string): Pro
     throw new Error(data.message || "Не удалось изменить пароль");
   }
 }
+
+
+/**
+ * Отправляет запрос на бэкенд для генерации токена и отправки письма
+ * @param email - Почта пользователя, который забыл пароль
+ */
+export async function forgotPasswordRequest(email: string): Promise<void> {
+  const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000";
+
+  const res = await fetch(`${API_URL}/auth/forgot-password`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ email }),
+  });
+
+  const data = await res.json();
+
+  if (!res.ok) {
+    throw new Error(data.message || "Не удалось отправить запрос");
+  }
+}
