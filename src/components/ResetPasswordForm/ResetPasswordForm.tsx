@@ -5,7 +5,6 @@ import { useRouter } from "next/navigation";
 import { resetPasswordRequest } from "@/utils/fetch";
 import Loader from "@/components/Loader/Loader";
 import ButtonBox from "@/components/ButtonBox/ButtonBox";
-// import css from "./reset-password.module.css";
 import css from "./ResetPasswordForm.module.css";
 
 export default function ResetPasswordForm({ token }: { token: string }) {
@@ -21,27 +20,21 @@ export default function ResetPasswordForm({ token }: { token: string }) {
     setError(null);
 
     if (password !== confirmPassword) {
-      setError("Пароли не совпадают");
+      setError("Passwords do not match");
       return;
     }
-
-    // if (password.length < 6) {
-    //   setError("Пароль должен быть не менее 6 символов");
-    //   return;
-    // }
 
     setIsPending(true);
 
     try {
       await resetPasswordRequest(token, password);
 
-      setSuccess("Пароль успешно изменен! Перенаправляем на страницу входа...");
+      setSuccess("Password updated successfully! Redirecting to login page");
       setTimeout(() => {
-        router.push("/signin");
+        router.push("/signIn");
       }, 3000);
     } catch (err) {
-      // Сюда прилетит именно та ошибка, которую мы сгенерировали внутри fetch-хелпера
-      setError(`${err || "Ошибка при сбросе пароля"}`);
+      setError(`${err || "Error updating password"}`);
     } finally {
       setIsPending(false);
     }
@@ -52,41 +45,49 @@ export default function ResetPasswordForm({ token }: { token: string }) {
   }
 
   return (
-    <form onSubmit={handleSubmit} className={css.form}>
-      <div className={css.inputGroup}>
-        <input
-          type="password"
-          placeholder="Новый пароль"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
+    <>
+      {isPending && (
+        <div className={css.loaderOverlay}>
+          <Loader />
+        </div>
+      )}
+      <form onSubmit={handleSubmit} className={css.form}>
+        <div className={css.inputGroup}>
+          <input
+            type="password"
+            placeholder="New Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+            disabled={isPending}
+            className={css.input}
+          />
+        </div>
+
+        <div className={css.inputGroup}>
+          <input
+            type="password"
+            placeholder="Confirm New Password"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+            required
+            disabled={isPending}
+            className={css.input}
+          />
+        </div>
+
+        {error && <div className={css.errorMessage}>{error}</div>}
+
+        <ButtonBox
+          option="button"
+          type="submit"
+          variant="primary"
           disabled={isPending}
-          className={css.input}
-        />
-      </div>
-
-      <div className={css.inputGroup}>
-        <input
-          type="password"
-          placeholder="Повторите пароль"
-          value={confirmPassword}
-          onChange={(e) => setConfirmPassword(e.target.value)}
-          required
-          disabled={isPending}
-          className={css.input}
-        />
-      </div>
-
-      {error && <div className={css.errorMessage}>{error}</div>}
-
-      <ButtonBox
-        option="button"
-        type="submit"
-        variant="primary"
-        disabled={isPending}
-      >
-        {isPending ? <Loader /> : "Сохранить пароль"}
-      </ButtonBox>
-    </form>
+        >
+          {" "}
+          Save Password
+        </ButtonBox>
+      </form>
+    </>
   );
 }

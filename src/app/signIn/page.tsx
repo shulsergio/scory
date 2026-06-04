@@ -27,6 +27,9 @@ export default function SignIn() {
       <p className={css.text}>Please enter your details to login</p>
       <SignInForm />
       <p className={css.text}>
+        Forgot your password? <Link href="/forgot-password">Reset it</Link>
+      </p>
+      <p className={css.text}>
         Dont have an account? <Link href="/register">Register now</Link>
       </p>
     </div>
