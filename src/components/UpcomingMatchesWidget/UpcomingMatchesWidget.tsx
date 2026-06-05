@@ -6,7 +6,8 @@ import { Match } from "@/types/interface";
 import Loader from "@/components/Loader/Loader";
 import ImageFlag from "@/components/ImageFlag/ImageFlag";
 import css from "./UpcomingMatchesWidget.module.css";
-import ButtonBox from "../ButtonBox/ButtonBox";
+import Link from "next/link";
+// import ButtonBox from "../ButtonBox/ButtonBox";
 
 export default function UpcomingMatchesWidget({
   tournament,
@@ -24,15 +25,20 @@ export default function UpcomingMatchesWidget({
     fetchAllMatches()
       .then((allMatches: Match[]) => {
         if (!isMounted) return;
-
+        const now = Date.now();
+        const fortyEightHoursLater = now + 48 * 60 * 60 * 1000; // мои 48 часов в показе матчей
         const upcoming = allMatches
           .filter((m) => {
             const isScheduled = m.status === "scheduled";
+
+            const matchTime = new Date(m.kickoffTime).getTime();
+            const isWithinNext48Hours =
+              matchTime > now && matchTime <= fortyEightHoursLater;
             const isCorrectTournament =
               m.homeTeam?.league?.toUpperCase() === tournament.toUpperCase() ||
               m.awayTeam?.league?.toUpperCase() === tournament.toUpperCase();
 
-            return isScheduled && isCorrectTournament;
+            return isScheduled && isWithinNext48Hours && isCorrectTournament;
           })
           .sort(
             (a, b) =>
@@ -93,12 +99,22 @@ export default function UpcomingMatchesWidget({
               <div className={css.teamsBlock}>
                 <div className={css.teamRow}>
                   <ImageFlag code={match.homeTeam?.flagCode} w="24" h="16" />
-                  <span className={css.teamName}>{match.homeTeam?.code}</span>
+                  <Link
+                    className={css.teamName}
+                    href={`/teams/${match.homeTeam?._id}`}
+                  >
+                    {match.homeTeam?.code}
+                  </Link>
                 </div>
                 <div className={css.vs}>VS</div>
                 <div className={css.teamRow}>
                   <ImageFlag code={match.awayTeam?.flagCode} w="24" h="16" />
-                  <span className={css.teamName}>{match.awayTeam?.code}</span>
+                  <Link
+                    className={css.teamName}
+                    href={`/teams/${match.awayTeam?._id}`}
+                  >
+                    {match.awayTeam?.code}
+                  </Link>
                 </div>
               </div>
 

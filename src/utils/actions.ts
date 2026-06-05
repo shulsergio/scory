@@ -21,39 +21,38 @@ export async function registerUser(
 
   const BACKEND_URL = process.env.NEXT_PUBLIC_API_URL;
 
-  try {
+ try {
     const response = await fetch(`${BACKEND_URL}/auth/register`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ userNickname, email, password }),
     });
 
-    // Обработка случая, если сервер прислал не JSON
     const result = await response.json().catch(() => ({ 
       message: "Server error: Invalid JSON response" 
     }));
 
     if (!response.ok) {
-      return { 
-        error: result.message || "Registration failed" 
-      };
+ 
+      throw new Error(result.message || "Registration failed");
     }
  
     return { 
       success: true, 
       credentials: { userNickname, password } 
     };
-  } catch (error) {
+  } catch (error ) {
     console.error("Registration error:", error);
+    
+ 
+    if (error instanceof Error) {
+      return { 
+        error: error.message 
+      };
+    }
+ 
     return { 
       error: "Server connection lost. Please try again later." 
     };
   }
 }
-
-/**
- * 
- * Интерфейс+ функция для получения эмодзи флага по коду страны
- * 
- * */
- 

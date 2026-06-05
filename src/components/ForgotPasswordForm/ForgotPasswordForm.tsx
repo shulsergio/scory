@@ -19,9 +19,11 @@ export default function ForgotPasswordForm() {
 
     try {
       await forgotPasswordRequest(email);
-      setSuccess("Инструкции по сбросу пароля отправлены на вашу почту!");
+      setSuccess(
+        "Instructions to reset your password have been sent to your email.",
+      );
     } catch (err) {
-      setError(`${err || "Произошла ошибка, попробуйте позже."}`);
+      setError(`${err || "An error occurred, please try again later."}`);
     } finally {
       setIsPending(false);
     }
@@ -32,29 +34,38 @@ export default function ForgotPasswordForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className={css.form}>
-      <div className={css.inputGroup}>
-        <input
-          type="email"
-          placeholder="Ваш Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
+    <>
+      {/* 🔥 Если идет отправка, рендерим лоадер на весь экран */}
+      {isPending && (
+        <div className={css.loaderOverlay}>
+          <Loader />
+        </div>
+      )}
+
+      <form onSubmit={handleSubmit} className={css.form}>
+        <div className={css.inputGroup}>
+          <input
+            type="email"
+            placeholder="Your Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+            disabled={isPending}
+            className={css.input}
+          />
+        </div>
+
+        {error && <div className={css.errorMessage}>{error}</div>}
+
+        <ButtonBox
+          option="button"
+          type="submit"
+          variant="primary"
           disabled={isPending}
-          className={css.input}
-        />
-      </div>
-
-      {error && <div className={css.errorMessage}>{error}</div>}
-
-      <ButtonBox
-        option="button"
-        type="submit"
-        variant="primary"
-        disabled={isPending}
-      >
-        {isPending ? <Loader /> : "Отправить ссылку"}
-      </ButtonBox>
-    </form>
+        >
+          Send link to Email
+        </ButtonBox>
+      </form>
+    </>
   );
 }
