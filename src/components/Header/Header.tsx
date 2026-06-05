@@ -195,10 +195,10 @@ export default function Header() {
               <ButtonBox
                 option="link"
                 variant="primary"
-                href="/register"
+                href="/signIn"
                 onClick={() => setIsOpen(false)}
               >
-                Get Started
+                Sign In
               </ButtonBox>
             )}
           </div>

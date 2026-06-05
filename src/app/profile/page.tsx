@@ -8,6 +8,8 @@ import css from "./profile.module.css";
 import UserLeagues from "@/components/UserLeagues/UserLeagues";
 import PredictionMatches from "@/components/PredictionMatches/PredictionMatches";
 import { Match } from "@/types/interface";
+import UpcomingMatchesWidget from "@/components/UpcomingMatchesWidget/UpcomingMatchesWidget";
+import ButtonBox from "@/components/ButtonBox/ButtonBox";
 
 export default function Profile() {
   const { data: session, status } = useSession();
@@ -46,7 +48,7 @@ export default function Profile() {
     status === "loading" || (status === "authenticated" && leagues === null);
 
   if (isLoading) return <Loader />;
-
+  const tournament = "WC2026";
   return (
     <main className={`${css.mainContainer} `}>
       {/* <div className={css.wrapper}>
@@ -62,10 +64,26 @@ export default function Profile() {
       <section className={css.sectionWrapper}>
         <h2 className={css.sectionTitle}>Next matches</h2>
         <div className={css.wrapper}>
-          <PredictionMatches
+          {/* <PredictionMatches
             matches={matches}
             token={session?.user?.accessToken || ""}
-          />
+          /> */}
+          {/* <UpcomingMatchesWidget /> */}
+          <div className={css.infoMatchesBlock}>
+            <UpcomingMatchesWidget tournament={tournament as string} />
+            <div className={css.matchesButtonBlock}>
+              <ButtonBox
+                option="link"
+                variant="primary"
+                href={`/matches/${tournament}`}
+              >
+                All matches
+              </ButtonBox>
+              <ButtonBox option="link" variant="primary" href={`/predictors`}>
+                Prognozes
+              </ButtonBox>
+            </div>
+          </div>
         </div>
       </section>
     </main>

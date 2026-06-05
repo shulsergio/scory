@@ -12,12 +12,17 @@
   padding: 10px 0;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  /* align-items: center; */
   justify-content: center;
   border-radius: 15px;
   padding: 12px 4px;
   border: 1px solid var(--border);
   gap: 10px;
+}
+.infoMatchesBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 .sectionWrapper {
   width: 100%;
@@ -29,4 +34,13 @@
   padding-left: 20px;
   padding-bottom: 8px;
   color: var(--text-main);
+}
+
+.matchesButtonBlock {
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  gap: 30px;
 }

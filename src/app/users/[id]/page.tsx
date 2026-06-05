@@ -34,7 +34,7 @@ export default async function UserProfilePage({ params }: Props) {
       <section className={css.profileHeader}>
         <div className={css.userMainInfo}>
           <h2 className={css.nickname}>
-            <ImageFlag code={user.country.toLocaleLowerCase()} w="28" h="20" />
+            <ImageFlag code={user.country} w="28" h="20" />
             {user.userName === "" ? "User" : user.userName}
             {user.nickname && (
               <>
