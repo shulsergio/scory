@@ -83,3 +83,148 @@
     transform: translateY(-10px);
   }
 }
+
+/* -------------------- */
+
+/* .pageHome {
+  min-height: 100vh;
+  background-color: #0f0f12;
+  color: #ffffff;
+  font-family:
+    system-ui,
+    -apple-system,
+    sans-serif;
+  padding-bottom: 60px;
+} */
+
+.mainHome {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 0;
+}
+
+/* --- Секция HERO (Приветствие) --- */
+.hero {
+  text-align: center;
+  /* padding: 60px 20px 80px 20px;
+  background: radial-gradient(
+    circle at center,
+    rgba(249, 115, 22, 0.15) 0%,
+    transparent 70%
+  ); */
+}
+
+.descriptionTop {
+  /* max-width: 440px; */
+  font-size: 22px;
+  /* line-height: 0px; */
+  /* text-wrap: balance; */
+  color: var(--text-blue-title-secondary);
+  /* padding-bottom: 5px; */
+}
+
+.title {
+  font-family: var(--font-family-Kanit);
+  font-weight: 900;
+  font-style: italic;
+  font-size: 60px;
+  text-align: center;
+  width: 100%;
+  /* ФОН ТЕКСТРА */
+  display: block;
+  background: linear-gradient(to bottom, #0008ff 10%, #ffffff 90%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  margin: 0;
+  padding: 0;
+}
+
+.descriptionBottom {
+  font-style: italic;
+  /* max-width: 440px; */
+  font-size: 18px;
+  line-height: 0px;
+  text-wrap: balance;
+  color: var(--text-blue-title-secondary);
+  padding-bottom: 40px;
+}
+/* -------------------- */
+
+.featuresGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  /* margin-top: 40px; */
+}
+
+.card {
+  background-color: #18181b;
+  border: 1px solid #27272a;
+  border-radius: 16px;
+  padding: 15px;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  border-color: #f97316;
+  box-shadow: 0 10px 30px rgba(249, 115, 22, 0.1);
+}
+
+.cardHeader {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+.iconWrapper {
+  font-size: 2rem;
+  background: rgba(249, 115, 22, 0.1);
+  padding: 10px;
+  border-radius: 12px;
+  color: #f97316;
+}
+
+.cardTitle {
+  font-size: 18px;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.cardText {
+  color: #a1a1aa;
+  font-size: 14px;
+  line-height: 1.6;
+  margin-bottom: 25px;
+}
+
+.cardLink {
+  display: inline-block;
+  align-self: flex-start;
+  color: #f97316;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: color 0.2s;
+}
+
+.cardLink:hover {
+  color: #ffedd5;
+}
+
+@media (min-width: 1200px) {
+  .cardTitle {
+    font-size: 20px;
+  }
+
+  .cardText {
+    font-size: 16px;
+  }
+}
