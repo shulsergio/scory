@@ -103,6 +103,24 @@ padding: 0;
 .select:focus {
   border-color: var(--accent, #fbbf24);
 }
+
+.feedbackRow {
+  margin-top: 12px;
+}
+
+.errorText,
+.successText {
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.errorText {
+  color: #f87171;
+}
+
+.successText {
+  color: #34d399;
+}
  
 .disabledInputWrapper {
   position: relative;

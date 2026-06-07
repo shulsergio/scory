@@ -45,7 +45,7 @@ export default function UpcomingMatchesWidget({
               new Date(a.kickoffTime).getTime() -
               new Date(b.kickoffTime).getTime(),
           )
-          .slice(0, 3);
+          .slice(0, 6);
 
         setMatches(upcoming);
         setLoading(false);

@@ -2,6 +2,7 @@
 
 import { useSession } from "next-auth/react";
 import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import Loader from "@/components/Loader/Loader";
 import css from "./settings.module.css";
 import { Lock } from "lucide-react";
@@ -25,24 +26,34 @@ const countries = [
 
 export default function SettingsPage() {
   const { data: session, status } = useSession();
-  const userDataSession = session?.user;
+  const router = useRouter();
   const token = session?.user?.accessToken || "";
   const [name, setName] = useState("");
   const [country, setCountry] = useState("");
   const [isSaving, setIsSaving] = useState(false);
-  console.log("SettingsPage userDataSession---", userDataSession);
-  console.log("SettingsPage session---", session);
+  const [errorMessage, setErrorMessage] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
+
   useEffect(() => {
     if (session?.user) {
       setName(session.user.name || "");
+      setCountry(session.user?.country || "");
     }
   }, [session]);
+
+  useEffect(() => {
+    if (status === "unauthenticated") {
+      router.push("/signIn");
+    }
+  }, [status, router]);
 
   if (status === "loading") return <Loader />;
   if (!session) return null;
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setErrorMessage("");
+    setSuccessMessage("");
     setIsSaving(true);
 
     try {
@@ -50,9 +61,7 @@ export default function SettingsPage() {
         name: name,
         country: country,
       });
-      console.log("Сохраняем данные на бэкенд:", { name, country });
-
-      alert("OK!");
+      setSuccessMessage("Settings saved successfully.");
     } catch (err) {
       console.error("err:", err);
     } finally {
@@ -140,6 +149,15 @@ export default function SettingsPage() {
               {isSaving ? "Saving..." : "Save changes"}
             </button>
           </div>
+          {(errorMessage || successMessage) && (
+            <div className={css.feedbackRow}>
+              {errorMessage ? (
+                <p className={css.errorText}>{errorMessage}</p>
+              ) : (
+                <p className={css.successText}>{successMessage}</p>
+              )}
+            </div>
+          )}
         </div>
       </form>
     </main>
