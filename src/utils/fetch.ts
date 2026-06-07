@@ -556,6 +556,7 @@ export const updateUserSettings = async (
   });
 
   if (!response.ok) {
+    await handleAuthError(response);
     const errorData = await response.json().catch(() => ({}));
     throw new Error(errorData.message || "not able to update settings");
   }
