@@ -29,15 +29,18 @@ export default function PredictorsPage() {
       }
     }
   }, [session?.user?.accessToken]);
-  console.log(" PredictorsPage matches-", matches);
+
+  console.log("PredictorsPage matches-", matches);
+
   useEffect(() => {
     if (status === "authenticated") {
       loadData();
     }
   }, [status, loadData]);
 
-  if (status === "loading" || isLoading) return <Loader />;
-
+  if (status === "loading" || isLoading || !session?.user?.accessToken) {
+    return <Loader />;
+  }
   return (
     <main className={css.container}>
       <h2 className={css.sectionTitle}>Predictions</h2>
@@ -45,9 +48,9 @@ export default function PredictorsPage() {
       <div className={css.infoBlock}>
         <PredictionList
           matches={matches}
-          token={session!.user.accessToken}
+          token={session.user.accessToken}
           onRefresh={loadData}
-        />{" "}
+        />
       </div>
     </main>
   );

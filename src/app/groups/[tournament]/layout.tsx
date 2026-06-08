@@ -18,7 +18,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     openGraph: {
       title,
       description,
-      url: `https://scory.online/groups/${tName}`,
+      url: `https://scory.com.ua/groups/${tName}`,
       siteName: "Scory",
       images: [
         {
@@ -37,7 +37,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       description,
       images: ["/og-image.png"],
     },
-    // Роботы
+
+    //  В КОНЦЕЕЕЕЕЕ
     robots: {
       index: false, // ИЗМЕНИТЬ в конце!!!
       follow: false, // ИЗМЕНИТЬ в конце!!!
