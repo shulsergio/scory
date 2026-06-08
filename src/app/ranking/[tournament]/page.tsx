@@ -148,7 +148,7 @@ export default function TournamentRankingPage() {
                             <span className={css.mainName}>
                               <ImageFlag code={player.country} w="28" h="20" />
                               <span>
-                                {/* Для мобилок (экран <= 491px): берем имя, проверяем длину и режем, если надо */}
+                                {/* Для мобилок смотрім длину и обрезаем */}
                                 <span className={css.mobileName}>
                                   {(player.userName || "User").length > 11
                                     ? `${(player.userName || "User").slice(0, 11)}.`

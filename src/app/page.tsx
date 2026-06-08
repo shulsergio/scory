@@ -3,7 +3,7 @@ import css from "./page.module.css";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Scory | FIFA World Cup 2026 Predictions & Live Stats",
+  title: "Scory | WC 2026 Predictions & Live Stats",
   description:
     "Predict FIFA World Cup 2026 match outcomes, group standings, and full statistics. Create custom leagues, compete with friends, and climb the leaderboard!",
   keywords: [
@@ -24,6 +24,11 @@ export const metadata: Metadata = {
     type: "website",
   },
 
+  //  В КОНЦЕЕЕЕЕЕ
+  robots: {
+    index: false,
+    follow: false,
+  },
   alternates: {
     canonical: "/",
   },
