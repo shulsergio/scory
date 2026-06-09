@@ -34,6 +34,7 @@
   font-size: 18px;
 }
 .subtitle {
+  color: var(--text-muted);
   width: 100%;
   display: flex;
   font-weight: normal;

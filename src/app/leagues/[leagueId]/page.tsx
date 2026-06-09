@@ -81,7 +81,7 @@ export default function LeagueDetailsPage() {
   const isMember =
     !!session?.user?.nickname &&
     data?.leaderboard.some((m) => m.nickname === session?.user?.nickname);
-  console.log("League Results DATA--- ", data);
+  // console.log("League Results DATA--- ", data);
 
   const handleJoinClick = async () => {
     if (!session?.user?.accessToken) return;
@@ -199,7 +199,7 @@ export default function LeagueDetailsPage() {
                 )}
               </div>
             </div>
-            <div className={css.advertisingBlock}>
+            {/* <div className={css.advertisingBlock}>
               <ButtonBox
                 className={css.advertisingLink}
                 option="link"
@@ -209,7 +209,7 @@ export default function LeagueDetailsPage() {
               >
                 Join to our telegram chat
               </ButtonBox>
-            </div>
+            </div> */}
           </div>
         </section>
 

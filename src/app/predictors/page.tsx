@@ -23,14 +23,14 @@ export default function PredictorsPage() {
         );
         setMatches(data || []);
       } catch (err) {
-        console.error("Error loading predictions:", err);
+        console.error(err);
       } finally {
         setIsLoading(false);
       }
     }
   }, [session?.user?.accessToken]);
 
-  console.log("PredictorsPage matches-", matches);
+  // console.log("PredictorsPage matches-", matches);
 
   useEffect(() => {
     if (status === "authenticated") {

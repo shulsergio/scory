@@ -21,7 +21,7 @@ export default async function UserProfilePage({ params }: Props) {
       </div>
     );
   }
-  console.log("UserProfilePage data---", data);
+  // console.log("UserProfilePage data---", data);
   const { user, stats, predictions } = data;
 
   const finishedPredictions = predictions.filter(

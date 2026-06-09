@@ -28,11 +28,12 @@
 .textarea {
   width: 100%;
   background: var(--input-bg);
-  color: var(--text-main);
+  color: #0022ff;
   border: 1px solid var(--card-border);
   padding: 12px;
   border-radius: 10px;
   font-family: inherit;
+  font-size: 1rem;
   resize: none;
   outline: none;
 }
@@ -70,11 +71,13 @@
 
 .inputGroup input {
   padding: 12px 16px;
-  border: 2px solid #eee;
+  border: 1px solid var(--card-border);
   border-radius: 8px;
   font-size: 1rem;
   transition: all 0.2s ease;
   outline: none;
+  background: var(--input-bg);
+  color: #0022ff;
 }
 
 .inputGroup input:focus {

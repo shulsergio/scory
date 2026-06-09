@@ -59,11 +59,11 @@ export default function TournamentRankingPage() {
   }, [tournament, currentPage]);
 
   if (loading && players.length === 0) return <Loader />;
-  console.log("TournamentRankingPage players---", players);
-  console.log("TournamentRankingPage tournament---", tournament);
-  console.log("player.userId с бэка:", players[0]?.userId);
-  console.log("session.user из Next-Auth:", session?.user);
-  console.log("totalParticipants:", totalParticipants);
+  // console.log("TournamentRankingPage players---", players);
+  // console.log("TournamentRankingPage tournament---", tournament);
+  // console.log("player.userId с бэка:", players[0]?.userId);
+  // console.log("session.user из Next-Auth:", session?.user);
+  // console.log("totalParticipants:", totalParticipants);
 
   if (loading) return <Loader />;
 
@@ -131,7 +131,7 @@ export default function TournamentRankingPage() {
                       currentUserId &&
                       playerUserId &&
                       currentUserId === playerUserId;
-                    console.log("isCurrentPlayer:", isCurrentPlayer);
+                    // console.log("isCurrentPlayer:", isCurrentPlayer);
                     return (
                       <tr
                         key={player.userId || player.rank}

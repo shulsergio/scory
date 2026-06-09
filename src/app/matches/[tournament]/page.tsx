@@ -16,7 +16,6 @@ export default async function Matches({
 
   const allMatches = await fetchAllMatches();
 
-  // 2. 🔥 Фильтруем массив прямо тут, на сервере Next.js
   const matches = allMatches.filter((match: Match) => {
     if (!status || status === "all") return true;
 

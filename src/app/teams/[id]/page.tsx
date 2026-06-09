@@ -48,9 +48,9 @@ export default async function TeamPage({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
-  console.log("!! TeamPage- id: ", id);
+  // console.log("!! TeamPage- id: ", id);
   const team: TeamWithMatches | null = await fetchTeamById(id);
-  console.log("!! TeamPage- team: ", team);
+  // console.log("!! TeamPage- team: ", team);
   if (!team) return <div>team not found</div>;
 
   // --- jsonLd ---

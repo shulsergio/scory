@@ -16,12 +16,12 @@ export default function PredictionMatches({
   matches,
   token,
 }: PredictionMatchesProps) {
-  console.log("token in PredictionMatches:", token);
+  // console.log("token in PredictionMatches:", token);
   const now = new Date();
   const ShowTimeFromNow = new Date(
     now.getTime() + HOURS_BEFORE_KICKOFF_FOR_DISPLAY * 60 * 60 * 1000,
   );
-  console.log("!!!!! matches ---- ", matches);
+  // console.log("!!!!! matches ---- ", matches);
   const activeMatchesForDisplay = matches
     .filter((m) => {
       const kickoff = new Date(m.kickoffTime);
@@ -42,10 +42,7 @@ export default function PredictionMatches({
       </div>
     );
   }
-  console.log(
-    "!!! activeMatchesForDisplay PredictionMatches: ",
-    activeMatchesForDisplay,
-  );
+
   return (
     <main className={css.container}>
       <section>
