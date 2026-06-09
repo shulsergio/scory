@@ -5,6 +5,7 @@ import Footer from "@/components/Footer/Index";
 import Header from "@/components/Header/Header";
 import { Providers } from "./providers";
 import "./globals.css";
+import { Toaster } from "react-hot-toast";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -33,6 +34,7 @@ export default function RootLayout({
           <div className="site-container">
             <Header />
             <main className="main-container">{children}</main>
+            <Toaster position="top-center" reverseOrder={false} />
             <Footer />
           </div>
         </Providers>

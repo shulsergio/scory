@@ -7,6 +7,7 @@ import PredictionCard, { ScoreValue } from "../PredictionCard/PredictionCard";
 import ButtonBox from "../ButtonBox/ButtonBox";
 import Loader from "../Loader/Loader";
 import css from "./PredictionList.module.css";
+import toast from "react-hot-toast";
 
 const HOURS_BEFORE_KICKOFF = 48;
 
@@ -72,13 +73,19 @@ export default function PredictionList({
       await Promise.all(promises);
 
       await onRefresh();
-
+      toast.success(
+        ids.length === 1
+          ? "Done, saved!"
+          : `All ${ids.length} predictions saved!`,
+      );
       setPendingChanges({});
 
       setIsSuccess(true);
       setTimeout(() => setIsSuccess(false), 3000);
     } catch (err) {
       console.error(err);
+
+      toast.error("Failed to save predictions. Please try again.");
     } finally {
       setIsSaving(false);
     }

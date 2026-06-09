@@ -7,6 +7,7 @@ import Loader from "@/components/Loader/Loader";
 import css from "./settings.module.css";
 import { Lock } from "lucide-react";
 import { updateUserSettings } from "@/utils/fetch";
+import toast from "react-hot-toast";
 
 const countries = [
   { code: "UA", name: "Ukraine", flag: "ua" },
@@ -61,9 +62,11 @@ export default function SettingsPage() {
         name: name,
         country: country,
       });
+      toast.success("Data updated!");
       setSuccessMessage("Settings saved successfully.");
     } catch (err) {
       console.error("err:", err);
+      toast.error("Failed, please try again");
     } finally {
       setIsSaving(false);
     }
