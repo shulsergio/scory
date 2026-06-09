@@ -6,7 +6,7 @@ import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import css from "./profile.module.css";
 import UserLeagues from "@/components/UserLeagues/UserLeagues";
-import PredictionMatches from "@/components/PredictionMatches/PredictionMatches";
+// import PredictionMatches from "@/components/PredictionMatches/PredictionMatches";
 import { Match } from "@/types/interface";
 import UpcomingMatchesWidget from "@/components/UpcomingMatchesWidget/UpcomingMatchesWidget";
 import ButtonBox from "@/components/ButtonBox/ButtonBox";

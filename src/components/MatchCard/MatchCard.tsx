@@ -65,7 +65,7 @@ export default function MatchCard({
     }
   };
   const data = fetchMatchesWithPredictions(token);
-  console.log("-- $$$ MatchCard-- matchesData", data);
+  // console.log("-- $$$ MatchCard-- matchesData", data);
   return (
     <div className={`${css.card} ${isLocked ? css.locked : ""}`}>
       {/* Время начала */}

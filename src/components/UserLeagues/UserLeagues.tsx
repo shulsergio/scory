@@ -31,7 +31,7 @@ export default function UserLeagues({ leagues, error }: UserLeaguesProps) {
       </div>
     );
   }
-  console.log("***** UserLeagues:", leagues);
+  // console.log("***** UserLeagues:", leagues);
   return (
     <div className={css.leaguesContainer}>
       <LeagueList

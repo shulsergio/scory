@@ -26,7 +26,7 @@ export default function MatchRow({ match, date = "shortDate" }: MatchRowProps) {
             {match.score.home} : {match.score.away}
           </div>
         ) : (
-          <div>
+          <div className={css.blockVisibleTime}>
             {new Date(match.kickoffTime)
               .toLocaleString("ru-RU", {
                 hour: "2-digit",

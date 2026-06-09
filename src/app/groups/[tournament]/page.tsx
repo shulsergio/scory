@@ -34,7 +34,7 @@ export default function GroupsPage() {
   const { tournament } = useParams();
   const [groups, setGroups] = useState<GroupData[]>([]);
   const [loading, setLoading] = useState(true);
-  console.log("!! function GroupsPage tournament!!- ", tournament);
+  // console.log("!! function GroupsPage tournament!!- ", tournament);
   useEffect(() => {
     if (tournament) {
       fetchTournamentGroups(tournament as string)
@@ -46,7 +46,7 @@ export default function GroupsPage() {
         });
     }
   }, [tournament]);
-  console.log("GROUPS:::", groups);
+  // console.log("GROUPS:::", groups);
   if (loading) return <Loader />;
 
   if (groups.length === 0) {
