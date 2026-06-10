@@ -9,7 +9,7 @@ import Loader from "../Loader/Loader";
 import css from "./PredictionList.module.css";
 import toast from "react-hot-toast";
 
-const HOURS_BEFORE_KICKOFF = 48;
+const HOURS_BEFORE_KICKOFF = 36;
 
 interface PredictionListProps {
   matches: MatchWithPrediction[];
@@ -96,7 +96,7 @@ export default function PredictionList({
   if (activeMatches.length === 0) {
     return (
       <div className={css.empty}>
-        No matches to predict in the next 48 hours.
+        No matches to predict in the next 36 hours.
       </div>
     );
   }

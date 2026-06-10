@@ -5,7 +5,7 @@ import ButtonBox from "../ButtonBox/ButtonBox";
 import { MoveRight } from "lucide-react";
 // import { MatchWithPrediction } from "@/utils/fetch";
 
-const HOURS_BEFORE_KICKOFF_FOR_DISPLAY = 48;
+const HOURS_BEFORE_KICKOFF_FOR_DISPLAY = 36;
 
 interface PredictionMatchesProps {
   matches: Match[];
