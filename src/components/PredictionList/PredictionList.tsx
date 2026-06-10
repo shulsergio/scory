@@ -96,7 +96,7 @@ export default function PredictionList({
   if (activeMatches.length === 0) {
     return (
       <div className={css.empty}>
-        No matches to predict in the next 48 hours.
+        No matches to predict in the next 36 hours.
       </div>
     );
   }
