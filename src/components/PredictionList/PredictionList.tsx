@@ -9,7 +9,7 @@ import Loader from "../Loader/Loader";
 import css from "./PredictionList.module.css";
 import toast from "react-hot-toast";
 
-const HOURS_BEFORE_KICKOFF = 48;
+const HOURS_BEFORE_KICKOFF = 24;
 
 interface PredictionListProps {
   matches: MatchWithPrediction[];
