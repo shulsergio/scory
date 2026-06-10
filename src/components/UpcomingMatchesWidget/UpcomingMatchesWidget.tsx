@@ -26,7 +26,7 @@ export default function UpcomingMatchesWidget({
       .then((allMatches: Match[]) => {
         if (!isMounted) return;
         const now = Date.now();
-        const fortyEightHoursLater = now + 96 * 60 * 60 * 1000; // мои 96 часов в показе матчей
+        const fortyEightHoursLater = now + 72 * 60 * 60 * 1000; // мои 72 часа в показе матчей
         const upcoming = allMatches
           .filter((m) => {
             const isScheduled = m.status === "scheduled";
