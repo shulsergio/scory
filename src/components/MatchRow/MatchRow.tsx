@@ -15,7 +15,7 @@ interface MatchRowProps {
  * @return {*}
  */
 export default function MatchRow({ match, date = "shortDate" }: MatchRowProps) {
-  console.log(match);
+  // console.log(match);
 
   return (
     <tr className={css.matchRow}>

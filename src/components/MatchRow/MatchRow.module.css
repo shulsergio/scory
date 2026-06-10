@@ -15,13 +15,13 @@
   color: red;
 }
 .blockVisibleTime {
-  color: var(--text-main);
+  color: var(--text-muted);
 }
 .teamsRow {
   width: 50%;
 }
 .blockTeam {
-  color: var(--text-main);
+  color: var(--text-muted);
   font-size: 14px;
   display: flex;
   flex-direction: column;
