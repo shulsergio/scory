@@ -19,8 +19,51 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Scory Game",
-  description: "Football prediction app",
+  title: {
+    default: "Scory | Football Prediction Platform",
+    template: "%s | Scory",
+  },
+  description:
+    "Платформа футбольных прогнозов и лиг для ЧМ-2026. Соревнуйся с друзьями, угадывай счета матчей и побеждай в глобальном рейтинге!",
+  keywords: [
+    "Scory",
+    "Scory prediction",
+    "WC 2026 predictions",
+    "WC 2026",
+    "World Cup 2026",
+    "футбольные прогнозы",
+    "ЧМ-2026",
+    "чемпионат мира 2026",
+    "создать лигу прогнозов",
+    "угадать счет матча",
+  ],
+  authors: [{ name: "Scory Team" }],
+
+  openGraph: {
+    title: "Scory — Football Prediction Platform WC 2026",
+    description:
+      "Predict World Cup 2026 matches and build your custom leagues.",
+    url: "https://scory.com.ua",
+    siteName: "Scory | Football Prediction Platform",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Scory Football Prediction Platform",
+      },
+    ],
+    locale: "en_US", // или "uk_UA" / "en_US" смотря какой основной язык интерфейса
+    type: "website",
+  },
+
+  twitter: {
+    card: "summary_large_image",
+    title: "Scory — Football Prediction App",
+    description:
+      "Predict World Cup 2026 matches and build your custom leagues.",
+    images: ["/og-image.png"],
+  },
 };
 
 export default function RootLayout({

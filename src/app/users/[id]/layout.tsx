@@ -38,8 +38,8 @@ export async function generateMetadata(): Promise<Metadata> {
     },
     // Роботы
     robots: {
-      index: false, // ИЗМЕНИТЬ в конце!!!
-      follow: false, // ИЗМЕНИТЬ в конце!!!
+      index: true, // ИЗМЕНИТЬ в конце!!!
+      follow: true, // ИЗМЕНИТЬ в конце!!!
     },
   };
 }

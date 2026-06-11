@@ -40,8 +40,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
     //  В КОНЦЕЕЕЕЕЕ
     robots: {
-      index: false, // ИЗМЕНИТЬ в конце!!!
-      follow: false, // ИЗМЕНИТЬ в конце!!!
+      index: true, // ИЗМЕНИТЬ в конце!!!
+      follow: true, // ИЗМЕНИТЬ в конце!!!
     },
   };
 }
