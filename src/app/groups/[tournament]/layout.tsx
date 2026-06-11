@@ -8,7 +8,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { tournament } = await params;
   const tName = tournament;
 
-  const title = `Groups Standings: ${tName} | Scory`;
+  const title = `Groups Standings: ${tName} `;
   const description = `Live table, points, and goal differences for all groups in ${tName}. Follow your favorite teams on Scory.online.`;
 
   return {

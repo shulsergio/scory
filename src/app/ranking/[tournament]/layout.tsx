@@ -10,7 +10,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const displayTournament =
     tournament === "WC2026" ? "FIFA World Cup 2026" : tournament;
 
-  const title = `Ranking ${displayTournament} | Scory`;
+  const title = `Ranking ${displayTournament} `;
   const description = `Live predictions leaderboard for ${displayTournament}. Check out top predictors, total points, exact scores, and user rankings on Scory. See who leads the global football challenge!`;
 
   return {
