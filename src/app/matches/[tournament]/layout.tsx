@@ -19,8 +19,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       images: ["/og-image-matches.png"],
     },
     robots: {
-      index: false, // ИЗМЕНИТЬ в конце!!!
-      follow: false, // ИЗМЕНИТЬ в конце!!!
+      index: true, // ИЗМЕНИТЬ в конце!!!
+      follow: true, // ИЗМЕНИТЬ в конце!!!
     },
   };
 }

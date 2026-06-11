@@ -14,8 +14,8 @@ export const metadata: Metadata = {
     type: "website",
   },
   robots: {
-    index: false,
-    follow: false,
+    index: true,
+    follow: true,
   },
 };
 

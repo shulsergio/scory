@@ -24,8 +24,8 @@ export const metadata: Metadata = {
 
   // В КОНЦЕЕЕЕЕЕ
   robots: {
-    index: false,
-    follow: false,
+    index: true,
+    follow: true,
   },
 };
 
