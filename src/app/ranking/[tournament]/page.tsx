@@ -5,12 +5,19 @@ import { useParams } from "next/navigation";
 import { fetchLeaderboard } from "@/utils/fetch";
 import Loader from "@/components/Loader/Loader";
 import Link from "next/link";
-import { ChevronLeft, ChevronRight, Trophy, Users } from "lucide-react";
+import {
+  ArrowUpRight,
+  ChevronLeft,
+  ChevronRight,
+  Trophy,
+  Users,
+} from "lucide-react";
 import css from "./tournament.module.css";
 import { useSession } from "next-auth/react";
 import ImageFlag from "@/components/ImageFlag/ImageFlag";
+import Image from "next/image";
 
-const ITEMS_PER_PAGE = 10;
+const ITEMS_PER_PAGE = 15;
 
 interface TournamentRankingPageProps {
   userId: string;
@@ -198,6 +205,35 @@ export default function TournamentRankingPage() {
                   </button>
                 </div>
               )}
+            </div>
+
+            <div className={css.partnerCard}>
+              <div className={css.partnerImageWrapper}>
+                <Image
+                  src="/FV.jpg"
+                  alt="Partner Channel Logo"
+                  width={180}
+                  height={180}
+                  className={css.partnerImage}
+                />
+              </div>
+              <div className={css.partnerInfo}>
+                <span className={css.partnerLabel}>Our Partner</span>
+                <h3 className={css.partnerTitle}>Football Universe</h3>
+                <p className={css.partnerDescription}>
+                  Football news, discussions, quizzes, audio podcasts,
+                  tournaments and more! Join our community of football fans!
+                </p>
+                <a
+                  href="https://t.me/football_universe21"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={css.partnerLink}
+                >
+                  <span>Join Telegram Channel</span>
+                  <ArrowUpRight size={16} />
+                </a>
+              </div>
             </div>
           </section>
         </div>
