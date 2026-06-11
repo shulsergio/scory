@@ -2,7 +2,7 @@ import { Metadata } from "next";
 
 // Статические метаданные для страницы прогнозов
 export const metadata: Metadata = {
-  title: "Predictions | Scory World Cup 2026",
+  title: "Predictions ",
   description:
     "Predict football match outcomes, guess exact scores, earn points, and dominate the global leaderboards on Scory.",
   openGraph: {

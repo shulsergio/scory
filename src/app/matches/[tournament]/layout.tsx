@@ -9,7 +9,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const tName = tournament;
 
   return {
-    title: `${tName} Schedule & Results | Scory`,
+    title: `${tName} Schedule & Results `,
     description: `Check the full schedule of ${tName}. Stay updated with real-time match results, group standings, and upcoming fixtures.`,
     keywords: [tName, "football scores", "match schedule", "predictions"],
     openGraph: {

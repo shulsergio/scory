@@ -2,7 +2,7 @@ import { Metadata } from "next";
 
 // Статические метаданные для страницы всех лиг
 export const metadata: Metadata = {
-  title: "Users Football Leagues | Scory",
+  title: "Users Football Leagues ",
   description:
     "Browse all user-created football prediction leagues on Scory. Search for your friends' leagues, join custom tournaments, or prepare to create your own private championship!",
   keywords: [
