@@ -18,7 +18,7 @@ export default function MatchRow({ match, date = "shortDate" }: MatchRowProps) {
         ) : (
           <div className={css.blockVisibleTime}>
             {new Date(match.kickoffTime)
-              .toLocaleString("ru-RU", {
+              .toLocaleTimeString("ru-RU", {
                 hour: "2-digit",
                 minute: "2-digit",
                 ...(date === "fullDate" && {
