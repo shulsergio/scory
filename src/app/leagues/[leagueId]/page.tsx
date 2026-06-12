@@ -24,7 +24,7 @@ import {
 import Link from "next/link";
 import ButtonBox from "@/components/ButtonBox/ButtonBox";
 
-const ITEMS_PER_PAGE = 25;
+const ITEMS_PER_PAGE = 15;
 
 interface LeagueMember {
   id: string;
