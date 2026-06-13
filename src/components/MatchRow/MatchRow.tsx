@@ -8,19 +8,9 @@ interface MatchRowProps {
   date?: "fullDate" | "shortDate";
 }
 
-/**
- * Компонент прорисовки строки матча в таблице на странице матчей
- *
- * @export
- * @param {MatchRowProps} { match, date }
- * @return {*}
- */
 export default function MatchRow({ match, date = "shortDate" }: MatchRowProps) {
-  // console.log(match);
-
   return (
     <tr className={css.matchRow}>
-      {/* ///////// */}
       <td className={css.blockTime}>
         {match.status === "finished" ? (
           <div className={css.blockScore}>
@@ -32,7 +22,6 @@ export default function MatchRow({ match, date = "shortDate" }: MatchRowProps) {
           </div>
         )}
       </td>
-      {/* ///////// */}
       <td className={css.teamsRow}>
         <div className={css.blockTeam}>
           <Link href={`/teams/${match.homeTeam?._id}`}>
@@ -43,7 +32,6 @@ export default function MatchRow({ match, date = "shortDate" }: MatchRowProps) {
           </Link>
         </div>
       </td>
-      {/* ///////// */}
       <td className={css.GroupRow}>
         <div className={css.blockInfo}>
           <div className={css.groupInfo}>Group {match.group}</div>
