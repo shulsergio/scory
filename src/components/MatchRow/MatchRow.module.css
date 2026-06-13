@@ -12,7 +12,7 @@
 .blockScore {
   font-weight: bold;
 
-  color: red;
+  color: var(--accent);
 }
 .blockVisibleTime {
   color: var(--text-muted);
