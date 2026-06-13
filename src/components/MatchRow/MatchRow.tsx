@@ -1,6 +1,7 @@
 import Link from "next/link";
 import css from "./MatchRow.module.css";
 import { Match } from "@/types/interface";
+import LocalTime from "../LocalTime/LocalTime";
 
 interface MatchRowProps {
   match: Match;
@@ -27,16 +28,7 @@ export default function MatchRow({ match, date = "shortDate" }: MatchRowProps) {
           </div>
         ) : (
           <div className={css.blockVisibleTime}>
-            {new Date(match.kickoffTime)
-              .toLocaleString("ru-RU", {
-                hour: "2-digit",
-                minute: "2-digit",
-                ...(date === "fullDate" && {
-                  day: "2-digit",
-                  month: "2-digit",
-                }),
-              })
-              .replace(",", "")}
+            <LocalTime kickoffTime={match.kickoffTime} dateType={date} />
           </div>
         )}
       </td>
