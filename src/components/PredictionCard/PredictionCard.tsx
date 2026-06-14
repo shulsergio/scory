@@ -1,7 +1,12 @@
 "use client";
 
-import { MatchWithPrediction } from "@/utils/fetch";
+import {
+  fetchMatchPredictionStats,
+  MatchStatsProps,
+  MatchWithPrediction,
+} from "@/utils/fetch";
 import css from "./PredictionCard.module.css";
+import { useEffect, useState } from "react";
 
 export type ScoreValue = number | string;
 
@@ -20,6 +25,16 @@ export default function PredictionCard({
   onUpdate,
   disabled,
 }: PredictionCardProps) {
+  const [stats, setStats] = useState<MatchStatsProps | null>(null);
+
+  useEffect(() => {
+    if (match._id) {
+      fetchMatchPredictionStats(match._id).then((data) => {
+        if (data) setStats(data);
+      });
+    }
+  }, [match._id]);
+
   const handleInputChange = (type: "home" | "away", value: string) => {
     const val: ScoreValue = value === "" ? "" : Number(value);
 
@@ -71,6 +86,41 @@ export default function PredictionCard({
             <span className={css.teamName}>{match.awayTeam.name}</span>
           </div>
         </div>
+        {stats && stats.totalPredictions > 0 && (
+          <div className={css.statsBlock}>
+            <div className={css.statsTitle}>Users predictions</div>
+
+            <div className={css.progressBar}>
+              <div
+                className={`${css.barSegment} ${css.homeBar}`}
+                style={{ width: `${stats.percentages.home}%` }}
+                title={`Победит ${match.homeTeam.name}: ${stats.percentages.home}%`}
+              >
+                {stats.percentages.home > 10 && `${stats.percentages.home}%`}
+              </div>
+              <div
+                className={`${css.barSegment} ${css.drawBar}`}
+                style={{ width: `${stats.percentages.draw}%` }}
+                title={`Ничья: ${stats.percentages.draw}%`}
+              >
+                {stats.percentages.draw > 10 && `${stats.percentages.draw}%`}
+              </div>
+              <div
+                className={`${css.barSegment} ${css.awayBar}`}
+                style={{ width: `${stats.percentages.away}%` }}
+                title={`Победит ${match.awayTeam.name}: ${stats.percentages.away}%`}
+              >
+                {stats.percentages.away > 10 && `${stats.percentages.away}%`}
+              </div>
+            </div>
+
+            <div className={css.statsLabels}>
+              <span>Home</span>
+              <span>X</span>
+              <span>Away</span>
+            </div>
+          </div>
+        )}
       </div>
     </main>
   );

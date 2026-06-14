@@ -614,3 +614,25 @@ export async function forgotPasswordRequest(email: string): Promise<void> {
     throw new Error(data.message || "Не удалось отправить запрос");
   }
 }
+
+
+export interface MatchStatsProps {
+  totalPredictions: number;
+  percentages: {
+    home: number;
+    draw: number;
+    away: number;
+  };
+}
+
+export async function fetchMatchPredictionStats(matchId: string): Promise<MatchStatsProps | null> {
+  const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000";
+  try {
+    const res = await fetch(`${API_URL}/matches/${matchId}/prediction-stats`);  
+    if (!res.ok) return null;
+    return await res.json();
+  } catch (err) {
+    console.error("Error fetching match stats:", err);
+    return null;
+  }
+}
