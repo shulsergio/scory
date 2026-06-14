@@ -4,12 +4,6 @@ const BASE_URL = 'https://scory-backend.onrender.com';
 
 // --- ИНТЕРФЕЙСЫ (Типизация) ---
 
-// interface BackendErrorData {
-//   message?: string;
-//   error?: string;
-//   code?: string;
-// }
-
 export interface League {
   leagueId: string;
   leagueName: string;
