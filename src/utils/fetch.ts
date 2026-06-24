@@ -630,3 +630,36 @@ export async function fetchMatchPredictionStats(matchId: string): Promise<MatchS
     return null;
   }
 }
+
+export interface MatchDetails {
+  _id: string;
+  kickoffTime: string;
+  status: 'scheduled'  | 'finished';  
+  homeTeam: { name: string; flag?: string };
+  awayTeam: { name: string; flag?: string };
+  score?: {
+    homeGoals: number;
+    awayGoals: number;
+  };
+  tournament: {
+    name: string;
+  };
+  stadium?: string;
+}
+
+export async function fetchMatchById(matchId: string): Promise<MatchDetails | null> {
+  try {
+    const baseUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000";
+    const res = await fetch(`${baseUrl}/matches/${matchId}`, {
+      cache: 'no-store'  
+    });
+
+    if (!res.ok) return null;
+    const result = await res.json();
+    return result.data;  
+  } catch (err) {
+    console.error("Error fetching match by ID:", err);
+    return null;
+  }
+}
+

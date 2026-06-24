@@ -1,0 +1,93 @@
+.container {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 24px;
+  background: #111;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  color: #fff;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 32px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 16px;
+}
+
+.tournamentName {
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #ff7a00; /* Твой фирменный оранжевый */
+  font-weight: bold;
+}
+
+.matchDate {
+  font-size: 14px;
+  color: #888;
+}
+
+.scoreboard {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 20px 0;
+}
+
+.teamBlock {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.teamName {
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.scoreBlock {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  min-width: 140px;
+}
+
+.score {
+  font-size: 42px;
+  font-weight: 800;
+  letter-spacing: 4px;
+  color: #fff;
+}
+
+.vs {
+  font-size: 20px;
+  font-weight: bold;
+  color: #555;
+}
+
+.statusBadge {
+  font-size: 11px;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.finished {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #aaa;
+}
+
+.live {
+  background-color: rgba(255, 122, 0, 0.1);
+  color: #ff7a00;
+}
