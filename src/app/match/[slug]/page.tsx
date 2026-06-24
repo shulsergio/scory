@@ -1,20 +1,21 @@
 import { notFound } from "next/navigation";
 import { fetchMatchById } from "@/utils/fetch";
-import css from "./matchDetail.modules.css";
+import css from "./matchDetail.module.css";
 
 interface MatchPageProps {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 }
 
 export default async function MatchDetailPage({ params }: MatchPageProps) {
-  const { slug } = params;
+  const { slug } = await params;
+  console.log("XXX SLUG", slug);
   const slugParts = slug.split("-");
   const matchId = slugParts[slugParts.length - 1];
-
+  console.log("XXX matchId", matchId);
   const match = await fetchMatchById(matchId);
-
+  console.log("XXX match", match);
   if (!match) {
     notFound();
   }
@@ -46,7 +47,7 @@ export default async function MatchDetailPage({ params }: MatchPageProps) {
         <div className={css.scoreBlock}>
           {isFinished || match.score ? (
             <div className={css.score}>
-              {match.score?.homeGoals ?? 0} : {match.score?.awayGoals ?? 0}
+              {match.score?.home ?? 0} : {match.score?.away ?? 0}
             </div>
           ) : (
             <div className={css.vs}>VS</div>

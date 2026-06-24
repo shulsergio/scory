@@ -638,8 +638,8 @@ export interface MatchDetails {
   homeTeam: { name: string; flag?: string };
   awayTeam: { name: string; flag?: string };
   score?: {
-    homeGoals: number;
-    awayGoals: number;
+    home: number;
+    away: number;
   };
   tournament: {
     name: string;
