@@ -122,6 +122,24 @@
 .groupCard:hover {
   border-color: var(--primary-500);
 }
+
+.tabsContainer {
+  background-color: var(--bg-main);
+  display: flex;
+  gap: 12px;
+  margin-bottom: 24px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 12px;
+}
+
+.playoffContainer {
+  background: #111;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 40px;
+  border-radius: 8px;
+  text-align: center;
+  color: #666;
+}
 @media (min-width: 1200px) {
   .WcMainBlock {
     display: flex;

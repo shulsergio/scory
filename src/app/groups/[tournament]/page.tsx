@@ -30,11 +30,17 @@ interface GroupData {
   teams: TeamData[];
 }
 
+type TabType = "groups" | "playoff";
+
 export default function GroupsPage() {
   const { tournament } = useParams();
+
   const [groups, setGroups] = useState<GroupData[]>([]);
   const [loading, setLoading] = useState(true);
+  const [activeTab, setActiveTab] = useState<TabType>("groups");
+
   // console.log("!! function GroupsPage tournament!!- ", tournament);
+
   useEffect(() => {
     if (tournament) {
       fetchTournamentGroups(tournament as string)
@@ -75,45 +81,92 @@ export default function GroupsPage() {
           </div>
         </section>
         <section className={css.groupsData}>
-          <h2 className={css.sectionTitle}>Tournament Groups: {tournament}</h2>
+          {/* ..................... */}
+          <div className={css.tabsContainer}>
+            <ButtonBox
+              option="button"
+              onClick={() => setActiveTab("groups")}
+              variant="primary"
+              href={`/predictors`}
+            >
+              Groups
+            </ButtonBox>
 
-          <div className={css.groupsFlexContainer}>
-            {groups.map((group) => (
-              <section key={group.letter} className={css.groupCard}>
-                <h2 className={css.groupLetter}>Group {group.letter}</h2>
-
-                <table className={css.table}>
-                  <thead>
-                    <tr>
-                      <th className={css.teamCellHead}>Team</th>
-                      <th>GP</th>
-                      <th>F</th>
-                      <th>A</th>
-                      <th>GD</th>
-                      <th>Pts</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {group.teams.map((team) => (
-                      <tr key={team.team.name}>
-                        <td className={css.teamCell}>
-                          <ImageFlag code={team.team?.flagCode} w="28" h="20" />
-                          <Link href={`/teams/${team.team?._id}`}>
-                            {team.team.name}
-                          </Link>
-                        </td>
-                        <td>{team.matchesPlayed}</td>
-                        <td>{team.goalsFor}</td>
-                        <td>{team.goalsAgainst}</td>
-                        <td>{team.goalDifference}</td>
-                        <td className={css.pts}>{team.points}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </section>
-            ))}
+            <ButtonBox
+              option="button"
+              onClick={() => setActiveTab("playoff")}
+              variant="primary"
+              href={`/predictors`}
+            >
+              Playoff
+            </ButtonBox>
           </div>
+          {activeTab === "groups" && (
+            <>
+              <h2 className={css.sectionTitle}>
+                Tournament Groups: {tournament}
+              </h2>
+              {groups.length === 0 ? (
+                <div className={css.empty}>
+                  no {tournament} groups available.
+                </div>
+              ) : (
+                <div className={css.groupsFlexContainer}>
+                  {groups.map((group) => (
+                    <section key={group.letter} className={css.groupCard}>
+                      <h2 className={css.groupLetter}>Group {group.letter}</h2>
+                      <table className={css.table}>
+                        <thead>
+                          <tr>
+                            <th className={css.teamCellHead}>Team</th>
+                            <th>GP</th>
+                            <th>F</th>
+                            <th>A</th>
+                            <th>GD</th>
+                            <th>Pts</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {group.teams.map((team) => (
+                            <tr key={team.team.name}>
+                              <td className={css.teamCell}>
+                                <ImageFlag
+                                  code={team.team?.flagCode}
+                                  w="28"
+                                  h="20"
+                                />
+                                <Link href={`/teams/${team.team?._id}`}>
+                                  {team.team.name}
+                                </Link>
+                              </td>
+                              <td>{team.matchesPlayed}</td>
+                              <td>{team.goalsFor}</td>
+                              <td>{team.goalsAgainst}</td>
+                              <td>{team.goalDifference}</td>
+                              <td className={css.pts}>{team.points}</td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </section>
+                  ))}
+                </div>
+              )}
+            </>
+          )}
+
+          {activeTab === "playoff" && (
+            <>
+              <h2 className={css.sectionTitle}>
+                Playoff Bracket: {tournament}
+              </h2>
+              {/* Тут будет твой компонент сетки, пока кинем заглушку */}
+              <div className={css.playoffContainer}>
+                <p>Сетка плей-офф (1/32, 1/16, 1/8...) проектируется здесь</p>
+                {/* <PlayoffBracketWidget tournament={tournament as string} /> */}
+              </div>
+            </>
+          )}
         </section>
       </div>
     </main>
