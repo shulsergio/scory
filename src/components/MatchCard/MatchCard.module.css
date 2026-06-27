@@ -8,7 +8,6 @@
   transition: all 0.2s ease;
 }
 
-/* Состояние, когда прогноз изменять нельзя */
 .locked {
   background: #f5f5f5;
   border-color: #d0d0d0;
@@ -38,13 +37,11 @@
   flex: 1;
 }
 
-/* Команда слева (Home) выравнивает текст по правому краю */
 .team:first-of-type {
   justify-content: flex-end;
   text-align: right;
 }
 
-/* Команда справа (Away) выравнивает текст по левому краю */
 .team:last-of-type {
   justify-content: flex-start;
   text-align: left;
@@ -70,7 +67,7 @@
 }
 
 .scoreInput:focus {
-  border-color: #003b7e; /* Твой основной синий цвет */
+  border-color: #003b7e;
 }
 
 .scoreInput:disabled {
@@ -79,7 +76,6 @@
   border-color: #ccc;
 }
 
-/* Убираем стрелочки у input type="number" */
 .scoreInput::-webkit-inner-spin-button,
 .scoreInput::-webkit-outer-spin-button {
   -webkit-appearance: none;
@@ -139,5 +135,5 @@
   text-align: center;
   font-size: 13px;
   font-weight: 700;
-  color: #d32f2f; /* Красный для акцента на результате */
+  color: #d32f2f;
 }

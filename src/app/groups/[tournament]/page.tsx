@@ -9,6 +9,7 @@ import Link from "next/link";
 import ButtonBox from "@/components/ButtonBox/ButtonBox";
 import ImageFlag from "@/components/ImageFlag/ImageFlag";
 import UpcomingMatchesWidget from "@/components/UpcomingMatchesWidget/UpcomingMatchesWidget";
+import PlayoffBox from "@/components/PlayoffBox/PlayoffBox";
 
 interface TeamData {
   team: {
@@ -157,13 +158,11 @@ export default function GroupsPage() {
 
           {activeTab === "playoff" && (
             <>
-              <h2 className={css.sectionTitle}>
-                Playoff Bracket: {tournament}
-              </h2>
-              {/* Тут будет твой компонент сетки, пока кинем заглушку */}
+              <h2 className={css.sectionTitle}>Playoff: {tournament}</h2>
+
               <div className={css.playoffContainer}>
-                <p>Сетка плей-офф (1/32, 1/16, 1/8...) проектируется здесь</p>
-                {/* <PlayoffBracketWidget tournament={tournament as string} /> */}
+                {/* <p>Сетка плей-офф (1/32, 1/16, 1/8...)  </p> */}
+                <PlayoffBox tournament={tournament as string} />
               </div>
             </>
           )}

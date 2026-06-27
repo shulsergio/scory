@@ -1,0 +1,140 @@
+.bracketWrapper {
+  width: 100%;
+  overflow-x: auto;
+  padding: 0;
+}
+
+.bracketContainer {
+  display: flex;
+  gap: 10px;
+  min-width: max-content;
+}
+
+.roundColumn {
+  width: 180px;
+  display: flex;
+  flex-direction: column;
+}
+
+.roundHeader {
+  text-align: center;
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--accent);
+  text-transform: uppercase;
+  background: #1e1e1e;
+  border: 1px solid #333;
+  padding: 8px;
+  border-radius: 6px;
+  margin-bottom: 8px;
+}
+
+.matchesList {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  justify-content: space-around;
+  flex-grow: 1;
+}
+
+.noMatches {
+  text-align: center;
+  color: #666;
+  font-size: 14px;
+  padding: 20px;
+  border: 1px dashed #333;
+  border-radius: 8px;
+}
+
+.matchCard {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #1a1a1a;
+  border: 1px solid #2a2a2a;
+  border-radius: 8px;
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.matchCard:hover {
+  background: #222;
+  border-color: #3a3a3a;
+}
+
+.teamsBlock {
+  width: 160px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 6px;
+  flex-grow: 1;
+}
+
+.teamRow {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.teamName {
+  font-size: 15px;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.infoBlock {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 65px;
+  align-self: stretch;
+  background: #1e1e1e;
+  /* border: 1px solid #333; */
+}
+
+/* Вертикальный счет */
+.scoreBox {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+  padding: 6px;
+  box-sizing: border-box;
+}
+
+.scoreValue {
+  font-size: 15px;
+  font-weight: 700;
+  color: #fff;
+  line-height: 14px;
+}
+
+/* Блок даты и времени */
+.dateBox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  text-align: center;
+}
+
+.dateDay {
+  font-size: 13px;
+  color: #888;
+  font-weight: 600;
+}
+
+.dateTime {
+  font-size: 13px;
+  color: var(--accent);
+  font-weight: 700;
+}

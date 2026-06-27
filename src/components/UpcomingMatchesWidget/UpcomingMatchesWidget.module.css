@@ -50,7 +50,7 @@
 
 .vs {
   font-size: 11px;
-  color: #ff6600;
+  color: var(--accent);
   font-weight: bold;
 }
 

@@ -662,4 +662,37 @@ export async function fetchMatchById(matchId: string): Promise<MatchDetails | nu
     return null;
   }
 }
+export interface PlayoffMatch {
+  _id: string;
+  stage: string;
+  homeTeam: { name: string; flagCode: string };
+  awayTeam: { name: string; flagCode: string };
+  score?: { home: number; away: number };
+  kickoffTime: string;
+  status: string;
+}
 
+/**
+ * Доставка матчей плей-офф с бэкенда по тегу турнира
+ * @param tournamentTag Текстовый код турнира (например, 'WC2026')
+ */
+
+export async function fetchTournamentPlayoff(tournamentTag: string): Promise<PlayoffMatch[]> {
+  try {
+    const baseUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000";
+    const res = await fetch(`${baseUrl}/matches/tournament/${tournamentTag}/playoff`, {
+      cache: 'no-store'  
+    });
+
+    if (!res.ok) {
+      console.error(`error: ${res.status}`);
+      return [];
+    }
+
+    const result = await res.json();
+    return result.data || [];
+  } catch (error) {
+    console.error("error:", error);
+    return [];
+  }
+}
