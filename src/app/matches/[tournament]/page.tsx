@@ -25,18 +25,23 @@ export default async function Matches({
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "ItemList",
-    itemListElement: matches.map((match: Match, index: number) => ({
-      "@type": "ListItem",
-      position: index + 1,
-      item: {
-        "@type": "SportsEvent",
-        name: `${match.homeTeam.name} vs ${match.awayTeam.name}`,
-        startDate: match.kickoffTime,
-        homeTeam: { "@type": "SportsTeam", name: match.homeTeam.name },
-        awayTeam: { "@type": "SportsTeam", name: match.awayTeam.name },
-        location: { "@type": "Place", name: match.stadium },
-      },
-    })),
+    itemListElement: matches.map((match: Match, index: number) => {
+      const homeName = match.homeTeam?.name || "TBD";
+      const awayName = match.awayTeam?.name || "TBD";
+
+      return {
+        "@type": "ListItem",
+        position: index + 1,
+        item: {
+          "@type": "SportsEvent",
+          name: `${homeName} vs ${awayName}`,
+          startDate: match.kickoffTime,
+          homeTeam: { "@type": "SportsTeam", name: homeName },
+          awayTeam: { "@type": "SportsTeam", name: awayName },
+          location: { "@type": "Place", name: match.stadium || "TBD" },
+        },
+      };
+    }),
   };
 
   const newDates = Array.from(
