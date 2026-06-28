@@ -29,14 +29,11 @@ export default async function MatchDetailPage({ params }: MatchPageProps) {
   });
 
   const isFinished = match.status === "finished";
-
+  console.log("isFinished=", isFinished);
   return (
     <main className={css.container}>
       <div className={css.header}>
-        <span className={css.tournamentName}>
-          {match.tournament?.name || "World Cup 2026"}
-        </span>
-        <span className={css.matchDate}>{formattedDate}</span>
+        <h1 className={css.headerText}>{match.tournament?.name || "CUP"}</h1>
       </div>
 
       <div className={css.scoreboard}>
@@ -45,12 +42,13 @@ export default async function MatchDetailPage({ params }: MatchPageProps) {
         </div>
 
         <div className={css.scoreBlock}>
-          {isFinished || match.score ? (
+          <div className={css.matchDate}>{formattedDate}</div>
+          {isFinished ? (
             <div className={css.score}>
               {match.score?.home ?? 0} : {match.score?.away ?? 0}
             </div>
           ) : (
-            <div className={css.vs}>VS</div>
+            <div className={css.score}>-:-</div>
           )}
 
           <div

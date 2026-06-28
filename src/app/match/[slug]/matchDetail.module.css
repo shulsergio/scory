@@ -1,31 +1,31 @@
 .container {
-  max-width: 800px;
-  margin: 40px auto;
-  padding: 24px;
-  background: #111;
-  border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  color: #fff;
+  padding: 10px 0;
+  background-color: var(--bg-main);
+  width: 100%;
+  /* max-width: 1200px; */
+  margin: 0 auto;
 }
 
 .header {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  gap: 6px;
-  margin-bottom: 32px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  padding-bottom: 16px;
+  margin-bottom: 12px;
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.5)), url("/bg.png");
+  background-size: cover;
+  background-position: center;
+  padding: 12px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
 }
-
-.tournamentName {
-  font-size: 14px;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  color: #ff7a00; /* Твой фирменный оранжевый */
+.headerText {
+  color: var(--accent);
+  font-size: 18px;
   font-weight: bold;
+  padding: 0;
+  text-align: center;
 }
-
 .matchDate {
   font-size: 14px;
   color: #888;
@@ -35,12 +35,18 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 20px;
-  padding: 20px 0;
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.5)), url("/bg.png");
+  background-size: cover;
+  background-position: center;
+  padding: 12px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
 }
 
 .teamBlock {
-  flex: 1;
+  width: 110px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -48,7 +54,8 @@
 }
 
 .teamName {
-  font-size: 24px;
+  color: var(--text-muted);
+  font-size: 20px;
   font-weight: 700;
 }
 
@@ -57,29 +64,23 @@
   flex-direction: column;
   align-items: center;
   gap: 12px;
-  min-width: 140px;
+  min-width: 80px;
 }
 
 .score {
   font-size: 42px;
   font-weight: 800;
   letter-spacing: 4px;
-  color: #fff;
-}
-
-.vs {
-  font-size: 20px;
-  font-weight: bold;
-  color: #555;
+  color: var(--text-muted);
 }
 
 .statusBadge {
-  font-size: 11px;
-  padding: 4px 10px;
-  border-radius: 20px;
+  font-size: 13px;
+  padding: 8px 12px;
+  border-radius: 12px;
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.7px;
 }
 
 .finished {

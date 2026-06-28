@@ -64,7 +64,7 @@
 
 .matchCard:hover {
   background: #222;
-  border-color: #3a3a3a;
+  border-color: #737373;
 }
 
 .teamsBlock {
@@ -84,6 +84,7 @@
 }
 
 .teamName {
+  color: var(--text-muted);
   font-size: 15px;
   font-weight: 600;
   white-space: nowrap;
