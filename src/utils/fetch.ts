@@ -641,8 +641,8 @@ export interface MatchDetails {
   _id: string;
   kickoffTime: string;
   status: 'scheduled'  | 'finished';  
-  homeTeam: { name: string; flag?: string };
-  awayTeam: { name: string; flag?: string };
+  homeTeam: { name: string; flag?: string; _id: string};
+  awayTeam: { name: string; flag?: string; _id: string };
   score?: {
     home: number;
     away: number;
