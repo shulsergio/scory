@@ -1,6 +1,8 @@
 import { notFound } from "next/navigation";
 import { fetchMatchById } from "@/utils/fetch";
 import css from "./matchDetail.module.css";
+import PredictionList from "@/components/PredictionList/PredictionList";
+import PredictionStatsBar from "@/components/PredictionStatsBar/PredictionStatsBar";
 
 interface MatchPageProps {
   params: Promise<{
@@ -37,6 +39,9 @@ export default async function MatchDetailPage({ params }: MatchPageProps) {
   const preview = match.preview;
   const infoBox = preview?.infoBox;
   const h2h = preview?.headToHead;
+
+  const homeName = match.homeTeam?.name || "wait";
+  const awayName = match.awayTeam?.name || "wait";
 
   return (
     <main className={css.container}>
@@ -131,75 +136,105 @@ export default async function MatchDetailPage({ params }: MatchPageProps) {
           </section>
         )}
 
-        {/*  (HEAD TO HEAD) */}
+        {/*  (User Predictions) */}
+        <section className={css.h2hSection}>
+          <h3 className={css.blockTitle}>User Predictions</h3>
+          <div className={css.tableWrapper}>
+            <div className={css.detailsCard}>
+              <PredictionStatsBar
+                matchId={matchId}
+                homeTeamName={homeName}
+                awayTeamName={awayName}
+              />
+            </div>
+          </div>
+        </section>
 
-        {h2h && h2h.matches && h2h.matches.length > 0 && (
+        {/*  (HEAD TO HEAD) */}
+        {h2h && (
           <section className={css.h2hSection}>
             <h3 className={css.blockTitle}>Head to Head History</h3>
             <div className={css.tableWrapper}>
-              {/* Сводка побед/ничьих (Summary) */}
-              {h2h.summary && h2h.summary.length === 3 && (
-                <div className={css.summaryBar}>
-                  <div className={css.summaryItem}>
-                    <span className={css.summaryCount}>{h2h.summary[0]}</span>
-                    <span className={css.summaryLabel}>
-                      Wins {match.homeTeam?.name}
-                    </span>
+              {h2h.matches && h2h.matches.length > 0 ? (
+                <>
+                  {h2h.summary && h2h.summary.length === 3 && (
+                    <div className={css.summaryBar}>
+                      <div className={css.summaryItem}>
+                        <span className={css.summaryCount}>
+                          {h2h.summary[0]}
+                        </span>
+                        <span className={css.summaryLabel}>
+                          Wins {match.homeTeam?.name}
+                        </span>
+                      </div>
+                      <div className={css.summaryItem}>
+                        <span className={css.summaryCount}>
+                          {h2h.summary[1]}
+                        </span>
+                        <span className={css.summaryLabel}>Draws</span>
+                      </div>
+                      <div className={css.summaryItem}>
+                        <span className={css.summaryCount}>
+                          {h2h.summary[2]}
+                        </span>
+                        <span className={css.summaryLabel}>
+                          Wins {match.awayTeam?.name}
+                        </span>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Список прошлых матчей */}
+                  <div className={css.h2hTableWrapper}>
+                    <table className={css.h2hTable}>
+                      <thead>
+                        <tr>
+                          <th>Date</th>
+                          <th className={css.textRight}>Home</th>
+                          <th className={css.textCenter}>Score</th>
+                          <th className={css.textLeft}>Away</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {h2h.matches.map((prevMatch, index) => {
+                          const formattedPrevDate = new Date(
+                            prevMatch.date,
+                          ).toLocaleDateString("ru-RU", {
+                            day: "2-digit",
+                            month: "2-digit",
+                            year: "numeric",
+                          });
+
+                          return (
+                            <tr key={prevMatch._id || index}>
+                              <td className={css.h2hDate}>
+                                {formattedPrevDate}
+                              </td>
+                              <td className={`${css.h2hTeam} ${css.textRight}`}>
+                                {prevMatch.home}
+                              </td>
+                              <td
+                                className={`${css.h2hScore} ${css.textCenter}`}
+                              >
+                                <span className={css.h2hScoreBadge}>
+                                  {prevMatch.score}
+                                </span>
+                              </td>
+                              <td className={`${css.h2hTeam} ${css.textLeft}`}>
+                                {prevMatch.away}
+                              </td>
+                            </tr>
+                          );
+                        })}
+                      </tbody>
+                    </table>
                   </div>
-                  <div className={css.summaryItem}>
-                    <span className={css.summaryCount}>{h2h.summary[1]}</span>
-                    <span className={css.summaryLabel}>Draws</span>
-                  </div>
-                  <div className={css.summaryItem}>
-                    <span className={css.summaryCount}>{h2h.summary[2]}</span>
-                    <span className={css.summaryLabel}>
-                      Wins {match.awayTeam?.name}
-                    </span>
-                  </div>
+                </>
+              ) : (
+                <div className={css.noHistoryMatches}>
+                  No match history between these teams
                 </div>
               )}
-
-              {/* Список прошлых матчей */}
-              <div className={css.h2hTableWrapper}>
-                <table className={css.h2hTable}>
-                  <thead>
-                    <tr>
-                      <th>Date</th>
-                      <th className={css.textRight}>Home</th>
-                      <th className={css.textCenter}>Score</th>
-                      <th className={css.textLeft}>Away</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {h2h.matches.map((prevMatch, index) => {
-                      const formattedPrevDate = new Date(
-                        prevMatch.date,
-                      ).toLocaleDateString("ru-RU", {
-                        day: "2-digit",
-                        month: "2-digit",
-                        year: "numeric",
-                      });
-
-                      return (
-                        <tr key={prevMatch._id || index}>
-                          <td className={css.h2hDate}>{formattedPrevDate}</td>
-                          <td className={`${css.h2hTeam} ${css.textRight}`}>
-                            {prevMatch.home}
-                          </td>
-                          <td className={`${css.h2hScore} ${css.textCenter}`}>
-                            <span className={css.h2hScoreBadge}>
-                              {prevMatch.score}
-                            </span>
-                          </td>
-                          <td className={`${css.h2hTeam} ${css.textLeft}`}>
-                            {prevMatch.away}
-                          </td>
-                        </tr>
-                      );
-                    })}
-                  </tbody>
-                </table>
-              </div>
             </div>
           </section>
         )}

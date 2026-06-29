@@ -197,6 +197,19 @@
 }
 
 /* Таблица личных встреч */
+
+.noHistoryMatches {
+  width: 100%;
+  text-align: center;
+  color: #bebebe;
+  font-size: 14px;
+  font-style: italic;
+  padding: 16px 8px;
+  background: #161616;
+  border: 1px dashed rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+}
+
 .h2hTableWrapper {
   width: 100%;
   background: #161616;
