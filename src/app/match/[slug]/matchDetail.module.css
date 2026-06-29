@@ -30,7 +30,23 @@
   font-size: 14px;
   color: #888;
 }
+.roundName {
+  font-size: 18px;
+  padding-left: 10px;
+  color: #ff7a00;
+  font-weight: 600;
+  text-transform: uppercase;
+}
 
+.blockTitle {
+  font-size: 18px;
+  font-weight: 700;
+  border-left: 3px solid #ff7a00;
+  padding-left: 10px;
+  margin-bottom: 16px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
 .scoreboard {
   display: flex;
   align-items: center;
@@ -44,7 +60,10 @@
   border: 1px solid var(--border);
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
 }
-
+.detailsSection,
+.h2hSection {
+  margin-top: 40px;
+}
 .teamBlock {
   width: 110px;
   display: flex;
@@ -91,4 +110,128 @@
 .live {
   background-color: rgba(255, 122, 0, 0.1);
   color: #ff7a00;
+}
+.detailsGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  width: 100%;
+}
+.detailsCard {
+  background: #161616;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 16px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  /* Занимает 100% на мобилках, а на десктопе делится пополам за счет flex-grow: 1 */
+  flex: 1 1 280px;
+}
+
+.label {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: #666;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.value {
+  font-size: 16px;
+  font-weight: 600;
+  color: #fff;
+}
+
+.subValue {
+  font-size: 13px;
+  color: #888;
+  margin-top: 4px;
+}
+
+/* Сводка H2H (Summary) */
+.summaryBar {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background: #161616;
+  padding: 16px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+.summaryItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.summaryCount {
+  font-size: 24px;
+  font-weight: 800;
+  color: #ff7a00;
+}
+
+.summaryLabel {
+  font-size: 12px;
+  color: #888;
+  margin-top: 2px;
+}
+
+/* Таблица личных встреч */
+.h2hTableWrapper {
+  background: #161616;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  overflow-x: auto; /* Защита от выламывания таблицы на мелких смартфонах */
+}
+
+.h2hTable {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  min-width: 500px; /* Чтобы таблица не сжималась в кашу */
+}
+
+.h2hTable th {
+  background: #1d1d1d;
+  padding: 12px;
+  font-size: 12px;
+  text-transform: uppercase;
+  color: #666;
+}
+
+.h2hTable td {
+  padding: 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.02);
+}
+
+.h2hDate {
+  color: #666;
+  font-size: 13px;
+}
+
+.h2hTeam {
+  font-weight: 500;
+}
+
+.h2hScoreBadge {
+  background: #222;
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-weight: 700;
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  display: inline-block;
+}
+
+/* Выравнивание текста в ячейках таблицы */
+.textRight {
+  text-align: right;
+}
+.textCenter {
+  text-align: center;
+}
+.textLeft {
+  text-align: left;
 }

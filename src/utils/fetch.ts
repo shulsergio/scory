@@ -630,7 +630,13 @@ export async function fetchMatchPredictionStats(matchId: string): Promise<MatchS
     return null;
   }
 }
-
+export interface H2HMatch {
+  _id?: string;  
+  date: string;  
+  home: string;  
+  away: string;  
+  score: string;  
+}
 export interface MatchDetails {
   _id: string;
   kickoffTime: string;
@@ -645,7 +651,35 @@ export interface MatchDetails {
     name: string;
   };
   stadium?: string;
-}
+  preview?: {
+    fotmobId: string;
+    leagueName: string;
+leagueRoundName: string;
+matchName: string;
+    infoBox: {
+      Referee: {
+        country: string;
+        name: string;
+      }
+      Stadium: {
+        capacity: number;
+        city: string;
+        country: string;
+        name: string;
+      }
+    }
+    headToHead:
+    {
+      summary: [number, number, number] | number[];
+      matches: H2HMatch[];
+    }
+    weather: {
+      description: string;
+      temperature: number;
+      windSpeed: number;
+    }
+  }
+  }
 
 export async function fetchMatchById(matchId: string): Promise<MatchDetails | null> {
   try {
@@ -656,12 +690,16 @@ export async function fetchMatchById(matchId: string): Promise<MatchDetails | nu
 
     if (!res.ok) return null;
     const result = await res.json();
+    console.log('!!! fetchMatchById: ',result)
     return result.data;  
   } catch (err) {
     console.error("Error fetching match by ID:", err);
     return null;
   }
 }
+
+// ------
+
 export interface PlayoffMatch {
   _id: string;
   stage: string;
