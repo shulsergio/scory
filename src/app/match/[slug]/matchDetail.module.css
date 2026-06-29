@@ -86,13 +86,13 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 2px;
+  gap: 8px;
   min-width: 80px;
 }
 
 .score {
-  font-size: 42px;
-  font-weight: 800;
+  font-size: 32px;
+  font-weight: 700;
   letter-spacing: 4px;
   color: var(--text-muted);
 }
@@ -196,6 +196,10 @@
   margin-top: 2px;
 }
 
+.weatherTemp {
+  color: var(--text-muted);
+}
+
 /* Таблица личных встреч */
 
 .noHistoryMatches {
@@ -215,7 +219,7 @@
   background: #161616;
   border: 1px solid rgba(255, 255, 255, 0.05);
   border-radius: 8px;
-  overflow-x: auto; /* Защита от выламывания таблицы на мелких смартфонах */
+  overflow-x: auto;
 }
 
 .h2hTable {
@@ -223,6 +227,11 @@
   border-collapse: collapse;
   font-size: 14px;
   min-width: 325px;
+}
+
+.h2hTableText {
+  color: var(--text-muted);
+  padding: 4px 0px 4px 20px;
 }
 
 .h2hTable th {
@@ -245,6 +254,7 @@
 }
 
 .h2hTeam {
+  color: var(--text-muted);
   font-weight: 500;
 }
 

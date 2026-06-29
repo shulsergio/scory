@@ -1,8 +1,9 @@
 import { notFound } from "next/navigation";
 import { fetchMatchById } from "@/utils/fetch";
 import css from "./matchDetail.module.css";
-import PredictionList from "@/components/PredictionList/PredictionList";
+// import PredictionList from "@/components/PredictionList/PredictionList";
 import PredictionStatsBar from "@/components/PredictionStatsBar/PredictionStatsBar";
+import Link from "next/link";
 
 interface MatchPageProps {
   params: Promise<{
@@ -42,7 +43,7 @@ export default async function MatchDetailPage({ params }: MatchPageProps) {
 
   const homeName = match.homeTeam?.name || "wait";
   const awayName = match.awayTeam?.name || "wait";
-
+  console.log("--- match.homeTeam?._id ----", match.homeTeam?._id);
   return (
     <main className={css.container}>
       {/* ТУРНИР / РАУНД */}
@@ -55,8 +56,13 @@ export default async function MatchDetailPage({ params }: MatchPageProps) {
       {/* ТАБЛО МАТЧА */}
       <div className={css.scoreboard}>
         <div className={css.teamBlock}>
-          <span className={css.teamName}>{match.homeTeam?.name || "wait"}</span>
+          <Link className={css.teamName} href={`/teams/${match.homeTeam?._id}`}>
+            {match.homeTeam?.name || "-"}
+          </Link>
         </div>
+        {/* <Link className={css.teamName} href={`/teams/${match.homeTeam?._id}`}>
+          {match.homeTeam?.name || "-"}
+        </Link> */}
 
         <div className={css.scoreBlock}>
           <div className={css.matchDate}>{formattedDate}</div>
@@ -76,7 +82,9 @@ export default async function MatchDetailPage({ params }: MatchPageProps) {
         </div>
 
         <div className={css.teamBlock}>
-          <span className={css.teamName}>{match.awayTeam?.name || "wait"}</span>
+          <Link className={css.teamName} href={`/teams/${match.awayTeam?._id}`}>
+            {match.awayTeam?.name || "-"}
+          </Link>{" "}
         </div>
       </div>{" "}
       <div className={css.dataBoxContainer}>
@@ -186,6 +194,9 @@ export default async function MatchDetailPage({ params }: MatchPageProps) {
 
                   {/* Список прошлых матчей */}
                   <div className={css.h2hTableWrapper}>
+                    <p className={css.h2hTableText}>
+                      last {h2h.matches.length} matches
+                    </p>
                     <table className={css.h2hTable}>
                       <thead>
                         <tr>
