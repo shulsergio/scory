@@ -82,7 +82,7 @@
 .statsTitle {
   color: var(--text-main);
   text-align: center;
-  padding-bottom: 4px;
+  padding-top: 4px;
 }
 
 .progressBar {
