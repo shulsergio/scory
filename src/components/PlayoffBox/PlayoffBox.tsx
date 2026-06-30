@@ -133,10 +133,14 @@ export default function PlayoffBox({ tournament }: PlayoffBracketWidgetProps) {
                           {isFinished ? (
                             <div className={css.scoreBox}>
                               <span className={css.scoreValue}>
-                                {match.score?.home}
+                                {match.score?.home ?? 0}
+                                {match.penaltiesScore?.home !== undefined &&
+                                  `(${match.penaltiesScore.home})`}
                               </span>
                               <span className={css.scoreValue}>
-                                {match.score?.away}
+                                {match.score?.away ?? 0}
+                                {match.penaltiesScore?.away !== undefined &&
+                                  `(${match.penaltiesScore.away})`}
                               </span>
                             </div>
                           ) : (

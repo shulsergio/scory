@@ -68,7 +68,12 @@ export default async function MatchDetailPage({ params }: MatchPageProps) {
           <div className={css.matchDate}>{formattedDate}</div>
           {isFinished ? (
             <div className={css.score}>
-              {match.score?.home ?? 0} : {match.score?.away ?? 0}
+              {match.score?.home ?? 0}
+              {match.penaltiesScore?.home !== undefined &&
+                `(${match.penaltiesScore.home})`}
+              :{match.score?.away ?? 0}
+              {match.penaltiesScore?.away !== undefined &&
+                `(${match.penaltiesScore.away})`}
             </div>
           ) : (
             <div className={css.score}>-:-</div>

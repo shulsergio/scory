@@ -647,6 +647,10 @@ export interface MatchDetails {
     home: number;
     away: number;
   };
+  penaltiesScore: {
+        home: number;
+    away: number;
+  }
   tournament: {
     name: string;
   };
@@ -706,6 +710,7 @@ export interface PlayoffMatch {
   homeTeam: { name: string; flagCode: string };
   awayTeam: { name: string; flagCode: string };
   score?: { home: number; away: number };
+  penaltiesScore?: { home: number; away: number };
   kickoffTime: string;
   status: string;
 }
